@@ -1,0 +1,1 @@
+anemometer by jostak on Thingiverse: https://www.thingiverse.com/thing:2559929
