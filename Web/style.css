@@ -1,0 +1,167 @@
+*{
+    font-family: sans-serif;
+    color: white;
+    margin-left: 0vw;
+}
+body{
+    height: 100%;
+    width: 100%;
+    margin: 0vh 0px;
+    background-color: rgb(44, 44, 44);
+    background-image: url("https://i.ibb.co/9h7YWpp/Captura-de-pantalla-2024-02-28-143927.png");
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-size: 100% 100%;
+    color: rgb(44, 44, 44);
+}
+ul{
+    padding: 0px 3vh 0px;
+    background: transparent;
+    background-color: transparent;
+}
+.simbols{
+    float: left;
+    max-width: 4.5vh;
+    max-height: 4.5vh;
+    margin-right: 1vw;
+}
+#reloj{
+    max-width: 20px; 
+    max-height: 20px;
+    margin-top: 15px;
+}
+.Nagatoro{
+    margin-left: 0px;
+    position: relative;
+    bottom: -11.5vmax;
+    float: right;
+}
+#act{
+    color: rgba(240, 255, 255, 0.733);
+    margin-top: 40px;
+}
+#time{
+    color: rgba(240, 255, 255, 0.733);
+}
+.tabla{
+    text-align: center;
+    padding: 0.6vh 0.5vw;
+    background: rgb(34, 34, 34);
+}
+table, th, td {
+    border: 1px solid whitesmoke; /* Añadir bordes a todas las celdas y filas de la tabla */
+    text-align: center;
+}
+table{
+    margin-left: 3vh;
+    margin-top: 3.2vh;
+    background: rgb(34, 34, 34);
+}
+table span{
+    background: rgb(34, 34, 34);
+}
+#basicData{
+    float: left;
+}
+#grafico{
+    float: left;
+    height: clamp(280px, 60%, 800px);
+    width: clamp(380px, 60%, 1000px);
+    position: sticky;
+    top: 5vh;
+    margin-left: 2vw;
+}
+
+footer{
+    clear: both;
+}
+
+#botonsitos{
+    display: flex
+}
+button{
+    color: white;
+    background: rgb(150, 150, 150);
+    height: 4vh;
+    width: 4vh;
+    margin-left: 0.8vh;
+    margin-right: 0.8vh;
+
+}
+#muestrasV{
+    color: rgb(150, 150, 150);
+    margin-top: 5px;
+    font-size: larger;
+}
+#luz{                                                                                                   
+    position: absolute;
+    right: 61.5vw;
+    bottom: 75.5vh;
+    z-index: 1;
+    padding: 0 0;
+    background-color: transparent;
+}
+
+#etec {
+    float: left;
+    height: 50px;
+    left: 0;
+    top: 0vh;
+    padding: 0vw 0vh 0vh;
+    margin-right: 0.5vw;
+    margin-top: 0.6000000000000014vw;
+    background-color: white;
+}
+#titulo{
+    position: relative;
+    padding: 0px 2vh 0px;
+    margin-left: 0vh;
+    font-size: 5vh;
+    margin: 2.5vh 0 2vh;
+}
+#weas{
+    display: flex;
+    float: right;
+}
+#git1 {
+    width: 90px;
+    height: 45px;
+    aspect-ratio: 1 / 1;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0vh 0vh 0px;
+}
+#git2{
+    padding: 0 0 0;
+    width: 90px;
+    height: 25px;
+    border: none;
+    cursor:pointer;
+    background-color: transparent;
+    margin-top: 0.5vw;
+}
+#excel {
+    width: 90px;
+    aspect-ratio: 1 / 1;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    padding: 0vh 0vh 0px;
+}
+#excel1 {
+    padding: 0 0 0;
+    width: 50px;
+    height: 50px;
+    border: none;
+    cursor: pointer;
+    background-color: transparent;
+    margin-top: 0.5vw;
+}
+#disclaimer{
+    color: rgba(240, 255, 255, 0.733);
+    font-size: 15px;
+    padding: 1.2vh 0 1.2vh;
+    margin: 0 0 0;
+    margin-left: 2vh;
+}

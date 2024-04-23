@@ -1,0 +1,186 @@
+DEBUG: Arreglar grafico
+<!DOCTYPE html>
+<html lang="ES">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estación Meteorológica</title>
+    <link rel="icon" href="https://media.discordapp.net/attachments/909971778724593684/1034524837433057342/ja.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.8.2/chart.min.js" integrity="sha512-zjlf0U0eJmSo1Le4/zcZI51ks5SjuQXkU0yOdsOBubjSmio9iCUp8XPLkEAADZNBdR9crRy3cniZ65LF2w8sRA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
+<body>
+    <section id="basicData">
+        <h1>Estación Meteorológica ETec</h1>
+        <div>
+            <ul>
+                <img src="https://github.com/MajorCrayon7047/EstacionMeteorologica-WemosD1-Mini/blob/master/recursos/temperatura.png?raw=true" alt="" class="simbols"><h1>Temperatura: <span id="temp">0</span>°C</h1>
+                <img src="https://github.com/MajorCrayon7047/EstacionMeteorologica-WemosD1-Mini/blob/master/recursos/humedad.png?raw=true" alt="" class="simbols"><h1>Humedad: <span id="hum">0</span>%</h1>
+                <img src="https://github.com/MajorCrayon7047/EstacionMeteorologica-WemosD1-Mini/blob/master/recursos/presion.png?raw=true" alt="" class="simbols"><h1>Presión Atmosférica: <span id="bp">0</span>hPa</h1>
+                <img src="https://github.com/MajorCrayon7047/EstacionMeteorologica-WemosD1-Mini/blob/master/recursos/reloj.png?raw=true" alt="" class="simbols" id="reloj"><p id="act">Ultima actualizacion: <span id="time">0</span></p>
+                <img id="luz" src="" alt="">
+            </ul>
+        </div>
+        <div>
+            <table>
+                <tr>
+                    <td class="tabla">Hora</td>
+                    <td class="tabla">Temperatura</td>
+                    <td class="tabla">Humedad</td>
+                    <td class="tabla">Presion Atmosferica</td>
+                </tr>
+                <!-- Aquí se insertarán las filas de datos -->
+            </table>
+        </div>
+    </section>
+
+    <section id="grafico">
+        <canvas id="myChart"></canvas>
+        <div id="botonsitos">
+            <button id="upScale" onclick="upScale()">-</button>
+            <button id="downScale" onclick="downScale()">+</button>
+            <p id="muestrasV">cantidad de muestras: <span id="escala">50</span></p>
+        </div>
+    </section>
+    <footer>
+        <p id="disclaimer"> 🟢 <b>Nota: </b> Este proyecto es una Estacion Meteorológica con acceso a internet donde guarda los datos en una base de datos para despues poder ser accedidos en esta pagina web, el proyecto fue realizado en la escuela tecnica ETec por el alumno Nicolas Perez de 5°E</p>
+        <p id="disclaimer"> ⚠️ <b>Disclaimer:</b> Los datos obtenidos por la estacion pueden no estar apegados a la realidad ya que sigue en etapa de pruebas.</p>
+        <div id="weas">
+            <img id="etec" src="https://inscripcionesetec.um.edu.ar/img/logo.png" alt="">
+            <button id="git2" type="button" onclick=" window.open('https://github.com/MajorCrayon7047/EstacionMeteorologica-WemosD1-Mini', '_blank'); return false;">
+                <img id="git1" src="https://static.vecteezy.com/system/resources/previews/016/833/880/non_2x/github-logo-git-hub-icon-with-text-on-white-background-free-vector.jpg" alt="">
+            </button>
+            <button id="excel" type="button" onclick="excel()">
+                <img id="excel1" src="https://www.projectwizards.net/media/pages/support/faq/third-party/csv-export-excel/be9a82a168-1661868368/excel.png" alt="">
+            </button>
+        </div>
+    </footer>
+    <script>
+        fetch('http://localhost:3000/ultimos-datos')
+        .then(response => response.json())
+        .then(data => {
+            document.getElementById('temp').innerText = data[0].Temperatura;
+            document.getElementById('hum').innerText = data[0]['Humedad Relativa'];
+            document.getElementById('bp').innerText = data[0]['Presión Atmosférica'];
+            document.getElementById('time').innerText = data[0]['Fecha'];
+            
+            // Agregar las últimas 6 filas de datos a la tabla
+            const table = document.querySelector('table');
+            for (let i = 0; i < 6 && i < data.length; i++) {
+                const row = table.insertRow(-1);
+                const cellHora = row.insertCell(0);
+                const cellTemp = row.insertCell(1);
+                const cellHum = row.insertCell(2);
+                const cellPresion = row.insertCell(3);
+                
+                // Convertir la fecha a formato hora:minuto
+                const fecha = new Date(data[i]['Fecha']);
+                const hora = fecha.getHours();
+                const minuto = fecha.getMinutes();
+                const horaMinuto = hora + ':' + (minuto < 10 ? '0' + minuto : minuto);
+                
+                cellHora.textContent = horaMinuto;
+                cellTemp.textContent = data[i]['Temperatura'] + '°C';
+                cellHum.textContent = data[i]['Humedad Relativa'] + '%';
+                cellPresion.textContent = data[i]['Presión Atmosférica'] + 'hPa';
+            }
+
+            const labels = data.slice(0, 50).map(datum => {
+                const fecha = new Date(datum['Fecha']);
+                const hora = fecha.getHours();
+                const minuto = fecha.getMinutes();
+                return hora + ':' + (minuto < 10 ? '0' + minuto : minuto);
+            });
+
+            const temperaturas = data.slice(0, 50).map(datum => datum['Temperatura']);
+            const humedades = data.slice(0, 50).map(datum => datum['Humedad Relativa']);
+            const presiones = data.slice(0, 50).map(datum => datum['Presión Atmosférica']); // Fix: Use the correct data key for atmospheric pressure
+
+            // Crear el gráfico
+            const ctx = document.getElementById('myChart').getContext('2d');
+            const myChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [
+                        {
+                            label: 'Temperatura (°C)',
+                            data: temperaturas,
+                            borderColor: 'rgb(255, 99, 132)',
+                            backgroundColor: 'rgba(255, 99, 132, 0.5)',
+                            fill: false
+                        },
+                        {
+                            label: 'Humedad (%)',
+                            data: humedades,
+                            borderColor: 'rgb(54, 162, 235)',
+                            backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                            fill: false
+                        },
+                        {
+                            label: 'Presión Atmosférica (hPa)', // Fix: Update the label for atmospheric pressure
+                            data: presiones, // Fix: Use the correct data key for atmospheric pressure
+                            borderColor: 'rgb(75, 192, 192)',
+                            backgroundColor: 'rgba(75, 192, 192, 0.5)',
+                            fill: false
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    scales: {
+                        x: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Hora'
+                            }
+                        },
+                        y: {
+                            display: true,
+                            title: {
+                                display: true,
+                                text: 'Valor'
+                            },
+                            max: parseInt(document.getElementById('escala').innerText) // Update the scale value
+                        }
+                    }
+                }
+            });
+
+            // Add event listeners to the buttons
+            document.getElementById('upScale').addEventListener('click', upScale);
+            document.getElementById('downScale').addEventListener('click', downScale);
+
+            // Function to update the chart with the new scale value
+            function updateChartScale(escala) {
+                myChart.options.scales.x.max = escala;
+                myChart.update();
+            }
+
+            // Function to increase the scale
+            function upScale() {
+                const escalaElement = document.getElementById('escala');
+                let escala = parseInt(escalaElement.innerText);
+                escala -= 5;
+                escalaElement.innerText = escala;
+
+                // Update the chart with the new scale value
+                updateChartScale(escala);
+            }
+
+            // Function to decrease the scale
+            function downScale() {
+                const escalaElement = document.getElementById('escala');
+                let escala = parseInt(escalaElement.innerText);
+                escala += 5;
+                escalaElement.innerText = escala;
+
+                // Update the chart with the new scale value
+                updateChartScale(escala);
+            }
+        })
+        .catch(error => console.error('Error al obtener los datos:', error));
+    </script>
+</body>
+</html>
