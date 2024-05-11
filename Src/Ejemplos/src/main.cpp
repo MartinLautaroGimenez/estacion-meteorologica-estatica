@@ -1,28 +1,32 @@
-#include <Wire.h>
-#include <Adafruit_BMP085.h>
+#include <WiFi.h>
+#include <ArduinoOTA.h>
 
-Adafruit_BMP085 bmp;
+const char* ssid = "ETEC";
+const char* password = "ETec2024*";
+const char* OTA_password = "bob";
 
 void setup() {
   Serial.begin(115200);
 
-  if (!bmp.begin()) {
-    Serial.println("No se pudo encontrar el sensor BMP180. Conecta correctamente o revisa las conexiones.");
-    while (true);
+  // Conexión WiFi
+  WiFi.begin(ssid, password);
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.println("Conectando a WiFi...");
   }
+  Serial.println("Conexión exitosa a WiFi");
+  
+  // Configuración OTA
+  ArduinoOTA.setHostname("ESP32-OTA");
+  ArduinoOTA.setPassword(OTA_password);
+
+  // Iniciar el servicio OTA
+  ArduinoOTA.begin();
 }
 
 void loop() {
-  float temperature = bmp.readTemperature();
-  float pressure = bmp.readPressure() / 100.0; // Convertir a hectopascales (hPa)
-
-  Serial.print("Temperatura: ");
-  Serial.print(temperature);
-  Serial.println(" °C");
-
-  Serial.print("Presión: ");
-  Serial.print(pressure);
-  Serial.println(" hPa");
-
-  delay(1000);
+  // Manejo de actualizaciones OTA
+  ArduinoOTA.handle();
+  
+  // Tu código loop aquí
 }
