@@ -3,7 +3,7 @@ Para el diseño del proyecto, concretamente para la parte electrónica de diseñ
 
 ![Estación de trabajo KiCAD7.0](<ref/img-v1/workStation.png>)
 
-![circuito completo con esquemático, diseño y modelo 3D](<ref/img-v1/MainBoard-v1.png.png>)
+![circuito completo con esquemático, diseño y modelo 3D](<ref/img-v1/MainBoard-v1.png>)
 
 
 
