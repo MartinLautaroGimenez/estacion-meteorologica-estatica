@@ -21,7 +21,7 @@ Este es un proyecto institucional y surge de la necesidad de poder comparar los 
 
 ### BMP180
 </div>
-   <img src="https://tienda.ityt.com.ar/23744-large_default/dht22-am2302-sensor-humedad-temperatura-new-itytarg.jpg" alt="DHT22" width="400">
+   <img src="https://tienda.ityt.com.ar/23744-large_default/dht22-am2302-sensor-humedad-temperatura-new-itytarg.jpg" alt="DHT22" width="200">
 </div>
 
 ### DHT22
