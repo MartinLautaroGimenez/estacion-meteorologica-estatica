@@ -20,8 +20,10 @@ Este es un proyecto institucional y surge de la necesidad de poder comparar los 
 ### ESP32
 
 ### BMP180
+El sensor DHT22 es un componente crucial en el campo de la electrónica y la monitorización ambiental. 
+Su función principal es medir con precisión la temperatura ambiente y la humedad relativa del entorno en el que se encuentra la estación meteorológica. Este sensor incorpora un termistor para la medición de la temperatura y un elemento especializado para medir la humedad relativa.
 </div>
-   <img src="https://www.todomicro.com.ar/727-large_default/sensor-de-humedad-y-temperatura-dht22-arduino.jpg" alt="DHT22" width="200">
+   <img src="https://http2.mlstatic.com/D_NQ_NP_863339-MLU75748316379_042024-O.webp" alt="DHT22" width="100">
 </div>
 
 ### DHT22
