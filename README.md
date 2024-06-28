@@ -1,5 +1,5 @@
-# estacion-meteorologica-estatica
-## Que es una estacion meteorologica?
+# Estación-Meteorológica-Estática
+## Que es una estación meteorológica?
 Una estación meteorológica es un dispositivo tecnológico de características electrónica e informática que permite nuclear parámetros relevantes para realizar estudios y sacar conclusiones frente a fenómenos físicos.
 ## Que es EME?
 Este es un proyecto institucional y surge de la necesidad de poder comparar los biomas entre Godoy Cruz, Mendoza y el departamento de lavalle puntualmente entre el colegio ETec de la universidad de Mendoza y los diversos puntos que parada que se tienen en otro proyecto institucional de salida a lavalle llamado “Viaje a las Raíces”.
