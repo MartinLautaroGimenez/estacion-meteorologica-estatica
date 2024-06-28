@@ -9,13 +9,13 @@ Este es un proyecto institucional y surge de la necesidad de poder comparar los 
   - [DHT22](#DHT22)
   - [BMP180](#BMP180)
   - [BMS 3S](#BMS-3S)
-  - [Baterías 18650](#Baterias-18650)
+  - [Baterías 18650](#Baterías-18650)
   - [Panel Solar](#Panel-Solar)
   - [Sensor de Hoja Mojada](#Sensor-de-Hoja-Mojada)
   - [BH1750](#BH1750)
   - [MQ-135](#MQ-135)
   - [Veleta](#Veleta)
-  - [Anemómetro](#Anemometro)
+  - [Anemómetro](#Anemómetro)
     
 ### ESP32
 ### DHT22
