@@ -18,6 +18,10 @@ Este es un proyecto institucional y surge de la necesidad de poder comparar los 
   - [Anemómetro](#Anemómetro)
     
 ### ESP32
+</div>
+   <img src="wiki/DroneBridgeLogo_text.png" alt="DroneBridge logo" width="400">
+</div>
+
 ### DHT22
 ### BMP180
 ### BMS 3S
