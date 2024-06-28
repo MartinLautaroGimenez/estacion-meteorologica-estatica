@@ -18,12 +18,13 @@ Este es un proyecto institucional y surge de la necesidad de poder comparar los 
   - [Anemómetro](#Anemómetro)
     
 ### ESP32
+
+### BMP180
 </div>
-   <img src="wiki/DroneBridgeLogo_text.png" alt="DroneBridge logo" width="400">
+   <img src="(https://tienda.ityt.com.ar/23744-large_default/dht22-am2302-sensor-humedad-temperatura-new-itytarg.jpg)" alt="DHT22" width="400">
 </div>
 
 ### DHT22
-### BMP180
 ### BMS 3S
 ### Baterías 18650
 ### Panel Solar
