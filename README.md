@@ -17,9 +17,9 @@ Este es un proyecto institucional y surge de la necesidad de poder comparar los 
   - [Veleta](#Veleta)
   - [Anemómetro](#Anemómetro)
     
-###ESP32
+### ESP32
 <img src= "" width="30px">
-###BMP180
+### BMP180
 El sensor BMP180 es un dispositivo el cual es utilizado para medir la presión atmosférica y la altitud a nivel del mar con un alto nivel de precisión. Es conocido por su pequeño tamaño y por su simplicidad al momento de realizar mediciones. 
 <img src= "" width="30px">
 ###DHT22
