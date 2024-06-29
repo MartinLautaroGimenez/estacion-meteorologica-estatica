@@ -20,10 +20,9 @@ Este es un proyecto institucional y surge de la necesidad de poder comparar los 
 ### ESP32
 <img src= "" width="30px">
 ### BMP180
-
 El sensor BMP180 es un dispositivo el cual es utilizado para medir la presión atmosférica y la altitud a nivel del mar con un alto nivel de precisión. Es conocido por su pequeño tamaño y por su simplicidad al momento de realizar mediciones. 
 <img src= "" width="30px">
-###DHT22 
+### DHT22
 El sensor DHT22 es un componente crucial en el campo de la electrónica y la monitorización ambiental. 
 Su función principal es medir con precisión la temperatura ambiente y la humedad relativa del entorno en el que se encuentra la estación meteorológica. Este sensor incorpora un termistor para la medición de la temperatura y un elemento especializado para medir la humedad relativa.
 <img src= "" width="30px">
