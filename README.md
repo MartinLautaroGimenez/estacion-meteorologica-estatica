@@ -6,7 +6,7 @@ Este es un proyecto institucional y surge de la necesidad de poder comparar los 
 ## Los modulos incorporados
 
   - [ESP32](#ESP32)
-  - [BMP180](###BMP180)
+  - [BMP180](#BMP180)
   - [DHT22](#DHT22)
   - [BMS 3S](#BMS-3S)
   - [Baterías 18650](#Baterías-18650)
@@ -16,9 +16,10 @@ Este es un proyecto institucional y surge de la necesidad de poder comparar los 
   - [MQ-135](#MQ-135)
   - [Veleta](#Veleta)
   - [Anemómetro](#Anemómetro)
-    
+ 
 ### ESP32
-<img src= "https://mimitoi.com/wp-content/uploads/2024/01/D_NQ_NP_657703-MCO70581862267_072023-O.webp" width="330px">
+hay que completar.
+<img src= "https://mimitoi.com/wp-content/uploads/2024/01/D_NQ_NP_657703-MCO70581862267_072023-O.webp" width="320px">
 ### BMP180
 El sensor BMP180 es un dispositivo el cual es utilizado para medir la presión atmosférica y la altitud a nivel del mar con un alto nivel de precisión. Es conocido por su pequeño tamaño y por su simplicidad al momento de realizar mediciones. 
 <img src= "https://http2.mlstatic.com/D_NQ_NP_814857-MLA52961108355_122022-O.webp" width="330px">
