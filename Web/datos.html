@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estación Meteorológica ETec</title>
+    <link rel="shortcut icon" href="./images/logo.png">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <header>
+        <div class="logo" title="University Management System">
+            <img src="./images/logo.png" alt="">
+            <h2>ET<span class="danger"></span>ec</h2>
+        </div>
+        <div class="navbar">
+            <a href="index.html">
+                <span class="material-symbols-sharp">home</span>
+                <h3>Inicio</h3>
+            </a>
+            <a href="timetable.html" class="active">
+                <span class="material-symbols-sharp">format_list_bulleted</span>
+                <h3>Datos</h3>
+            </a> 
+            <a href="graphs.html">
+                <span class="material-symbols-sharp">grid_view</span>
+                <h3>Graficos Importantes</h3>
+            </a>
+        </div>
+        <div class="theme-toggler">
+            <span class="material-symbols-sharp active">light_mode</span>
+            <span class="material-symbols-sharp">dark_mode</span>
+        </div>
+        
+    </header>
+    <div class="container">
+        <style>
+            .container {
+            display: flex;
+            flex-wrap: wrap;
+            }
+
+            .container > main {
+            flex: 1;
+            }
+
+            .container > .right {
+            flex: 1;
+            }
+            #datoNumero {
+                display: none;
+            }
+        </style>
+
+        <main>
+            <h1>Datos Más Importantes</h1>
+            <div class="subjects">
+                <div class="eg">
+                    <span class="material-symbols-sharp">schedule</span>
+                    <h3>Última Actualización</h3>
+                    <h2 id="fecha"></h2>
+                </div>
+                <div class="qw">
+                    <span class="material-symbols-sharp">device_thermostat</span>
+                    <h3>Temperatura</h3>
+                    <h2 id="temperatura">12/14</h2>
+                </div>
+                <div class="mth">
+                    <span class="material-symbols-sharp">cloud</span>
+                    <h3>Presión Atmosférica</h3>
+                    <h2 id="presion">27/29</h2>
+                </div>
+                <div class="cs">
+                    <span class="material-symbols-sharp">water_drop</span>
+                    <h3>Humedad Relativa</h3>
+                    <h2 id="humedad">27/30</h2>
+                </div>
+                <div class="cg">
+                    <span class="material-symbols-sharp">light_mode</span>
+                    <h3>Nivel de luz</h3>
+                    <h2 id="nivelLuz">24/25</h2>
+                </div>
+                <div class="cs">
+                    <span class="material-symbols-sharp">air</span>
+                    <h3>Calidad del aire</h3>
+                    <h2 id="calidadAire">25/27</h2>
+                </div>
+                <div class="eg">
+                    <span class="material-symbols-sharp">wind_power</span>
+                    <h3>Velocidad del viento</h3>
+                    <h2 id="velocidadViento">12/14</h2>
+                </div>
+                <div class="qw">
+                    <span class="material-symbols-sharp">read_more</span>
+                    <h3>Direccion del viento</h3>
+                    <h2 id="direccionViento">27/29</h2>
+                </div>
+                <div class="cg">
+                    <span class="material-symbols-sharp">rainy</span>
+                    <h3>Sensor de lluvia</h3>
+                    <h2 id="sensorLluvia">27/30</h2>
+                </div>
+                <div class="cs" onclick="descargarDatosEnXLSX()" style="cursor: pointer;">
+                    <span class="material-symbols-sharp">download</span>
+                    <h3>Descargar excel</h3>
+                    <small class="text-muted">Descargue la base de datos completa en un archivo Excel</small>
+                </div>
+                
+            </div>
+
+           
+    </div>
+<footer>
+<p>Cabe aclarar que la estación sigue una etapa de prueba y los datos no pueden estar muy apegados a la realidad</p>
+</footer>
+    <script src="timeTable.js"></script>
+    <script src="app.js"></script>
+    <script src="excel.js"></script>
+</body>
+<div id="datoNumero"></div>
+</html>

@@ -1,6 +1,0 @@
-# Excluimos la carpeta de conficuración de visual
-.vscode
-# Excluimos ala carpeta de configuración de platformio
-.pio
-# Excluir los backup de kicad
-pcb/EME-backups/*
