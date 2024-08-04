@@ -1,4 +1,5 @@
 #include <Arduino.h>
+#include "../lib/config.h"
 #include "../lib/LeerSensores.h"
 LeerSensoresControlador controlador("bmp180");
 
@@ -82,11 +83,11 @@ unsigned long lastMillis = 0;
 
 #include <WiFi.h>
 #include <PubSubClient.h>
-const char* ssid = "momantai";
-const char* pass = "42425640";
-const char* brokerUser = "EMM";
-const char* brokerPass = "public";
-const char* broker = "192.168.100.12";
+#define ssid RED_SSID_WIFI
+#define pass PASSWORD_WIFI
+#define brokerUser USUARIO_BROKER
+#define brokerPass PASSWORD_BROKER
+#define broker DIRECCION_BROKER
 const char* senBH1750 = "EMM/bh1750";
 const char* senBMP180 = "EMM/bmp180";
 const char* senDHT11 = "EMM/dht11";
