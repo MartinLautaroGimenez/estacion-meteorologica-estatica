@@ -5,63 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estación Meteorológica ETec</title>
-    <link rel="shortcut icon" href="./images/logo.png">
+    <link rel="shortcut icon" href="https://i.ibb.co/hctNTsB/logo.jpg">
     <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://emetec.wetec.um.edu.ar/css">
+    <style>
+        .container {
+        display: flex;
+        flex-wrap: wrap;
+        }
+
+        .container > main {
+        flex: 1;
+        }
+
+        .container > .right {
+        flex: 1;
+        }
+        #datoNumero {
+            display: none;
+        }
+    </style>
 </head>
 <body>
+    <!-- Header -->
     <header>
-        <div class="logo" title="University Management System">
-            <img src="./images/logo.png" alt="">
-            <h2>ET<span class="danger"></span>ec</h2>
+        <div class="logo">
+            <img src="https://i.ibb.co/hctNTsB/logo.jpg" alt="">
+            <h2 class="etech2">Escuela Técnica de la Universidad de Mendoza<span class="danger"></span></h2>
         </div>
         <div class="navbar">
-            <a href="index.html">
+            <a href="https://emetec.wetec.um.edu.ar/EM/index.html">
                 <span class="material-symbols-sharp">home</span>
                 <h3>Inicio</h3>
             </a>
-            <a href="timetable.html" class="active">
+            <a href="datos.html" class="active">
                 <span class="material-symbols-sharp">format_list_bulleted</span>
                 <h3>Datos</h3>
             </a> 
             <a href="graphs.html">
                 <span class="material-symbols-sharp">grid_view</span>
-                <h3>Graficos Importantes</h3>
+                <h3>Gráficos Importantes</h3>
             </a>
         </div>
         <div class="theme-toggler">
             <span class="material-symbols-sharp active">light_mode</span>
             <span class="material-symbols-sharp">dark_mode</span>
         </div>
-        
     </header>
+
     <div class="container">
-        <style>
-            .container {
-            display: flex;
-            flex-wrap: wrap;
-            }
-
-            .container > main {
-            flex: 1;
-            }
-
-            .container > .right {
-            flex: 1;
-            }
-            #datoNumero {
-                display: none;
-            }
-        </style>
-
         <main>
             <h1>Datos Más Importantes</h1>
             <div class="subjects">
-                <div class="eg">
+                <div class="cs">
                     <span class="material-symbols-sharp">schedule</span>
                     <h3>Última Actualización</h3>
                     <h2 id="fecha"></h2>
+                </div>
+                <div class="eg">
+                    <span class="material-symbols-sharp">location_on</span>
+                    <h3>Ubicación</h3>
+                    <h3><a href="https://maps.app.goo.gl/2LxSamvsiX2J4FRX7" target="_blank" style="text-decoration: underline;">Escuela Técnica de la Universidad de Mendoza</a></h3>
+                </div>
+                <div class="mth">
+                    <span class="material-symbols-sharp">battery_5_bar</span>
+                    <h3>Voltaje de la batería</h3>
+                    <h2 id="battery"></h2>
                 </div>
                 <div class="qw">
                     <span class="material-symbols-sharp">device_thermostat</span>
@@ -69,36 +79,51 @@
                     <h2 id="temperatura">12/14</h2>
                 </div>
                 <div class="mth">
+                    <span class="material-symbols-sharp">nest_thermostat_zirconium_eu</span>
+                    <h3>Sensación Térmica</h3>
+                    <h2 id="stermica">12/14</h2>
+                </div>
+                <div class="cs">
                     <span class="material-symbols-sharp">cloud</span>
                     <h3>Presión Atmosférica</h3>
                     <h2 id="presion">27/29</h2>
                 </div>
-                <div class="cs">
+                <div class="eg">
                     <span class="material-symbols-sharp">water_drop</span>
                     <h3>Humedad Relativa</h3>
                     <h2 id="humedad">27/30</h2>
                 </div>
-                <div class="cg">
+                <div class="qw">
                     <span class="material-symbols-sharp">light_mode</span>
                     <h3>Nivel de luz</h3>
                     <h2 id="nivelLuz">24/25</h2>
                 </div>
                 <div class="cs">
+                    <span class="material-symbols-sharp">dew_point</span>
+                    <h3>Puento de rocio</h3>
+                    <h2 id="procio">24/25</h2>
+                </div>
+                <div class="mth">
+                    <span class="material-symbols-sharp">eco</span>
+                    <h3>Partes por millón CO2</h3>
+                    <h2 id="ppmco2">25/27</h2>
+                </div>
+                <div class="eg">
                     <span class="material-symbols-sharp">air</span>
                     <h3>Calidad del aire</h3>
                     <h2 id="calidadAire">25/27</h2>
                 </div>
-                <div class="eg">
+                <div class="qw">
                     <span class="material-symbols-sharp">wind_power</span>
                     <h3>Velocidad del viento</h3>
                     <h2 id="velocidadViento">12/14</h2>
                 </div>
-                <div class="qw">
+                <div class="eg">
                     <span class="material-symbols-sharp">read_more</span>
                     <h3>Direccion del viento</h3>
                     <h2 id="direccionViento">27/29</h2>
                 </div>
-                <div class="cg">
+                <div class="qw">
                     <span class="material-symbols-sharp">rainy</span>
                     <h3>Sensor de lluvia</h3>
                     <h2 id="sensorLluvia">27/30</h2>
@@ -116,9 +141,8 @@
 <footer>
 <p>Cabe aclarar que la estación sigue una etapa de prueba y los datos no pueden estar muy apegados a la realidad</p>
 </footer>
-    <script src="timeTable.js"></script>
-    <script src="app.js"></script>
-    <script src="excel.js"></script>
+    <script src="https://emetec.wetec.um.edu.ar/js"></script>
+    <script src="https://emetec.wetec.um.edu.ar/exceljs"></script>
 </body>
 <div id="datoNumero"></div>
 </html>

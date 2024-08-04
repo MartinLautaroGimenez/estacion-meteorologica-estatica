@@ -1,9 +1,9 @@
-//Acá se introducen variables las cuales no son de acceso público, es decir, no se pueden modificar desde fuera de la clase.
-//Esto se hace para proteger la información que se encuentra en la clase.
-const char* ssid = "quemirabobo";
-const char *password = "12345678";
-const char *otaPassword = "BOB";
-const char *mqttServer = "your_MQTT_broker_IP";
+//Acá se introducen las credenciales que no son de acceso público 
+//Este archivo se añadirá a .gitignore para que no se suba a GitHub y se mantengan seguras las credenciales
+const char* ssid = "ETEC";
+const char *password = "ETec2024*";
+const char *otaPassword = "EMEtec2024*";
+const char *mqttServer = "192.168.40.242";
 const int mqttPort = 1883;
-const char *mqttUser = "your_MQTT_broker_user";
-const char *mqttPassword = "your_MQTT_broker_password";
+const char *mqttUser = "EME";
+const char *mqttPassword = "EMEtec2024*";

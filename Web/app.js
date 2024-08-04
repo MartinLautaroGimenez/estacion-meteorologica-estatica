@@ -49,10 +49,14 @@ document.addEventListener('DOMContentLoaded', function() {
             const ultimoDato = ultimos10Datos[ultimos10Datos.length - 1];
             document.getElementById('datoNumero').textContent = ultimoDato["Dato N°"];
             document.getElementById('fecha').textContent = ultimoDato["Fecha"];
+            document.getElementById('battery').textContent = ultimoDato["Voltaje bateria"];
             document.getElementById('temperatura').textContent = ultimoDato["Temperatura"];
+            document.getElementById('stermica').textContent = ultimoDato["Sensacion Termica"];
             document.getElementById('presion').textContent = ultimoDato["Presion Atmosferica"];
             document.getElementById('humedad').textContent = ultimoDato["Humedad Relativa"];
             document.getElementById('nivelLuz').textContent = ultimoDato["Nivel de luz"];
+            document.getElementById('procio').textContent = ultimoDato["Punto de rocio"];
+            document.getElementById('ppmco2').textContent = ultimoDato["Partes por millon co2"];
             document.getElementById('calidadAire').textContent = ultimoDato["Calidad del aire"];
             document.getElementById('velocidadViento').textContent = ultimoDato["Velocidad del viento"];
             document.getElementById('direccionViento').textContent = ultimoDato["Direccion del viento"];
