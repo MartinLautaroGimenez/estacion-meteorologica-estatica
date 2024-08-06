@@ -216,7 +216,6 @@ LeerSensoresControlador::datosBMP LeerSensoresControlador::leerBMP()
     }
     else if (strcmp(this->BMP_SELECTED, BMP_TYPE_180) == 0)
     {
-        Serial.print("\n\nA continuación: Datos leidos del sensor BMP180\n");
         char status;
         double T, P, p0, a;
         Serial.print("altitud proporcionada: ");
