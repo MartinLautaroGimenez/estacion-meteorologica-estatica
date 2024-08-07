@@ -37,37 +37,6 @@ LeerSensoresControlador controlador;
 #define uS_TO_S_FACTOR 1000000  // Conversión de segundos a microsegundos
 #define TIME_TO_SLEEP_15_MIN  15 * 60  // Tiempo en segundos (15 minutos)
 #define TIME_TO_SLEEP_5_SEG  5   // Tiempo en segundos (5seg
-// #define WAKEUP_PIN GPIO_NUM_33
-
-
-// RTC_DATA_ATTR int bootCount = 0;
-
-// void print_wakeup_reason() {
-//     esp_sleep_wakeup_cause_t wakeup_reason;  
-//     wakeup_reason = esp_sleep_get_wakeup_cause();
-
-//     switch (wakeup_reason) {
-//         case ESP_SLEEP_WAKEUP_TIMER:
-//             Serial.println("Wakeup caused by timer");
-//             break;
-//         case ESP_SLEEP_WAKEUP_EXT0:
-//             Serial.println("Wakeup caused by external signal using RTC_IO");
-//             break;
-//         case ESP_SLEEP_WAKEUP_EXT1:
-//             Serial.println("Wakeup caused by external signal using RTC_CNTL");
-//             break;
-//         case ESP_SLEEP_WAKEUP_TOUCHPAD:
-//             Serial.println("Wakeup caused by touchpad");
-//             break;
-//         case ESP_SLEEP_WAKEUP_ULP:
-//             Serial.println("Wakeup caused by ULP program");
-//             break;
-//         default:
-//             Serial.printf("Wakeup was not caused by deep sleep: %d\n", wakeup_reason);
-//             break;
-//     }
-// }
-
 
 void envioMQTT();
 
@@ -163,7 +132,8 @@ void setup()
 void loop()
 {
   envioMQTT();
-  delay(TIME_TO_SLEEP_15_MIN * 1000 * 60);
+  // delay(TIME_TO_SLEEP_15_MIN * 1000 * 60);
+  delay(TIME_TO_SLEEP_5_SEG * 1000);
 }
 
 
@@ -193,30 +163,46 @@ void envioMQTT(){
 
   if (!local){
     // Publicar temperatura ETec_broker
-    snprintf(mensaje, 20, "%.2f °C", (bmpData.temperatura + dhtData.temperatura)/2 );
-    client.publish(temperaturaDHT, mensaje);
+    snprintf(mensaje, 20, "%.2f °C", dhtData.temperatura);
+    client.publish(TOPIC_DHT_TEMP, mensaje);
     // Publicar humedad ETec_broker
     snprintf(mensaje, 20, "%.2f %%HR", dhtData.humedadRelativa);
-    client.publish(humedadDHT, mensaje);
+    client.publish(TOPIC_DHT_HUM, mensaje);
+    // Publicar sensación térmica ETec_broker
+    snprintf(mensaje, 20, "%.2f °C", dhtData.sensacionTermica);
+    client.publish(TOPIC_DHT_SENST, mensaje);
+
+    // Publicar temperatura bmp ETec_broker
+    snprintf(mensaje, 20, "%.2f hPa", bmpData.temperatura);
+    client.publish(TOPIC_BMP_TEMP, mensaje);
     // Publicar presion ETec_broker
-    snprintf(mensaje, 20, "%.2f Pa", bmpData.presionAbsoluta);
-    client.publish(presionBMP, mensaje);
+    snprintf(mensaje, 20, "%.2f hPa", bmpData.presionAbsoluta);
+    client.publish(TOPIC_BMP_PRES, mensaje);
+    // Publicar altitud ETec_broker
+    snprintf(mensaje, 20, "%.2f hPa", bmpData.altitud);
+    client.publish(TOPIC_BMP_ALT, mensaje);
+    // Publicar presion a nivel del mar ETec_broker
+    snprintf(mensaje, 20, "%.2f hPa", bmpData.presionAlNivelDelMar);
+    client.publish(TOPIC_BMP_PRESNM, mensaje);
+
     // Publicar luz ETec_broker
     snprintf(mensaje, 20, "%.2f lux", bh1750Data);
-    client.publish(luminosidad, mensaje);
+    client.publish(TOPIC_BH_LUZ, mensaje);
+
     // Publicar ppmCO2 ETec_broker
     snprintf(mensaje, 20, "%.2f ppmCO2", mqData.ppmCO2);
-    client.publish(calidadAire, mensaje);
+    client.publish(TOPIC_MQ_PPMCO2, mensaje);
+
     // Publicar velocidad del Viento ETec_broker
     snprintf(mensaje, 20, "Proximamente");
-    client.publish(velocidadViento, mensaje);
+    client.publish(TOPIC_VIENTO_VELOCIDAD, mensaje);
     // Publicar dirección del viento ETec_broker
     snprintf(mensaje, 20, "Proximamente");
-    client.publish(direccionViento, mensaje);
+    client.publish(TOPIC_VIENTO_DIRECCION, mensaje);
+
     // Publicar lluvia ETec_broker
     snprintf(mensaje, 20, "Proximamente");
-    client.publish(sensorDeLluvia, mensaje);
-
+    client.publish(TOPIC_YL_LLUVIA, mensaje);
   } else {
       // Publicar datos del BMP180
     snprintf(mensaje, 75,

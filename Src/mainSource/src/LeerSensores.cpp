@@ -192,8 +192,8 @@ LeerSensoresControlador::datosBMP LeerSensoresControlador::leerBMP()
     {
         float T, P, p0, a;
         T = bmp.readTemperature();
-        P = bmp.readPressure();
-        p0 = (P / pow(1 - (ALTITUDE / 44330.0), 5.255));
+        P = bmp.readPressure()/100;
+        p0 = (P / pow(1 - (ALTITUDE / 44330.0), 5.255))/100;
         a = bmp.readAltitude(1013.25);
 
         Serial.print(F("Temperature = "));
@@ -201,16 +201,16 @@ LeerSensoresControlador::datosBMP LeerSensoresControlador::leerBMP()
         Serial.print(" *C \t\t");
 
         Serial.print(F("Pressure = "));
-        Serial.print(P);
-        Serial.print(" Pa \t\t");
+        Serial.print(P/100);
+        Serial.print(" hPa \t\t");
 
         Serial.print(F("Approx altitude = "));
         Serial.print(a); /* Adjusted to local forecast! */
         Serial.print(" m \t\t");
 
         Serial.print(F("Presión a nivel del mar = "));
-        Serial.print(p0);
-        Serial.println(" Pa \t\t");
+        Serial.print(p0/100);
+        Serial.println(" hPa \t\t");
 
         return {T, P, p0, a};
     }
@@ -268,7 +268,7 @@ LeerSensoresControlador::datosBMP LeerSensoresControlador::leerBMP()
                         // Print out the measurement:
                         Serial.print("Presión absoluta: ");
                         Serial.print(P, 2);
-                        Serial.print(" mb \t\t");
+                        Serial.print(" hPa \t\t");
                         // Serial.print(P*0.0295333727,2);
                         // Serial.println(" inHg");
 
@@ -281,7 +281,9 @@ LeerSensoresControlador::datosBMP LeerSensoresControlador::leerBMP()
                         p0 = pressure.sealevel(P, ALTITUDE); // we're at 1655 meters (Boulder, CO)
                         Serial.print("Presión relativa (a nivel del mar): ");
                         Serial.print(p0, 2);
-                        Serial.print(" mb \t\t");
+                        Serial.print(" hPa \t\t");
+                        // Serial.print(p0, 2);
+                        // Serial.print(" mb \t\t");
                         // Serial.print(p0*0.0295333727,2);
                         // Serial.println(" inHg");
 
@@ -297,8 +299,8 @@ LeerSensoresControlador::datosBMP LeerSensoresControlador::leerBMP()
                         // Serial.print(a*3.28084,0);
                         // Serial.println(" feet");
                         float Tf = (float)T;
-                        float Pf = (float)P;
-                        float p0f = (float)p0;
+                        float Pf = (float)P*100;
+                        float p0f = (float)p0*100;
                         float af = (float)a;
                         return {Tf, Pf, p0f, af};
                     }
