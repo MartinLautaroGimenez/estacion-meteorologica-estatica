@@ -299,8 +299,8 @@ LeerSensoresControlador::datosBMP LeerSensoresControlador::leerBMP()
                         // Serial.print(a*3.28084,0);
                         // Serial.println(" feet");
                         float Tf = (float)T;
-                        float Pf = (float)P*100;
-                        float p0f = (float)p0*100;
+                        float Pf = (float)P;
+                        float p0f = (float)p0;
                         float af = (float)a;
                         return {Tf, Pf, p0f, af};
                     }
