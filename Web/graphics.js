@@ -32,8 +32,8 @@ function formatTime(dateString) {
 function createTemperatureHumidityChart(data) {
     // Configuración del primer gráfico (Temperatura y Humedad Relativa)
     const labels = data.map(d => formatTime(d.Fecha));
-    const temperatures = data.map(d => parseFloat(d.Temperatura));
-    const humidities = data.map(d => parseFloat(d["Humedad Relativa"]));
+    const temperatures = data.map(d => parseFloat(d["Temperatura Promedio"]));
+    const humidities = data.map(d => parseFloat(d["Humedad"]));
 
     const ctx = document.getElementById('myChart1').getContext('2d');
     const lineChart = new Chart(ctx, {
@@ -86,7 +86,9 @@ function createTemperatureHumidityChart(data) {
     });
 
     // Configuración del segundo gráfico (Presión Atmosférica)
-    const bpa = data.map(d => parseFloat(d["Presion Atmosferica"]));
+    const bpa = data.map(d => parseFloat(d["Presion"]));
+    const a = data.map(d => parseFloat(d["Altitud"]));
+    const bp0 = data.map(d => parseFloat(d["Presion Nivel Mar"]));
     const ctx2 = document.getElementById('myChart2').getContext('2d');
     const lineChart2 = new Chart(ctx2, {
         type: 'line',
@@ -96,7 +98,23 @@ function createTemperatureHumidityChart(data) {
                 {
                     label: 'Presión Atmosférica',
                     data: bpa,
-                    backgroundColor: 'rgba(129, 212, 249, 0.2)',
+                    backgroundColor: 'rgba(229, 212, 249, 0.2)',
+                    borderColor: 'rgb(2, 119, 189)',
+                    fill: true,
+                    borderWidth: 2.5,
+                },
+                {
+                    label: 'Presión A nivel de Mar',
+                    data: bp0,
+                    backgroundColor: 'rgba(29, 12, 249, 0.3)',
+                    borderColor: 'rgb(2, 119, 189)',
+                    fill: true,
+                    borderWidth: 2.5,
+                },
+                {
+                    label: 'Altitud',
+                    data: a,
+                    backgroundColor: 'rgba(109, 162, 9, 0.2)',
                     borderColor: 'rgb(2, 119, 189)',
                     fill: true,
                     borderWidth: 2.5,
@@ -125,6 +143,7 @@ function createTemperatureHumidityChart(data) {
     });
 
     // Configuración del tercer gráfico (Velocidad del viento)
+    const ppmco2 = data.map(d => parseFloat(d["ppm CO2"]));
     const velviento = data.map(d => parseFloat(d["Velocidad del viento"]));
     const ctx3 = document.getElementById('myChart3').getContext('2d');
     const lineChart3 = new Chart(ctx3, {
@@ -136,6 +155,14 @@ function createTemperatureHumidityChart(data) {
                     label: 'Velocidad del viento',
                     data: velviento,
                     backgroundColor: 'rgba(255, 159, 64, 0.2)',
+                    borderColor: 'rgb(255, 159, 64)',
+                    fill: true,
+                    borderWidth: 2.5,
+                },
+                {
+                    label: 'Partes Por Millón de CO2',
+                    data: ppmco2,
+                    backgroundColor: 'rgba(55, 159, 64, 0.2)',
                     borderColor: 'rgb(255, 159, 64)',
                     fill: true,
                     borderWidth: 2.5,
@@ -171,3 +198,4 @@ function displayData(data) {
 
 // Llamar a la función para obtener datos cuando el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', fetchData);
+

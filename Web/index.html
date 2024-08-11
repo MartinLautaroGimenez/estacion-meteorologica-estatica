@@ -27,6 +27,10 @@
         #velocidadViento,
         #direccionViento,
         #datoNumero,
+	#procio
+	#ppmco2
+	#battery
+	#stermica
         #sensorLluvia {
             display: none;
         }
@@ -44,11 +48,11 @@
                 <span class="material-symbols-sharp">home</span>
                 <h3>Inicio</h3>
             </a>
-            <a href="datos.html">
+            <a href="https://emetec.wetec.um.edu.ar/em/datos.html">
                 <span class="material-symbols-sharp">format_list_bulleted</span>
                 <h3>Datos</h3>
             </a> 
-            <a href="graphs.html">
+            <a href="https://emetec.wetec.um.edu.ar/em/graphs.html">
                 <span class="material-symbols-sharp">grid_view</span>
                 <h3>Gráficos Importantes</h3>
             </a>
@@ -106,14 +110,13 @@
                             <tr>
                                 <th>Dato</th>
                                 <th>Fecha</th>
+                                <th>Voltaje de la bateria</th>
                                 <th>Temperatura</th>
-                                <th>Presión Atmosférica</th>
-                                <th>Humedad</th>
+                                <th>Presión atmosferica</th>
+                                <th>Humedad relativa</th>
                                 <th>Nivel de luz</th>
                                 <th>Calidad del aire</th>
-                                <th>Velocidad del viento</th>
-                                <th>Direccion del viento</th>
-                                <th>Sensor de lluvia</th>
+                                <th>PPM CO2</th>
                             </tr>
                         </thead>
                         <tbody id="tablaDetallesCuerpo"></tbody>
@@ -201,7 +204,8 @@
     </footer>
 
     <!-- JavaScript -->
-    <script src="https://emetec.wetec.um.edu.ar/js"></script>
+    <script src="app.js"></script>
+    <!-- <script src="https://emetec.wetec.um.edu.ar/js"></script> -->
     <script>
         $(document).ready(function() {
             // Inicializar Magnific Popup
@@ -219,8 +223,12 @@
     </script>
 </body>
 <!-- Elementos adicionales ocultos -->
-<div id="datoNumero"></div>
-<div id="velocidadViento"></div>
-<div id="direccionViento"></div>
-<div id="sensorLluvia"></div>
+<div id="datoNumero" style="display: none;"></div>
+<div id="velocidadViento" style="display: none;"></div>
+<div id="direccionViento" style="display: none;"></div>
+<div id="sensorLluvia" style="display: none;"></div>
+<div id="battery" style="display: none;"></div>
+<div id="stermica" style="display: none;"></div>
+<div id="ppmco2" style="display: none;" ></div>
+<div id="procio" style="display: none;"></div>
 </html>
