@@ -7,3 +7,6 @@
 
 # Excluir archivo de datos sobre redes internas
 lib/config.h
+
+# Excluir carpeta de backups de pcb
+pcb/EME-backups/*.zip
