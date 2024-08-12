@@ -14,9 +14,10 @@ async function fetchData() {
         }
 
         const data = await response.json();
+        const ultimos10Datos = data.slice(-10);
         console.log(data); // Registro para verificar que los datos se obtienen correctamente
         displayData(data); // Función para mostrar los datos (puedes definirla más adelante)
-        createTemperatureHumidityChart(data); // Función para crear gráfico de temperatura y humedad
+        createTemperatureHumidityChart(ultimos10Datos); // Función para crear gráfico de temperatura y humedad
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
     }
