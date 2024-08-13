@@ -7,7 +7,7 @@ async function fetchData() {
     try {
         const response = await fetch(apiUrl, {
             headers: {
-                'Access-Control-Allow-Origin': '*' // Permitir CORS, si es necesario
+                'Access-Control-Allow-Origin': '*'  // Permitir CORS, si es necesario
             }
         });
 
