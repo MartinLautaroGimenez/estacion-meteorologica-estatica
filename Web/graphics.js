@@ -11,7 +11,7 @@ async function fetchData() {
 
         if (!response.ok) {
             throw new Error('Network response was not ok ' + response.statusText);
-        }
+        } // algo
 
         const data = await response.json();
         const ultimos10Datos = data.slice(-10);

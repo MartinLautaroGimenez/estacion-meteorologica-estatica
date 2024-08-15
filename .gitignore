@@ -1,0 +1,12 @@
+mainSource/.pio
+mainSource/.vscode/.browse.c_cpp.db*
+mainSource/.vscode/c_cpp_properties.json
+mainSource/.vscode/launch.json
+mainSource/.vscode/ipch
+mainSource/*.code-workspace
+
+# Excluir archivo de datos sobre redes internas
+mainSource/lib/config.h
+
+# Excluir carpeta de backups de pcb
+mainSource/pcb/EME-backups/*.zip
