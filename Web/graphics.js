@@ -1,11 +1,13 @@
 const apiUrl = 'https://emetec.wetec.um.edu.ar/graph';
 
+let myChart1, myChart2, myChart3;
+
 // Función asincrónica para obtener y procesar datos
 async function fetchData() {
     try {
         const response = await fetch(apiUrl, {
             headers: {
-                'Access-Control-Allow-Origin': '*' // Permitir CORS, si es necesario
+                'Access-Control-Allow-Origin': '*'  // Permitir CORS, si es necesario
             }
         });
 
@@ -13,11 +15,25 @@ async function fetchData() {
             throw new Error('Network response was not ok ' + response.statusText);
         } // algo
 
+          // Destruir los gráficos antes de recrearlos
+          if (myChart1) {
+            myChart1.destroy();
+          }
+          if (myChart2) {
+            myChart2.destroy();
+          }
+          if (myChart3) {
+            myChart3.destroy();
+          }
+        
         const data = await response.json();
         const ultimos10Datos = data.slice(-10);
+        
+        const numMuestras = document.getElementById('numMuestras').value;
+        const ultimosNdatos = data.slice(-numMuestras); // Filtrar por muestras seleccionadas
         console.log(data); // Registro para verificar que los datos se obtienen correctamente
         displayData(data); // Función para mostrar los datos (puedes definirla más adelante)
-        createTemperatureHumidityChart(ultimos10Datos); // Función para crear gráfico de temperatura y humedad
+        createTemperatureHumidityChart(ultimosNdatos); // Función para crear gráfico de temperatura y humedad
     } catch (error) {
         console.error('There has been a problem with your fetch operation:', error);
     }
@@ -37,7 +53,7 @@ function createTemperatureHumidityChart(data) {
     const humidities = data.map(d => parseFloat(d["Humedad"]));
 
     const ctx = document.getElementById('myChart1').getContext('2d');
-    const lineChart = new Chart(ctx, {
+    myChart1 = new Chart(ctx, {
         type: 'line',
         data: {
             labels: labels,
@@ -91,7 +107,7 @@ function createTemperatureHumidityChart(data) {
     const a = data.map(d => parseFloat(d["Altitud"]));
     const bp0 = data.map(d => parseFloat(d["Presion Nivel Mar"]));
     const ctx2 = document.getElementById('myChart2').getContext('2d');
-    const lineChart2 = new Chart(ctx2, {
+    myChart2 = new Chart(ctx2, {
         type: 'line',
         data: {
             labels: labels,
@@ -147,7 +163,7 @@ function createTemperatureHumidityChart(data) {
     const ppmco2 = data.map(d => parseFloat(d["ppm CO2"]));
     const velviento = data.map(d => parseFloat(d["Velocidad del viento"]));
     const ctx3 = document.getElementById('myChart3').getContext('2d');
-    const lineChart3 = new Chart(ctx3, {
+    myChart3 = new Chart(ctx3, {
         type: 'bar',
         data: {
             labels: labels,

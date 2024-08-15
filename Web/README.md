@@ -17,17 +17,20 @@ Cómo se ha visto un poco sobre la idea anteriormente, se proveeran datos de hum
  
 ### Dashboard
 #### Dashboard Principal
-En el sasa$#%&$E/%UJNTHD FGHTURI/RUTYSGDF
+En el COMPLETAR
 
 
 ### Datos
 #### Saraza
 lorem impsu re copado y aestetic
+COMPLETAR
 
 ### Gráficos
 #### Saraza
 lorem impsu re copado y aestetic
+CCOMPLETAR
 
 ### Información
 #### Saraza
 lorem impsu re copado y aestetic
+COMPLETAR
