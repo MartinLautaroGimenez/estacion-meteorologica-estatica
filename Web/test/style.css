@@ -615,3 +615,71 @@ footer {
     margin-top: 7px;
   }
 
+
+.dropdown-container {
+    display: flex;
+    justify-content: space-between; /* Coloca el menú desplegable al inicio y 'subjects' al final */
+    align-items: center; /* Alinea verticalmente los elementos */
+    width: 100%; /* Asegura que ocupe todo el ancho disponible */
+}
+
+.dropdown {
+    flex: 0 1 auto; /* Permite que el menú desplegable tome el espacio necesario */
+}
+
+.excelc {
+    display: flex;
+    justify-content: flex-end; /* Alinea el contenido al final del contenedor 'subjects' */
+    /* flex: 1; Toma el resto del espacio disponible */
+}
+
+.exceli {
+    display: flex; /* Usa flexbox para alinear elementos en una fila */
+    align-items: center; /* Alinea verticalmente los elementos en el centro */
+    gap: 10px; /* Espacio entre el icono y el texto (ajusta según sea necesario) */
+    flex: 0 1 auto; /* Permite que el elemento 'cs' tome el espacio necesario */
+    text-align: right; /* Alinea el texto a la derecha dentro del elemento 'cs' */
+}
+
+main .excelc .exceli svg circle{
+    stroke-dashoffset: 35;
+    stroke-dasharray: 210;
+}
+
+main .excelc > div{
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    /* margin-top: 1rem; */
+    box-shadow: var(--box-shadow);
+    transition: all 300ms ease;
+}
+
+main .excelc > div:hover{
+    box-shadow: none;
+}
+main .excelc > div.exceli span{background: var(--color-success);}
+main .excelc svg circle{
+    fill: none;
+    stroke: var(--color-primary);
+    stroke-width: 8;
+    stroke-linecap: round;
+    transform: translate(5px, 5px);
+    stroke-dasharray: 110;
+    stroke-dashoffset: 92;
+}
+
+main .excelc > div span{
+    background-color: var(--color-primary);
+    padding: .5rem;
+    border-radius: 50%;
+    color: var(--color-white);
+    font-size: 1.5rem;
+}
+
+#opciones {
+    background-color: var(--color-white);
+    border: light-dark;
+    margin-left: 34px;
+  }
+  
