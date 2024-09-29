@@ -3,6 +3,7 @@ const sideMenu = document.querySelector("aside");
 const themeToggler = document.querySelector(".theme-toggler");
 const nextDay = document.getElementById('nextDay');
 const prevDay = document.getElementById('prevDay');
+const categoriaDropdown = document.getElementById('categoriaDropdown');
 
 // Función para alternar entre temas oscuro y claro
 themeToggler.onclick = function() {
@@ -24,13 +25,18 @@ if (savedTheme === 'dark') {
     themeToggler.querySelector('span:nth-child(2)').classList.add('active'); // Activar segundo span
 }
 
+window.addEventListener('load', function() {
+    document.getElementById('categoriaDropdown').value = "emetec"; // Valor default "emetec"
+  });
+
 // Esperar a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', function() {
     const apiUrl = 'https://emetec.wetec.um.edu.ar/datos';
+    const apiTempUrl = 'https://emetec.wetec.um.edu.ar/datostruchos';
 
-    async function obtenerDatos() {
+    async function obtenerDatos(url) {
         try {
-            const response = await fetch(apiUrl, {
+            const response = await fetch(url, {
                 headers: {
                     'Access-Control-Allow-Origin': '*'
                 }
@@ -88,7 +94,16 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }
 
-    obtenerDatos();
+    // Event listener para el dropdown
+    categoriaDropdown.addEventListener('change', function() {
+        const selectedValue = categoriaDropdown.value;
+        if (selectedValue === 'emetec') {
+            obtenerDatos(apiUrl); // Usar la URL de temperatura
+        } else {
+            obtenerDatos(apiTempUrl); // Usar la URL por defecto
+        }
+    });
+
+    // Llamar a obtenerDatos al cargar la página para mostrar datos iniciales
+    obtenerDatos(apiUrl);
 });
-
-

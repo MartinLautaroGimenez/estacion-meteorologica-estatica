@@ -8,21 +8,44 @@
     <link rel="shortcut icon" href="https://i.ibb.co/hctNTsB/logo.jpg">
     <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
-    <!-- <link rel="stylesheet" href="https://emetec.wetec.um.edu.ar/css"> -->
-    <link rel="stylesheet" href="style.css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://emetec.wetec.um.edu.ar/css">
     <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+            margin: 0;
+        }
+
         .container {
-        display: flex;
-        flex-wrap: wrap;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+            overflow: auto; /* Allow scrolling if content overflows */
         }
 
-        .container > main {
-        flex: 1;
+        main {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        .container > .right {
-        flex: 1;
+        .zarazap {
+            display: flex;
+            align-items: center;
         }
+
+        .dropdown {
+            margin-left: 20px;
+        }
+
+        footer {
+            margin-top: auto; /* Push footer to the end */
+            text-align: center; /* Center the footer text */
+        }
+
         #datoNumero {
             display: none;
         }
@@ -58,15 +81,24 @@
     <div class="container">
         <main>
             <div class="zarazap">
-            <h1>Datos Más Importantes</h1>
-
-        </div>
+                <h1>Datos Más Importantes</h1>
+                <select id="categoriaDropdown" class="dropdown">
+                    <option value="" disabled selected>Seleccionar categoría</option>
+                    <option value="emetec" selected>EME: ETec</option>
+                    <option value="emmetec">EMM: ETec</option>
+                    <option value="emmsj">EMM: Colegio San Jorge</option>
+                </select>
+                <div class="cs" style="cursor: pointer;" onclick="descargarDatosEnXLSX()">
+                    <span class="material-symbols-sharp">download</span>
+                    <h3>Descargar Excel</h3>
+                </div>
+            </div>
             <div class="subjects">
                 <div class="cs">
                     <span class="material-symbols-sharp">schedule</span>
                     <h3>Última Actualización</h3>
                     <h2 id="fecha"></h2>
-            </div>
+                </div>
                 <div class="eg">
                     <span class="material-symbols-sharp">location_on</span>
                     <h3>Ubicación</h3>
@@ -109,7 +141,7 @@
                 </div>
                 <div class="cs">
                     <span class="material-symbols-sharp">dew_point</span>
-                    <h3>Punto de rocio</h3>
+                    <h3>Punto de rocío</h3>
                     <h2 id="procio">24/25</h2>
                 </div>
                 <div class="mth">
@@ -129,7 +161,7 @@
                 </div>
                 <div class="eg">
                     <span class="material-symbols-sharp">read_more</span>
-                    <h3>Direccion del viento</h3>
+                    <h3>Dirección del viento</h3>
                     <h2 id="direccionViento">27/29</h2>
                 </div>
                 <div class="qw">
@@ -137,14 +169,13 @@
                     <h3>Sensor de lluvia</h3>
                     <h2 id="sensorLluvia">Proximamente</h2>
                 </div>
-                
             </div>
-
-           
+        </main>
+        <footer>
+            <p>Cabe aclarar que la estación sigue una etapa de prueba y los datos no pueden estar muy apegados a la realidad</p>
+        </footer>
     </div>
-<footer>
-<p>Cabe aclarar que la estación sigue una etapa de prueba y los datos no pueden estar muy apegados a la realidad</p>
-</footer>
+    <!-- <script src="app.js"></script> -->
     <script src="https://emetec.wetec.um.edu.ar/js"></script>
     <script src="https://emetec.wetec.um.edu.ar/exceljs"></script>
 </body>
