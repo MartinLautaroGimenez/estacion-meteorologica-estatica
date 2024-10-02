@@ -37,6 +37,7 @@ LeerSensoresControlador controlador;
 #define uS_TO_S_FACTOR 1000000  // Conversión de segundos a microsegundos
 #define TIME_TO_SLEEP_15_MIN  15 * 60  // Tiempo en segundos (15 minutos)
 #define TIME_TO_SLEEP_5_SEG  5   // Tiempo en segundos (5seg
+#define TIME_TO_SLEEP_2_MIN  2 * 60   // Tiempo en segundos (2min)
 
 void envioMQTT();
 
@@ -132,8 +133,8 @@ void setup()
 void loop()
 {
   envioMQTT();
-  // delay(TIME_TO_SLEEP_15_MIN * 1000 * 60);
-  delay(TIME_TO_SLEEP_5_SEG * 1000);
+  delay(2 * 60 * 1000);
+  //delay(TIME_TO_SLEEP_5_SEG * 1000);
 }
 
 
