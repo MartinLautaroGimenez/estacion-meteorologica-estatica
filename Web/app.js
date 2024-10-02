@@ -1,35 +1,3 @@
-// Selección de elementos del DOM
-const sideMenu = document.querySelector("aside");
-const themeToggler = document.querySelector(".theme-toggler");
-const nextDay = document.getElementById('nextDay');
-const prevDay = document.getElementById('prevDay');
-const categoriaDropdown = document.getElementById('categoriaDropdown');
-
-// Función para alternar entre temas oscuro y claro
-themeToggler.onclick = function() {
-    document.body.classList.toggle('dark-theme'); // Alternar clase dark-theme en body
-    themeToggler.querySelector('span:nth-child(1)').classList.toggle('active'); // Alternar estado activo de primer span
-    themeToggler.querySelector('span:nth-child(2)').classList.toggle('active'); // Alternar estado activo de segundo span
-    
-    // Guardar preferencia de tema en el almacenamiento local
-    const isDarkTheme = document.body.classList.contains('dark-theme');
-    localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
-}
-
-// Comprobar si hay un tema guardado en el almacenamiento local
-const savedTheme = localStorage.getItem('theme');
-if (savedTheme === 'dark') {
-    // Aplicar tema oscuro al cargar la página
-    document.body.classList.add('dark-theme');
-    themeToggler.querySelector('span:nth-child(1)').classList.remove('active'); // Desactivar primer span
-    themeToggler.querySelector('span:nth-child(2)').classList.add('active'); // Activar segundo span
-}
-
-window.addEventListener('load', function() {
-    document.getElementById('categoriaDropdown').value = "emetec"; // Valor default "emetec"
-  });
-
-// Esperar a que el DOM esté completamente cargado
 document.addEventListener('DOMContentLoaded', function() {
     const apiUrl = 'https://emetec.wetec.um.edu.ar/datos';
     const apiTempUrl = 'https://emetec.wetec.um.edu.ar/datostruchos';
@@ -49,7 +17,12 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             const ultimos10Datos = data.slice(-10);
 
+            // Obtener el último dato
             const ultimoDato = ultimos10Datos[ultimos10Datos.length - 1];
+            // Obtener el primer dato
+            const primerDato = data[0]; // Acceder al primer elemento
+
+            // Mostrar el último dato en el DOM
             document.getElementById('datoNumero').textContent = ultimoDato["Dato N°"];
             document.getElementById('fecha').textContent = ultimoDato["Fecha"];
             document.getElementById('battery').textContent = ultimoDato["Nivel de bateria"] + ' V';
@@ -65,11 +38,13 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('direccionViento').textContent = ultimoDato["Direccion del viento"];
             document.getElementById('sensorLluvia').textContent = ultimoDato["Sensor de lluvia"];
 
-            document.getElementById('fecha2').textContent = ultimoDato["Fecha"];
-            document.getElementById('fecha3').textContent = ultimoDato["Fecha"];
-            document.getElementById('fecha4').textContent = ultimoDato["Fecha"];
-            document.getElementById('fecha5').textContent = ultimoDato["Fecha"];
+            // Mostrar el primer dato en el DOM (ejemplo)
+            document.getElementById('primerDatoNumero').textContent = primerDato["Dato N°"]; // Asegúrate de tener un elemento con este ID
+            document.getElementById('primerFecha').textContent = primerDato["Fecha"]; // Asegúrate de tener un elemento con este ID
 
+            // Repetir para otros campos según sea necesario...
+
+            // Actualizar la tabla de detalles
             const tablaDetallesCuerpo = document.getElementById('tablaDetallesCuerpo');
             tablaDetallesCuerpo.innerHTML = '';
 
