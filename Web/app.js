@@ -53,8 +53,3 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 tablaDetallesCuerpo.appendChild(fila);
             });
-        }
-    }
-
-    obtenerDatos();
-});
