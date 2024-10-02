@@ -38,6 +38,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             });
 
+            // Asegurarse de que la respuesta sea correcta
+            if (!response.ok) {
+                throw new Error(`HTTP error! status: ${response.status}`);
             }
 
             const data = await response.json();
@@ -85,6 +88,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 `;
                 tablaDetallesCuerpo.appendChild(fila);
             });
+        } catch (error) {
+            console.error('Error al obtener datos:', error);
         }
     }
 
