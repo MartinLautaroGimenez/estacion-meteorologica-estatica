@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
     <!-- CSS personalizado local -->
     <link rel="stylesheet" href="https://emetec.wetec.um.edu.ar/css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
     <style>
         .container {
             display: flex;
@@ -44,15 +45,15 @@
             <h2 class="etech2">Escuela Técnica de la Universidad de Mendoza<span class="danger"></span></h2>
         </div>
         <div class="navbar">
-            <a href="https://emetec.wetec.um.edu.ar/em/index.html" class="active">
+            <a href="/em/index.html" class="active">
                 <span class="material-symbols-sharp">home</span>
                 <h3>Inicio</h3>
             </a>
-            <a href="https://emetec.wetec.um.edu.ar/em/datos.html">
+            <a href="/em/datos.html">
                 <span class="material-symbols-sharp">format_list_bulleted</span>
                 <h3>Datos</h3>
             </a> 
-            <a href="https://emetec.wetec.um.edu.ar/em/graphs.html">
+            <a href="/em/graphs.html">
                 <span class="material-symbols-sharp">grid_view</span>
                 <h3>Gráficos Importantes</h3>
             </a>
@@ -66,7 +67,15 @@
     <div class="container">
         <!-- Contenido Principal -->
         <main>
-            <h1>Últimos Datos Más Importantes</h1>
+            <div class="zarazap">
+                <h1>Últimos Datos Más Importantes</h1>
+                <select id="categoriaDropdown" class="dropdown" style="margin-right: 0px;">
+                    <option value="" disabled selected>Seleccione nodo meteorológico</option>
+                    <option value="emetec" selected>EME: ETec</option>
+                    <!-- <option value="emmetec">EMM: ETec</option>
+                    <option value="emmsj">EMM: Colegio San Jorge</option> -->
+                </select>
+            </div>
             <div class="subjects">
                 <div class="eg">
                     <span class="material-symbols-sharp">device_thermostat</span>
@@ -157,7 +166,7 @@
                         </div>
                     </div>
                     <div class="teacher">
-                        <div class="profile-photo"><img src="https://i.ibb.co/PtzgQcN/Luis.jpg" alt=""></div>
+                        <div class="profile-photo"><img src="https://i.ibb.co/PtzgQcN/Luis.jpg" data-mfp-src="https://i.ibb.co/PtzgQcN/Luis.jpg" alt="" class="image-link"></div>
                         <div class="info">
                             <h3>Luis Cuesta</h3>
                             <small class="text-muted">Tutor técnico en el área de informática.</small>
@@ -165,7 +174,7 @@
                     </div>
                 </div>
                 <div class="teacher">
-                    <div class="profile-photo"><img src="https://i.ibb.co/NT6RjyM/Whats-App-Image-2024-08-02-at-14-50-40.jpg" alt=""></div>
+                    <div class="profile-photo"><img src="https://i.ibb.co/NT6RjyM/Whats-App-Image-2024-08-02-at-14-50-40.jpg" data-mfp-src="https://i.ibb.co/NT6RjyM/Whats-App-Image-2024-08-02-at-14-50-40.jpg" alt="" class="image-link"></div>
                     <div class="info">
                         <h3>Santiago Juarez</h3>
                         <small class="text-muted">Integrante del equipo, estudiante de segundo año del ETec.</small>
@@ -205,7 +214,8 @@
 
     <!-- JavaScript -->
     <script src="https://emetec.wetec.um.edu.ar/js"></script>
-    <!-- <script src="https://emetec.wetec.um.edu.ar/js"></script> -->
+    <!-- <script src="app.js"></script> -->
+   
     <script>
         $(document).ready(function() {
             // Inicializar Magnific Popup

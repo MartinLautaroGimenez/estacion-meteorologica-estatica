@@ -8,47 +8,25 @@
     <link rel="shortcut icon" href="https://i.ibb.co/hctNTsB/logo.jpg">
     <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="https://emetec.wetec.um.edu.ar/css">
+    <link rel="stylesheet" href="style.css">
     <style>
-        body {
-            display: flex;
-            flex-direction: column;
-            height: 100vh;
-            margin: 0;
-        }
-
         .container {
             display: flex;
-            flex-direction: column;
+            flex-wrap: wrap;
+        }
+
+        .container > main {
             flex: 1;
-            overflow: auto; /* Allow scrolling if content overflows */
         }
 
-        main {
+        .container > .right {
             flex: 1;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-
-        .zarazap {
-            display: flex;
-            align-items: center;
-        }
-
-        .dropdown {
-            margin-left: 20px;
-        }
-
-        footer {
-            margin-top: auto; /* Push footer to the end */
-            text-align: center; /* Center the footer text */
         }
 
         #datoNumero {
             display: none;
         }
+
     </style>
 </head>
 <body>
@@ -59,19 +37,20 @@
             <h2 class="etech2">Escuela Técnica de la Universidad de Mendoza<span class="danger"></span></h2>
         </div>
         <div class="navbar">
-            <a href="/EM/index.html">
+            <a href="https://emetec.wetec.um.edu.ar/EM/index.html">
                 <span class="material-symbols-sharp">home</span>
                 <h3>Inicio</h3>
             </a>
-            <a href="/EM/datos.html" class="active">
+            <a href="datos.html" class="active">
                 <span class="material-symbols-sharp">format_list_bulleted</span>
                 <h3>Datos</h3>
             </a> 
-            <a href="/EM/graphs.html">
+            <a href="graphs.html">
                 <span class="material-symbols-sharp">grid_view</span>
                 <h3>Gráficos Importantes</h3>
             </a>
         </div>
+
         <div class="theme-toggler">
             <span class="material-symbols-sharp active">light_mode</span>
             <span class="material-symbols-sharp">dark_mode</span>
@@ -80,19 +59,26 @@
 
     <div class="container">
         <main>
-            <div class="zarazap">
+            <!-- Contenedor para título, menú desplegable y 'cs' -->
+            <div class="dropdown-container">
                 <h1>Datos Más Importantes</h1>
-                <select id="categoriaDropdown" class="dropdown">
-                    <option value="" disabled selected>Seleccione nodo meteorológico</option>
-                    <option value="emetec" selected>EME: ETec</option>
-                    <!-- <option value="emmetec">EMM: ETec</option>
-                    <option value="emmsj">EMM: Colegio San Jorge</option> -->
-                </select>
-                <div class="cs" style="cursor: pointer;" onclick="descargarDatosEnXLSX()">
-                    <span class="material-symbols-sharp">download</span>
-                    <h3>Descargar Excel</h3>
+                <div class="dropdown">
+                    <h2 for="opciones">Seleccione una estación:</h2>
+                    <select id="opciones">
+                        <option value="1">EME - ETec</option>
+                        <option value="2">EMM - Colegio San Jorge</option>
+                    </select>
+                </div>
+                <div class="excelc" onclick="descargarDatosEnXLSX()" style="cursor: pointer;"> 
+                    <div class="exceli">
+                        <span class="material-symbols-sharp">download</span>
+                        <h3>Descargar datos en excel</h3>
+                        <h2 id=""></h2>
+                    </div>
                 </div>
             </div>
+
+            <!-- Elementos 'subjects' restantes -->
             <div class="subjects">
                 <div class="cs">
                     <span class="material-symbols-sharp">schedule</span>
@@ -141,7 +127,7 @@
                 </div>
                 <div class="cs">
                     <span class="material-symbols-sharp">dew_point</span>
-                    <h3>Punto de rocío</h3>
+                    <h3>Punto de rocio</h3>
                     <h2 id="procio">24/25</h2>
                 </div>
                 <div class="mth">
@@ -167,15 +153,15 @@
                 <div class="qw">
                     <span class="material-symbols-sharp">rainy</span>
                     <h3>Sensor de lluvia</h3>
-                    <h2 id="sensorLluvia">Proximamente</h2>
+                    <h2 id="sensorLluvia">Próximamente</h2>
                 </div>
             </div>
         </main>
-        <footer>
-            <p>Cabe aclarar que la estación sigue una etapa de prueba y los datos no pueden estar muy apegados a la realidad</p>
-        </footer>
     </div>
-    <!-- <script src="app.js"></script> -->
+
+    <footer>
+        <p>Cabe aclarar que la estación sigue una etapa de prueba y los datos no pueden estar muy apegados a la realidad</p>
+    </footer>
     <script src="https://emetec.wetec.um.edu.ar/js"></script>
     <script src="https://emetec.wetec.um.edu.ar/exceljs"></script>
 </body>

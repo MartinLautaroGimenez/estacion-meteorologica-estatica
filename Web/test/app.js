@@ -9,7 +9,7 @@ themeToggler.onclick = function() {
     document.body.classList.toggle('dark-theme'); // Alternar clase dark-theme en body
     themeToggler.querySelector('span:nth-child(1)').classList.toggle('active'); // Alternar estado activo de primer span
     themeToggler.querySelector('span:nth-child(2)').classList.toggle('active'); // Alternar estado activo de segundo span
-
+    
     // Guardar preferencia de tema en el almacenamiento local
     const isDarkTheme = document.body.classList.contains('dark-theme');
     localStorage.setItem('theme', isDarkTheme ? 'dark' : 'light');
@@ -43,7 +43,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             const ultimos10Datos = data.slice(-10);
 
-            const ultimoDato = ultimos10Datos[0];
+            const ultimoDato = ultimos10Datos[ultimos10Datos.length - 1];
             document.getElementById('datoNumero').textContent = ultimoDato["Dato N°"];
             document.getElementById('fecha').textContent = ultimoDato["Fecha"];
             document.getElementById('battery').textContent = ultimoDato["Nivel de bateria"] + ' V';
@@ -90,3 +90,5 @@ document.addEventListener('DOMContentLoaded', function() {
 
     obtenerDatos();
 });
+
+

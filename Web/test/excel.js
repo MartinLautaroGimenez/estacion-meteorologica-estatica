@@ -1,4 +1,4 @@
-const apiUrl = 'https://emetec.wetec.um.edu.ar/excel';
+const apiUrl = 'https://emetec.wetec.um.edu.ar/datos';
 
 async function descargarDatosEnXLSX() {
   try {

@@ -2,7 +2,7 @@
 ## ¿Qué es una estación meteorológica?
 Una estación meteorológica es un dispositivo tecnológico de características electrónica e informática que permite nuclear parámetros relevantes para realizar estudios y sacar conclusiones frente a fenómenos físicos.
 ## ¿Qué es EME?
-Este es un proyecto institucional y surge de la necesidad de poder comparar los biomas entre Godoy Cruz, Mendoza y el departamento de lavalle puntualmente entre el colegio ETec de la universidad de Mendoza y los diversos puntos que parada que se tienen en otro proyecto institucional de salida a lavalle llamado “Viaje a las Raíces”.
+Este es un proyecto institucional y surge de la necesidad de poder comparar los sistemas atmosféricos de algunos departamentos como Godoy Cruz, Gran Mendoza, Lavalle entre otros departamentos unidos a la red de la Escuela ETec de la Universidad de Mendoza para tener un conocimiento amplio de las condiciones atmosféricas de la provincia y así contribuir al análisis de las condiciones climáticas de la misma.
 ## Los modulos incorporados
 
   - [ESP32](#ESP32)
