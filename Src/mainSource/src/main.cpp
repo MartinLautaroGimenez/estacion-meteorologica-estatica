@@ -113,6 +113,8 @@ void setup()
   String thisBoard = ARDUINO_BOARD;
   Serial.println(thisBoard);
 
+  digitalWrite(27, HIGH);
+  digitalWrite(14, HIGH);
 
 
 
@@ -133,7 +135,10 @@ void setup()
 void loop()
 {
   envioMQTT();
-  delay(2 * 60 * 1000);
+  digitalWrite(27, LOW);
+  digitalWrite(14, LOW);
+  ESP.deepSleep(15*60*1000000);
+  //delay(2 * 60 * 1000);
   //delay(TIME_TO_SLEEP_5_SEG * 1000);
 }
 
