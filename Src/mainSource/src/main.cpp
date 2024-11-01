@@ -144,102 +144,67 @@ void loop()
 
 
 void envioMQTT(){
-//  Reconectar si se ha desconectado del Broker
+  // Reconectar si se ha desconectado del Broker
   if (!client.connected())
   {
     reconectar();
   }
   client.loop();
 
-  //  Declaración de variables de lectura para sensores tomando cómo estructura de datos la de la clase LeerSensoresControlador
+  // Declaración de variables de lectura para sensores
   LeerSensoresControlador::datosBMP bmpData;
   LeerSensoresControlador::datosDHT dhtData;
   LeerSensoresControlador::datosMQ mqData;
   float bh1750Data;
 
-  //  Lectura y asignación de párametros de los sensores
+  // Lectura y asignación de parámetros de los sensores
   dhtData = controlador.leerDHT();
   bmpData = controlador.leerBMP();
   bh1750Data = controlador.leerBH();
   mqData = controlador.leerMQ(dhtData.temperatura, dhtData.humedadRelativa);
-  // mqData = controlador.leerMQ();
 
   bool local = false;
-  // bool local = true;
 
   if (!local){
-    // Publicar temperatura ETec_broker
-    snprintf(mensaje, 20, "%.2f °C", dhtData.temperatura);
-    client.publish(TOPIC_DHT_TEMP, mensaje);
-    // Publicar humedad ETec_broker
-    snprintf(mensaje, 20, "%.2f %%HR", dhtData.humedadRelativa);
-    client.publish(TOPIC_DHT_HUM, mensaje);
-    // Publicar sensación térmica ETec_broker
-    snprintf(mensaje, 20, "%.2f °C", dhtData.sensacionTermica);
-    client.publish(TOPIC_DHT_SENST, mensaje);
+    // Crear mensaje JSON
+    snprintf(mensaje, 256, 
+      "{"
+      "\"temperaturaDHT\": %.2f, "
+      "\"humedadRelativa\": %.2f, "
+      "\"sensacionTermica\": %.2f, "
+      "\"temperaturaBMP\": %.2f, "
+      "\"presionAbsoluta\": %.2f, "
+      "\"altitud\": %.2f, "
+      "\"presionAlNivelDelMar\": %.2f, "
+      "\"luminosidad\": %.2f, "
+      "\"ppmCO2\": %.2f, "
+      "\"vientoVelocidad\": \"Proximamente\", "
+      "\"vientoDireccion\": \"Proximamente\", "
+      "\"lluvia\": \"Proximamente\""
+      "}", 
+      dhtData.temperatura, dhtData.humedadRelativa, dhtData.sensacionTermica, 
+      bmpData.temperatura, bmpData.presionAbsoluta, bmpData.altitud, 
+      bmpData.presionAlNivelDelMar, bh1750Data, mqData.ppmCO2);
 
-    // Publicar temperatura bmp ETec_broker
-    snprintf(mensaje, 20, "%.2f °C", bmpData.temperatura);
-    client.publish(TOPIC_BMP_TEMP, mensaje);
-    // Publicar presion ETec_broker
-    snprintf(mensaje, 20, "%.2f hPa", bmpData.presionAbsoluta);
-    client.publish(TOPIC_BMP_PRES, mensaje);
-    // Publicar altitud ETec_broker
-    snprintf(mensaje, 20, "%.2f m", bmpData.altitud);
-    client.publish(TOPIC_BMP_ALT, mensaje);
-    // Publicar presion a nivel del mar ETec_broker
-    snprintf(mensaje, 20, "%.2f hPa", bmpData.presionAlNivelDelMar);
-    client.publish(TOPIC_BMP_PRESNM, mensaje);
-
-    // Publicar luz ETec_broker
-    snprintf(mensaje, 20, "%.2f lm", bh1750Data);
-    client.publish(TOPIC_BH_LUZ, mensaje);
-
-    // Publicar ppmCO2 ETec_broker
-    snprintf(mensaje, 20, "%.2f ppmCO2", mqData.ppmCO2);
-    client.publish(TOPIC_MQ_PPMCO2, mensaje);
-
-    // Publicar velocidad del Viento ETec_broker
-    snprintf(mensaje, 20, "Proximamente");
-    client.publish(TOPIC_VIENTO_VELOCIDAD, mensaje);
-    // Publicar dirección del viento ETec_broker
-    snprintf(mensaje, 20, "Proximamente");
-    client.publish(TOPIC_VIENTO_DIRECCION, mensaje);
-
-    // Publicar lluvia ETec_broker
-    snprintf(mensaje, 20, "Proximamente");
-    client.publish(TOPIC_YL_LLUVIA, mensaje);
+    // Publicar datos en formato JSON
+    client.publish("TOPIC_GENERAL", mensaje);
   } else {
-      // Publicar datos del BMP180
-    snprintf(mensaje, 75,
-            "estado:OK temperatura:%.2f presAbs:%.2f presNivlMar:%.2f altit:%.2f",
-            // bmpData.estado,
-            bmpData.temperatura,
-            bmpData.presionAbsoluta,
-            bmpData.presionAlNivelDelMar,
-            bmpData.altitud);
-    client.publish(senBMP180, mensaje);
+    // Crear mensaje JSON para el modo local
+    snprintf(mensaje, 512,
+      "{"
+      "\"BMP180\": {\"estado\": \"OK\", \"temperatura\": %.2f, \"presAbs\": %.2f, \"presNivlMar\": %.2f, \"altit\": %.2f}, "
+      "\"BH1750\": {\"lux\": %.2f}, "
+      "\"DHT11\": {\"humedad\": %.2f, \"temperatura\": %.2f, \"sensacionTermica\": %.2f}, "
+      "\"MQ135\": {\"rzero\": %.2f, \"correctRZero\": %.2f, \"res\": %.2f, \"ppmCO2\": %.2f, \"ppmCorreg\": %.2f}"
+      "}",
+      bmpData.temperatura, bmpData.presionAbsoluta, bmpData.presionAlNivelDelMar, bmpData.altitud, 
+      bh1750Data, 
+      dhtData.humedadRelativa, dhtData.temperatura, dhtData.sensacionTermica, 
+      mqData.rzero, mqData.zeroCorregido, mqData.resistencia, mqData.ppmCO2, mqData.ppmCorregidas);
 
-    // Publicar datos del BH1750
-    snprintf(mensaje, 20, "Lux:%.2f", bh1750Data);
-    client.publish(senBH1750, mensaje);
-
-    // Publicar datos del DHT11
-    snprintf(mensaje, 40, "hum:%.2f temp:%.2f sensacionTerm:%.2f",
-            // dhtData.estado,
-            dhtData.humedadRelativa,
-            dhtData.temperatura,
-            dhtData.sensacionTermica);
-    client.publish(senDHT11, mensaje);
-
-    // Publicar datos del MQ135
-    snprintf(mensaje, 75, "rzero:%.2f correctRZero:%.2f res:%.2f ppmCO2:%.2f ppmCorreg:%.2f",
-            mqData.rzero,
-            mqData.zeroCorregido,
-            mqData.resistencia,
-            mqData.ppmCO2,
-            mqData.ppmCorregidas);
-    client.publish(senMQ135, mensaje);
+    // Publicar datos en formato JSON
+    client.publish("TOPIC_LOCAL", mensaje);
   }
 }
+
 
