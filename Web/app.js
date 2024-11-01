@@ -99,7 +99,7 @@ document.addEventListener('DOMContentLoaded', function() {
         const selectedValue = categoriaDropdown.value;
         if (selectedValue === 'emetec') {
             obtenerDatos(apiUrl); // Usar la URL de temperatura
-        } else {
+        } else if (selectedValue === 'test') {
             obtenerDatos(apiTempUrl); // Usar la URL por defecto
         }
     });
