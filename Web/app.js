@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function() {
             const data = await response.json();
             const ultimos10Datos = data.slice(-10);
 
-            const ultimoDato = ultimos10Datos[ultimos10Datos.length - 1];
+            const ultimoDato = ultimos10Datos[0];
             document.getElementById('datoNumero').textContent = ultimoDato["Dato N°"];
             document.getElementById('fecha').textContent = ultimoDato["Fecha"];
             document.getElementById('battery').textContent = ultimoDato["Nivel de bateria"] + ' V';
