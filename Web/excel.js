@@ -1,3 +1,6 @@
+let apiEMEtec = 'https://emetec.wetec.um.edu.ar/excel';
+let apiTest = 'https://emetec.wetec.um.edu.ar/datostruchos';
+
 // Función para establecer cookies
 function setCookie(name, value, days) {
   const date = new Date();
@@ -31,9 +34,9 @@ async function descargarDatosEnXLSX() {
 
       let apiUrl;
       if (selectedCategory === 'emetec') {
-          apiUrl = 'https://emetec.wetec.um.edu.ar/excel';
+          apiUrl = apiEMEtec;
       } else if (selectedCategory === 'test') {
-          apiUrl = 'https://emetec.wetec.um.edu.ar/datostruchos';
+          apiUrl = apiTest;
       }
 
       const response = await fetch(apiUrl, {
