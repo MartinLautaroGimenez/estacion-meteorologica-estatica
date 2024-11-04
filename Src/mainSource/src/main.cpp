@@ -3,35 +3,24 @@
 #include <PubSubClient.h>
 #include "../lib/LeerSensores.h"
 #include "../lib/config.h"
+#include "../lib/FormWiFi.h"
 #include "esp_sleep.h"
 
 char mensaje[80];
 
 WiFiClient esp_EME;
-PubSubClient client(esp_EME);
+FormularioWiFi form;
+ManejoDatosWifi controler;
 LeerSensoresControlador controlador;
+
+struct data
+{
+  /* data */
+};
+
 
 #define ssid RED_SSID_WIFI
 #define pass PASSWORD_WIFI
-#define brokerUser USUARIO_BROKER
-#define brokerPass PASSWORD_BROKER
-#define broker DIRECCION_BROKER
-
-//  Topicos del Broker Mosquitto MQTT
-#define senBH1750 "EMM/bh1750"
-#define senBMP180 "EMM/bmp180"
-#define senDHT11 "EMM/dht11"
-#define senMQ135 "EMM/mq135"
-#define chau "EMM/test"
-//  Topicos Del broker ETec
-#define temperaturaDHT "temp"
-#define humedadDHT "hum"
-#define presionBMP "bp"
-#define luminosidad "luz"
-#define calidadAire "aire"
-#define velocidadViento "velocidad"
-#define direccionViento "direccion"
-#define sensorDeLluvia "lluvia"
 
 
 #define uS_TO_S_FACTOR 1000000  // Conversión de segundos a microsegundos
@@ -39,7 +28,7 @@ LeerSensoresControlador controlador;
 #define TIME_TO_SLEEP_5_SEG  5   // Tiempo en segundos (5seg
 #define TIME_TO_SLEEP_2_MIN  2 * 60   // Tiempo en segundos (2min)
 
-void envioMQTT();
+void leerSensores();
 
 void setupWifi()
 {
@@ -58,27 +47,6 @@ void setupWifi()
   Serial.println(ssid);
   Serial.print("\nCon la siguiente IP: ");
   Serial.println(WiFi.localIP());
-}
-void reconectar()
-{
-  Serial.print("\nConectando al broker: ");
-  Serial.println(broker);
-  while (!client.connected())
-  {
-    if (client.connect("EME"))
-    {
-      Serial.print("\nConectado al broker: ");
-      Serial.println(broker);
-      client.subscribe(chau);
-    }
-    else
-    {
-      Serial.print("Error de conexión, rc=");
-      Serial.print(client.state());
-      Serial.println(".-");
-      delay(1000);
-    }
-  }
 }
 
 void callback(char *topic, byte *payload, unsigned int length)
@@ -113,6 +81,8 @@ void setup()
   String thisBoard = ARDUINO_BOARD;
   Serial.println(thisBoard);
 
+  digitalWrite(27, HIGH);
+  digitalWrite(14, HIGH);
 
 
 
@@ -121,31 +91,29 @@ void setup()
 
   //  Inicializar conexión a la red
   setupWifi();
-  client.setServer(broker, 1883);
-  client.setCallback(callback);
-
-  // envioMQTT();
-
+  
   // Serial.print("Entrando a modo Deep Sleep\n");
   // esp_deep_sleep_start();
 }
 
 void loop()
 {
-  envioMQTT();
+  // Si estamos en modo punto de acceso, atendemos las peticiones web
+  if (WiFi.getMode() == WIFI_AP) {
+    server.handleClient();
+  }
+
+  leerSensores();
+  // digitalWrite(27, LOW);
+  // digitalWrite(14, LOW);
+  // ESP.deepSleep(15*60*1000000);
   delay(2 * 60 * 1000);
   //delay(TIME_TO_SLEEP_5_SEG * 1000);
 }
 
 
-void envioMQTT(){
-//  Reconectar si se ha desconectado del Broker
-  if (!client.connected())
-  {
-    reconectar();
-  }
-  client.loop();
-
+void leerSensores(){
+  
   //  Declaración de variables de lectura para sensores tomando cómo estructura de datos la de la clase LeerSensoresControlador
   LeerSensoresControlador::datosBMP bmpData;
   LeerSensoresControlador::datosDHT dhtData;
@@ -161,6 +129,9 @@ void envioMQTT(){
 
   bool local = false;
   // bool local = true;
+
+  
+  controler.enviarData();
 
   if (!local){
     // Publicar temperatura ETec_broker
@@ -237,4 +208,3 @@ void envioMQTT(){
     client.publish(senMQ135, mensaje);
   }
 }
-
