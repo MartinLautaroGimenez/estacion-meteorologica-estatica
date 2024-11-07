@@ -96,19 +96,6 @@ void setup()
   String thisBoard = ARDUINO_BOARD;
   Serial.println(thisBoard);
 
-  // Conectar a la red WiFi
-  WiFi.begin(ssid, pass);
-  Serial.print("Conectando a WiFi...");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.print(".");
-  }
-  Serial.println("\nConectado a la red WiFi");
-
-
-
-  digitalWrite(27, HIGH);
-  digitalWrite(14, HIGH);
 
 
 
@@ -124,22 +111,20 @@ void setup()
 
 void loop()
 {
-  // Si estamos en modo punto de acceso, atendemos las peticiones web
-  // if (controlerWiFi.WiFi.getMode() == WIFI_AP) {
-  //   controlerWiFi.server.handleClient();
-  // }
-
-  leerSensores();
-  // digitalWrite(27, LOW);
-  // digitalWrite(14, LOW);
-  // ESP.deepSleep(15*60*1000000);
+  envioMQTT();
   delay(2 * 60 * 1000);
   //delay(TIME_TO_SLEEP_5_SEG * 1000);
 }
 
 
-void leerSensores(){
-  
+void envioMQTT(){
+//  Reconectar si se ha desconectado del Broker
+  if (!client.connected())
+  {
+    reconectar();
+  }
+  client.loop();
+
   //  Declaración de variables de lectura para sensores tomando cómo estructura de datos la de la clase LeerSensoresControlador
   LeerSensoresControlador::datosBMP bmpData;
   LeerSensoresControlador::datosDHT dhtData;
@@ -150,63 +135,87 @@ void leerSensores(){
   float lluvia = -1;
 
   //  Lectura y asignación de párametros de los sensores
-  dhtData = controladorSensores.leerDHT();
-  bmpData = controladorSensores.leerBMP();
-  bh1750Data = controladorSensores.leerBH();
-  mqData = controladorSensores.leerMQ(dhtData.temperatura, dhtData.humedadRelativa);
+  dhtData = controlador.leerDHT();
+  bmpData = controlador.leerBMP();
+  bh1750Data = controlador.leerBH();
+  mqData = controlador.leerMQ(dhtData.temperatura, dhtData.humedadRelativa);
   // mqData = controlador.leerMQ();
 
   bool local = false;
-  // bool local = true;
 
-  // String datazo = dataHandler.jsonMaker(
-  //     dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia
-  // );
+  if (!local){
+    // Publicar temperatura ETec_broker
+    snprintf(mensaje, 20, "%.2f °C", dhtData.temperatura);
+    client.publish(TOPIC_DHT_TEMP, mensaje);
+    // Publicar humedad ETec_broker
+    snprintf(mensaje, 20, "%.2f %%HR", dhtData.humedadRelativa);
+    client.publish(TOPIC_DHT_HUM, mensaje);
+    // Publicar sensación térmica ETec_broker
+    snprintf(mensaje, 20, "%.2f °C", dhtData.sensacionTermica);
+    client.publish(TOPIC_DHT_SENST, mensaje);
 
-  // dataHandler.enviarData(datazo);
+    // Publicar temperatura bmp ETec_broker
+    snprintf(mensaje, 20, "%.2f °C", bmpData.temperatura);
+    client.publish(TOPIC_BMP_TEMP, mensaje);
+    // Publicar presion ETec_broker
+    snprintf(mensaje, 20, "%.2f hPa", bmpData.presionAbsoluta);
+    client.publish(TOPIC_BMP_PRES, mensaje);
+    // Publicar altitud ETec_broker
+    snprintf(mensaje, 20, "%.2f m", bmpData.altitud);
+    client.publish(TOPIC_BMP_ALT, mensaje);
+    // Publicar presion a nivel del mar ETec_broker
+    snprintf(mensaje, 20, "%.2f hPa", bmpData.presionAlNivelDelMar);
+    client.publish(TOPIC_BMP_PRESNM, mensaje);
 
+    // Publicar luz ETec_broker
+    snprintf(mensaje, 20, "%.2f lm", bh1750Data);
+    client.publish(TOPIC_BH_LUZ, mensaje);
 
-  // Crear cliente seguro para HTTPS
-  WiFiClientSecure client;
-  // Si estás en un entorno de pruebas y no te importa la verificación del certificado:
-  client.setInsecure();
+    // Publicar ppmCO2 ETec_broker
+    snprintf(mensaje, 20, "%.2f ppmCO2", mqData.ppmCO2);
+    client.publish(TOPIC_MQ_PPMCO2, mensaje);
 
-  // Conectar al servidor
-  if (client.connect("emetec.wetec.um.edu.ar", 443)) {
-    Serial.println("Conectado al servidor HTTPS");
+    // Publicar velocidad del Viento ETec_broker
+    snprintf(mensaje, 20, "Proximamente");
+    client.publish(TOPIC_VIENTO_VELOCIDAD, mensaje);
+    // Publicar dirección del viento ETec_broker
+    snprintf(mensaje, 20, "Proximamente");
+    client.publish(TOPIC_VIENTO_DIRECCION, mensaje);
 
-    String datazo = jsonMaker(dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia);
-   // String datazo = "pepe";
-
-    // Enviar solicitud HTTP POST
-    client.println("POST /weather HTTP/1.1");
-    client.println("Host: emetec.wetec.um.edu.ar");
-    client.println("User-Agent: ESP32");
-    client.println("Content-Type: application/json");
-    client.print("Content-Length: ");
-    client.println(datazo.length());
-    client.println();  // Línea vacía para indicar fin de encabezados
-    client.println(datazo);  // Cuerpo de la solicitud (datos)
-
-    // Leer la respuesta del servidor
-    while (client.connected()) {
-      String line = client.readStringUntil('\n');
-      if (line == "\r") {
-        Serial.println("Cuerpo de la respuesta:");
-        break;
-      }
-    }
-
-    // Imprimir el cuerpo de la respuesta
-    String response = client.readString();
-    Serial.println(response);
-
+    // Publicar lluvia ETec_broker
+    snprintf(mensaje, 20, "Proximamente");
+    client.publish(TOPIC_YL_LLUVIA, mensaje);
   } else {
-    Serial.println("Fallo al conectar al servidor HTTPS");
+      // Publicar datos del BMP180
+    snprintf(mensaje, 75,
+            "estado:OK temperatura:%.2f presAbs:%.2f presNivlMar:%.2f altit:%.2f",
+            // bmpData.estado,
+            bmpData.temperatura,
+            bmpData.presionAbsoluta,
+            bmpData.presionAlNivelDelMar,
+            bmpData.altitud);
+    client.publish(senBMP180, mensaje);
+
+    // Publicar datos del BH1750
+    snprintf(mensaje, 20, "Lux:%.2f", bh1750Data);
+    client.publish(senBH1750, mensaje);
+
+    // Publicar datos del DHT11
+    snprintf(mensaje, 40, "hum:%.2f temp:%.2f sensacionTerm:%.2f",
+            // dhtData.estado,
+            dhtData.humedadRelativa,
+            dhtData.temperatura,
+            dhtData.sensacionTermica);
+    client.publish(senDHT11, mensaje);
+
+    // Publicar datos del MQ135
+    snprintf(mensaje, 75, "rzero:%.2f correctRZero:%.2f res:%.2f ppmCO2:%.2f ppmCorreg:%.2f",
+            mqData.rzero,
+            mqData.zeroCorregido,
+            mqData.resistencia,
+            mqData.ppmCO2,
+            mqData.ppmCorregidas);
+    client.publish(senMQ135, mensaje);
   }
-
-  // Finalizar la conexión
-  client.stop();
-
-
 }
+
