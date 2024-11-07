@@ -5,18 +5,15 @@
 #include "../lib/config.h"
 #include "../lib/FormWiFi.h"
 #include "esp_sleep.h"
+#include <WiFiClientSecure.h>
 
 char mensaje[80];
 
 WiFiClient esp_EME;
-FormularioWiFi form;
-ManejoDatosWifi controler;
-LeerSensoresControlador controlador;
+//ControladorWiFi controlerWiFi;
+// ManejoDatosWifi dataHandler;
+LeerSensoresControlador controladorSensores;
 
-struct data
-{
-  /* data */
-};
 
 
 #define ssid RED_SSID_WIFI
@@ -30,35 +27,53 @@ struct data
 
 void leerSensores();
 
-void setupWifi()
+
+
+String jsonMaker(
+    LeerSensoresControlador::datosDHT dhtData,
+    LeerSensoresControlador::datosMQ mqData,
+    LeerSensoresControlador::datosBMP bmpData,    
+    float bhData,
+    float velViento,
+    String dirViento,
+    float lluvia
+)
 {
-  delay(100);
-  Serial.print("\nConectando a ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, pass);
-
-  while (WiFi.status() != WL_CONNECTED)
+  String postData;
+  if (lluvia < 0 || velViento < 0)
   {
-    delay(200);
-    Serial.print(".-");
+    // Crear los datos JSON para enviar (temperatura y humedad)
+    postData = "{\"DHT_temperatura\":" + String(dhtData.temperatura) + 
+                      ",\"DHT_humedad\":" + String(dhtData.humedadRelativa) + 
+                      ",\"DHT_sensasionTerm\":" + String(dhtData.sensacionTermica) + 
+                      ",\"MQ_ppmCO2\":" + String(mqData.ppmCO2) + 
+                      ",\"BMP_presion\":" + String(bmpData.presionAbsoluta) + 
+                      ",\"BMP_temperatura\":" + String(bmpData.temperatura) + 
+                      ",\"BMP_altitud\":" + String(bmpData.altitud) + 
+                      ",\"BH_lumines\":" + String(bhData) + 
+                      ",\"VelocidadViento\":" + "Proximamente" + 
+                      ",\"DireccionViento\":" + "Proximamente" + 
+                      ",\"Lluvia\":" + "Proximamente" + 
+                      "}";
+  } else {
+    // Crear los datos JSON para enviar (temperatura y humedad)
+    postData = "{\"DHT_temperatura\":" + String(dhtData.temperatura) + 
+                      ",\"DHT_humedad\":" + String(dhtData.humedadRelativa) + 
+                      ",\"DHT_sensasionTerm\":" + String(dhtData.sensacionTermica) + 
+                      ",\"MQ_ppmCO2\":" + String(mqData.ppmCO2) + 
+                      ",\"BMP_presion\":" + String(bmpData.presionAbsoluta) + 
+                      ",\"BMP_temperatura\":" + String(bmpData.temperatura) + 
+                      ",\"BMP_altitud\":" + String(bmpData.altitud) + 
+                      ",\"BH_lumines\":" + String(bhData) + 
+                      ",\"VelocidadViento\":" + String(velViento) + 
+                      ",\"DireccionViento\":" + dirViento + 
+                      ",\"Lluvia\":" + String(lluvia) + 
+                      "}";
+    
   }
-
-  Serial.print("\nConectado a la red: ");
-  Serial.println(ssid);
-  Serial.print("\nCon la siguiente IP: ");
-  Serial.println(WiFi.localIP());
+  return postData;
 }
 
-void callback(char *topic, byte *payload, unsigned int length)
-{
-  Serial.print("Mensaje recibido: ");
-  Serial.println(topic);
-  for (unsigned int i = 0; i < length; i++)
-  {
-    Serial.print((char)payload[i]);
-  }
-  Serial.println();
-}
 
 unsigned long delayTime;
 void setup()
@@ -81,16 +96,27 @@ void setup()
   String thisBoard = ARDUINO_BOARD;
   Serial.println(thisBoard);
 
+  // Conectar a la red WiFi
+  WiFi.begin(ssid, pass);
+  Serial.print("Conectando a WiFi...");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print(".");
+  }
+  Serial.println("\nConectado a la red WiFi");
+
+
+
   digitalWrite(27, HIGH);
   digitalWrite(14, HIGH);
 
 
 
   //  Inicializar controlador de sensores
-  controlador.initControlador(BMP_TYPE_180);
+  controladorSensores.initControlador(BMP_TYPE_180);
 
   //  Inicializar conexión a la red
-  setupWifi();
+  // setupWifi();
   
   // Serial.print("Entrando a modo Deep Sleep\n");
   // esp_deep_sleep_start();
@@ -99,9 +125,9 @@ void setup()
 void loop()
 {
   // Si estamos en modo punto de acceso, atendemos las peticiones web
-  if (WiFi.getMode() == WIFI_AP) {
-    server.handleClient();
-  }
+  // if (controlerWiFi.WiFi.getMode() == WIFI_AP) {
+  //   controlerWiFi.server.handleClient();
+  // }
 
   leerSensores();
   // digitalWrite(27, LOW);
@@ -119,92 +145,68 @@ void leerSensores(){
   LeerSensoresControlador::datosDHT dhtData;
   LeerSensoresControlador::datosMQ mqData;
   float bh1750Data;
+  float velViento = -1;
+  String dirViento = "";
+  float lluvia = -1;
 
   //  Lectura y asignación de párametros de los sensores
-  dhtData = controlador.leerDHT();
-  bmpData = controlador.leerBMP();
-  bh1750Data = controlador.leerBH();
-  mqData = controlador.leerMQ(dhtData.temperatura, dhtData.humedadRelativa);
+  dhtData = controladorSensores.leerDHT();
+  bmpData = controladorSensores.leerBMP();
+  bh1750Data = controladorSensores.leerBH();
+  mqData = controladorSensores.leerMQ(dhtData.temperatura, dhtData.humedadRelativa);
   // mqData = controlador.leerMQ();
 
   bool local = false;
   // bool local = true;
 
-  
-  controler.enviarData();
+  // String datazo = dataHandler.jsonMaker(
+  //     dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia
+  // );
 
-  if (!local){
-    // Publicar temperatura ETec_broker
-    snprintf(mensaje, 20, "%.2f °C", dhtData.temperatura);
-    client.publish(TOPIC_DHT_TEMP, mensaje);
-    // Publicar humedad ETec_broker
-    snprintf(mensaje, 20, "%.2f %%HR", dhtData.humedadRelativa);
-    client.publish(TOPIC_DHT_HUM, mensaje);
-    // Publicar sensación térmica ETec_broker
-    snprintf(mensaje, 20, "%.2f °C", dhtData.sensacionTermica);
-    client.publish(TOPIC_DHT_SENST, mensaje);
+  // dataHandler.enviarData(datazo);
 
-    // Publicar temperatura bmp ETec_broker
-    snprintf(mensaje, 20, "%.2f °C", bmpData.temperatura);
-    client.publish(TOPIC_BMP_TEMP, mensaje);
-    // Publicar presion ETec_broker
-    snprintf(mensaje, 20, "%.2f hPa", bmpData.presionAbsoluta);
-    client.publish(TOPIC_BMP_PRES, mensaje);
-    // Publicar altitud ETec_broker
-    snprintf(mensaje, 20, "%.2f m", bmpData.altitud);
-    client.publish(TOPIC_BMP_ALT, mensaje);
-    // Publicar presion a nivel del mar ETec_broker
-    snprintf(mensaje, 20, "%.2f hPa", bmpData.presionAlNivelDelMar);
-    client.publish(TOPIC_BMP_PRESNM, mensaje);
 
-    // Publicar luz ETec_broker
-    snprintf(mensaje, 20, "%.2f lm", bh1750Data);
-    client.publish(TOPIC_BH_LUZ, mensaje);
+  // Crear cliente seguro para HTTPS
+  WiFiClientSecure client;
+  // Si estás en un entorno de pruebas y no te importa la verificación del certificado:
+  client.setInsecure();
 
-    // Publicar ppmCO2 ETec_broker
-    snprintf(mensaje, 20, "%.2f ppmCO2", mqData.ppmCO2);
-    client.publish(TOPIC_MQ_PPMCO2, mensaje);
+  // Conectar al servidor
+  if (client.connect("emetec.wetec.um.edu.ar", 443)) {
+    Serial.println("Conectado al servidor HTTPS");
 
-    // Publicar velocidad del Viento ETec_broker
-    snprintf(mensaje, 20, "Proximamente");
-    client.publish(TOPIC_VIENTO_VELOCIDAD, mensaje);
-    // Publicar dirección del viento ETec_broker
-    snprintf(mensaje, 20, "Proximamente");
-    client.publish(TOPIC_VIENTO_DIRECCION, mensaje);
+    String datazo = jsonMaker(dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia);
+   // String datazo = "pepe";
 
-    // Publicar lluvia ETec_broker
-    snprintf(mensaje, 20, "Proximamente");
-    client.publish(TOPIC_YL_LLUVIA, mensaje);
+    // Enviar solicitud HTTP POST
+    client.println("POST /weather HTTP/1.1");
+    client.println("Host: emetec.wetec.um.edu.ar");
+    client.println("User-Agent: ESP32");
+    client.println("Content-Type: application/json");
+    client.print("Content-Length: ");
+    client.println(datazo.length());
+    client.println();  // Línea vacía para indicar fin de encabezados
+    client.println(datazo);  // Cuerpo de la solicitud (datos)
+
+    // Leer la respuesta del servidor
+    while (client.connected()) {
+      String line = client.readStringUntil('\n');
+      if (line == "\r") {
+        Serial.println("Cuerpo de la respuesta:");
+        break;
+      }
+    }
+
+    // Imprimir el cuerpo de la respuesta
+    String response = client.readString();
+    Serial.println(response);
+
   } else {
-      // Publicar datos del BMP180
-    snprintf(mensaje, 75,
-            "estado:OK temperatura:%.2f presAbs:%.2f presNivlMar:%.2f altit:%.2f",
-            // bmpData.estado,
-            bmpData.temperatura,
-            bmpData.presionAbsoluta,
-            bmpData.presionAlNivelDelMar,
-            bmpData.altitud);
-    client.publish(senBMP180, mensaje);
-
-    // Publicar datos del BH1750
-    snprintf(mensaje, 20, "Lux:%.2f", bh1750Data);
-    client.publish(senBH1750, mensaje);
-
-    // Publicar datos del DHT11
-    snprintf(mensaje, 40, "hum:%.2f temp:%.2f sensacionTerm:%.2f",
-            // dhtData.estado,
-            dhtData.humedadRelativa,
-            dhtData.temperatura,
-            dhtData.sensacionTermica);
-    client.publish(senDHT11, mensaje);
-
-    // Publicar datos del MQ135
-    snprintf(mensaje, 75, "rzero:%.2f correctRZero:%.2f res:%.2f ppmCO2:%.2f ppmCorreg:%.2f",
-            mqData.rzero,
-            mqData.zeroCorregido,
-            mqData.resistencia,
-            mqData.ppmCO2,
-            mqData.ppmCorregidas);
-    client.publish(senMQ135, mensaje);
+    Serial.println("Fallo al conectar al servidor HTTPS");
   }
+
+  // Finalizar la conexión
+  client.stop();
+
+
 }

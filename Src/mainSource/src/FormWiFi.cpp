@@ -13,19 +13,19 @@
 ⣿⣿⣯⡔⢛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣭⣍⣨⠿⢿⣿⣿⣿
 ⣿⡿⢫⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣝⣿
 */
-
-FormularioWiFi::FormularioWiFi()
+/*
+ControladorWiFi::ControladorWiFi()
 {
   // Credenciales WiFi predeterminadas (se usarán si no hay nada guardado en las preferencias)
-  const char* defaultSSID = "TuSSIDPredeterminado";
-  const char* defaultPassword = "TuContraseñaPredeterminada";
+  const char* defaultSSID = "ETEC";
+  const char* defaultPassword = "ETec2024*";
 
-  // Creamos una instancia del servidor web en el puerto 80
-  WebServer server(80);
 
   // Creamos un objeto Preferences para manejar la configuración en la memoria flash
   Preferences preferences;
 
+  // Creamos una instancia del servidor web en el puerto 80
+  WebServer server(80);
 
   // Iniciamos la comunicación serial para depuración
   Serial.begin(115200);
@@ -52,7 +52,7 @@ FormularioWiFi::FormularioWiFi()
   }
 }
 
-bool FormularioWiFi::connectToWiFi() {
+bool ControladorWiFi::connectToWiFi() {
   // Leemos las credenciales WiFi de las preferencias
   String ssid = preferences.getString("ssid", defaultSSID);
   String password = preferences.getString("password", defaultPassword);
@@ -60,13 +60,13 @@ bool FormularioWiFi::connectToWiFi() {
   Serial.println("Intentando conectar a: " + ssid);
 
   // Intentamos conectarnos al WiFi
-  WiFi.begin(ssid.c_str(), password.c_str());
+  this->WiFi.begin(ssid.c_str(), password.c_str());
 
   // Esperamos hasta 10 segundos por la conexión
   for (int i = 0; i < 20; i++) {
-    if (WiFi.status() == WL_CONNECTED) {
+    if (this->WiFi.status() == WL_CONNECTED) {
       Serial.println("Conectado a WiFi");
-      Serial.println("Dirección IP: " + WiFi.localIP().toString());
+      Serial.println("Dirección IP: " + this->WiFi.localIP().toString());
       return true;
     }
     delay(500);
@@ -77,23 +77,8 @@ bool FormularioWiFi::connectToWiFi() {
   return false;
 }
 
-void FormularioWiFi::setupAP() {
-  // Configuramos el ESP32 como punto de acceso
-  WiFi.mode(WIFI_AP);
-  WiFi.softAP("ESP32_Config", "password");
 
-  // Configuramos las rutas del servidor web
-  this->server.on('/', handleRoot);
-  server.on("/save", handleSave);
-  server.begin();
-
-  Serial.println("Modo punto de acceso iniciado");
-  Serial.println("SSID: ESP32_Config");
-  Serial.println("Password: password");
-  Serial.println("Dirección IP: " + WiFi.softAPIP().toString());
-}
-
-void FormularioWiFi::handleRoot() {
+void ControladorWiFi::handleRoot() {
   String html = "<!DOCTYPE html><html lang='es'>"
                 "<head>"
                 "<meta name='viewport' content='width=device-width, initial-scale=1'>"
@@ -120,44 +105,63 @@ void FormularioWiFi::handleRoot() {
                 "</div>"
                 "</body>"
                 "</html>";
-  server.send(200, "text/html", html);
+  this->server.send(200, "text/html", html);
 }
 
-void FormularioWiFi::handleSave() {
+void ControladorWiFi::handleSave() {
   // Obtenemos el nuevo SSID y contraseña del formulario
-  String newSSID = server.arg("ssid");
-  String newPassword = server.arg("password");
+  String newSSID = this->server.arg("ssid");
+  String newPassword = this->server.arg("password");
 
   // Guardamos las nuevas credenciales en las preferencias
-  preferences.putString("ssid", newSSID);
-  preferences.putString("password", newPassword);
+  this->preferences.putString("ssid", newSSID);
+  this->preferences.putString("password", newPassword);
 
   // Enviamos una respuesta al cliente
-  server.send(200, "text/plain", "Configuración guardada. Reiniciando...");
+  this->server.send(200, "text/plain", "Configuración guardada. Reiniciando...");
   delay(1000);
   ESP.restart();  // Reiniciamos el ESP32 para aplicar la nueva configuración
 }
 
-void FormularioWiFi::clearPreferences() {
+void ControladorWiFi::clearPreferences() {
   // Borramos todas las preferencias almacenadas en el espacio de nombres "wifi"
-  preferences.clear();
-  preferences.end();
+  this->preferences.clear();
+  this->preferences.end();
 }
+
+
+void ControladorWiFi::setupAP() {
+  // Configuramos el ESP32 como punto de acceso
+  this->WiFi.mode(WIFI_AP);
+  this->WiFi.softAP("ESP32_Config", "password");
+
+  // Configuramos las rutas del servidor web
+  const Uri root = "/";
+  this->server.on("/", std::bind(&ControladorWiFi::handleRoot, this));
+  this->server.on("/save", std::bind(&ControladorWiFi::handleSave, this));
+  this->server.begin();
+
+  Serial.println("Modo punto de acceso iniciado");
+  Serial.println("SSID: ESP32_Config");
+  Serial.println("Password: password");
+  Serial.println("Dirección IP: " + WiFi.softAPIP().toString());
+}
+*/
 
 ManejoDatosWifi::ManejoDatosWifi()
 {
-  /*
-  Serial.begin(115200);
-  // Conectar a la red WiFi
-  WiFi.begin(ssid, password);
-  Serial.print("Conectando a WiFi...");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.print(".");
-  }
-  Serial.println("\nConectado a la red WiFi");
+  
+  // Serial.begin(115200);
+  // // Conectar a la red WiFi
+  // WiFi.begin(ssid, password);
+  // Serial.print("Conectando a WiFi...");
+  // while (WiFi.status() != WL_CONNECTED) {
+  //   delay(1000);
+  //   Serial.print(".");
+  // }
+  // Serial.println("\nConectado a la red WiFi");
 
-*/
+
   // Crear cliente seguro para HTTPS
   WiFiClientSecure client;
 
@@ -169,11 +173,17 @@ String ManejoDatosWifi::jsonMaker(
     LeerSensoresControlador::datosDHT dhtData,
     LeerSensoresControlador::datosMQ mqData,
     LeerSensoresControlador::datosBMP bmpData,    
-    float bhData
+    float bhData,
+    float velViento,
+    String dirViento,
+    float lluvia
 )
 {
+  String postData;
+  if (lluvia < 0 || velViento < 0)
+  {
     // Crear los datos JSON para enviar (temperatura y humedad)
-    String postData = "{\"DHT_temperatura\":" + String(dhtData.temperatura) + 
+    postData = "{\"DHT_temperatura\":" + String(dhtData.temperatura) + 
                       ",\"DHT_humedad\":" + String(dhtData.humedadRelativa) + 
                       ",\"DHT_sensasionTerm\":" + String(dhtData.sensacionTermica) + 
                       ",\"MQ_ppmCO2\":" + String(mqData.ppmCO2) + 
@@ -181,18 +191,33 @@ String ManejoDatosWifi::jsonMaker(
                       ",\"BMP_temperatura\":" + String(bmpData.temperatura) + 
                       ",\"BMP_altitud\":" + String(bmpData.altitud) + 
                       ",\"BH_lumines\":" + String(bhData) + 
-                      ",\"aaaaaaaa\":" + String() + 
-                      ",\"aaaaaaaa\":" + String() + 
-                      ",\"aaaaaaaa\":" + String() + 
+                      ",\"VelocidadViento\":" + "Proximamente" + 
+                      ",\"DireccionViento\":" + "Proximamente" + 
+                      ",\"Lluvia\":" + "Proximamente" + 
+                      "}";
+  } else {
+    // Crear los datos JSON para enviar (temperatura y humedad)
+    postData = "{\"DHT_temperatura\":" + String(dhtData.temperatura) + 
+                      ",\"DHT_humedad\":" + String(dhtData.humedadRelativa) + 
+                      ",\"DHT_sensasionTerm\":" + String(dhtData.sensacionTermica) + 
+                      ",\"MQ_ppmCO2\":" + String(mqData.ppmCO2) + 
+                      ",\"BMP_presion\":" + String(bmpData.presionAbsoluta) + 
+                      ",\"BMP_temperatura\":" + String(bmpData.temperatura) + 
+                      ",\"BMP_altitud\":" + String(bmpData.altitud) + 
+                      ",\"BH_lumines\":" + String(bhData) + 
+                      ",\"VelocidadViento\":" + String(velViento) + 
+                      ",\"DireccionViento\":" + dirViento + 
+                      ",\"Lluvia\":" + String(lluvia) + 
                       "}";
     
-    return postData;
+  }
+  return postData;
 }
 
 int ManejoDatosWifi::enviarData(String postData)
 {
   // Conectar al servidor
-  if (this->client.connect("emetec.wetec.um.edu.ar", 443)) {
+  if (client.connect("emetec.wetec.um.edu.ar", 443)) {
     Serial.println("Conectado al servidor HTTPS");
 
     // Enviar solicitud HTTP POST
@@ -217,9 +242,10 @@ int ManejoDatosWifi::enviarData(String postData)
     // Imprimir el cuerpo de la respuesta
     String response = client.readString();
     Serial.println(response);
-
+    return 0;
   } else {
     Serial.println("Fallo al conectar al servidor HTTPS");
+    return 1;
   }
 
   // Finalizar la conexión
