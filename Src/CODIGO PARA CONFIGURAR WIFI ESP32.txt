@@ -1,0 +1,146 @@
+#include <WiFi.h>
+#include <Preferences.h>
+#include <WebServer.h>
+
+// Creamos un objeto Preferences para manejar la configuración en la memoria flash
+Preferences preferences;
+
+// Credenciales WiFi predeterminadas (se usarán si no hay nada guardado en las preferencias)
+const char* defaultSSID = "TuSSIDPredeterminado";
+const char* defaultPassword = "TuContraseñaPredeterminada";
+
+// Creamos una instancia del servidor web en el puerto 80
+WebServer server(80);
+
+// Declaración de funciones
+void setupAP();
+void handleRoot();
+void handleSave();
+bool connectToWiFi();
+void clearPreferences();
+
+void setup() {
+  // Iniciamos la comunicación serial para depuración
+  Serial.begin(115200);
+
+  // Iniciamos las preferencias en modo lectura/escritura
+  preferences.begin("wifi", false);
+
+  // Ofrecemos la opción de borrar las preferencias al inicio
+  Serial.println("Presiona 'C' en los próximos 5 segundos para borrar las preferencias...");
+  unsigned long startTime = millis();
+  while (millis() - startTime < 5000) {
+    if (Serial.available() && Serial.read() == 'C') {
+      clearPreferences();
+      Serial.println("Preferencias borradas. Reiniciando...");
+      delay(1000);
+      ESP.restart();
+    }
+  }
+
+  // Intentamos conectarnos al WiFi
+  if (!connectToWiFi()) {
+    // Si la conexión falla, configuramos el modo punto de acceso
+    setupAP();
+  }
+}
+
+void loop() {
+  // Si estamos en modo punto de acceso, atendemos las peticiones web
+  if (WiFi.getMode() == WIFI_AP) {
+    server.handleClient();
+  }
+  // Aquí puedes añadir más código para tu aplicación principal
+}
+
+bool connectToWiFi() {
+  // Leemos las credenciales WiFi de las preferencias
+  String ssid = preferences.getString("ssid", defaultSSID);
+  String password = preferences.getString("password", defaultPassword);
+
+  Serial.println("Intentando conectar a: " + ssid);
+
+  // Intentamos conectarnos al WiFi
+  WiFi.begin(ssid.c_str(), password.c_str());
+
+  // Esperamos hasta 10 segundos por la conexión
+  for (int i = 0; i < 20; i++) {
+    if (WiFi.status() == WL_CONNECTED) {
+      Serial.println("Conectado a WiFi");
+      Serial.println("Dirección IP: " + WiFi.localIP().toString());
+      return true;
+    }
+    delay(500);
+    Serial.print(".");
+  }
+
+  Serial.println("Fallo en la conexión WiFi");
+  return false;
+}
+
+void setupAP() {
+  // Configuramos el ESP32 como punto de acceso
+  WiFi.mode(WIFI_AP);
+  WiFi.softAP("ESP32_Config", "password");
+
+  // Configuramos las rutas del servidor web
+  server.on("/", handleRoot);
+  server.on("/save", handleSave);
+  server.begin();
+
+  Serial.println("Modo punto de acceso iniciado");
+  Serial.println("SSID: ESP32_Config");
+  Serial.println("Password: password");
+  Serial.println("Dirección IP: " + WiFi.softAPIP().toString());
+}
+
+void handleRoot() {
+  String html = "<!DOCTYPE html><html lang='es'>"
+                "<head>"
+                "<meta name='viewport' content='width=device-width, initial-scale=1'>"
+                "<title>Configuraci&oacute;n WiFi</title>"
+                "<style>"
+                "body{font-family:system-ui,-apple-system,BlinkMacSystemFont,'Segoe UI',Roboto,sans-serif;color:#1d1d1f;background-color:#f5f5f7;margin:0;padding:20px;display:flex;align-items:center;justify-content:center;min-height:100vh}"
+                ".container{background-color:#fff;padding:30px;border-radius:12px;box-shadow:0 4px 6px rgba(0,0,0,0.1);max-width:300px;width:100%}"
+                "h1{font-size:24px;text-align:center;margin-bottom:20px;color:#1d1d1f}"
+                "form{display:flex;flex-direction:column}"
+                "input{width:100%;padding:10px;margin-bottom:15px;border:1px solid #d2d2d7;border-radius:6px;font-size:14px}"
+                "input[type='submit']{background-color:#0071e3;color:white;border:none;font-weight:bold;cursor:pointer}"
+                "input[type='submit']:hover{background-color:#0077ed}"
+                "</style>"
+                "</head>"
+                "<body>"
+                "<div class='container'>"
+                "<h1>EMM ETEC</h1>"
+                "<h1>Configuraci&oacute;n WiFi</h1>"
+                "<form action='/save' method='post'>"
+                "<input type='text' name='ssid' placeholder='Nombre de la red (SSID)' required>"
+                "<input type='password' name='password' placeholder='Contrase&ntilde;a' required>"
+                "<input type='submit' value='Guardar'>"
+                "</form>"
+                "</div>"
+                "</body>"
+                "</html>";
+  server.send(200, "text/html", html);
+}
+
+void handleSave() {
+  // Obtenemos el nuevo SSID y contraseña del formulario
+  String newSSID = server.arg("ssid");
+  String newPassword = server.arg("password");
+
+  // Guardamos las nuevas credenciales en las preferencias
+  preferences.putString("ssid", newSSID);
+  preferences.putString("password", newPassword);
+
+  // Enviamos una respuesta al cliente
+  server.send(200, "text/plain", "Configuración guardada. Reiniciando...");
+  delay(1000);
+  ESP.restart();  // Reiniciamos el ESP32 para aplicar la nueva configuración
+}
+
+void clearPreferences() {
+  // Borramos todas las preferencias almacenadas en el espacio de nombres "wifi"
+  preferences.clear();
+  preferences.end();
+}
