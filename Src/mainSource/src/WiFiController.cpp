@@ -1,4 +1,4 @@
-#include "../lib/FormWiFi.h"
+#include "../lib/WiFiController.h"
 
 /*
 ⣿⣿⡟⡹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
@@ -13,6 +13,7 @@
 ⣿⣿⣯⡔⢛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣭⣍⣨⠿⢿⣿⣿⣿
 ⣿⡿⢫⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣝⣿
 */
+
 /*
 ControladorWiFi::ControladorWiFi()
 {

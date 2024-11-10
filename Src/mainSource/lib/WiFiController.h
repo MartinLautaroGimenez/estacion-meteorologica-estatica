@@ -1,5 +1,5 @@
-#ifndef FormWifi_h
-#define FormWifi_h
+#ifndef WiFiController_h
+#define WiFiController_h
 
 #include <WiFi.h>
 #include <Preferences.h>
@@ -33,7 +33,7 @@ class ControladorWiFi
 
 };
 
-class ManejoDatosWifi
+class ManejoDatosWifi : ControladorWiFi
 {
   public:
 

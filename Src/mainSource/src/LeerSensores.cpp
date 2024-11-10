@@ -1,20 +1,48 @@
 #include "../lib/LeerSensores.h"
 
+/*
+⣿⣿⡟⡹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⢱⣶⣭⡻⢿⠿⣛⣛⣛⠸⣮⡻⣿⣿⡿⢛⣭⣶⣆⢿⣿
+⣿⡿⣸⣿⣿⣿⣷⣮⣭⣛⣿⣿⣿⣿⣶⣥⣾⣿⣿⣿⡷⣽⣿
+⣿⡏⣾⣿⣿⡿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿
+⣿⣧⢻⣿⡟⣰⡿⠁⢹⣿⣿⣿⣋⣴⠖⢶⣝⢻⣿⣿⡇⣿⣿
+⠩⣥⣿⣿⣴⣿⣇⠀⣸⣿⣿⣿⣿⣷⠀⢰⣿⠇⣿⣭⣼⠍⣿
+⣿⡖⣽⣿⣿⣿⣿⣿⣿⣯⣭⣭⣿⣿⣷⣿⣿⣿⣿⣿⡔⣾⣿
+⣿⡡⢟⡛⠻⠿⣿⣿⣿⣝⣨⣝⣡⣿⣿⡿⠿⠿⢟⣛⣫⣼⣿
+⣿⣿⣿⡷⠝⢿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣾⡩⣼⣿⣿⣿⣿⣿
+⣿⣿⣯⡔⢛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣭⣍⣨⠿⢿⣿⣿⣿
+⣿⡿⢫⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣝⣿
+*/
+
 LeerSensoresControlador::LeerSensoresControlador()
     : dht(), bmp(), pressure(), lightMeter(BH1750_ADDRESS), mq135_sensor(PIN_MQ135)
 {
     //  Método constructor de clase controlador de sensores
+
+    // Defino los pines de ground que controlan los mosfet cómo salidas digitales
+    pinMode(PIN_GROUND_1, OUTPUT);
+    pinMode(PIN_GROUND_2, OUTPUT);
+
+    //Una vez definidos los pines se procede a levantarlos
+    this->alimentaciones("all");
+    // agregamos un pequeño delay para dartiempos a los sensores
+    delay(150);
+}
+
+// Método destructor de la clase
+LeerSensoresControlador::~LeerSensoresControlador()
+{
 }
 
 //  Método inicializador de comunicación y varios
-void LeerSensoresControlador::initControlador(const char *sensor)
+void LeerSensoresControlador::initControlador(const char *tipoDeBMP, const char *tipoDeDHT)
 {
     // Initialize the I2C bus (BH1750 library doesn't do this automatically)
     Wire.begin();
     //  Le asigno al atributo de la instancia el valor tomado del sensor
-    this->BMP_SELECTED = sensor;
+    this->BMP_SELECTED = tipoDeBMP;
 
-    if (strcmp(sensor, BMP_TYPE_280) == 0)
+    if (strcmp(tipoDeBMP, BMP_TYPE_280) == 0)
     {
         while (!Serial)
             delay(100); // wait for native usb
@@ -42,7 +70,7 @@ void LeerSensoresControlador::initControlador(const char *sensor)
                         Adafruit_BMP280::FILTER_X16,      /* Filtering. */
                         Adafruit_BMP280::STANDBY_MS_500); /* Standby time. */
     }
-    else if (strcmp(sensor, BMP_TYPE_180) == 0)
+    else if (strcmp(tipoDeBMP, BMP_TYPE_180) == 0)
     {
         if (pressure.begin())
             Serial.println("BMP180 init success");
@@ -98,7 +126,17 @@ void LeerSensoresControlador::initControlador(const char *sensor)
         Serial.println(F("Error initialising BH1750"));
     }
 
-    //  inicializo DHT
+    //  inicializo DHT //
+    // Verificar que tipo de DHT se está utilizando
+    if (strcmp(DHT_SELECTED, DHT_TYPE_11)){
+        DHT_TYPE = DHTesp::DHT11;
+    } else if (strcmp(DHT_SELECTED, DHT_TYPE_22)){
+        DHT_TYPE = DHTesp::DHT22;
+    } else if (strcmp(DHT_SELECTED, DHT_TYPE_AM2302)){
+        DHT_TYPE = DHTesp::AM2302;
+    } else {
+        DHT_TYPE = DHTesp::AUTO_DETECT;
+    }
     this->dht.setup(DHT_PIN, DHT_TYPE);
 }
 //  Método para leer sensor DHT22
@@ -112,17 +150,13 @@ LeerSensoresControlador::datosDHT LeerSensoresControlador::leerDHT()
     float sensacion = dht.computeHeatIndex(temperature, humidity, false);
 
     // Serial.print(dht.getStatusString());
-    if (DHT_TYPE == DHTesp::DHT22)
-    {
-        Serial.printf("\nA continuación: Datos leidos del sensor DHT22\n");
-    }
-    else if (DHT_TYPE == DHTesp::DHT11)
-    {
-        Serial.printf("\nA continuación: Datos leidos del sensor DHT11 \n");
-    }
-    else{
-        Serial.print("\nHay un problema con el DHT_TYPE d ela librería.");
-    }
+    String tipo_de_DHT;
+    if (DHT_TYPE == DHTesp::DHT11) tipo_de_DHT = "DHT11";
+    else if (DHT_TYPE == DHTesp::DHT22) tipo_de_DHT = "DHT22";
+    else if (DHT_TYPE == DHTesp::AM2302) tipo_de_DHT = "AM2302";
+    else if (DHT_TYPE == DHTesp::AUTO_DETECT) tipo_de_DHT = "AUTO_DETECT";
+    Serial.printf("\nA continuación: Datos leidos del sensor %s\n", tipo_de_DHT);
+    
     Serial.print("Humedad de: ");
     Serial.print(humidity);
     Serial.print("\t\tTemperatura de:");
@@ -338,4 +372,33 @@ float LeerSensoresControlador::leerBH()
         Serial.println(" lx");
     }
     return lux;
+}
+
+void LeerSensoresControlador::alimentaciones(boolean g1, boolean g2){
+    digitalWrite(PIN_GROUND_1, g1);
+    digitalWrite(PIN_GROUND_2, g2);
+}
+
+String LeerSensoresControlador::alimentaciones(String state){
+    String respuesta;
+    if (strcmp(state.c_str(), "on")){
+        digitalWrite(PIN_GROUND_1, true);
+        digitalWrite(PIN_GROUND_2, true);
+        respuesta = "aaaa";
+    } else if (strcmp(state.c_str(), "off")){
+        digitalWrite(PIN_GROUND_1, false);
+        digitalWrite(PIN_GROUND_2, false);
+        respuesta = "aaaa";
+    }else if (strcmp(state.c_str(), "g1")){
+        digitalWrite(PIN_GROUND_1, true);
+        digitalWrite(PIN_GROUND_2, false);
+        respuesta = "aaaa";
+    }else if (strcmp(state.c_str(), "g2")){
+        digitalWrite(PIN_GROUND_1, false);
+        digitalWrite(PIN_GROUND_2, true);
+        respuesta = "aaaa";
+    } else {
+        respuesta = "Invalid state.";
+    }
+    return respuesta;
 }
