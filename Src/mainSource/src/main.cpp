@@ -9,8 +9,8 @@
 
 // Instanciar objetos de tipos.
 WiFiClient esp_EME;
-// ControladorWiFi controlerWiFi;
-// ManejoDatosWifi dataHandler;
+ControladorWiFi controlerWiFi;
+ManejoDatosWifi dataHandler;
 LeerSensoresControlador controladorSensores;
 
 // Definición de las credenciales de WiFi
@@ -41,11 +41,13 @@ void setup()
 
     // print_wakeup_reason();
 
-
   Serial.begin(115200);
   String thisBoard = ARDUINO_BOARD;
   Serial.println(thisBoard);
 
+  if (controlerWiFi.connectToWiFi()){
+    Serial.printf("Se conecto a la red WiFi %s, contraseña: %s", RED_SSID_WIFI, PASSWORD_WIFI);
+  }
   // Conectar a la red WiFi
   WiFi.begin(ssid, pass);
   Serial.print("Conectando a WiFi...");
@@ -98,55 +100,55 @@ void leerSensores(){
   bh1750Data = controladorSensores.leerBH();
   mqData = controladorSensores.leerMQ(dhtData.temperatura, dhtData.humedadRelativa);
 
-  // String datazo = dataHandler.jsonMaker(
-  //     dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia
-  // );
+  String datazo = dataHandler.jsonMaker(
+      dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia
+  );
 
-  // dataHandler.enviarData(datazo);
+  dataHandler.enviarData(datazo);
 
 
-  // Crear cliente seguro para HTTPS
-  WiFiClientSecure client;
-  // Si estás en un entorno de pruebas y no te importa la verificación del certificado:
-  client.setInsecure();
+  // // Crear cliente seguro para HTTPS
+  // WiFiClientSecure client;
+  // // Si estás en un entorno de pruebas y no te importa la verificación del certificado:
+  // client.setInsecure();
 
-  // Conectar al servidor
-  if (client.connect("emetec.wetec.um.edu.ar", 443)) {
-    Serial.println("Conectado al servidor HTTPS");
+  // // Conectar al servidor
+  // if (client.connect("emetec.wetec.um.edu.ar", 443)) {
+  //   Serial.println("Conectado al servidor HTTPS");
 
-    String datazo = ManejoDatosWifi::jsonMaker(dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia);
-   // String datazo = "pepe";
+  //   // String datazo = dataHandler.jsonMaker(dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia);
+  //   String datazo = "pepe";
 
-    // Enviar solicitud HTTP POST
-    client.println("POST /weather HTTP/1.1");
-    client.println("Host: emetec.wetec.um.edu.ar");
-    client.println("User-Agent: ESP32");
-    client.println("Content-Type: application/json");
-    client.print("Content-Length: ");
-    client.println(datazo.length());
-    client.println();  // Línea vacía para indicar fin de encabezados
-    client.println(datazo);  // Cuerpo de la solicitud (datos)
+  //   // Enviar solicitud HTTP POST
+  //   client.println("POST /weather HTTP/1.1");
+  //   client.println("Host: emetec.wetec.um.edu.ar");
+  //   client.println("User-Agent: ESP32");
+  //   client.println("Content-Type: application/json");
+  //   client.print("Content-Length: ");
+  //   client.println(datazo.length());
+  //   client.println();  // Línea vacía para indicar fin de encabezados
+  //   client.println(datazo);  // Cuerpo de la solicitud (datos)
 
-    // Leer la respuesta del servidor
-    while (client.connected()) {
-      String line = client.readStringUntil('\n');
-      if (line == "\r") {
-        Serial.println("Cuerpo de la respuesta:");
-        break;
-      }
-    }
+  //   // Leer la respuesta del servidor
+  //   while (client.connected()) {
+  //     String line = client.readStringUntil('\n');
+  //     if (line == "\r") {
+  //       Serial.println("Cuerpo de la respuesta:");
+  //       break;
+  //     }
+  //   }
 
-    // Imprimir el cuerpo de la respuesta
-    String response = client.readString();
-    Serial.println(response);
+  //   // Imprimir el cuerpo de la respuesta
+  //   String response = client.readString();
+  //   Serial.println(response);
 
-  // Caso contrario indicar falla al servidor
-  } else {
-    Serial.println("Fallo al conectar al servidor HTTPS");
-  }
+  // // Caso contrario indicar falla al servidor
+  // } else {
+  //   Serial.println("Fallo al conectar al servidor HTTPS");
+  // }
 
-  // Finalizar la conexión
-  client.stop();
+  // // Finalizar la conexión
+  // client.stop();
 }
 
 /*

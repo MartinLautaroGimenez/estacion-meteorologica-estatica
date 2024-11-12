@@ -18,6 +18,16 @@ class ControladorWiFi
         // WebServer server(80);
         // Métodos
         ControladorWiFi();
+
+        /*!
+        *  Destructor de la clase LeerSensoresControlador.
+        *  @brief   
+        *           Destructor 
+        *  @warning 
+        *           Necesaria para Destruir el objeto controlador.
+        */
+        ~ControladorWiFi();
+
         // Declaración de funciones
         void setupAP();
         void handleRoot();
@@ -33,11 +43,20 @@ class ControladorWiFi
 
 };
 
-class ManejoDatosWifi : ControladorWiFi
+class ManejoDatosWifi
 {
   public:
 
     ManejoDatosWifi();
+
+    /*!
+    *  Destructor de la clase LeerSensoresControlador.
+    *  @brief   
+    *           Destructor 
+    *  @warning 
+    *           Necesaria para Destruir el objeto controlador.
+    */
+    ~ManejoDatosWifi();
 
     // URL del servidor con HTTPS (asegúrate que el endpoint de Node-RED no incluya /admin)
     const char* serverName = "https://emetec.wetec.um.edu.ar/weather";
