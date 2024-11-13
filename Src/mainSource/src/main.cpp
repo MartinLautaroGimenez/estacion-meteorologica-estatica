@@ -58,7 +58,7 @@ void setup()
   Serial.println("\nConectado a la red WiFi");
 
   //  Inicializar controlador de sensores
-  controladorSensores.initControlador(BMP_TYPE_180, DHT_TYPE_22);
+  controladorSensores.initControlador(BMP_TYPE_280, DHT_TYPE_22);
 
   //  Inicializar conexión a la red
   // setupWifi();
