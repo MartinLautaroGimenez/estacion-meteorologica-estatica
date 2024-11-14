@@ -3,104 +3,37 @@
 #include <PubSubClient.h>
 #include "../lib/LeerSensores.h"
 #include "../lib/config.h"
+#include "../lib/WiFiController.h"
 #include "esp_sleep.h"
+#include <WiFiClientSecure.h>
 
-char mensaje[80];
-
+// Instanciar objetos de tipos.
 WiFiClient esp_EME;
-PubSubClient client(esp_EME);
-LeerSensoresControlador controlador;
+ControladorWiFi controlerWiFi;
+ManejoDatosWifi dataHandler;
+LeerSensoresControlador controladorSensores;
 
+// Definición de las credenciales de WiFi
 #define ssid RED_SSID_WIFI
 #define pass PASSWORD_WIFI
-#define brokerUser USUARIO_BROKER
-#define brokerPass PASSWORD_BROKER
-#define broker DIRECCION_BROKER
 
-//  Topicos del Broker Mosquitto MQTT
-#define senBH1750 "EMM/bh1750"
-#define senBMP180 "EMM/bmp180"
-#define senDHT11 "EMM/dht11"
-#define senMQ135 "EMM/mq135"
-#define chau "EMM/test"
-//  Topicos Del broker ETec
-#define temperaturaDHT "temp"
-#define humedadDHT "hum"
-#define presionBMP "bp"
-#define luminosidad "luz"
-#define calidadAire "aire"
-#define velocidadViento "velocidad"
-#define direccionViento "direccion"
-#define sensorDeLluvia "lluvia"
-
-
+// Definición de factores de tiempo a usar
 #define uS_TO_S_FACTOR 1000000  // Conversión de segundos a microsegundos
 #define TIME_TO_SLEEP_15_MIN  15 * 60  // Tiempo en segundos (15 minutos)
 #define TIME_TO_SLEEP_5_SEG  5   // Tiempo en segundos (5seg
 #define TIME_TO_SLEEP_2_MIN  2 * 60   // Tiempo en segundos (2min)
 
-void envioMQTT();
+// Función para leer sensores
+void leerSensores();
 
-void setupWifi()
-{
-  delay(100);
-  Serial.print("\nConectando a ");
-  Serial.println(ssid);
-  WiFi.begin(ssid, pass);
-
-  while (WiFi.status() != WL_CONNECTED)
-  {
-    delay(200);
-    Serial.print(".-");
-  }
-
-  Serial.print("\nConectado a la red: ");
-  Serial.println(ssid);
-  Serial.print("\nCon la siguiente IP: ");
-  Serial.println(WiFi.localIP());
-}
-void reconectar()
-{
-  Serial.print("\nConectando al broker: ");
-  Serial.println(broker);
-  while (!client.connected())
-  {
-    if (client.connect("EME"))
-    {
-      Serial.print("\nConectado al broker: ");
-      Serial.println(broker);
-      client.subscribe(chau);
-    }
-    else
-    {
-      Serial.print("Error de conexión, rc=");
-      Serial.print(client.state());
-      Serial.println(".-");
-      delay(1000);
-    }
-  }
-}
-
-void callback(char *topic, byte *payload, unsigned int length)
-{
-  Serial.print("Mensaje recibido: ");
-  Serial.println(topic);
-  for (unsigned int i = 0; i < length; i++)
-  {
-    Serial.print((char)payload[i]);
-  }
-  Serial.println();
-}
-
-unsigned long delayTime;
 void setup()
 {
-  // //****Para ESP8266****/
-  // // ESP.deepSleep(15*60*1000000);    // DEEP sleep 15 minutos
-  // // ESP.deepSleep(5 * 1000000); // DEEP sleep de 5 segundos
-  // //****Para ESP32*****/
-  // // Configurar el temporizador RTC para que despierte el ESP32 después de TIME_TO_SLEEP segundos
-  // // esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP_15_MIN * uS_TO_S_FACTOR);
+  ////****Para ESP8266****////
+  // ESP.deepSleep(15*60*1000000);    // DEEP sleep 15 minutos
+  // ESP.deepSleep(5 * 1000000); // DEEP sleep de 5 segundos
+  ////****Para ESP32*****////
+  // Configurar el temporizador RTC para que despierte el ESP32 después de TIME_TO_SLEEP segundos
+  // esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP_15_MIN * uS_TO_S_FACTOR);
   // esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP_5_SEG * uS_TO_S_FACTOR);
 
     // ++bootCount;
@@ -108,103 +41,126 @@ void setup()
 
     // print_wakeup_reason();
 
-
   Serial.begin(115200);
   String thisBoard = ARDUINO_BOARD;
   Serial.println(thisBoard);
 
-  digitalWrite(27, HIGH);
-  digitalWrite(14, HIGH);
-
-
+  if (controlerWiFi.connectToWiFi()){
+    Serial.printf("Se conecto a la red WiFi %s, contraseña: %s", RED_SSID_WIFI, PASSWORD_WIFI);
+  }
+  // Conectar a la red WiFi
+  WiFi.begin(ssid, pass);
+  Serial.print("Conectando a WiFi...");
+  while (WiFi.status() != WL_CONNECTED) {
+    delay(1000);
+    Serial.print(".");
+  }
+  Serial.println("\nConectado a la red WiFi");
 
   //  Inicializar controlador de sensores
-  controlador.initControlador(BMP_TYPE_180);
+  controladorSensores.initControlador(BMP_TYPE_280, DHT_TYPE_22);
 
   //  Inicializar conexión a la red
-  setupWifi();
-  client.setServer(broker, 1883);
-  client.setCallback(callback);
-
-  // envioMQTT();
-
+  // setupWifi();
+  
   // Serial.print("Entrando a modo Deep Sleep\n");
   // esp_deep_sleep_start();
 }
 
 void loop()
 {
-  envioMQTT();
-  digitalWrite(27, LOW);
-  digitalWrite(14, LOW);
-  ESP.deepSleep(15*60*1000000);
-  //delay(2 * 60 * 1000);
+  // Si estamos en modo punto de acceso, atendemos las peticiones web
+  // if (controlerWiFi.WiFi.getMode() == WIFI_AP) {
+  //   controlerWiFi.server.handleClient();
+  // }
+
+  leerSensores();
+  // digitalWrite(27, LOW);
+  // digitalWrite(14, LOW);
+  // ESP.deepSleep(15*60*1000000);
+  delay(2 * 60 * 1000);
   //delay(TIME_TO_SLEEP_5_SEG * 1000);
 }
 
 
-void envioMQTT(){
-  // Reconectar si se ha desconectado del Broker
-  if (!client.connected())
-  {
-    reconectar();
-  }
-  client.loop();
-
-  // Declaración de variables de lectura para sensores
+void leerSensores(){
+  
+  //  Declaración de variables de lectura para sensores tomando cómo estructura de datos la de la clase LeerSensoresControlador
   LeerSensoresControlador::datosBMP bmpData;
   LeerSensoresControlador::datosDHT dhtData;
   LeerSensoresControlador::datosMQ mqData;
   float bh1750Data;
+  float velViento = -1;
+  String dirViento = "";
+  float lluvia = -1;
 
-  // Lectura y asignación de parámetros de los sensores
-  dhtData = controlador.leerDHT();
-  bmpData = controlador.leerBMP();
-  bh1750Data = controlador.leerBH();
-  mqData = controlador.leerMQ(dhtData.temperatura, dhtData.humedadRelativa);
+  //  Lectura y asignación de párametros de los sensores
+  dhtData = controladorSensores.leerDHT();
+  bmpData = controladorSensores.leerBMP();
+  bh1750Data = controladorSensores.leerBH();
+  mqData = controladorSensores.leerMQ(dhtData.temperatura, dhtData.humedadRelativa);
 
-  bool local = false;
+  String datazo = dataHandler.jsonMaker(
+      dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia
+  );
 
-  if (!local){
-    // Crear mensaje JSON
-    snprintf(mensaje, 256, 
-      "{"
-      "\"temperaturaDHT\": %.2f, "
-      "\"humedadRelativa\": %.2f, "
-      "\"sensacionTermica\": %.2f, "
-      "\"temperaturaBMP\": %.2f, "
-      "\"presionAbsoluta\": %.2f, "
-      "\"altitud\": %.2f, "
-      "\"presionAlNivelDelMar\": %.2f, "
-      "\"luminosidad\": %.2f, "
-      "\"ppmCO2\": %.2f, "
-      "\"vientoVelocidad\": \"Proximamente\", "
-      "\"vientoDireccion\": \"Proximamente\", "
-      "\"lluvia\": \"Proximamente\""
-      "}", 
-      dhtData.temperatura, dhtData.humedadRelativa, dhtData.sensacionTermica, 
-      bmpData.temperatura, bmpData.presionAbsoluta, bmpData.altitud, 
-      bmpData.presionAlNivelDelMar, bh1750Data, mqData.ppmCO2);
+  dataHandler.enviarData(datazo);
 
-    // Publicar datos en formato JSON
-    client.publish("TOPIC_GENERAL", mensaje);
-  } else {
-    // Crear mensaje JSON para el modo local
-    snprintf(mensaje, 512,
-      "{"
-      "\"BMP180\": {\"estado\": \"OK\", \"temperatura\": %.2f, \"presAbs\": %.2f, \"presNivlMar\": %.2f, \"altit\": %.2f}, "
-      "\"BH1750\": {\"lux\": %.2f}, "
-      "\"DHT11\": {\"humedad\": %.2f, \"temperatura\": %.2f, \"sensacionTermica\": %.2f}, "
-      "\"MQ135\": {\"rzero\": %.2f, \"correctRZero\": %.2f, \"res\": %.2f, \"ppmCO2\": %.2f, \"ppmCorreg\": %.2f}"
-      "}",
-      bmpData.temperatura, bmpData.presionAbsoluta, bmpData.presionAlNivelDelMar, bmpData.altitud, 
-      bh1750Data, 
-      dhtData.humedadRelativa, dhtData.temperatura, dhtData.sensacionTermica, 
-      mqData.rzero, mqData.zeroCorregido, mqData.resistencia, mqData.ppmCO2, mqData.ppmCorregidas);
 
-    // Publicar datos en formato JSON
-    client.publish("TOPIC_LOCAL", mensaje);
-  }
+  // // Crear cliente seguro para HTTPS
+  // WiFiClientSecure client;
+  // // Si estás en un entorno de pruebas y no te importa la verificación del certificado:
+  // client.setInsecure();
+
+  // // Conectar al servidor
+  // if (client.connect("emetec.wetec.um.edu.ar", 443)) {
+  //   Serial.println("Conectado al servidor HTTPS");
+
+  //   // String datazo = dataHandler.jsonMaker(dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia);
+  //   String datazo = "pepe";
+
+  //   // Enviar solicitud HTTP POST
+  //   client.println("POST /weather HTTP/1.1");
+  //   client.println("Host: emetec.wetec.um.edu.ar");
+  //   client.println("User-Agent: ESP32");
+  //   client.println("Content-Type: application/json");
+  //   client.print("Content-Length: ");
+  //   client.println(datazo.length());
+  //   client.println();  // Línea vacía para indicar fin de encabezados
+  //   client.println(datazo);  // Cuerpo de la solicitud (datos)
+
+  //   // Leer la respuesta del servidor
+  //   while (client.connected()) {
+  //     String line = client.readStringUntil('\n');
+  //     if (line == "\r") {
+  //       Serial.println("Cuerpo de la respuesta:");
+  //       break;
+  //     }
+  //   }
+
+  //   // Imprimir el cuerpo de la respuesta
+  //   String response = client.readString();
+  //   Serial.println(response);
+
+  // // Caso contrario indicar falla al servidor
+  // } else {
+  //   Serial.println("Fallo al conectar al servidor HTTPS");
+  // }
+
+  // // Finalizar la conexión
+  // client.stop();
 }
 
-
+/*
+⣿⣿⡟⡹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
+⣿⣿⢱⣶⣭⡻⢿⠿⣛⣛⣛⠸⣮⡻⣿⣿⡿⢛⣭⣶⣆⢿⣿
+⣿⡿⣸⣿⣿⣿⣷⣮⣭⣛⣿⣿⣿⣿⣶⣥⣾⣿⣿⣿⡷⣽⣿
+⣿⡏⣾⣿⣿⡿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿
+⣿⣧⢻⣿⡟⣰⡿⠁⢹⣿⣿⣿⣋⣴⠖⢶⣝⢻⣿⣿⡇⣿⣿
+⠩⣥⣿⣿⣴⣿⣇⠀⣸⣿⣿⣿⣿⣷⠀⢰⣿⠇⣿⣭⣼⠍⣿
+⣿⡖⣽⣿⣿⣿⣿⣿⣿⣯⣭⣭⣿⣿⣷⣿⣿⣿⣿⣿⡔⣾⣿
+⣿⡡⢟⡛⠻⠿⣿⣿⣿⣝⣨⣝⣡⣿⣿⡿⠿⠿⢟⣛⣫⣼⣿
+⣿⣿⣿⡷⠝⢿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣾⡩⣼⣿⣿⣿⣿⣿
+⣿⣿⣯⡔⢛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣭⣍⣨⠿⢿⣿⣿⣿
+⣿⡿⢫⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣝⣿
+*/
