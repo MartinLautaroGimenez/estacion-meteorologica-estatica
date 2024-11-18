@@ -1,7 +1,9 @@
-# Estación Meteorológica Estática
+# Estación Meteorológica Fija
 ## ¿Qué es una estación meteorológica?
 Una estación meteorológica es un dispositivo tecnológico de características electrónica e informática que permite nuclear parámetros relevantes para realizar estudios y sacar conclusiones frente a fenómenos físicos.
-## ¿Qué es EME?
+## ¿Qué es EMF?
+Este es el inicio del proyecto EME, fue desarrollado en 2022 por el Alumno Nicolas Pérez de la escuela ETec UM, para posteriormente en el año 2024, tras el egreso de Nicolas de la escuela, la estación fue acogida por el taller Aeroglobe ETec y en conjunto con el nevo equipo que se creó en el taller se le pudo dar continuidad y agregar sensores y actualizar partes de la estación. 
+## EME
 Este es un proyecto institucional y surge de la necesidad de poder comparar los sistemas atmosféricos de algunos departamentos como Godoy Cruz, Gran Mendoza, Lavalle entre otros departamentos unidos a la red de la Escuela ETec de la Universidad de Mendoza para tener un conocimiento amplio de las condiciones atmosféricas de la provincia y así contribuir al análisis de las condiciones climáticas de la misma.
 ## Los modulos incorporados
 
