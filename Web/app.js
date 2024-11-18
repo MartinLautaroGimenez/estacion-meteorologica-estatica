@@ -59,7 +59,7 @@ window.addEventListener('load', function() {
 
 //APIs
 const apiUrl = 'https://emetec.wetec.um.edu.ar/datos';
-const apiTempUrl = 'https://emetec.wetec.um.edu.ar/datostruchos';
+const apiTempUrl = 'https://emetec.wetec.um.edu.ar/datosemm';
 
 // Event listener para el dropdown
 categoriaDropdown.addEventListener('change', function() {
