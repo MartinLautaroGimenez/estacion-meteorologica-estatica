@@ -7,7 +7,7 @@ La idea de poder tener una estación operativa que pueda leer datos es buena ide
 ## ¿Qué se tiene en EMETec?
 Cómo se ha visto un poco sobre la idea anteriormente, se proveeran datos de humedad relativa, temperatura absoluta, sensación térmica, temperatura punto de rocio, presión absoluta, presión a nivel de mar, altitud, intensidad luminica, valocidad del viento, dirección del mismo, calidad de aire, partes por millón de CO2, humedad de suelo y lluvia entre otros posibles datos de interes que vayan agregandosé en cada actualización.
 <div align="center">
-   <img src= "[Web/imagenes web/Captura de pantalla 2024-11-04 205353.png](https://github.com/MartinLautaroGimenez/estacion-meteorologica-estatica/blob/main/Web/imagenes%20web/Captura%20de%20pantalla%202024-11-04%20205353.png?raw=true)" width="270px">
+   <img src= "Web/imagenes web/Captura de pantalla 2024-11-04 205353.png" width="270px">
 </div>
 ## Las partes del Dashboard
 
