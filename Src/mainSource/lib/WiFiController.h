@@ -6,13 +6,14 @@
 #include <WebServer.h>
 #include "LeerSensores.h"
 #include <WiFiClientSecure.h>
+#include "../lib/config.h"
 
 class ControladorWiFi 
 {
     public:
         // Credenciales WiFi predeterminadas (se usarán si no hay nada guardado en las preferencias)
-        const char* defaultSSID = "TuSSIDPredeterminado";
-        const char* defaultPassword = "TuContraseñaPredeterminada";
+        const char* defaultSSID = RED_SSID_WIFI;
+        const char* defaultPassword = PASSWORD_WIFI;
 
         // Creamos una instancia del servidor web en el puerto 80
         // WebServer server(80);
@@ -33,13 +34,14 @@ class ControladorWiFi
         void handleRoot();
         void handleSave();
         bool connectToWiFi();
+
         void clearPreferences();
 
     // private:
         // Creamos un objeto Preferences para manejar la configuración en la memoria flash
-        Preferences preferences;
-        WebServer server;
-        WiFiClass WiFi;
+        // Preferences preferences;
+        // WebServer server;
+        // WiFiClass WiFi;
 
 };
 

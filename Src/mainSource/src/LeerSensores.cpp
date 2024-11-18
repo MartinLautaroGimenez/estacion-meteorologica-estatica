@@ -41,12 +41,12 @@ void LeerSensoresControlador::initControlador(const char *tipoDeBMP, const char 
     Wire.begin();
     //  Le asigno al atributo de la instancia el valor tomado del sensor
     this->BMP_SELECTED = tipoDeBMP;
+    this->DHT_SELECTED = tipoDeDHT;
 
     if (strcmp(tipoDeBMP, BMP_TYPE_280) == 0)
     {
         while (!Serial)
-            delay(100); // wait for native usb
-        Serial.println(F("BMP280 test"));
+        delay(100); // wait for native usb
         unsigned status;
         status = bmp.begin(BMP280_ADDRESS_ALT, BMP280_CHIPID);
         // status = bmp.begin();
@@ -63,6 +63,7 @@ void LeerSensoresControlador::initControlador(const char *tipoDeBMP, const char 
             while (1)
                 delay(10);
         }
+        Serial.println("BMP280 init success");
         /* Default settings from datasheet. */
         bmp.setSampling(Adafruit_BMP280::MODE_NORMAL,     /* Operating Mode. */
                         Adafruit_BMP280::SAMPLING_X2,     /* Temp. oversampling */
@@ -128,15 +129,18 @@ void LeerSensoresControlador::initControlador(const char *tipoDeBMP, const char 
 
     //  inicializo DHT //
     // Verificar que tipo de DHT se está utilizando
-    if (strcmp(DHT_SELECTED, DHT_TYPE_11)){
+    if (strcmp(DHT_SELECTED, DHT_TYPE_11) == 0){
         DHT_TYPE = DHTesp::DHT11;
-    } else if (strcmp(DHT_SELECTED, DHT_TYPE_22)){
+    } else if (strcmp(DHT_SELECTED, DHT_TYPE_22) == 0){
         DHT_TYPE = DHTesp::DHT22;
-    } else if (strcmp(DHT_SELECTED, DHT_TYPE_AM2302)){
+    } else if (strcmp(DHT_SELECTED, DHT_TYPE_AM2302) == 0){
         DHT_TYPE = DHTesp::AM2302;
     } else {
         DHT_TYPE = DHTesp::AUTO_DETECT;
     }
+    
+    Serial.printf("DHT sensor selected: %s\n", DHT_SELECTED);
+    
     this->dht.setup(DHT_PIN, DHT_TYPE);
 }
 //  Método para leer sensor DHT22

@@ -14,7 +14,7 @@
 
 /*****************DEFINICIONES*************/
 //  Definiciones del sensor DHT22
-#define DHT_PIN 18
+#define DHT_PIN 15
 #define DHT_TYPE_22 "DHT22"
 #define DHT_TYPE_11 "DHT11"
 #define DHT_TYPE_AM2302 "AM2302"
@@ -27,12 +27,21 @@
 // #define BMP280_ADDRESS (0x77) /**< The default I2C address for the sensor. */
 // #define BMP280_ADDRESS_ALT (0x76)    /**< Alternative I2C address for the sensor. */
 // #define BMP280_CHIPID (0x58)  /**< Default chip ID. */
-#define BMP_SCK (13)
-#define BMP_MISO (12)
-#define BMP_MOSI (11)
-#define BMP_CS (10)
+#define BMP_SCK (18)
+#define BMP_MISO (19)
+#define BMP_MOSI (23)
+#define BMP_CS (5)
 //  Definiciones del sensor BH1750
 #define BH1750_ADDRESS 0X23
+// Definición de pines para Sensor de Hoja Mojada
+#define SHM_Ax 12
+#define SHM_Dx 13
+// Definición de pines para Veleta
+#define S0 32
+#define S1 33
+#define S2 25
+// Definición de pines para Anemometro
+#define HALL_Sensor 2
 // Definición de pines para Ground 1 y Ground 2
 #define PIN_GROUND_1 27
 #define PIN_GROUND_2 14
@@ -183,6 +192,34 @@ public:
     */
     datosBMP leerBMP();
 
+    /*!
+    *  Método Lectura del BH1750.
+    *  @return 
+    *           Devuelve lectura en una estructura de dato tipo "float".
+    */
+    float leerBH();
+    
+    /*!
+    *  Método Lectura del Anemometro.
+    *  @return 
+    *           Devuelve lectura en una estructura de dato tipo "float".
+    */
+    float leerAnemometro();
+    
+    /*!
+    *  Método Lectura de la veleta.
+    *  @return 
+    *           Devuelve lectura en una estructura de dato tipo "float".
+    */
+    float leerVeleta();
+    
+    /*!
+    *  Método Lectura del Sensor de Hoja Mojada.
+    *  @return 
+    *           Devuelve lectura en una estructura de dato tipo "float".
+    */
+    float leerHojaMojada();
+    
     /*!
     *  Método Lectura del BH1750.
     *  @return 
