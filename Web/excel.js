@@ -1,5 +1,5 @@
-let apiEMEtec = 'https://emetec.wetec.um.edu.ar/excel';
-let apiTest = 'https://emetec.wetec.um.edu.ar/datostruchos';
+let apiEMEtec = 'https://emetec.wetec.um.edu.ar/exceleme';
+let apiTest = 'https://emetec.wetec.um.edu.ar/excelemm';
 
 // Función para establecer cookies
 function setCookie(name, value, days) {
