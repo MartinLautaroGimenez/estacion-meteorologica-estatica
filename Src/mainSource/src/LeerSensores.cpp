@@ -15,6 +15,9 @@
 ⣿⡿⢫⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣝⣿
 */
 
+// Definición fuera de la clase
+datosVELOCIDADES LeerSensoresControlador::velocidades;
+
 LeerSensoresControlador::LeerSensoresControlador()
     : dht(), bmp(), pressure(), lightMeter(BH1750_ADDRESS), mq135_sensor(PIN_MQ135)
 {

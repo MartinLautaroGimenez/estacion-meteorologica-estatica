@@ -47,6 +47,22 @@
 #define PIN_GROUND_1 27
 #define PIN_GROUND_2 14
 
+    /*!
+    *  Estructura de datos para el MQ135.
+    *  @param analogico
+    *           int: valor de lectura Analogíca.
+    *  @param digital
+    *           boolean: valor de lectura Digital.
+    *  @warning 
+    *           Tener en cuenta el orden en que aparecen!
+    *  @author Mario-dango
+    */
+    struct datosVELOCIDADES
+    {
+        float velocidadVientoAngular;
+        float velocidadVientoTangencial;
+    };
+
 //  Clase controladora de leer los sensores de la estación
 class LeerSensoresControlador
 {
@@ -138,27 +154,10 @@ public:
     };
 
 
-    /*!
-    *  Estructura de datos para el MQ135.
-    *  @param analogico
-    *           int: valor de lectura Analogíca.
-    *  @param digital
-    *           boolean: valor de lectura Digital.
-    *  @warning 
-    *           Tener en cuenta el orden en que aparecen!
-    *  @author Mario-dango
-    */
-    struct datosVELOCIDADES
-    {
-        static float velocidadVientoAngular;
-        static float velocidadVientoTangencial;
-    };
-
     //  Declaración de atributos
     const char *BMP_SELECTED;
     const char *DHT_SELECTED;
     DHTesp::DHT_MODEL_t DHT_TYPE;
-    static datosVELOCIDADES velocidades;
 
 
     // static float velocidadVientoAngular;
@@ -291,6 +290,8 @@ public:
     String alimentaciones(String state);
 
 private:
+    
+    static datosVELOCIDADES velocidades;
     DHTesp dht;
     Adafruit_BMP280 bmp; // I2C
     // Adafruit_BMP280 bmp(BMP_CS); // hardware SPI
@@ -304,10 +305,12 @@ private:
     // Aquí va la lógica para calcular la velocidad del viento
     // Basada en la cantidad de pulsos en un segundo y la
     // calibración del anemómetro
+
     static void calcularVelocidad(unsigned long pulsos);
 
     static volatile unsigned long pulseCount; // Contador de pulsos
 
 };
+
 
 #endif
