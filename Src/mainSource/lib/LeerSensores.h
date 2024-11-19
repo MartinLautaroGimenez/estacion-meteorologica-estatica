@@ -20,6 +20,7 @@
 #define DHT_TYPE_AM2302 "AM2302"
 //  Definiciones del sensor MQ135
 #define PIN_MQ135 35 // MQ135 Analog Input Pin
+#define PIN_MQ135_D0 34 // MQ135 Analog Input Pin
 //  Definiciones del sensor BMP's
 #define ALTITUDE 1655.0 // Altitude of SparkFun's HQ in Boulder, CO. in meters
 #define BMP_TYPE_180 "BMP180"
@@ -34,8 +35,8 @@
 //  Definiciones del sensor BH1750
 #define BH1750_ADDRESS 0X23
 // Definición de pines para Sensor de Hoja Mojada
-#define SHM_Ax 12
-#define SHM_Dx 13
+#define SHM_Ax 39
+#define SHM_Dx 36
 // Definición de pines para Veleta
 #define S0 32
 #define S1 33
@@ -119,10 +120,49 @@ public:
         float ppmCO2;
         float ppmCorregidas;
     };
+    
+    /*!
+    *  Estructura de datos para el MQ135.
+    *  @param analogico
+    *           int: valor de lectura Analogíca.
+    *  @param digital
+    *           boolean: valor de lectura Digital.
+    *  @warning 
+    *           Tener en cuenta el orden en que aparecen!
+    *  @author Mario-dango
+    */
+    struct datosYL
+    {
+        int analogico;
+        boolean digital;
+    };
+
+
+    /*!
+    *  Estructura de datos para el MQ135.
+    *  @param analogico
+    *           int: valor de lectura Analogíca.
+    *  @param digital
+    *           boolean: valor de lectura Digital.
+    *  @warning 
+    *           Tener en cuenta el orden en que aparecen!
+    *  @author Mario-dango
+    */
+    struct datosVELOCIDADES
+    {
+        static float velocidadVientoAngular;
+        static float velocidadVientoTangencial;
+    };
+
     //  Declaración de atributos
     const char *BMP_SELECTED;
     const char *DHT_SELECTED;
     DHTesp::DHT_MODEL_t DHT_TYPE;
+    static datosVELOCIDADES velocidades;
+
+
+    // static float velocidadVientoAngular;
+    // static float velocidadVientoTangencial;
 
     float temperatura, humedadRelativa;
     //  Declaración de Métodos //
@@ -209,23 +249,17 @@ public:
     /*!
     *  Método Lectura de la veleta.
     *  @return 
-    *           Devuelve lectura en una estructura de dato tipo "float".
+    *           Devuelve lectura en una estructura de dato tipo "String" para el sentido del viento.
     */
-    float leerVeleta();
+    String leerVeleta();
     
     /*!
     *  Método Lectura del Sensor de Hoja Mojada.
     *  @return 
-    *           Devuelve lectura en una estructura de dato tipo "float".
+    *           Devuelve lectura en una estructura de dato tipo "datosYL {int,boolean}".
     */
-    float leerHojaMojada();
+    datosYL leerHojaMojada();
     
-    /*!
-    *  Método Lectura del BH1750.
-    *  @return 
-    *           Devuelve lectura en una estructura de dato tipo "float".
-    */
-    float leerBH();
     
     /*!
     *  Alimentaciones.
@@ -264,6 +298,16 @@ private:
     SFE_BMP180 pressure;
     BH1750 lightMeter;
     MQ135 mq135_sensor;
+    
+    static void contadorPulsos();
+    
+    // Aquí va la lógica para calcular la velocidad del viento
+    // Basada en la cantidad de pulsos en un segundo y la
+    // calibración del anemómetro
+    static void calcularVelocidad(unsigned long pulsos);
+
+    static volatile unsigned long pulseCount; // Contador de pulsos
+
 };
 
 #endif

@@ -33,7 +33,7 @@ String jsonMaker(
     float bhData,
     float velViento,
     String dirViento,
-    float lluvia
+    LeerSensoresControlador::datosYL lluvia
 );
 
 void setup()
@@ -65,18 +65,6 @@ void setup()
   }
   Serial.println("\nConectado a la red WiFi");
   
-  // if (controlerWiFi.connectToWiFi()){
-  //   Serial.printf("Se conecto a la red WiFi %s, contraseña: %s", RED_SSID_WIFI, PASSWORD_WIFI);
-  // }
-  // // Conectar a la red WiFi
-  // WiFi.begin(ssid, pass);
-  // Serial.print("Conectando a WiFi...");
-  // while (WiFi.status() != WL_CONNECTED) {
-  //   delay(1000);
-  //   Serial.print(".");
-  // }
-  // Serial.println("\nConectado a la red WiFi");
-
   //  Inicializar controlador de sensores
   controladorSensores.initControlador(BMP_TYPE_280, DHT_TYPE_22);
 
@@ -95,8 +83,7 @@ void loop()
   // }
 
   leerSensores();
-  // digitalWrite(27, LOW);
-  // digitalWrite(14, LOW);
+  
   // ESP.deepSleep(15*60*1000000);
   delay(2 * 60 * 1000);
   //delay(TIME_TO_SLEEP_5_SEG * 1000);
@@ -110,24 +97,21 @@ void leerSensores(){
   LeerSensoresControlador::datosDHT dhtData;
   LeerSensoresControlador::datosMQ mqData;
   float bh1750Data;
-  float velViento = -1;
-  String dirViento = "";
-  float lluvia = -1;
+  float velViento;
+  String dirViento;
+  LeerSensoresControlador::datosYL lluvia;
 
   //  Lectura y asignación de párametros de los sensores
   dhtData = controladorSensores.leerDHT();
   bmpData = controladorSensores.leerBMP();
   bh1750Data = controladorSensores.leerBH();
   mqData = controladorSensores.leerMQ(dhtData.temperatura, dhtData.humedadRelativa);
-
-  // String datazo = dataHandler.jsonMaker(
-  //     dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia
-  // );
-
-  // dataHandler.enviarData(datazo);
+  dirViento = controladorSensores.leerVeleta();
+  lluvia = controladorSensores.leerHojaMojada();
+  velViento = controladorSensores.leerAnemometro();
 
 
-  // // Crear cliente seguro para HTTPS
+  // Crear cliente seguro para HTTPS
   WiFiClientSecure client;
   // Si estás en un entorno de pruebas y no te importa la verificación del certificado:
   client.setInsecure();
@@ -136,11 +120,11 @@ void leerSensores(){
   if (client.connect(SERVIDOR_ETEC, 443)) {
     Serial.printf("\nConectado al servidor HTTPS: %s\n", SERVIDOR_ETEC);
 
+    //  Función para formatear a un dato tipo JSON valido
     String datazo = jsonMaker(dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia);
-    // String datazo = "pepe";
 
     // Enviar solicitud HTTP POST
-    client.println("POST /weather HTTP/1.1");
+    client.println("POST /emeapi HTTP/1.1");
     client.println("Host: emetec.wetec.um.edu.ar");
     client.println("User-Agent: ESP32");
     client.println("Content-Type: application/json");
@@ -197,39 +181,42 @@ String jsonMaker(
     float bhData,
     float velViento,
     String dirViento,
-    float lluvia
+    LeerSensoresControlador::datosYL lluvia
 )
 {
   String postData;
-  if (lluvia < 0 || velViento < 0)
+  if (lluvia.digital < 0 || velViento < 0 
+  || strcmp(dirViento.c_str(), "default") == 0 || strcmp(dirViento.c_str(), "Pendiente") == 0)
   {
     // Crear los datos JSON para enviar (temperatura y humedad)
-    postData = "{\"DHT_temperatura\":" + String(dhtData.temperatura) + 
-                      ",\"DHT_humedad\":" + String(dhtData.humedadRelativa) + 
-                      ",\"DHT_sensasionTerm\":" + String(dhtData.sensacionTermica) + 
-                      ",\"MQ_ppmCO2\":" + String(mqData.ppmCO2) + 
-                      ",\"BMP_presion\":" + String(bmpData.presionAbsoluta) + 
-                      ",\"BMP_temperatura\":" + String(bmpData.temperatura) + 
-                      ",\"BMP_altitud\":" + String(bmpData.altitud) + 
-                      ",\"BH_lumines\":" + String(bhData) + 
-                      ",\"VelocidadViento\":" + "Proximamente" + 
-                      ",\"DireccionViento\":" + "Proximamente" + 
-                      ",\"Lluvia\":" + "Proximamente" + 
-                      "}";
+    postData =  "{\"EME_n0/dht/temp\":" + String(dhtData.temperatura) + 
+                ",\"EME_n0/dht/hum\":" + String(dhtData.humedadRelativa) + 
+                ",\"EME_n0/dht/senst\":" + String(dhtData.sensacionTermica) + 
+                ",\"EME_n0/bmp/temp\":" + String(bmpData.temperatura) + 
+                ",\"EME_n0/bmp/pres\":" + String(bmpData.presionAbsoluta) + 
+                ",\"EME_n0/bmp/alt\":" + String(bmpData.altitud) + 
+                ",\"EME_n0/bmp/presnm\":" + String(bmpData.presionAlNivelDelMar) + 
+                ",\"EME_n0/bh/presnm\":" + String(bhData) + 
+                ",\"EME_n0/mq/ppmco2\":" + String(mqData.ppmCO2) + 
+                ",\"EME_n0/yl/lluv\":\"Proximamente\"" + 
+                ",\"EME_n0/viento/vel\":\"Proximamente\"" + 
+                ",\"EME_n0/viento/dir\":\"Proximamente\"" + 
+                "}";
   } else {
     // Crear los datos JSON para enviar (temperatura y humedad)
-    postData = "{\"DHT_temperatura\":" + String(dhtData.temperatura) + 
-                      ",\"DHT_humedad\":" + String(dhtData.humedadRelativa) + 
-                      ",\"DHT_sensasionTerm\":" + String(dhtData.sensacionTermica) + 
-                      ",\"MQ_ppmCO2\":" + String(mqData.ppmCO2) + 
-                      ",\"BMP_presion\":" + String(bmpData.presionAbsoluta) + 
-                      ",\"BMP_temperatura\":" + String(bmpData.temperatura) + 
-                      ",\"BMP_altitud\":" + String(bmpData.altitud) + 
-                      ",\"BH_lumines\":" + String(bhData) + 
-                      ",\"VelocidadViento\":" + String(velViento) + 
-                      ",\"DireccionViento\":" + dirViento + 
-                      ",\"Lluvia\":" + String(lluvia) + 
-                      "}";
+    postData =  "{\"EME_n0/dht/temp\":" + String(dhtData.temperatura) + 
+                ",\"EME_n0/dht/hum\":" + String(dhtData.humedadRelativa) + 
+                ",\"EME_n0/dht/senst\":" + String(dhtData.sensacionTermica) + 
+                ",\"EME_n0/bmp/temp\":" + String(bmpData.temperatura) + 
+                ",\"EME_n0/bmp/pres\":" + String(bmpData.presionAbsoluta) + 
+                ",\"EME_n0/bmp/alt\":" + String(bmpData.altitud) + 
+                ",\"EME_n0/bmp/presnm\":" + String(bmpData.presionAlNivelDelMar) + 
+                ",\"EME_n0/bh/presnm\":" + String(bhData) + 
+                ",\"EME_n0/mq/ppmco2\":" + String(mqData.ppmCO2) + 
+                ",\"EME_n0/yl/lluv\":" + String(lluvia.digital) + 
+                ",\"EME_n0/viento/vel\":" +  String(velViento) + 
+                ",\"EME_n0/viento/dir\":" + dirViento + 
+                "}";
     
   }
   return postData;

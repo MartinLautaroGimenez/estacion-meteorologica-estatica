@@ -1,5 +1,6 @@
 #include "../lib/LeerSensores.h"
 
+
 /*
 ⣿⣿⡟⡹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⢱⣶⣭⡻⢿⠿⣛⣛⣛⠸⣮⡻⣿⣿⡿⢛⣭⣶⣆⢿⣿
@@ -22,6 +23,17 @@ LeerSensoresControlador::LeerSensoresControlador()
     // Defino los pines de ground que controlan los mosfet cómo salidas digitales
     pinMode(PIN_GROUND_1, OUTPUT);
     pinMode(PIN_GROUND_2, OUTPUT);
+
+    // Defino los pines de ground que controlan los mosfet cómo salidas digitales
+    pinMode(S0, INPUT);
+    pinMode(S1, INPUT);
+    pinMode(S2, INPUT);
+    
+    // Defino los pines de ground que controlan los mosfet cómo salidas digitales
+    pinMode(SHM_Dx, INPUT);
+
+    pinMode(HALL_Sensor, INPUT_PULLUP); // Configurar el pin como entrada con resistencia pull-up interna
+    attachInterrupt(digitalPinToInterrupt(HALL_Sensor), LeerSensoresControlador::contadorPulsos, RISING); // Configurar la interrupción
 
     //Una vez definidos los pines se procede a levantarlos
     this->alimentaciones("all");
@@ -195,6 +207,7 @@ LeerSensoresControlador::datosMQ LeerSensoresControlador::leerMQ(float temperatu
 
     return {rzero, correctedRZero, resistance, ppm, correctedPPM};
 }
+
 LeerSensoresControlador::datosMQ LeerSensoresControlador::leerMQ()
 {
     this->temperatura = this->leerDHT().temperatura;
@@ -375,34 +388,143 @@ float LeerSensoresControlador::leerBH()
         Serial.print(lux);
         Serial.println(" lx");
     }
+
     return lux;
 }
 
+//  Método "getter" de la velocidad de la clase
+float LeerSensoresControlador::leerAnemometro()
+{
+    Serial.print("\nA continuación: Datos leidos del Anemómetro\n");
+    Serial.printf("Velocidad Tangencial: %.3f \t\t", velocidades.velocidadVientoAngular);
+    Serial.printf("Velocidad Angular: %.3f \n", velocidades.velocidadVientoTangencial);
+    return velocidades.velocidadVientoTangencial;
+}
+
+//  Método para calcular la velocidad tangencial del viento
+void LeerSensoresControlador::calcularVelocidad(unsigned long pulsos){
+    velocidades.velocidadVientoAngular = (pulsos*60)/(2 * PI);      //  Revoluciones por minutos (RPM)
+    velocidades.velocidadVientoTangencial = velocidades.velocidadVientoAngular * 0.08;          //  Vel angular pro el brazo de palanca da velocidad tangencial
+}
+
+
+//  Método para función de interrupción del anemómetro
+void LeerSensoresControlador::contadorPulsos() {
+        static volatile unsigned long previousMillis = 0;
+        static volatile unsigned long pulseCount = 0;
+
+        unsigned long currentMillis = millis();
+        if (currentMillis - previousMillis >= 1000) { // Cada segundo
+            previousMillis = currentMillis;
+            // Calcular la velocidad del viento basándose en pulseCount
+            LeerSensoresControlador::calcularVelocidad(pulseCount);
+            pulseCount = 0; // Reiniciar el contador
+        }
+        pulseCount++;
+        
+}
+
+
+String LeerSensoresControlador::leerVeleta()
+{
+    String direction;
+    int direccion = digitalRead(S2) *4 + digitalRead(S1) *2 + digitalRead(S0) *1;
+    switch (direccion)
+    {
+    case 0:
+        /* code */
+        direction = "Pendiente";
+        break;
+    case 1:
+        /* code */
+        direction = "Norte";
+        break;
+    case 2:
+        /* code */
+        direction = "Noreste";
+        break;
+    case 3:
+        /* code */
+        direction = "Noroeste";
+        break;
+    case 4:
+        /* code */
+        direction = "Sur";
+        break;
+    case 5:
+        /* code */
+        direction = "Sureste";
+        break;
+    case 6:
+        /* code */
+        direction = "Suroeste";
+        break;
+    case 7:
+        /* code */
+        direction = "Oeste";
+        break;
+    case 8:
+        /* code */
+        direction = "Este";
+        break;
+    
+    default:
+        direction = "default";
+        break;
+    } 
+    
+    Serial.printf("\nLa dirección de la veleta apunta con dirección %s\n", direction);
+
+    return direction;
+}
+
+LeerSensoresControlador::datosYL LeerSensoresControlador::leerHojaMojada()
+{
+    int analogSHM = analogRead(SHM_Ax);
+    boolean boolSHM = digitalRead(SHM_Dx);
+
+    Serial.print("\nA continuación: Datos leidos del Sensor de Hoja Mojada\n");
+    Serial.printf("Analogico: %d \t\t", analogSHM);
+    Serial.printf("Digital: %d \n", boolSHM);
+
+    return {analogSHM, boolSHM};
+}
+
 void LeerSensoresControlador::alimentaciones(boolean g1, boolean g2){
+
     digitalWrite(PIN_GROUND_1, g1);
     digitalWrite(PIN_GROUND_2, g2);
+    
+    Serial.print("\nSe han habilitado los MOSFET de alimentación\n");
+    Serial.printf("MOSFET de Sensores: %d \t\t", g1);
+    Serial.printf("MOSFET de Comunicaciones: %d \n", g2);
 }
 
 String LeerSensoresControlador::alimentaciones(String state){
+
+    Serial.print("\nSe han cambiado los estados de los MOSFET de alimentación\n");
     String respuesta;
     if (strcmp(state.c_str(), "on")){
         digitalWrite(PIN_GROUND_1, true);
         digitalWrite(PIN_GROUND_2, true);
-        respuesta = "aaaa";
+        respuesta = "Ambos MOSFET's activados";
     } else if (strcmp(state.c_str(), "off")){
         digitalWrite(PIN_GROUND_1, false);
         digitalWrite(PIN_GROUND_2, false);
-        respuesta = "aaaa";
+        respuesta = "Ambos MOSFET's desactivados";
     }else if (strcmp(state.c_str(), "g1")){
         digitalWrite(PIN_GROUND_1, true);
         digitalWrite(PIN_GROUND_2, false);
-        respuesta = "aaaa";
+        respuesta = "MOSFET de Sensores: Activado \t\tMOSFET de Comunicaciones: Desactivado \n";
     }else if (strcmp(state.c_str(), "g2")){
         digitalWrite(PIN_GROUND_1, false);
         digitalWrite(PIN_GROUND_2, true);
-        respuesta = "aaaa";
+        respuesta = "MOSFET de Sensores: Desactivado \t\tMOSFET de Comunicaciones: Activado \n";
     } else {
-        respuesta = "Invalid state.";
+        respuesta = "Estado incorrecto para los MOSFET's.";
     }
+    
+    Serial.print(respuesta);
+
     return respuesta;
 }
