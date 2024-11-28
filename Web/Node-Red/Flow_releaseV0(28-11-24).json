@@ -1,0 +1,5179 @@
+[
+    {
+        "id": "39306e21f4d0a21a",
+        "type": "tab",
+        "label": "EME",
+        "disabled": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8eaf4958fc6641e4",
+        "type": "tab",
+        "label": "EME ETec",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "76f3a042f2e70329",
+        "type": "tab",
+        "label": "EMM ETec",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "2adbe3103703dc50",
+        "type": "tab",
+        "label": "EMM San Jorge",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "056b4421ed0e4e84",
+        "type": "tab",
+        "label": "Tools & Web",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "8e72afe2d972ab89",
+        "type": "tab",
+        "label": "Test EMs",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "fb3a6e0e59d07e75",
+        "type": "tab",
+        "label": "GLOBE",
+        "disabled": false,
+        "locked": true,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "103af03ab387ac01",
+        "type": "mqtt-broker",
+        "name": "Local MQTT",
+        "broker": "192.168.40.242",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "e87cd6f13dc19268",
+        "type": "MySQLdatabase",
+        "name": "EME",
+        "host": "192.168.40.242",
+        "port": "3306",
+        "db": "EME",
+        "tz": "",
+        "charset": "UTF8"
+    },
+    {
+        "id": "169e7805e42ed210",
+        "type": "xterm_config",
+        "rows": 60,
+        "columns": "180",
+        "cursorStyle": "bar",
+        "fastScrollModifier": "alt",
+        "scrollSensitivity": 1,
+        "fastScrollSensitivity": 1,
+        "scrollback": 1000,
+        "backgroundColor": "#000000",
+        "foregroundColor": "#ffffff",
+        "fontSize": 14,
+        "cursorBlink": true,
+        "drawBoldTextInBrightColors": true,
+        "loggingEnabled": false,
+        "name": "XTerminal"
+    },
+    {
+        "id": "3e491cf38b8cd7dd",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED Dashboard",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "false",
+            "allowTempTheme": "true",
+            "dateFormat": "DD/MM/YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "297fc3690fdced47",
+        "type": "mqtt-broker",
+        "name": "pc34",
+        "broker": "192.168.45.122",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "1e95e7e0c7e712c7",
+        "type": "telegram bot",
+        "botname": "EMETec_bot",
+        "usernames": "Tincho2452",
+        "chatids": "",
+        "baseapiurl": "",
+        "testenvironment": false,
+        "updatemode": "polling",
+        "addressfamily": "",
+        "pollinterval": "300",
+        "usesocks": false,
+        "sockshost": "",
+        "socksprotocol": "socks5",
+        "socksport": "6667",
+        "socksusername": "anonymous",
+        "sockspassword": "",
+        "bothost": "",
+        "botpath": "",
+        "localbotport": "8443",
+        "publicbotport": "8443",
+        "privatekey": "",
+        "certificate": "",
+        "useselfsignedcertificate": false,
+        "sslterminated": false,
+        "verboselogging": false
+    },
+    {
+        "id": "abf48d3132018348",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "Selección",
+        "func": "// En el nodo de función\nmsg.topic = \"SELECT * FROM `EME`.`datos web`;\"\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 1020,
+        "wires": [
+            [
+                "350e0fc6e5458518"
+            ]
+        ]
+    },
+    {
+        "id": "dc124818e4dba8b3",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "Excel http in",
+        "url": "/excel",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 1020,
+        "wires": [
+            [
+                "abf48d3132018348"
+            ]
+        ]
+    },
+    {
+        "id": "19df164bb3f2d61b",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "JSON",
+        "func": "msg.payload = JSON.stringify(msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 1020,
+        "wires": [
+            [
+                "0bc8407795fd2811"
+            ]
+        ]
+    },
+    {
+        "id": "0bc8407795fd2811",
+        "type": "http response",
+        "z": "39306e21f4d0a21a",
+        "name": "Excel http out",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "x": 700,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "c79ff286de4f0dd2",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "",
+        "url": "/datos",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 1120,
+        "wires": [
+            [
+                "0833826b319c0dbb"
+            ]
+        ]
+    },
+    {
+        "id": "0833826b319c0dbb",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "Select from mysql",
+        "func": "msg.topic = \"SELECT * FROM `EME`.`datos web` ORDER BY `Dato N°` DESC LIMIT 10 ;\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 1120,
+        "wires": [
+            [
+                "8c3ea039ae1a70df"
+            ]
+        ]
+    },
+    {
+        "id": "bd8704bcb61b92d2",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "JSON",
+        "func": "msg.headers = msg.headers || {};\nmsg.headers['Access-Control-Allow-Origin'] = '*'; // Cambia '*' por 'https://example.com' si necesitas restringir el origen\nmsg.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';\nmsg.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 1120,
+        "wires": [
+            [
+                "a0871382e78981cf",
+                "05e1f06fd916e803"
+            ]
+        ]
+    },
+    {
+        "id": "a0871382e78981cf",
+        "type": "http response",
+        "z": "39306e21f4d0a21a",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "05e1f06fd916e803",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "debug 12",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 1160,
+        "wires": []
+    },
+    {
+        "id": "d7b06204cbd3791a",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "",
+        "url": "/graph",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 130,
+        "y": 1260,
+        "wires": [
+            [
+                "ddaab84694f69eeb"
+            ]
+        ]
+    },
+    {
+        "id": "ddaab84694f69eeb",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "Select from mysql",
+        "func": "msg.topic = \"SELECT * FROM (SELECT * FROM `EME`.`datos web` WHERE STR_TO_DATE(Fecha, '%d-%m-%Y %H:%i') >= DATE_SUB(NOW(), INTERVAL 9 HOUR) AND MINUTE(STR_TO_DATE(Fecha, '%d-%m-%Y %H:%i:%s')) = 0 ORDER BY ABS(TIME_TO_SEC(TIMEDIFF(STR_TO_DATE(Fecha, '%d-%m-%Y %H:%i:%s'), CONCAT(DATE_FORMAT(STR_TO_DATE(Fecha, '%d-%m-%Y %H:%i:%s'), '%Y-%m-%d %H'), ':00:00')))) ) AS subquery;\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 310,
+        "y": 1260,
+        "wires": [
+            [
+                "fb8a9ef9e907e633"
+            ]
+        ]
+    },
+    {
+        "id": "ba0a5c82dd88c627",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "JSON",
+        "func": "msg.headers = msg.headers || {};\nmsg.headers['Access-Control-Allow-Origin'] = '*'; // Cambia '*' por 'https://example.com' si necesitas restringir el origen\nmsg.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';\nmsg.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 1260,
+        "wires": [
+            [
+                "3a6ac6417be5abec",
+                "2c39badae3a23887"
+            ]
+        ]
+    },
+    {
+        "id": "3a6ac6417be5abec",
+        "type": "http response",
+        "z": "39306e21f4d0a21a",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 750,
+        "y": 1260,
+        "wires": []
+    },
+    {
+        "id": "2c39badae3a23887",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "debug 13",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "4e074b5da9644d20",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "WEB SERVER (opción A)",
+        "url": "/EM",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 1420,
+        "wires": [
+            [
+                "657dad8b30bba2cc"
+            ]
+        ]
+    },
+    {
+        "id": "657dad8b30bba2cc",
+        "type": "file in",
+        "z": "39306e21f4d0a21a",
+        "name": "HTML",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/index.html",
+        "filenameType": "str",
+        "format": "utf8",
+        "encoding": "none",
+        "allProps": false,
+        "x": 330,
+        "y": 1440,
+        "wires": [
+            [
+                "363b18185022b24f"
+            ]
+        ]
+    },
+    {
+        "id": "363b18185022b24f",
+        "type": "http response",
+        "z": "39306e21f4d0a21a",
+        "name": "RESPONSE",
+        "statusCode": "",
+        "headers": {},
+        "x": 470,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "61f7fb40f100ac20",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Administrar solicitudes de excel",
+        "info": "",
+        "x": 690,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "3e41ef961b3c6a10",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Se obtienen los ultimos datos de la db",
+        "info": "",
+        "x": 680,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "3e73818c179622eb",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Se obtienen los datos de la db para los graficos",
+        "info": "",
+        "x": 660,
+        "y": 1220,
+        "wires": []
+    },
+    {
+        "id": "485d35ce9a425305",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Se crea la web del html (Inicio)",
+        "info": "",
+        "x": 490,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "f59c96f769022a37",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "WEB SERVER",
+        "url": "/EM/datos.html",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1540,
+        "wires": [
+            [
+                "1e9f9852eaa6d007"
+            ]
+        ]
+    },
+    {
+        "id": "1e9f9852eaa6d007",
+        "type": "file in",
+        "z": "39306e21f4d0a21a",
+        "name": "HTML",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/datos.html",
+        "filenameType": "str",
+        "format": "utf8",
+        "encoding": "none",
+        "allProps": false,
+        "x": 270,
+        "y": 1540,
+        "wires": [
+            [
+                "2786492ace69f12b"
+            ]
+        ]
+    },
+    {
+        "id": "2786492ace69f12b",
+        "type": "http response",
+        "z": "39306e21f4d0a21a",
+        "name": "RESPONSE",
+        "statusCode": "",
+        "headers": {},
+        "x": 410,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "0ca279c5632e8be4",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Se crea la web del html (Ultimos Datos)",
+        "info": "",
+        "x": 510,
+        "y": 1500,
+        "wires": []
+    },
+    {
+        "id": "1013ab3f4de40386",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "WEB SERVER (opción B)",
+        "url": "/EM/index.html",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 1460,
+        "wires": [
+            [
+                "657dad8b30bba2cc"
+            ]
+        ]
+    },
+    {
+        "id": "a1c76f50edfbb7b2",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "WEB SERVER",
+        "url": "/EM/graphs.html",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 1620,
+        "wires": [
+            [
+                "bbb4a2dc9a87e6b8"
+            ]
+        ]
+    },
+    {
+        "id": "bbb4a2dc9a87e6b8",
+        "type": "file in",
+        "z": "39306e21f4d0a21a",
+        "name": "HTML",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/graphs.html",
+        "filenameType": "str",
+        "format": "utf8",
+        "encoding": "none",
+        "allProps": false,
+        "x": 270,
+        "y": 1620,
+        "wires": [
+            [
+                "6fa813d21a06d2a4"
+            ]
+        ]
+    },
+    {
+        "id": "6fa813d21a06d2a4",
+        "type": "http response",
+        "z": "39306e21f4d0a21a",
+        "name": "RESPONSE",
+        "statusCode": "",
+        "headers": {},
+        "x": 410,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "9754473102e2a6c6",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Se crea la web del html (Graficos importantes)",
+        "info": "",
+        "x": 540,
+        "y": 1580,
+        "wires": []
+    },
+    {
+        "id": "a01f61ede9bad8db",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "",
+        "url": "/css",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 800,
+        "y": 1400,
+        "wires": [
+            [
+                "4d5a0bd2ebc1f025"
+            ]
+        ]
+    },
+    {
+        "id": "76c7f41cd55d0062",
+        "type": "http response",
+        "z": "39306e21f4d0a21a",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "text/css"
+        },
+        "x": 1190,
+        "y": 1400,
+        "wires": []
+    },
+    {
+        "id": "4d5a0bd2ebc1f025",
+        "type": "file in",
+        "z": "39306e21f4d0a21a",
+        "name": "style.css",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/style.css",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 980,
+        "y": 1400,
+        "wires": [
+            [
+                "76c7f41cd55d0062"
+            ]
+        ]
+    },
+    {
+        "id": "96ca165c61dbc451",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "",
+        "url": "/js",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 790,
+        "y": 1480,
+        "wires": [
+            [
+                "409efa9d5f7ffec6"
+            ]
+        ]
+    },
+    {
+        "id": "0a5886a1bc4101af",
+        "type": "http response",
+        "z": "39306e21f4d0a21a",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "Content-type": "text/javascript"
+        },
+        "x": 1190,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "409efa9d5f7ffec6",
+        "type": "file in",
+        "z": "39306e21f4d0a21a",
+        "name": "app.js",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/app.js",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 970,
+        "y": 1480,
+        "wires": [
+            [
+                "0a5886a1bc4101af"
+            ]
+        ]
+    },
+    {
+        "id": "cb79e71b1bec14a8",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Se le da una url al css",
+        "info": "",
+        "x": 1160,
+        "y": 1360,
+        "wires": []
+    },
+    {
+        "id": "f69f68de7f3c2dd3",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Se le da una url al js",
+        "info": "",
+        "x": 1130,
+        "y": 1440,
+        "wires": []
+    },
+    {
+        "id": "21e09fbb4ca48651",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "",
+        "url": "/exceljs",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 810,
+        "y": 1560,
+        "wires": [
+            [
+                "865c9201e75dcd29"
+            ]
+        ]
+    },
+    {
+        "id": "a4c67a4ec2bb5a01",
+        "type": "http response",
+        "z": "39306e21f4d0a21a",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "Content-type": "text/javascript"
+        },
+        "x": 1190,
+        "y": 1560,
+        "wires": []
+    },
+    {
+        "id": "865c9201e75dcd29",
+        "type": "file in",
+        "z": "39306e21f4d0a21a",
+        "name": "excel.js",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/excel.js",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 980,
+        "y": 1560,
+        "wires": [
+            [
+                "a4c67a4ec2bb5a01"
+            ]
+        ]
+    },
+    {
+        "id": "7655dd3e561d40ca",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Se le da una url al js de excel",
+        "info": "",
+        "x": 1160,
+        "y": 1520,
+        "wires": []
+    },
+    {
+        "id": "61333d259246e883",
+        "type": "http in",
+        "z": "39306e21f4d0a21a",
+        "name": "",
+        "url": "/graphicsjs",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 820,
+        "y": 1640,
+        "wires": [
+            [
+                "fee459ed8ab216a4"
+            ]
+        ]
+    },
+    {
+        "id": "363527c3fd8b0e73",
+        "type": "http response",
+        "z": "39306e21f4d0a21a",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "Content-type": "text/javascript"
+        },
+        "x": 1190,
+        "y": 1640,
+        "wires": []
+    },
+    {
+        "id": "fee459ed8ab216a4",
+        "type": "file in",
+        "z": "39306e21f4d0a21a",
+        "name": "graphics.js",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/graphics.js",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 990,
+        "y": 1640,
+        "wires": [
+            [
+                "363527c3fd8b0e73"
+            ]
+        ]
+    },
+    {
+        "id": "f52b613d8936c4fc",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Se le da una url al js de los graficos",
+        "info": "",
+        "x": 1180,
+        "y": 1600,
+        "wires": []
+    },
+    {
+        "id": "79ee200a7d438ae1",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Archivos Estáticos",
+        "info": "",
+        "x": 950,
+        "y": 1340,
+        "wires": []
+    },
+    {
+        "id": "350e0fc6e5458518",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "",
+        "x": 430,
+        "y": 1020,
+        "wires": [
+            [
+                "19df164bb3f2d61b"
+            ]
+        ]
+    },
+    {
+        "id": "8c3ea039ae1a70df",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "",
+        "x": 470,
+        "y": 1120,
+        "wires": [
+            [
+                "bd8704bcb61b92d2"
+            ]
+        ]
+    },
+    {
+        "id": "fb8a9ef9e907e633",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "",
+        "x": 470,
+        "y": 1260,
+        "wires": [
+            [
+                "ba0a5c82dd88c627"
+            ]
+        ]
+    },
+    {
+        "id": "71d671e8602fced8",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "Formateo de data",
+        "func": "function crearFecha() {\n\n    // Obtener la fecha actual\n    var fechaActual = new Date();\n\n    // Obtener los componentes de la fecha\n    var dia = fechaActual.getDate();\n    var mes = fechaActual.getMonth() + 1; // Nota: Enero es 0, así que se suma 1 al mes\n    var año = fechaActual.getFullYear();\n    var horas = fechaActual.getHours();\n    var minutos = fechaActual.getMinutes();\n    var segundos = fechaActual.getSeconds();\n\n    // Agregar ceros delante si es necesario para mantener el formato DD.MM.YYYY HH:mm:ss\n    if (dia < 10) { dia = '0' + dia; }\n    if (mes < 10) { mes = '0' + mes; }\n    if (horas < 10) { horas = '0' + horas; }\n    if (minutos < 10) { minutos = '0' + minutos; }\n    if (segundos < 10) { segundos = '0' + segundos; }\n\n    // Construir la fecha en el formato deseado\n    var fechaFormateada = dia + '-' + mes + '-' + año + ' ' + horas + ':' + minutos + ':' + segundos;\n    return fechaFormateada;\n}\n\n//funciona\nfunction formatearDatosParaBD(msg) {\n    const nuevoArray = [];\n\n    // Iteramos sobre las propiedades del objeto y agregamos los valores al nuevo array\n   \n    for (const propiedad in msg.payload) {\n        const valor = msg.payload[propiedad];\n\n        // Eliminamos unidades y convertimos a número si es posible\n        const valorNumerico = valor.replace(/[^\\d.-]/g, '');\n        const valorFinal = isNaN(parseFloat(valorNumerico)) ? valor : valorNumerico;\n\n        nuevoArray.push(valorFinal);\n    }\n    msg.payload = nuevoArray;\n\n    const fecha = crearFecha();\n    // Agregar la fecha al inicio del array\n    msg.payload.unshift(fecha);\n}\nformatearDatosParaBD(msg);\n\n// Crear la parte inicial de la consulta\nvar query = \"insert into `EME`.`datos sensores`(`Fecha`, `Temperatura DHT`, `Humedad DHT`, `Sensacion T DHT`, `Temperatura BMP`, `Presion BMP`, `Altitud BMP`, `Presion Nivel Mar BMP`, `Nivel de luz`, `ppm CO2`, `Velocidad del viento`, `Direccion del viento`, `Sensor de lluvia`) values(\";\n\n// Agregar los valores a la consulta\nfor (var i = 0; i < msg.payload.length; i++) {\n    if (i == 0 || i > 9) {\n        // Los primeros y los últimos tres elementos como VARCHAR\n        query += \"'\" + msg.payload[i] + \"'\";\n    } else {\n        if (i == 9) {\n            msg.payload[i] = (msg.payload[i] * 0.01);\n        }\n        // Los otros elementos como DECIMAL\n        query += msg.payload[i];\n    }\n    \n    if (i < msg.payload.length - 1) {\n        query += \", \";\n    }\n}\n\n// Cerrar la consulta\nquery += \");\";\n\n// Asignar la consulta al topic del mensaje\nmsg.topic = query;\n\n// Retornar el mensaje\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 610,
+        "y": 260,
+        "wires": [
+            [
+                "5ab1729ffceee117",
+                "f8e62f88b5b73e8c",
+                "6223745dbcdc63c1"
+            ]
+        ]
+    },
+    {
+        "id": "5ab1729ffceee117",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "Llegada de Datos",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 910,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "fa80ced2bf7da02e",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Obtención de datos EME 0",
+        "info": "",
+        "x": 170,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "e8e5288351aafa6e",
+        "type": "mqtt in",
+        "z": "39306e21f4d0a21a",
+        "name": "EMM N°0",
+        "topic": "EME_n0/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "103af03ab387ac01",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 200,
+        "wires": [
+            [
+                "d3beaad0dfc21c0f"
+            ]
+        ]
+    },
+    {
+        "id": "d3beaad0dfc21c0f",
+        "type": "join",
+        "z": "39306e21f4d0a21a",
+        "name": "Unir datos de EME n°X",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "12",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 340,
+        "y": 200,
+        "wires": [
+            [
+                "af0349e663b1e1c3",
+                "71d671e8602fced8"
+            ]
+        ]
+    },
+    {
+        "id": "6223745dbcdc63c1",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "Calculo de datos y formateo a web",
+        "func": "function calculoPuntoDeRocio() {\n    var temp = parseFloat(msg.payload[1].replace(/[^0-9.-]/g, \"\"));; // Temperatura en formato string\n    var hum = parseFloat(msg.payload[2].replace(/[^0-9.-]/g, \"\"));;   // Humedad en formato string\n\n    // Constantes para la fórmula de Magnus-MEFISTO\n    var a = 17.27;\n    var b = 237.7;\n\n    // Cálculo intermedio\n    var alpha = ((a * temp) / (b + temp)) + Math.log(hum / 100);\n\n    // Cálculo del punto de rocío\n    var dewPoint = (b * alpha) / (a - alpha);\n\n    // Asignar el punto de rocío al payload\n    return dewPoint.toFixed(2); // Resultado con dos decimales\n}\n\n\nfunction calculoCalidadDelAire() {\n    // muy bueno < 400\n    // nueno 400 y 1000\n    // moderado 1000 y 2000\n    // malo  2000 y 5000\n    // muy malo >5000    \n    var calidadDeAire;\n    // var ppmCO2 = parseFloat(msg.payload[8].replace(/[^0-9.-]/g, \"\"));\n    var ppmCO2 = msg.payload[8];\n    if (ppmCO2 < 400) {\n        calidadDeAire = \"Muy Bueno\";\n    } else if ((ppmCO2 >= 400) || (ppmCO2 < 1000)) {\n        calidadDeAire = \"Bueno\";\n    } else if ((ppmCO2 >= 1000) || (ppmCO2 < 2000)) {\n        calidadDeAire = \"Moderado\";\n    } else if ((ppmCO2 >= 2000) || (ppmCO2 < 5000)) {\n        calidadDeAire = \"Malo\";\n    } else if (ppmCO2 >= 5000) {\n        calidadDeAire = \"Muy Malo\";\n    }\n    // else {\n    //     calidadDeAire = \"Error MQ135.\";\n    // }\n\n    return calidadDeAire;\n}\n\nfunction calculoDeNivelBateria() {\n    // Generar un número aleatorio entre 0 y 1\n    let random = Math.random();\n\n    // Escalar el número aleatorio a un rango de 7 a 10\n    let scaledRandom = 7 + (random * (10 - 7));\n\n    // Redondear a tres decimales\n    let result = parseFloat(scaledRandom.toFixed(3));\n\n    // Establecer el resultado en el payload del mensaje\n    return result.toString();\n}\n\nfunction promedioTemperatura() {\n    var tempDht = parseFloat(msg.payload[1].replace(/[^0-9.-]/g, \"\"));\n    var tempBmp = parseFloat(msg.payload[4].replace(/[^0-9.-]/g, \"\"));\n\n    var tempProm = (tempBmp + tempDht) / 2;\n\n    var tempDhtString = tempProm.toString();\n\n    msg.payload.splice(4, 1);\n    msg.payload.splice(1, 1, tempDhtString);\n\n}\n\npromedioTemperatura();\nmsg.payload.push(calculoPuntoDeRocio());\nmsg.payload.push(calculoCalidadDelAire());\nmsg.payload.push(calculoDeNivelBateria());\n\n\n// Crear la parte inicial de la consulta\nvar query = \"insert into `EME`.`datos web` (Fecha, `Temperatura Promedio`, Humedad, `Sensacion T`, Presion, Altitud, `Presion Nivel Mar`, `Nivel de luz`, `ppm CO2`, `Velocidad del viento`, `Direccion del viento`, `Sensor de lluvia`, `Temperatura punto de rocio`, `Calidad del aire`, `Nivel de bateria`) values(\";\n\n// Agregar los valores a la consulta\nfor (var i = 0; i < msg.payload.length; i++) {\n    if (i == 0 || i == 9 || i == 10 || i == 11 || i == 13) {\n        // Los primeros y los últimos tres elementos como VARCHAR\n        query += \"'\" + msg.payload[i] + \"'\";\n    } else {\n        // Los otros elementos como DECIMAL\n        query += msg.payload[i];\n    }\n\n    if (i < msg.payload.length - 1) {\n        query += \", \";\n    }\n}\n\n// Cerrar la consulta\nquery += \");\";\n\n// Asignar la consulta al topic del mensaje\nmsg.topic = query;\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 920,
+        "y": 200,
+        "wires": [
+            [
+                "fa48a4aeaedf12df",
+                "a80ca59ef4fc4724"
+            ]
+        ]
+    },
+    {
+        "id": "af0349e663b1e1c3",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "Llegada de Datos desde JOIN",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 658.75,
+        "y": 131.25,
+        "wires": []
+    },
+    {
+        "id": "f8e62f88b5b73e8c",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Sensores",
+        "x": 840,
+        "y": 320,
+        "wires": [
+            [
+                "6f7d53f9d25132b8"
+            ]
+        ]
+    },
+    {
+        "id": "6f7d53f9d25132b8",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "debug SQL",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "fa48a4aeaedf12df",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Web",
+        "x": 1050,
+        "y": 100,
+        "wires": [
+            [
+                "baa85dba45b92d91"
+            ]
+        ]
+    },
+    {
+        "id": "baa85dba45b92d91",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "debug SQL WEB",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1230,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "a80ca59ef4fc4724",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "topic SQL WEB",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1196.5,
+        "y": 239.49998474121094,
+        "wires": []
+    },
+    {
+        "id": "c6398c23205ee796",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "SQL create dataWeb table",
+        "func": "var consultaSQL = `  \nCREATE TABLE IF NOT EXISTS \\`datos web\\` (\n  \\`Dato N°\\` int NOT NULL PRIMARY KEY auto_increment,\n  \\`Fecha\\` longtext,\n  \n  \\`Temperatura Promedio\\` decimal(4,2) DEFAULT NULL, -- temperatura promedio entre dht y bmp\n  \\`Humedad\\` decimal(5,2) DEFAULT NULL,\n  \\`Sensacion T\\` decimal(4,2) DEFAULT NULL,\n  \n\\`Presion\\` decimal(8,2) DEFAULT NULL,\n\\`Altitud\\` decimal(6,2) DEFAULT NULL,\n\\`Presion Nivel Mar\\` decimal(8,2) DEFAULT NULL,\n  \n\\`Nivel de luz\\` decimal(8,2) DEFAULT NULL,\n  \n  \\`ppm CO2\\` decimal(7,2) DEFAULT NULL,\n  \n\\`Velocidad del viento\\` varchar(15) DEFAULT NULL,\n\\`Direccion del viento\\` varchar(15) DEFAULT NULL,\n  \n  \\`Sensor de lluvia\\` varchar(15) DEFAULT NULL,\n  \n  -- Datos Calculados por fuera de los sensores, usando su data\n  \\`Temperatura punto de rocio\\` decimal(4,2) DEFAULT NULL,\n\\`Calidad del aire\\` varchar(15) DEFAULT NULL,\n\\`Nivel de bateria\\` decimal(5,3) DEFAULT NULL  \n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n`;\n\nmsg.topic = consultaSQL;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 800,
+        "wires": [
+            [
+                "e9a899ad148dc152"
+            ]
+        ]
+    },
+    {
+        "id": "e9a899ad148dc152",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Web",
+        "x": 170,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "706e4428fa64db45",
+        "type": "inject",
+        "z": "39306e21f4d0a21a",
+        "name": "CREATE",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 200,
+        "y": 700,
+        "wires": [
+            [
+                "d5845acea67aeb69"
+            ]
+        ]
+    },
+    {
+        "id": "a265cbb692e2ec85",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "SQL create dataSens table",
+        "func": "var consultaSQL = `  \nCREATE TABLE IF NOT EXISTS \\`EME\\`.\\`datos sensores\\` (\n  \\`Dato N°\\` int NOT NULL PRIMARY KEY auto_increment,\n  \\`Fecha\\` longtext,\n  \n  \\`Temperatura DHT\\` decimal(4,2) DEFAULT NULL,\n\\`Humedad DHT\\` decimal(5,2) DEFAULT NULL,\n\\`Sensacion T DHT\\` decimal(4,2) DEFAULT NULL,\n  \n\\`Temperatura BMP\\` decimal(4,2) DEFAULT NULL,\n\\`Presion BMP\\` decimal(8,2) DEFAULT NULL,\n\\`Altitud BMP\\` decimal(6,2) DEFAULT NULL,\n\\`Presion Nivel Mar BMP\\` decimal(8,2) DEFAULT NULL,\n  \n\\`Nivel de luz\\` decimal(8,2) DEFAULT NULL,\n  \n  \\`ppm CO2\\` decimal(7,2) DEFAULT NULL,\n  \n\\`Velocidad del viento\\` varchar(15) DEFAULT NULL,\n\\`Direccion del viento\\` varchar(15) DEFAULT NULL,\n  \n  \\`Sensor de lluvia\\` varchar(15) DEFAULT NULL\n   \n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n`;\n\nmsg.topic = consultaSQL;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 840,
+        "wires": [
+            [
+                "d914f86412132662"
+            ]
+        ]
+    },
+    {
+        "id": "d914f86412132662",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Sensores",
+        "x": 360,
+        "y": 900,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "9906c20dce1599f9",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Crear Tablas de Datos Web y Sensores",
+        "info": "",
+        "x": 270,
+        "y": 640,
+        "wires": []
+    },
+    {
+        "id": "3b3316d431d3840b",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "debug SQL",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 670,
+        "y": 900,
+        "wires": []
+    },
+    {
+        "id": "6e986e39489acd8a",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Drop Datos",
+        "x": 670,
+        "y": 840,
+        "wires": [
+            [
+                "3b3316d431d3840b"
+            ]
+        ]
+    },
+    {
+        "id": "82da33881030bf06",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "Drop both tables",
+        "func": "var consultaSQL = `  \ndrop table \\`EME\\`.\\`datos web\\`;\ndrop table \\`EME\\`.\\`datos sensores\\`;\n`;\n\nmsg.topic = consultaSQL;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 660,
+        "y": 800,
+        "wires": [
+            [
+                "6e986e39489acd8a"
+            ]
+        ]
+    },
+    {
+        "id": "f8cbbc1cbfcc4171",
+        "type": "inject",
+        "z": "39306e21f4d0a21a",
+        "name": "DROP",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 640,
+        "y": 760,
+        "wires": [
+            [
+                "82da33881030bf06"
+            ]
+        ]
+    },
+    {
+        "id": "0dbc2712ad654b9f",
+        "type": "inject",
+        "z": "39306e21f4d0a21a",
+        "name": "SHOW DB",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1190,
+        "y": 780,
+        "wires": [
+            [
+                "30b9f7bd2f622f7a"
+            ]
+        ]
+    },
+    {
+        "id": "30b9f7bd2f622f7a",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "Select * from data",
+        "func": "msg.topic = \"select * from`EME`.`datos sensores`;\"\n\nmsg.topic = `\nselect * from \\`EME\\`.\\`datos web\\`\nORDER BY Fecha desc\nLIMIT 40;\n`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 780,
+        "wires": [
+            [
+                "27952fe59499d0fe"
+            ]
+        ]
+    },
+    {
+        "id": "27952fe59499d0fe",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "show data",
+        "x": 1190,
+        "y": 840,
+        "wires": [
+            [
+                "538df7604e802df0"
+            ]
+        ]
+    },
+    {
+        "id": "538df7604e802df0",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "Show db",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1380,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "37714008dfe389d4",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "CUIDADO DROPEA TABLA!!!",
+        "info": "El suicidio no es una opción\nllama al 2616167475 para obtener\nayuda!",
+        "x": 660,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "07058af843ac2655",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Ver tablas de la db EME",
+        "info": "",
+        "x": 1180,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "7a267c60ce21aef0",
+        "type": "exec",
+        "z": "39306e21f4d0a21a",
+        "command": "cd /home/etec && git clone https://github.com/MartinLautaroGimenez/estacion-meteorologica-estatica.git",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Clonar Repo GitHUB",
+        "x": 1200,
+        "y": 980,
+        "wires": [
+            [
+                "efe7eed4fd0a2405"
+            ],
+            [
+                "e9d9025f621a3efa"
+            ],
+            [
+                "2e9b10ff12c9de0f"
+            ]
+        ]
+    },
+    {
+        "id": "b20756ebf11caf34",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Clonar Repo a Local EMETec",
+        "info": "",
+        "x": 1080,
+        "y": 920,
+        "wires": []
+    },
+    {
+        "id": "25b5839037c123f4",
+        "type": "exec",
+        "z": "39306e21f4d0a21a",
+        "command": "cd /home/etec/estacion-meteorologica-estatica && git config pull.rebase true && git pull",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Actualizar Repo de GitHub",
+        "x": 1220,
+        "y": 1100,
+        "wires": [
+            [
+                "efe7eed4fd0a2405"
+            ],
+            [
+                "e9d9025f621a3efa"
+            ],
+            [
+                "2e9b10ff12c9de0f"
+            ]
+        ]
+    },
+    {
+        "id": "c53fefb278e86d65",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Actualizar Repo Local EMETec",
+        "info": "",
+        "x": 1090,
+        "y": 1040,
+        "wires": []
+    },
+    {
+        "id": "771c89e96a2a77f8",
+        "type": "inject",
+        "z": "39306e21f4d0a21a",
+        "name": "CLONE",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1010,
+        "y": 980,
+        "wires": [
+            [
+                "7a267c60ce21aef0"
+            ]
+        ]
+    },
+    {
+        "id": "806bf38b43b0bf75",
+        "type": "inject",
+        "z": "39306e21f4d0a21a",
+        "name": "PULL",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1010,
+        "y": 1100,
+        "wires": [
+            [
+                "25b5839037c123f4"
+            ]
+        ]
+    },
+    {
+        "id": "2e9b10ff12c9de0f",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "return code",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1510,
+        "y": 1240,
+        "wires": []
+    },
+    {
+        "id": "e9d9025f621a3efa",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "Standar err",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1510,
+        "y": 1100,
+        "wires": []
+    },
+    {
+        "id": "efe7eed4fd0a2405",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "Standar out",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1510,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "3e3bbb74854aefa5",
+        "type": "exec",
+        "z": "39306e21f4d0a21a",
+        "command": "cd /home/etec/estacion-meteorologica-estatica/Web && ls -la",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Actualizar Repo de GitHub",
+        "x": 1220,
+        "y": 1240,
+        "wires": [
+            [
+                "efe7eed4fd0a2405"
+            ],
+            [
+                "e9d9025f621a3efa"
+            ],
+            [
+                "2e9b10ff12c9de0f"
+            ]
+        ]
+    },
+    {
+        "id": "24ac203cdc0e94da",
+        "type": "inject",
+        "z": "39306e21f4d0a21a",
+        "name": "SHOW",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1010,
+        "y": 1240,
+        "wires": [
+            [
+                "3e3bbb74854aefa5"
+            ]
+        ]
+    },
+    {
+        "id": "23e2d9c80164eb3c",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Ver Repo Local EMETec",
+        "info": "",
+        "x": 1050,
+        "y": 1180,
+        "wires": []
+    },
+    {
+        "id": "8adc97bc4aaa799a",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "Formateo de data",
+        "func": "function crearFecha() {\n\n    // Obtener la fecha actual\n    var fechaActual = new Date();\n\n    // Obtener los componentes de la fecha\n    var dia = fechaActual.getDate();\n    var mes = fechaActual.getMonth() + 1; // Nota: Enero es 0, así que se suma 1 al mes\n    var año = fechaActual.getFullYear();\n    var horas = fechaActual.getHours();\n    var minutos = fechaActual.getMinutes();\n    var segundos = fechaActual.getSeconds();\n\n    // Agregar ceros delante si es necesario para mantener el formato DD.MM.YYYY HH:mm:ss\n    if (dia < 10) { dia = '0' + dia; }\n    if (mes < 10) { mes = '0' + mes; }\n    if (horas < 10) { horas = '0' + horas; }\n    if (minutos < 10) { minutos = '0' + minutos; }\n    if (segundos < 10) { segundos = '0' + segundos; }\n\n    // Construir la fecha en el formato deseado\n    var fechaFormateada = dia + '-' + mes + '-' + año + ' ' + horas + ':' + minutos + ':' + segundos;\n    return fechaFormateada;\n}\n\n//funciona\nfunction formatearDatosParaBD(msg) {\n    const nuevoArray = [];\n\n    // Iteramos sobre las propiedades del objeto y agregamos los valores al nuevo array\n   \n    for (const propiedad in msg.payload) {\n        const valor = msg.payload[propiedad];\n\n        // Eliminamos unidades y convertimos a número si es posible\n        const valorNumerico = valor.replace(/[^\\d.-]/g, '');\n        const valorFinal = isNaN(parseFloat(valorNumerico)) ? valor : valorNumerico;\n\n        nuevoArray.push(valorFinal);\n    }\n    msg.payload = nuevoArray;\n\n    const fecha = crearFecha();\n    // Agregar la fecha al inicio del array\n    msg.payload.unshift(fecha);\n}\nformatearDatosParaBD(msg);\n\n// Crear la parte inicial de la consulta\nvar query = \"insert into `EME`.`datos sensores`(`Fecha`, `Temperatura DHT`, `Humedad DHT`, `Sensacion T DHT`, `Temperatura BMP`, `Presion BMP`, `Altitud BMP`, `Presion Nivel Mar BMP`, `Nivel de luz`, `ppm CO2`, `Velocidad del viento`, `Direccion del viento`, `Sensor de lluvia`) values(\";\n\n// Agregar los valores a la consulta\nfor (var i = 0; i < msg.payload.length; i++) {\n    if (i == 0 || i > 9) {\n        // Los primeros y los últimos tres elementos como VARCHAR\n        query += \"'\" + msg.payload[i] + \"'\";\n    } else {\n        if (i == 9) {\n            msg.payload[i] = (msg.payload[i] * 0.001);\n        }\n        // Los otros elementos como DECIMAL\n        query += msg.payload[i];\n    }\n    \n    if (i < msg.payload.length - 1) {\n        query += \", \";\n    }\n}\n\n// Cerrar la consulta\nquery += \");\";\n\n// Asignar la consulta al topic del mensaje\nmsg.topic = query;\n\n// Retornar el mensaje\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 590,
+        "y": 540,
+        "wires": [
+            [
+                "dfdc8503bd46cdcf",
+                "552fb7b509edb66d",
+                "3c4ecb0244d7f7bb"
+            ]
+        ]
+    },
+    {
+        "id": "dfdc8503bd46cdcf",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "Llegada de Datos",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "ca1ff15925288d2c",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "Obtención de datos EMM 0",
+        "info": "",
+        "x": 170,
+        "y": 380,
+        "wires": []
+    },
+    {
+        "id": "416ca0956217431a",
+        "type": "mqtt in",
+        "z": "39306e21f4d0a21a",
+        "name": "EMM N°0",
+        "topic": "EMM_n0/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "103af03ab387ac01",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 480,
+        "wires": [
+            [
+                "5b4aa8f49aad160d"
+            ]
+        ]
+    },
+    {
+        "id": "5b4aa8f49aad160d",
+        "type": "join",
+        "z": "39306e21f4d0a21a",
+        "name": "Unir datos de EMM n°X",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "accumulate": false,
+        "timeout": "",
+        "count": "12",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 340,
+        "y": 480,
+        "wires": [
+            [
+                "8adc97bc4aaa799a",
+                "2fda109be3661302"
+            ]
+        ]
+    },
+    {
+        "id": "3c4ecb0244d7f7bb",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "Calculo de datos y formateo a web",
+        "func": "function calculoPuntoDeRocio() {\n    var temp = parseFloat(msg.payload[1].replace(/[^0-9.-]/g, \"\"));; // Temperatura en formato string\n    var hum = parseFloat(msg.payload[2].replace(/[^0-9.-]/g, \"\"));;   // Humedad en formato string\n\n    // Constantes para la fórmula de Magnus-MEFISTO\n    var a = 17.27;\n    var b = 237.7;\n\n    // Cálculo intermedio\n    var alpha = ((a * temp) / (b + temp)) + Math.log(hum / 100);\n\n    // Cálculo del punto de rocío\n    var dewPoint = (b * alpha) / (a - alpha);\n\n    // Asignar el punto de rocío al payload\n    return dewPoint.toFixed(2); // Resultado con dos decimales\n}\n\n\nfunction calculoCalidadDelAire() {\n    // muy bueno < 400\n    // nueno 400 y 1000\n    // moderado 1000 y 2000\n    // malo  2000 y 5000\n    // muy malo >5000    \n    var calidadDeAire;\n    var ppmCO2 = parseFloat(msg.payload[8].replace(/[^0-9.-]/g, \"\"));\n\n    if (ppmCO2 < 400) {\n        calidadDeAire = \"Muy Bueno\";\n    }\n    if ((ppmCO2 >= 400) || (ppmCO2 < 1000)) {\n        calidadDeAire = \"Bueno\";\n    }\n    if ((ppmCO2 >= 1000) || (ppmCO2 < 2000)) {\n        calidadDeAire = \"Moderado\";\n    }\n    if ((ppmCO2 >= 2000) || (ppmCO2 < 5000)) {\n        calidadDeAire = \"Malo\";\n    }\n    if (ppmCO2 >= 5000) {\n        calidadDeAire = \"Muy Malo\";\n    }\n    // else {\n    //     calidadDeAire = \"Error MQ135.\";\n    // }\n\n    return calidadDeAire;\n}\n\nfunction calculoDeNivelBateria() {\n    // Generar un número aleatorio entre 0 y 1\n    let random = Math.random();\n\n    // Escalar el número aleatorio a un rango de 7 a 10\n    let scaledRandom = 7 + (random * (10 - 7));\n\n    // Redondear a tres decimales\n    let result = parseFloat(scaledRandom.toFixed(3));\n\n    // Establecer el resultado en el payload del mensaje\n    return result.toString();\n}\n\nfunction promedioTemperatura() {\n    var tempDht = parseFloat(msg.payload[1].replace(/[^0-9.-]/g, \"\"));\n    var tempBmp = parseFloat(msg.payload[4].replace(/[^0-9.-]/g, \"\"));\n\n    var tempProm = (tempBmp + tempDht) / 2;\n\n    var tempDhtString = tempProm.toString();\n\n    msg.payload.splice(4, 1);\n    msg.payload.splice(1, 1, tempDhtString);\n\n}\n\npromedioTemperatura();\nmsg.payload.push(calculoPuntoDeRocio());\nmsg.payload.push(calculoCalidadDelAire());\nmsg.payload.push(calculoDeNivelBateria());\n\n\n// Crear la parte inicial de la consulta\nvar query = \"insert into `EME`.`datos web` (Fecha, `Temperatura Promedio`, Humedad, `Sensacion T`, Presion, Altitud, `Presion Nivel Mar`, `Nivel de luz`, `ppm CO2`, `Velocidad del viento`, `Direccion del viento`, `Sensor de lluvia`, `Temperatura punto de rocio`, `Calidad del aire`, `Nivel de bateria`) values(\";\n\n// Agregar los valores a la consulta\nfor (var i = 0; i < msg.payload.length; i++) {\n    if (i == 0 || i == 9 || i == 10 || i == 11 || i == 13) {\n        // Los primeros y los últimos tres elementos como VARCHAR\n        query += \"'\" + msg.payload[i] + \"'\";\n    } else {\n        // Los otros elementos como DECIMAL\n        query += msg.payload[i];\n    }\n\n    if (i < msg.payload.length - 1) {\n        query += \", \";\n    }\n}\n\n// Cerrar la consulta\nquery += \");\";\n\n// Asignar la consulta al topic del mensaje\nmsg.topic = query;\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 480,
+        "wires": [
+            [
+                "4b1ebd46b9807845",
+                "4edc59e0b199ec74"
+            ]
+        ]
+    },
+    {
+        "id": "2fda109be3661302",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "Llegada de Datos desde JOIN",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 658.75,
+        "y": 411.25,
+        "wires": []
+    },
+    {
+        "id": "552fb7b509edb66d",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Sensores",
+        "x": 820,
+        "y": 600,
+        "wires": [
+            [
+                "025036fdcebd356c"
+            ]
+        ]
+    },
+    {
+        "id": "025036fdcebd356c",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "debug SQL",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1030,
+        "y": 600,
+        "wires": []
+    },
+    {
+        "id": "4b1ebd46b9807845",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Web",
+        "x": 1050,
+        "y": 380,
+        "wires": [
+            [
+                "a8b226b6ef2a099d"
+            ]
+        ]
+    },
+    {
+        "id": "a8b226b6ef2a099d",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "debug SQL WEB",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1230,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "4edc59e0b199ec74",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "topic SQL WEB",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1196.5,
+        "y": 519.4999847412109,
+        "wires": []
+    },
+    {
+        "id": "d5845acea67aeb69",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "SQL create dataNodo table",
+        "func": "var consultaSQL = `  \nCREATE TABLE IF NOT EXISTS \\`Nodos EM\\` (\n  \\`Nodo ID\\` int NOT NULL PRIMARY KEY auto_increment,\n  \\`Tipo EM\\` varchar(6) DEFAULT NULL,\n  \\`Responsable\\` longtext,\n  \n  \\`Ubicacion\\` longtext,\n  \\`Estado\\` varchar(15), \n  \\`Ultima conexion\\` longtext\n   \n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n`;\n\n// - ID\n// - tipo de EM\n// - Responsable\n// - Ubicación\n// - Estado\n// - Ultima conexión\n\nmsg.topic = consultaSQL;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 300,
+        "y": 760,
+        "wires": [
+            [
+                "d3e1e3f1d8f876fa"
+            ]
+        ]
+    },
+    {
+        "id": "d3e1e3f1d8f876fa",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Sensores",
+        "x": 420,
+        "y": 700,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "7cba3c5bfc236285",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "Select * from data",
+        "func": "msg.topic = \"select * from`EME`.`Nodos EM`;\"\n\nmsg.topic = \"show tables from `EME`;\"\n\n// msg.topic = `\n// select * from \\`EME\\`.\\`datos web\\`\n// ORDER BY Fecha desc\n// LIMIT 40;\n// `;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1360,
+        "y": 740,
+        "wires": [
+            [
+                "27952fe59499d0fe"
+            ]
+        ]
+    },
+    {
+        "id": "35a080411382d4f4",
+        "type": "inject",
+        "z": "39306e21f4d0a21a",
+        "name": "SHOW DB",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1190,
+        "y": 740,
+        "wires": [
+            [
+                "7cba3c5bfc236285"
+            ]
+        ]
+    },
+    {
+        "id": "f606a96a099f6141",
+        "type": "debug",
+        "z": "39306e21f4d0a21a",
+        "name": "debug SQL",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 930,
+        "y": 860,
+        "wires": []
+    },
+    {
+        "id": "dffda890f3ab0df9",
+        "type": "mysql",
+        "z": "39306e21f4d0a21a",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Truncate accion",
+        "x": 940,
+        "y": 800,
+        "wires": [
+            [
+                "f606a96a099f6141"
+            ]
+        ]
+    },
+    {
+        "id": "1f54fb2b973a6adf",
+        "type": "function",
+        "z": "39306e21f4d0a21a",
+        "name": "TRUNCATE datos web",
+        "func": "var consultaSQL = \"TRUNCATE `datos web`\"\n\nmsg.topic = consultaSQL;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 960,
+        "y": 760,
+        "wires": [
+            [
+                "dffda890f3ab0df9"
+            ]
+        ]
+    },
+    {
+        "id": "6977326a84c7406e",
+        "type": "inject",
+        "z": "39306e21f4d0a21a",
+        "name": "TRUNCATE",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 930,
+        "y": 700,
+        "wires": [
+            [
+                "1f54fb2b973a6adf"
+            ]
+        ]
+    },
+    {
+        "id": "8c533b1ececd668c",
+        "type": "comment",
+        "z": "39306e21f4d0a21a",
+        "name": "CUIDADO! TRUNCATE datos web",
+        "info": "",
+        "x": 940,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "87d0624e94fe9f68",
+        "type": "function",
+        "z": "8eaf4958fc6641e4",
+        "name": "Formateo de data",
+        "func": "// Función para crear la fecha en el formato DD-MM-YYYY HH:mm:ss\nfunction crearFecha() {\n    // Obtener la fecha actual\n    var fechaActual = new Date();\n\n    // Restar 3 horas a la fecha actual\n    fechaActual.setHours(fechaActual.getHours() - 3);\n\n    // Obtener los componentes de la fecha\n    var dia = fechaActual.getDate();\n    var mes = fechaActual.getMonth() + 1; // Nota: Enero es 0, así que se suma 1 al mes\n    var año = fechaActual.getFullYear();\n    var horas = fechaActual.getHours();\n    var minutos = fechaActual.getMinutes();\n    var segundos = fechaActual.getSeconds();\n\n    // Agregar ceros delante si es necesario para mantener el formato DD-MM-YYYY HH:mm:ss\n    if (dia < 10) { dia = '0' + dia; }\n    if (mes < 10) { mes = '0' + mes; }\n    if (horas < 10) { horas = '0' + horas; }\n    if (minutos < 10) { minutos = '0' + minutos; }\n    if (segundos < 10) { segundos = '0' + segundos; }\n\n    // Construir la fecha en el formato deseado\n    var fechaFormateada = dia + '-' + mes + '-' + año + ' ' + horas + ':' + minutos + ':' + segundos;\n    return fechaFormateada;\n}\n\n\n// Función para formatear los datos para la base de datos\nfunction formatearDatosParaBD(msg) {\n    const nuevoArray = [];\n\n    // Iteramos sobre las propiedades del objeto y agregamos los valores al nuevo array\n    for (const propiedad in msg.payload) {\n        let valor = msg.payload[propiedad];\n\n        // Verificar si el valor es una cadena (y solo aplicar replace a las cadenas)\n        if (typeof valor === 'string') {\n            // Eliminamos unidades y convertimos a número si es posible\n            const valorNumerico = valor.replace(/[^\\d.-]/g, ''); // Eliminar cualquier cosa que no sea número o punto\n            valor = isNaN(parseFloat(valorNumerico)) ? valor : parseFloat(valorNumerico);\n        } else if (typeof valor === 'number' || Array.isArray(valor)) {\n            // Si es un número o un array, dejamos el valor tal cual (no aplicamos replace)\n            // Aquí puedes agregar más lógica si quieres manejar arrays u otros tipos\n        }\n\n        nuevoArray.push(valor);\n    }\n\n    // Agregar la fecha al inicio del array\n    const fecha = crearFecha();\n    msg.payload = [fecha, ...nuevoArray];\n\n    return msg;\n}\n\n// Llamar a la función para formatear los datos\nformatearDatosParaBD(msg);\n\n// Crear la parte inicial de la consulta SQL\nvar query = \"insert into `EME`.`datos sensores`(`Fecha`, `Temperatura DHT`, `Humedad DHT`, `Sensacion T DHT`, `Temperatura BMP`, `Presion BMP`, `Altitud BMP`, `Presion Nivel Mar BMP`, `Nivel de luz`, `ppm CO2`, `Velocidad del viento`, `Direccion del viento`, `Sensor de lluvia`) values(\";\n\n// Agregar los valores a la consulta SQL\nfor (var i = 0; i < msg.payload.length; i++) {\n    if (i == 0 || i > 9) {\n        // Los primeros y los últimos tres elementos como VARCHAR (en este caso, la fecha y los valores no numéricos)\n        query += \"'\" + msg.payload[i] + \"'\";\n    } else {\n        if (i == 9) {\n            // Si es el valor de ppm CO2, multiplicarlo por 0.01\n            msg.payload[i] = (msg.payload[i] * 0.01);\n        }\n        // Los otros elementos como DECIMAL\n        query += msg.payload[i];\n    }\n\n    // Agregar una coma si no es el último valor\n    if (i < msg.payload.length - 1) {\n        query += \", \";\n    }\n}\n\n// Cerrar la consulta SQL\nquery += \");\";\n\n// Asignar la consulta SQL al topic del mensaje\nmsg.topic = query;\n\n// Retornar el mensaje\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 550,
+        "y": 220,
+        "wires": [
+            [
+                "3fafca96cf23c040",
+                "7d8d8cd62c0ce6d7",
+                "3d8a787fc5b5f4cf"
+            ]
+        ]
+    },
+    {
+        "id": "3fafca96cf23c040",
+        "type": "debug",
+        "z": "8eaf4958fc6641e4",
+        "name": "Llegada de Datos",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "c64fa4728e3bba10",
+        "type": "comment",
+        "z": "8eaf4958fc6641e4",
+        "name": "Obtención de datos EME 0",
+        "info": "curl -X POST https://emetec.wetec.um.edu.ar/weather -H \"Content-Type: application/json\" -d \"{\\\"temperatura\\\": 25.00, \\\"humedad\\\": 60.00, \\\"sensacionTermica\\\": 24.50, \\\"temperatura_bmp\\\": 24.00, \\\"presion\\\": 1013.25, \\\"altitud\\\": 100.00, \\\"presion_nivel_mar\\\": 1012.00, \\\"luz\\\": 150.00, \\\"ppmCO2\\\": 400.00, \\\"velocidad_viento\\\": \\\"Proximamente\\\", \\\"direccion_viento\\\": \\\"Proximamente\\\", \\\"lluvia\\\": \\\"Proximamente\\\"}\"\n",
+        "x": 130,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "7d8d8cd62c0ce6d7",
+        "type": "function",
+        "z": "8eaf4958fc6641e4",
+        "name": "Calculo de datos y formateo a web",
+        "func": "function calculoPuntoDeRocio() {\n    var temp = msg.payload[1];\n    var hum = msg.payload[2];\n\n    // Asegurarse de que temp y hum sean cadenas de texto y luego eliminar caracteres no numéricos\n    if (typeof temp !== 'string') {\n        temp = temp.toString();\n    }\n    if (typeof hum !== 'string') {\n        hum = hum.toString();\n    }\n\n    temp = parseFloat(temp.replace(/[^0-9.-]/g, \"\")); // Temperatura en formato string\n    hum = parseFloat(hum.replace(/[^0-9.-]/g, \"\"));   // Humedad en formato string\n\n    // Constantes para la fórmula de Magnus-MEFISTO\n    var a = 17.27;\n    var b = 237.7;\n\n    // Cálculo intermedio\n    var alpha = ((a * temp) / (b + temp)) + Math.log(hum / 100);\n\n    // Cálculo del punto de rocío\n    var dewPoint = (b * alpha) / (a - alpha);\n\n    // Asignar el punto de rocío al payload\n    return dewPoint.toFixed(2); // Resultado con dos decimales\n}\n\nfunction calculoCalidadDelAire() {\n    // Verificar si el valor de msg.payload[8] es un string\n    var ppmCO2 = msg.payload[8];\n    if (typeof ppmCO2 === 'string') {\n        // Si es un string, limpiar el valor eliminando caracteres no numéricos\n        ppmCO2 = parseFloat(ppmCO2.replace(/[^0-9.-]/g, \"\"));\n    } else {\n        // Si no es un string, simplemente convertirlo a número\n        ppmCO2 = parseFloat(ppmCO2);\n    }\n\n    // Determinar la calidad del aire\n    var calidadDeAire;\n    if (ppmCO2 < 400) {\n        calidadDeAire = \"Muy Bueno\";\n    } else if (ppmCO2 >= 400 && ppmCO2 < 1000) {\n        calidadDeAire = \"Bueno\";\n    } else if (ppmCO2 >= 1000 && ppmCO2 < 2000) {\n        calidadDeAire = \"Moderado\";\n    } else if (ppmCO2 >= 2000 && ppmCO2 < 5000) {\n        calidadDeAire = \"Malo\";\n    } else if (ppmCO2 >= 5000) {\n        calidadDeAire = \"Muy Malo\";\n    }\n\n    return calidadDeAire;\n}\n\n\nfunction calculoDeNivelBateria() {\n    // Generar un número aleatorio entre 0 y 1\n    let random = Math.random();\n\n    // Escalar el número aleatorio a un rango de 7 a 10\n    let scaledRandom = 7 + (random * (10 - 7));\n\n    // Redondear a tres decimales\n    let result = parseFloat(scaledRandom.toFixed(3));\n\n    // Establecer el resultado en el payload del mensaje\n    return result.toString();\n}\n\nfunction promedioTemperatura() {\n    // Extraer las temperaturas de los sensores\n    var tempDht = msg.payload[1];\n    var tempBmp = msg.payload[4];\n\n    // Verificar y limpiar tempDht\n    if (typeof tempDht === 'string') {\n        tempDht = parseFloat(tempDht.replace(/[^0-9.-]/g, \"\"));\n    } else {\n        tempDht = parseFloat(tempDht); // Si no es string, convertir directamente a número\n    }\n\n    // Verificar y limpiar tempBmp\n    if (typeof tempBmp === 'string') {\n        tempBmp = parseFloat(tempBmp.replace(/[^0-9.-]/g, \"\"));\n    } else {\n        tempBmp = parseFloat(tempBmp); // Si no es string, convertir directamente a número\n    }\n\n    // Calcular la temperatura promedio\n    var tempProm = (tempBmp + tempDht) / 2;\n\n    // Convertir el resultado a string y actualizar el mensaje\n    var tempDhtString = tempProm.toString();\n\n    // Reemplazar la temperatura original por la temperatura promedio en el payload\n    msg.payload.splice(4, 1);\n    msg.payload.splice(1, 1, tempDhtString);\n}\n\n\npromedioTemperatura();\nmsg.payload.push(calculoPuntoDeRocio());\nmsg.payload.push(calculoCalidadDelAire());\nmsg.payload.push(calculoDeNivelBateria());\n\n\n// Crear la parte inicial de la consulta\nvar query = \"insert into `EME`.`datos web`(`Fecha`, `Temperatura Promedio`, `Humedad`, `Sensacion T`, `Presion`, `Altitud`, `Presion Nivel Mar`, `Nivel de luz`, `ppm CO2`, `Velocidad del viento`, `Direccion del viento`, `Sensor de lluvia`, `Temperatura punto de rocio`, `Calidad del aire`, `Nivel de bateria`) values(\";\n\n// Agregar los valores a la consulta\nfor (var i = 0; i < msg.payload.length; i++) {\n    if (i == 0 || i == 9 || i == 10 || i == 11 || i == 13) {\n        // Los primeros y los últimos tres elementos como VARCHAR\n        query += \"'\" + msg.payload[i] + \"'\";\n    } else {\n        // Los otros elementos como DECIMAL\n        query += msg.payload[i];\n    }\n\n    if (i < msg.payload.length - 1) {\n        query += \", \";\n    }\n}\n\n// Cerrar la consulta\nquery += \");\";\n\n// Asignar la consulta al topic del mensaje\nmsg.topic = query;\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 900,
+        "y": 160,
+        "wires": [
+            [
+                "a3cb3b6afd84f78c",
+                "3886bb0a21da2b4c"
+            ]
+        ]
+    },
+    {
+        "id": "4e947850e23968a6",
+        "type": "debug",
+        "z": "8eaf4958fc6641e4",
+        "name": "Llegada de Datos desde JOIN",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "3d8a787fc5b5f4cf",
+        "type": "mysql",
+        "z": "8eaf4958fc6641e4",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Sensores",
+        "x": 800,
+        "y": 280,
+        "wires": [
+            [
+                "558117a7dd788bca"
+            ]
+        ]
+    },
+    {
+        "id": "558117a7dd788bca",
+        "type": "debug",
+        "z": "8eaf4958fc6641e4",
+        "name": "debug SQL",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 990,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "a3cb3b6afd84f78c",
+        "type": "mysql",
+        "z": "8eaf4958fc6641e4",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Web",
+        "x": 1010,
+        "y": 60,
+        "wires": [
+            [
+                "96e8fd67acfb028a"
+            ]
+        ]
+    },
+    {
+        "id": "96e8fd67acfb028a",
+        "type": "debug",
+        "z": "8eaf4958fc6641e4",
+        "name": "debug SQL WEB",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1190,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "3886bb0a21da2b4c",
+        "type": "debug",
+        "z": "8eaf4958fc6641e4",
+        "name": "topic SQL WEB",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1156.5,
+        "y": 199.49998474121094,
+        "wires": []
+    },
+    {
+        "id": "71eb213b559ca68e",
+        "type": "http in",
+        "z": "8eaf4958fc6641e4",
+        "name": "HTTP IN API",
+        "url": "/emeapi",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 110,
+        "y": 160,
+        "wires": [
+            [
+                "36a9ce962ff2a810"
+            ]
+        ]
+    },
+    {
+        "id": "36a9ce962ff2a810",
+        "type": "json",
+        "z": "8eaf4958fc6641e4",
+        "name": "Formato JS",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 330,
+        "y": 160,
+        "wires": [
+            [
+                "4e947850e23968a6",
+                "87d0624e94fe9f68",
+                "f85615133dfef972"
+            ]
+        ]
+    },
+    {
+        "id": "c6b75a42486d6ad6",
+        "type": "http response",
+        "z": "8eaf4958fc6641e4",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 640,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "f85615133dfef972",
+        "type": "function",
+        "z": "8eaf4958fc6641e4",
+        "name": "response",
+        "func": "msg.payload = \"Datos recibidos correctamente! Gracias por utilizar API REST \\n\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 500,
+        "y": 160,
+        "wires": [
+            [
+                "c6b75a42486d6ad6"
+            ]
+        ]
+    },
+    {
+        "id": "5c3d6137653a87e6",
+        "type": "catch",
+        "z": "8eaf4958fc6641e4",
+        "name": "Captura de errores",
+        "scope": null,
+        "uncaught": false,
+        "x": 410,
+        "y": 440,
+        "wires": [
+            [
+                "1a09df6b3372e251"
+            ]
+        ]
+    },
+    {
+        "id": "1a09df6b3372e251",
+        "type": "function",
+        "z": "8eaf4958fc6641e4",
+        "name": "Mensaje",
+        "func": "// Asegúrate de que el objeto error.source existe y contiene los datos\nlet errorSource = msg.error && msg.error.source ? msg.error.source : {id: 'desconocido', name: 'desconocido', type: 'desconocido'};\nlet errorMessage = msg.error && msg.error.message ? msg.error.message : 'No hay mensaje de error';\n\nmsg.payload = {\n    chatId: 1293964250,\n    type: 'message',\n    content: `⚠️ Ha ocurrido un error en el nodo ${errorSource.id} - ${errorSource.name} de tipo ${errorSource.type}. El mensaje de error es: ${errorMessage}. Se le solicita revisar urgente! ⚠️`\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 600,
+        "y": 440,
+        "wires": [
+            [
+                "f35dce68c366882b"
+            ]
+        ]
+    },
+    {
+        "id": "f35dce68c366882b",
+        "type": "telegram sender",
+        "z": "8eaf4958fc6641e4",
+        "name": "Envío",
+        "bot": "1e95e7e0c7e712c7",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 750,
+        "y": 440,
+        "wires": [
+            [
+                "4f6dbf274b26ecde"
+            ]
+        ]
+    },
+    {
+        "id": "4f6dbf274b26ecde",
+        "type": "debug",
+        "z": "8eaf4958fc6641e4",
+        "name": "Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 890,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "c4cd8995d7656d4c",
+        "type": "function",
+        "z": "76f3a042f2e70329",
+        "name": "Formateo de data",
+        "func": "// Función para crear la fecha en el formato DD-MM-YYYY HH:mm:ss\nfunction crearFecha() {\n    // Obtener la fecha actual\n    var fechaActual = new Date();\n\n    // Restar 3 horas a la fecha actual\n    fechaActual.setHours(fechaActual.getHours() - 3);\n\n    // Obtener los componentes de la fecha\n    var dia = fechaActual.getDate();\n    var mes = fechaActual.getMonth() + 1; // Nota: Enero es 0, así que se suma 1 al mes\n    var año = fechaActual.getFullYear();\n    var horas = fechaActual.getHours();\n    var minutos = fechaActual.getMinutes();\n    var segundos = fechaActual.getSeconds();\n\n    // Agregar ceros delante si es necesario para mantener el formato DD-MM-YYYY HH:mm:ss\n    if (dia < 10) { dia = '0' + dia; }\n    if (mes < 10) { mes = '0' + mes; }\n    if (horas < 10) { horas = '0' + horas; }\n    if (minutos < 10) { minutos = '0' + minutos; }\n    if (segundos < 10) { segundos = '0' + segundos; }\n\n    // Construir la fecha en el formato deseado\n    var fechaFormateada = dia + '-' + mes + '-' + año + ' ' + horas + ':' + minutos + ':' + segundos;\n    return fechaFormateada;\n}\n\n\n// Función para formatear los datos para la base de datos\nfunction formatearDatosParaBD(msg) {\n    const nuevoArray = [];\n\n    // Iteramos sobre las propiedades del objeto y agregamos los valores al nuevo array\n    for (const propiedad in msg.payload) {\n        let valor = msg.payload[propiedad];\n\n        // Verificar si el valor es una cadena (y solo aplicar replace a las cadenas)\n        if (typeof valor === 'string') {\n            // Eliminamos unidades y convertimos a número si es posible\n            const valorNumerico = valor.replace(/[^\\d.-]/g, ''); // Eliminar cualquier cosa que no sea número o punto\n            valor = isNaN(parseFloat(valorNumerico)) ? valor : parseFloat(valorNumerico);\n        } else if (typeof valor === 'number' || Array.isArray(valor)) {\n            // Si es un número o un array, dejamos el valor tal cual (no aplicamos replace)\n            // Aquí puedes agregar más lógica si quieres manejar arrays u otros tipos\n        }\n\n        nuevoArray.push(valor);\n    }\n\n    // Agregar la fecha al inicio del array\n    const fecha = crearFecha();\n    msg.payload = [fecha, ...nuevoArray];\n\n    return msg;\n}\n\n// Llamar a la función para formatear los datos\nformatearDatosParaBD(msg);\n\n// Crear la parte inicial de la consulta SQL\nvar query = \"insert into `EMM`.`datos_sensores`(`Fecha`, `Temperatura_DHT`, `Humedad_DHT`, `Sensacion_T_DHT`, `Temperatura_BMP`, `Presion_BMP`, `Altitud_BMP`, `Presion_Nivel_Mar_BMP`, `Nivel_de_luz`, `ppm_CO2`, `Velocidad_del_viento`, `Direccion_del_viento`, `Sensor_de_lluvia`) values(\";\n\n// Agregar los valores a la consulta SQL\nfor (var i = 0; i < msg.payload.length; i++) {\n    if (i == 0 || i > 9) {\n        // Los primeros y los últimos tres elementos como VARCHAR (en este caso, la fecha y los valores no numéricos)\n        query += \"'\" + msg.payload[i] + \"'\";\n    } else {\n        if (i == 9) {\n            // Si es el valor de ppm CO2, multiplicarlo por 0.01\n            msg.payload[i] = (msg.payload[i] * 0.01);\n        }\n        // Los otros elementos como DECIMAL\n        query += msg.payload[i];\n    }\n\n    // Agregar una coma si no es el último valor\n    if (i < msg.payload.length - 1) {\n        query += \", \";\n    }\n}\n\n// Cerrar la consulta SQL\nquery += \");\";\n\n// Asignar la consulta SQL al topic del mensaje\nmsg.topic = query;\n\n// Retornar el mensaje\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 530,
+        "y": 220,
+        "wires": [
+            [
+                "6d05fb5920dc65c2",
+                "6b7b553b7f9fe1b2",
+                "c7329d209c2f0d08"
+            ]
+        ]
+    },
+    {
+        "id": "6d05fb5920dc65c2",
+        "type": "debug",
+        "z": "76f3a042f2e70329",
+        "name": "Llegada de Datos",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 850,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "f09e1b9af41d245e",
+        "type": "comment",
+        "z": "76f3a042f2e70329",
+        "name": "Obtención de datos EMM 0",
+        "info": "curl -X POST https://emetec.wetec.um.edu.ar/weather -H \"Content-Type: application/json\" -d \"{\\\"temperatura\\\": 25.00, \\\"humedad\\\": 60.00, \\\"sensacionTermica\\\": 24.50, \\\"temperatura_bmp\\\": 24.00, \\\"presion\\\": 1013.25, \\\"altitud\\\": 100.00, \\\"presion_nivel_mar\\\": 1012.00, \\\"luz\\\": 150.00, \\\"ppmCO2\\\": 400.00, \\\"velocidad_viento\\\": \\\"Proximamente\\\", \\\"direccion_viento\\\": \\\"Proximamente\\\", \\\"lluvia\\\": \\\"Proximamente\\\"}\"\n",
+        "x": 110,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "6b7b553b7f9fe1b2",
+        "type": "function",
+        "z": "76f3a042f2e70329",
+        "name": "Calculo de datos y formateo a web",
+        "func": "function calculoPuntoDeRocio() {   \n    var temp = msg.payload[1];\n    var hum = msg.payload[2];\n\n    // Asegurarse de que temp y hum sean cadenas de texto y luego eliminar caracteres no numéricos\n    if (typeof temp !== 'string') {\n        temp = temp.toString();\n    }\n    if (typeof hum !== 'string') {\n        hum = hum.toString();\n    }\n\n    temp = parseFloat(temp.replace(/[^0-9.-]/g, \"\")); // Temperatura en formato string\n    hum = parseFloat(hum.replace(/[^0-9.-]/g, \"\"));   // Humedad en formato string\n\n    // Constantes para la fórmula de Magnus-MEFISTO\n    var a = 17.27;\n    var b = 237.7;\n\n    // Cálculo intermedio\n    var alpha = ((a * temp) / (b + temp)) + Math.log(hum / 100);\n\n    // Cálculo del punto de rocío\n    var dewPoint = (b * alpha) / (a - alpha);\n\n    // Asignar el punto de rocío al payload\n    return dewPoint.toFixed(2); // Resultado con dos decimales\n}\n\nfunction calculoCalidadDelAire() {\n    // Verificar si el valor de msg.payload[8] es un string\n    var ppmCO2 = msg.payload[8];\n    if (typeof ppmCO2 === 'string') {\n        // Si es un string, limpiar el valor eliminando caracteres no numéricos\n        ppmCO2 = parseFloat(ppmCO2.replace(/[^0-9.-]/g, \"\"));\n    } else {\n        // Si no es un string, simplemente convertirlo a número\n        ppmCO2 = parseFloat(ppmCO2);\n    }\n\n    // Determinar la calidad del aire\n    var calidadDeAire;\n    if (ppmCO2 < 400) {\n        calidadDeAire = \"Muy Bueno\";\n    } else if (ppmCO2 >= 400 && ppmCO2 < 1000) {\n        calidadDeAire = \"Bueno\";\n    } else if (ppmCO2 >= 1000 && ppmCO2 < 2000) {\n        calidadDeAire = \"Moderado\";\n    } else if (ppmCO2 >= 2000 && ppmCO2 < 5000) {\n        calidadDeAire = \"Malo\";\n    } else if (ppmCO2 >= 5000) {\n        calidadDeAire = \"Muy Malo\";\n    }\n\n    return calidadDeAire;\n}\n\n\nfunction calculoDeNivelBateria(){\n    // Generar un número aleatorio entre 0 y 1\n    let random = Math.random();\n\n    // Escalar el número aleatorio a un rango de 7 a 10\n    let scaledRandom = 7 + (random * (10 - 7));\n\n    // Redondear a tres decimales\n    let result = parseFloat(scaledRandom.toFixed(3));\n\n    // Establecer el resultado en el payload del mensaje\n    return result.toString();\n}\n\nfunction promedioTemperatura(){\n    // Extraer las temperaturas de los sensores\n    var tempDht = msg.payload[1];\n    var tempBmp = msg.payload[4];\n    \n    // Verificar y limpiar tempDht\n    if (typeof tempDht === 'string') {\n        tempDht = parseFloat(tempDht.replace(/[^0-9.-]/g, \"\"));\n    } else {\n        tempDht = parseFloat(tempDht); // Si no es string, convertir directamente a número\n    }\n\n    // Verificar y limpiar tempBmp\n    if (typeof tempBmp === 'string') {\n        tempBmp = parseFloat(tempBmp.replace(/[^0-9.-]/g, \"\"));\n    } else {\n        tempBmp = parseFloat(tempBmp); // Si no es string, convertir directamente a número\n    }\n\n    // Calcular la temperatura promedio\n    var tempProm = (tempBmp + tempDht) / 2;\n    \n    // Convertir el resultado a string y actualizar el mensaje\n    var tempDhtString = tempProm.toString();\n\n    // Reemplazar la temperatura original por la temperatura promedio en el payload\n    msg.payload.splice(4, 1);\n    msg.payload.splice(1, 1, tempDhtString);\n}\n\n\npromedioTemperatura();\nmsg.payload.push(calculoPuntoDeRocio());\nmsg.payload.push(calculoCalidadDelAire());\nmsg.payload.push(calculoDeNivelBateria());\n\n\n// Crear la parte inicial de la consulta\nvar query = \"insert into `EMM`.`datos_web`(`Fecha`, `Temperatura Promedio`, `Humedad`, `Sensacion T`, `Presion`, `Altitud`, `Presion Nivel Mar`, `Nivel de luz`, `ppm CO2`, `Velocidad del viento`, `Direccion del viento`, `Sensor de lluvia`, `Temperatura punto de rocio`, `Calidad del aire`, `Nivel de bateria`) values(\";\n\n// Agregar los valores a la consulta\nfor (var i = 0; i < msg.payload.length; i++) {\n    if (i == 0 || i == 9 || i == 10 || i ==11 || i == 13) {\n        // Los primeros y los últimos tres elementos como VARCHAR\n        query += \"'\" + msg.payload[i] + \"'\";\n    } else {\n        // Los otros elementos como DECIMAL\n        query += msg.payload[i];\n    }\n\n    if (i < msg.payload.length - 1) {\n        query += \", \";\n    }\n}\n\n// Cerrar la consulta\nquery += \");\";\n\n// Asignar la consulta al topic del mensaje\nmsg.topic = query;\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 160,
+        "wires": [
+            [
+                "c02f99c56eac1b9d",
+                "44eecac5b6e69a44"
+            ]
+        ]
+    },
+    {
+        "id": "16dea3c902eb5404",
+        "type": "debug",
+        "z": "76f3a042f2e70329",
+        "name": "Llegada de Datos desde JOIN",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 100,
+        "wires": []
+    },
+    {
+        "id": "c7329d209c2f0d08",
+        "type": "mysql",
+        "z": "76f3a042f2e70329",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Sensores",
+        "x": 780,
+        "y": 280,
+        "wires": [
+            [
+                "54f4eaf0390e2e12"
+            ]
+        ]
+    },
+    {
+        "id": "54f4eaf0390e2e12",
+        "type": "debug",
+        "z": "76f3a042f2e70329",
+        "name": "debug SQL",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 970,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "c02f99c56eac1b9d",
+        "type": "mysql",
+        "z": "76f3a042f2e70329",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Web",
+        "x": 990,
+        "y": 60,
+        "wires": [
+            [
+                "d50e41f4dcaf2bf6"
+            ]
+        ]
+    },
+    {
+        "id": "d50e41f4dcaf2bf6",
+        "type": "debug",
+        "z": "76f3a042f2e70329",
+        "name": "debug SQL WEB",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1170,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "44eecac5b6e69a44",
+        "type": "debug",
+        "z": "76f3a042f2e70329",
+        "name": "topic SQL WEB",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1136.5,
+        "y": 199.49998474121094,
+        "wires": []
+    },
+    {
+        "id": "f6a47f37384d979d",
+        "type": "http in",
+        "z": "76f3a042f2e70329",
+        "name": "HTTP IN API",
+        "url": "/emmapi",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 90,
+        "y": 160,
+        "wires": [
+            [
+                "af1fa64c4ec0f076"
+            ]
+        ]
+    },
+    {
+        "id": "af1fa64c4ec0f076",
+        "type": "json",
+        "z": "76f3a042f2e70329",
+        "name": "Formato JS",
+        "property": "payload",
+        "action": "obj",
+        "pretty": false,
+        "x": 310,
+        "y": 160,
+        "wires": [
+            [
+                "16dea3c902eb5404",
+                "c4cd8995d7656d4c",
+                "661ce7f6862fbdbe"
+            ]
+        ]
+    },
+    {
+        "id": "b22d22ec3ba703a0",
+        "type": "http response",
+        "z": "76f3a042f2e70329",
+        "name": "",
+        "statusCode": "200",
+        "headers": {},
+        "x": 620,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "661ce7f6862fbdbe",
+        "type": "function",
+        "z": "76f3a042f2e70329",
+        "name": "response",
+        "func": "msg.payload = \"Datos recibidos correctamente! Gracias por utilizar API REST \\n\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 160,
+        "wires": [
+            [
+                "b22d22ec3ba703a0"
+            ]
+        ]
+    },
+    {
+        "id": "257a8bfe309f9b78",
+        "type": "function",
+        "z": "2adbe3103703dc50",
+        "name": "Formateo de data",
+        "func": "function crearFecha() {\n\n    // Obtener la fecha actual\n    var fechaActual = new Date();\n\n    // Obtener los componentes de la fecha\n    var dia = fechaActual.getDate();\n    var mes = fechaActual.getMonth() + 1; // Nota: Enero es 0, así que se suma 1 al mes\n    var año = fechaActual.getFullYear();\n    var horas = fechaActual.getHours();\n    var minutos = fechaActual.getMinutes();\n    var segundos = fechaActual.getSeconds();\n\n    // Agregar ceros delante si es necesario para mantener el formato DD.MM.YYYY HH:mm:ss\n    if (dia < 10) { dia = '0' + dia; }\n    if (mes < 10) { mes = '0' + mes; }\n    if (horas < 10) { horas = '0' + horas; }\n    if (minutos < 10) { minutos = '0' + minutos; }\n    if (segundos < 10) { segundos = '0' + segundos; }\n\n    // Construir la fecha en el formato deseado\n    var fechaFormateada = dia + '-' + mes + '-' + año + ' ' + horas + ':' + minutos + ':' + segundos;\n    return fechaFormateada;\n}\n\n//funciona\nfunction formatearDatosParaBD(msg) {\n    const nuevoArray = [];\n\n    // Iteramos sobre las propiedades del objeto y agregamos los valores al nuevo array\n   \n    for (const propiedad in msg.payload) {\n        const valor = msg.payload[propiedad];\n\n        // Eliminamos unidades y convertimos a número si es posible\n        const valorNumerico = valor.replace(/[^\\d.-]/g, '');\n        const valorFinal = isNaN(parseFloat(valorNumerico)) ? valor : valorNumerico;\n\n        nuevoArray.push(valorFinal);\n    }\n    msg.payload = nuevoArray;\n\n    const fecha = crearFecha();\n    // Agregar la fecha al inicio del array\n    msg.payload.unshift(fecha);\n}\nformatearDatosParaBD(msg);\n\n// Crear la parte inicial de la consulta\nvar query = \"insert into `EME`.`datos sensores`(`Fecha`, `Temperatura DHT`, `Humedad DHT`, `Sensacion T DHT`, `Temperatura BMP`, `Presion BMP`, `Altitud BMP`, `Presion Nivel Mar BMP`, `Nivel de luz`, `ppm CO2`, `Velocidad del viento`, `Direccion del viento`, `Sensor de lluvia`) values(\";\n\n// Agregar los valores a la consulta\nfor (var i = 0; i < msg.payload.length; i++) {\n    if (i == 0 || i > 9) {\n        // Los primeros y los últimos tres elementos como VARCHAR\n        query += \"'\" + msg.payload[i] + \"'\";\n    } else {\n        if (i == 9) {\n            msg.payload[i] = (msg.payload[i] * 0.001);\n        }\n        // Los otros elementos como DECIMAL\n        query += msg.payload[i];\n    }\n    \n    if (i < msg.payload.length - 1) {\n        query += \", \";\n    }\n}\n\n// Cerrar la consulta\nquery += \");\";\n\n// Asignar la consulta al topic del mensaje\nmsg.topic = query;\n\n// Retornar el mensaje\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 570,
+        "y": 220,
+        "wires": [
+            [
+                "2ed1100ddbc05498",
+                "ef89a1f0839d1fb0",
+                "63fe06ca14b2c8b9"
+            ]
+        ]
+    },
+    {
+        "id": "2ed1100ddbc05498",
+        "type": "debug",
+        "z": "2adbe3103703dc50",
+        "name": "Llegada de Datos",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 870,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "5b5e7b12cf9d2a38",
+        "type": "comment",
+        "z": "2adbe3103703dc50",
+        "name": "Obtención de datos EMM 0",
+        "info": "",
+        "x": 150,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "bb025e67e3bb55c1",
+        "type": "mqtt in",
+        "z": "2adbe3103703dc50",
+        "name": "EMM N°0",
+        "topic": "EMM_n1/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "103af03ab387ac01",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 100,
+        "y": 160,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "8f9a92d489a61a4d",
+        "type": "join",
+        "z": "2adbe3103703dc50",
+        "name": "Unir datos de EMM n°X",
+        "mode": "custom",
+        "build": "object",
+        "property": "payload",
+        "propertyType": "msg",
+        "key": "topic",
+        "joiner": "\\n",
+        "joinerType": "str",
+        "useparts": true,
+        "accumulate": false,
+        "timeout": "",
+        "count": "12",
+        "reduceRight": false,
+        "reduceExp": "",
+        "reduceInit": "",
+        "reduceInitType": "num",
+        "reduceFixup": "",
+        "x": 320,
+        "y": 160,
+        "wires": [
+            [
+                "257a8bfe309f9b78",
+                "2f6e1d12d77b491f"
+            ]
+        ]
+    },
+    {
+        "id": "63fe06ca14b2c8b9",
+        "type": "function",
+        "z": "2adbe3103703dc50",
+        "name": "Calculo de datos y formateo a web",
+        "func": "function calculoPuntoDeRocio() {\n    var temp = parseFloat(msg.payload[1].replace(/[^0-9.-]/g, \"\"));; // Temperatura en formato string\n    var hum = parseFloat(msg.payload[2].replace(/[^0-9.-]/g, \"\"));;   // Humedad en formato string\n\n    // Constantes para la fórmula de Magnus-MEFISTO\n    var a = 17.27;\n    var b = 237.7;\n\n    // Cálculo intermedio\n    var alpha = ((a * temp) / (b + temp)) + Math.log(hum / 100);\n\n    // Cálculo del punto de rocío\n    var dewPoint = (b * alpha) / (a - alpha);\n\n    // Asignar el punto de rocío al payload\n    return dewPoint.toFixed(2); // Resultado con dos decimales\n}\n\n\nfunction calculoCalidadDelAire() {\n    // muy bueno < 400\n    // nueno 400 y 1000\n    // moderado 1000 y 2000\n    // malo  2000 y 5000\n    // muy malo >5000    \n    var calidadDeAire;\n    // var ppmCO2 = parseFloat(msg.payload[8].replace(/[^0-9.-]/g, \"\"));\n    var ppmCO2 = msg.payload[8];\n    if (ppmCO2 < 400) {\n        calidadDeAire = \"Muy Bueno\";\n    } else if ((ppmCO2 >= 400) || (ppmCO2 < 1000)) {\n        calidadDeAire = \"Bueno\";\n    } else if ((ppmCO2 >= 1000) || (ppmCO2 < 2000)) {\n        calidadDeAire = \"Moderado\";\n    } else if ((ppmCO2 >= 2000) || (ppmCO2 < 5000)) {\n        calidadDeAire = \"Malo\";\n    } else if (ppmCO2 >= 5000) {\n        calidadDeAire = \"Muy Malo\";\n    }\n    // else {\n    //     calidadDeAire = \"Error MQ135.\";\n    // }\n\n    return calidadDeAire;\n}\n\nfunction calculoDeNivelBateria() {\n    // Generar un número aleatorio entre 0 y 1\n    let random = Math.random();\n\n    // Escalar el número aleatorio a un rango de 7 a 10\n    let scaledRandom = 7 + (random * (10 - 7));\n\n    // Redondear a tres decimales\n    let result = parseFloat(scaledRandom.toFixed(3));\n\n    // Establecer el resultado en el payload del mensaje\n    return result.toString();\n}\n\nfunction promedioTemperatura() {\n    var tempDht = parseFloat(msg.payload[1].replace(/[^0-9.-]/g, \"\"));\n    var tempBmp = parseFloat(msg.payload[4].replace(/[^0-9.-]/g, \"\"));\n\n    var tempProm = (tempBmp + tempDht) / 2;\n\n    var tempDhtString = tempProm.toString();\n\n    msg.payload.splice(4, 1);\n    msg.payload.splice(1, 1, tempDhtString);\n\n}\n\npromedioTemperatura();\nmsg.payload.push(calculoPuntoDeRocio());\nmsg.payload.push(calculoCalidadDelAire());\nmsg.payload.push(calculoDeNivelBateria());\n\n\n// Crear la parte inicial de la consulta\nvar query = \"insert into `EM`.`EMM SJ` (Fecha, `Temperatura`, Humedad, `Sensacion T`, Presion, Altitud, `Presion Nivel Mar`, `Nivel de luz`, `ppm CO2`, `Velocidad del viento`, `Direccion del viento`, `Sensor de lluvia`, `Temperatura punto de rocio`, `Calidad del aire`, `Nivel de bateria`) values(\";\n\n// Agregar los valores a la consulta\nfor (var i = 0; i < msg.payload.length; i++) {\n    if (i == 0 || i == 9 || i == 10 || i == 11 || i == 13) {\n        // Los primeros y los últimos tres elementos como VARCHAR\n        query += \"'\" + msg.payload[i] + \"'\";\n    } else {\n        // Los otros elementos como DECIMAL\n        query += msg.payload[i];\n    }\n\n    if (i < msg.payload.length - 1) {\n        query += \", \";\n    }\n}\n\n// Cerrar la consulta\nquery += \");\";\n\n// Asignar la consulta al topic del mensaje\nmsg.topic = query;\n\n\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 880,
+        "y": 160,
+        "wires": [
+            [
+                "f6b18eca9dd5a049",
+                "ad814acfb1cee2a6"
+            ]
+        ]
+    },
+    {
+        "id": "2f6e1d12d77b491f",
+        "type": "debug",
+        "z": "2adbe3103703dc50",
+        "name": "Llegada de Datos desde JOIN",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 638.75,
+        "y": 91.25,
+        "wires": []
+    },
+    {
+        "id": "ef89a1f0839d1fb0",
+        "type": "mysql",
+        "z": "2adbe3103703dc50",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Sensores",
+        "x": 800,
+        "y": 280,
+        "wires": [
+            [
+                "45642dddd0e63111"
+            ]
+        ]
+    },
+    {
+        "id": "45642dddd0e63111",
+        "type": "debug",
+        "z": "2adbe3103703dc50",
+        "name": "debug SQL",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1010,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "f6b18eca9dd5a049",
+        "type": "mysql",
+        "z": "2adbe3103703dc50",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Web",
+        "x": 1030,
+        "y": 60,
+        "wires": [
+            [
+                "c7de0209e5e12126"
+            ]
+        ]
+    },
+    {
+        "id": "c7de0209e5e12126",
+        "type": "debug",
+        "z": "2adbe3103703dc50",
+        "name": "debug SQL WEB",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1210,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "ad814acfb1cee2a6",
+        "type": "debug",
+        "z": "2adbe3103703dc50",
+        "name": "topic SQL WEB",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "topic",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1176.5,
+        "y": 199.49998474121094,
+        "wires": []
+    },
+    {
+        "id": "d85fbc56956a375b",
+        "type": "mqtt in",
+        "z": "2adbe3103703dc50",
+        "name": "EMM N°0",
+        "topic": "EMM_n1/#",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "103af03ab387ac01",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 0,
+        "x": 120,
+        "y": 300,
+        "wires": [
+            [
+                "e27d580c03e2962b"
+            ]
+        ]
+    },
+    {
+        "id": "b87cfc25540c4f1d",
+        "type": "inject",
+        "z": "2adbe3103703dc50",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "aaaaa",
+        "payload": "asfasfasfasf",
+        "payloadType": "str",
+        "x": 130,
+        "y": 360,
+        "wires": [
+            [
+                "e37a918bdab4e8f1"
+            ]
+        ]
+    },
+    {
+        "id": "e27d580c03e2962b",
+        "type": "debug",
+        "z": "2adbe3103703dc50",
+        "name": "debug 18",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 300,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "e37a918bdab4e8f1",
+        "type": "mqtt out",
+        "z": "2adbe3103703dc50",
+        "name": "",
+        "topic": "ctr",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "297fc3690fdced47",
+        "x": 310,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "3f072df5dfcfda76",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "WEB SERVER (opción A)",
+        "url": "/",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 140,
+        "wires": [
+            [
+                "bb55b22b2b633ade"
+            ]
+        ]
+    },
+    {
+        "id": "bb55b22b2b633ade",
+        "type": "file in",
+        "z": "056b4421ed0e4e84",
+        "name": "HTML",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/index.html",
+        "filenameType": "str",
+        "format": "utf8",
+        "encoding": "none",
+        "allProps": false,
+        "x": 330,
+        "y": 160,
+        "wires": [
+            [
+                "3ef0daee0ec2c88b"
+            ]
+        ]
+    },
+    {
+        "id": "3ef0daee0ec2c88b",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "RESPONSE",
+        "statusCode": "",
+        "headers": {},
+        "x": 470,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "a1cc159823e1c555",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se crea la web del html (Inicio)",
+        "info": "",
+        "x": 490,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "eb8a7fc6f2aa9daf",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "WEB SERVER",
+        "url": "/EM/datos.html",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 260,
+        "wires": [
+            [
+                "df7ecc1e5d75950a"
+            ]
+        ]
+    },
+    {
+        "id": "df7ecc1e5d75950a",
+        "type": "file in",
+        "z": "056b4421ed0e4e84",
+        "name": "HTML",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/datos.html",
+        "filenameType": "str",
+        "format": "utf8",
+        "encoding": "none",
+        "allProps": false,
+        "x": 270,
+        "y": 260,
+        "wires": [
+            [
+                "e01f0bb8b71df477"
+            ]
+        ]
+    },
+    {
+        "id": "e01f0bb8b71df477",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "RESPONSE",
+        "statusCode": "",
+        "headers": {},
+        "x": 410,
+        "y": 260,
+        "wires": []
+    },
+    {
+        "id": "93bc899450441ebe",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se crea la web del html (Ultimos Datos)",
+        "info": "",
+        "x": 510,
+        "y": 220,
+        "wires": []
+    },
+    {
+        "id": "cf6e8394d031fb3a",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "WEB SERVER (opción B)",
+        "url": "/EM/index.html",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 150,
+        "y": 180,
+        "wires": [
+            [
+                "bb55b22b2b633ade"
+            ]
+        ]
+    },
+    {
+        "id": "13496a8f9fef2513",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "WEB SERVER",
+        "url": "/EM/graphs.html",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 340,
+        "wires": [
+            [
+                "d5e4140a3182253a"
+            ]
+        ]
+    },
+    {
+        "id": "d5e4140a3182253a",
+        "type": "file in",
+        "z": "056b4421ed0e4e84",
+        "name": "HTML",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/graphs.html",
+        "filenameType": "str",
+        "format": "utf8",
+        "encoding": "none",
+        "allProps": false,
+        "x": 270,
+        "y": 340,
+        "wires": [
+            [
+                "fb3a9f8489f93db8"
+            ]
+        ]
+    },
+    {
+        "id": "fb3a9f8489f93db8",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "RESPONSE",
+        "statusCode": "",
+        "headers": {},
+        "x": 410,
+        "y": 340,
+        "wires": []
+    },
+    {
+        "id": "856ce5c749773cf6",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se crea la web del html (Graficos importantes)",
+        "info": "",
+        "x": 540,
+        "y": 300,
+        "wires": []
+    },
+    {
+        "id": "c8f46d87f9733220",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "url": "/css",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 840,
+        "y": 120,
+        "wires": [
+            [
+                "c0a911bdef14ceda"
+            ]
+        ]
+    },
+    {
+        "id": "db8d93a0a2ccf8cb",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "text/css"
+        },
+        "x": 1230,
+        "y": 120,
+        "wires": []
+    },
+    {
+        "id": "c0a911bdef14ceda",
+        "type": "file in",
+        "z": "056b4421ed0e4e84",
+        "name": "style.css",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/style.css",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1020,
+        "y": 120,
+        "wires": [
+            [
+                "db8d93a0a2ccf8cb"
+            ]
+        ]
+    },
+    {
+        "id": "4da31758567c4558",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "url": "/js",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 830,
+        "y": 200,
+        "wires": [
+            [
+                "788e7373daf4163f"
+            ]
+        ]
+    },
+    {
+        "id": "e07b860adc63ffce",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "Content-type": "text/javascript"
+        },
+        "x": 1230,
+        "y": 200,
+        "wires": []
+    },
+    {
+        "id": "788e7373daf4163f",
+        "type": "file in",
+        "z": "056b4421ed0e4e84",
+        "name": "app.js",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/app.js",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1010,
+        "y": 200,
+        "wires": [
+            [
+                "e07b860adc63ffce"
+            ]
+        ]
+    },
+    {
+        "id": "0c724cbcc0c75e7d",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se le da una url al css",
+        "info": "",
+        "x": 1200,
+        "y": 80,
+        "wires": []
+    },
+    {
+        "id": "441390905057e5f7",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se le da una url al js",
+        "info": "",
+        "x": 1170,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "ec229e6a02581607",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "url": "/exceljs",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 850,
+        "y": 280,
+        "wires": [
+            [
+                "7140563a22fe486a"
+            ]
+        ]
+    },
+    {
+        "id": "379e9c88e1e51564",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "Content-type": "text/javascript"
+        },
+        "x": 1230,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "7140563a22fe486a",
+        "type": "file in",
+        "z": "056b4421ed0e4e84",
+        "name": "excel.js",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/excel.js",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1020,
+        "y": 280,
+        "wires": [
+            [
+                "379e9c88e1e51564"
+            ]
+        ]
+    },
+    {
+        "id": "54f0be5f4ec074cd",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se le da una url al js de excel",
+        "info": "",
+        "x": 1200,
+        "y": 240,
+        "wires": []
+    },
+    {
+        "id": "e52cb57fa5b37ee9",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "url": "/graphicsjs",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 860,
+        "y": 360,
+        "wires": [
+            [
+                "47ce478487f919dd"
+            ]
+        ]
+    },
+    {
+        "id": "ab8205eec41bcef9",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "statusCode": "",
+        "headers": {
+            "Content-type": "text/javascript"
+        },
+        "x": 1230,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "47ce478487f919dd",
+        "type": "file in",
+        "z": "056b4421ed0e4e84",
+        "name": "graphics.js",
+        "filename": "/home/etec/estacion-meteorologica-estatica/Web/graphics.js",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 1030,
+        "y": 360,
+        "wires": [
+            [
+                "ab8205eec41bcef9"
+            ]
+        ]
+    },
+    {
+        "id": "ea68dd6f4eb2fe3d",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se le da una url al js de los graficos",
+        "info": "",
+        "x": 1220,
+        "y": 320,
+        "wires": []
+    },
+    {
+        "id": "28cfeeae1e22971d",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Archivos Estáticos",
+        "info": "",
+        "x": 990,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "5f88e968ab6a6eb1",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "Selección",
+        "func": "// En el nodo de función\nmsg.topic = \"SELECT * FROM `EME`.`datos web`;\"\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 540,
+        "wires": [
+            [
+                "8746857c474e167f"
+            ]
+        ]
+    },
+    {
+        "id": "8083f3919fa0e44c",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "Excel http in",
+        "url": "/exceleme",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 590,
+        "y": 540,
+        "wires": [
+            [
+                "5f88e968ab6a6eb1"
+            ]
+        ]
+    },
+    {
+        "id": "8f2a1987309dfa21",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "JSON",
+        "func": "msg.payload = JSON.stringify(msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 540,
+        "wires": [
+            [
+                "c27136b84de270af"
+            ]
+        ]
+    },
+    {
+        "id": "c27136b84de270af",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "Excel http out",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "x": 1140,
+        "y": 540,
+        "wires": []
+    },
+    {
+        "id": "72c3348bc13f0f4d",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "url": "/datos",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 560,
+        "y": 700,
+        "wires": [
+            [
+                "7a4610d8f262559f"
+            ]
+        ]
+    },
+    {
+        "id": "7a4610d8f262559f",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "Select from mysql",
+        "func": "msg.topic = \"SELECT * FROM `EME`.`datos web` ORDER BY `Dato N°` DESC LIMIT 10 ;\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 700,
+        "wires": [
+            [
+                "a1076fa1a376155b"
+            ]
+        ]
+    },
+    {
+        "id": "12d23209cb8eaf8e",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "JSON",
+        "func": "msg.headers = msg.headers || {};\nmsg.headers['Access-Control-Allow-Origin'] = '*'; // Cambia '*' por 'https://example.com' si necesitas restringir el origen\nmsg.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';\nmsg.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 700,
+        "wires": [
+            [
+                "0d591c169df5e399",
+                "6225b8caad34d1ea"
+            ]
+        ]
+    },
+    {
+        "id": "0d591c169df5e399",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1180,
+        "y": 700,
+        "wires": []
+    },
+    {
+        "id": "6225b8caad34d1ea",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "debug 14",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1170,
+        "y": 740,
+        "wires": []
+    },
+    {
+        "id": "2708c1dcbf37dc16",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "url": "/graph",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 560,
+        "y": 840,
+        "wires": [
+            [
+                "865a037f5b77fbe6"
+            ]
+        ]
+    },
+    {
+        "id": "865a037f5b77fbe6",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "Select from mysql",
+        "func": "msg.topic = \"SELECT * FROM (SELECT * FROM `EME`.`datos web` WHERE STR_TO_DATE(Fecha, '%d-%m-%Y %H:%i') >= DATE_SUB(NOW(), INTERVAL 9 HOUR) AND MINUTE(STR_TO_DATE(Fecha, '%d-%m-%Y %H:%i:%s')) = 0 ORDER BY ABS(TIME_TO_SEC(TIMEDIFF(STR_TO_DATE(Fecha, '%d-%m-%Y %H:%i:%s'), CONCAT(DATE_FORMAT(STR_TO_DATE(Fecha, '%d-%m-%Y %H:%i:%s'), '%Y-%m-%d %H'), ':00:00')))) ) AS subquery;\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 840,
+        "wires": [
+            [
+                "7f9f9371479c5445"
+            ]
+        ]
+    },
+    {
+        "id": "3178b2c7a77efbbf",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "JSON",
+        "func": "msg.headers = msg.headers || {};\nmsg.headers['Access-Control-Allow-Origin'] = '*'; // Cambia '*' por 'https://example.com' si necesitas restringir el origen\nmsg.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';\nmsg.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 840,
+        "wires": [
+            [
+                "67d802b0ec0ee736",
+                "52ba5391d0aa43c9"
+            ]
+        ]
+    },
+    {
+        "id": "67d802b0ec0ee736",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1180,
+        "y": 840,
+        "wires": []
+    },
+    {
+        "id": "52ba5391d0aa43c9",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "debug 15",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1170,
+        "y": 880,
+        "wires": []
+    },
+    {
+        "id": "012fd4291460d913",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Administrar solicitudes de excel",
+        "info": "",
+        "x": 1090,
+        "y": 500,
+        "wires": []
+    },
+    {
+        "id": "ba63ad17fba14a9e",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se obtienen los ultimos datos de la db",
+        "info": "",
+        "x": 1110,
+        "y": 660,
+        "wires": []
+    },
+    {
+        "id": "4a63c316e27364da",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se obtienen las novedades desde la db",
+        "info": "",
+        "x": 1060,
+        "y": 940,
+        "wires": []
+    },
+    {
+        "id": "8746857c474e167f",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "",
+        "x": 870,
+        "y": 540,
+        "wires": [
+            [
+                "8f2a1987309dfa21"
+            ]
+        ]
+    },
+    {
+        "id": "a1076fa1a376155b",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "",
+        "x": 900,
+        "y": 700,
+        "wires": [
+            [
+                "12d23209cb8eaf8e"
+            ]
+        ]
+    },
+    {
+        "id": "7f9f9371479c5445",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "",
+        "x": 900,
+        "y": 840,
+        "wires": [
+            [
+                "3178b2c7a77efbbf"
+            ]
+        ]
+    },
+    {
+        "id": "6258a4991dccd497",
+        "type": "exec",
+        "z": "056b4421ed0e4e84",
+        "command": "cd /home/etec && git clone https://github.com/MartinLautaroGimenez/estacion-meteorologica-estatica.git",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Clonar Repo GitHUB",
+        "x": 280,
+        "y": 1420,
+        "wires": [
+            [
+                "8ed4b93289879da9"
+            ],
+            [
+                "30575dc22ed54919"
+            ],
+            [
+                "586e3fc8c85f7d85"
+            ]
+        ]
+    },
+    {
+        "id": "366aa99e71a0155c",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Clonar Repo a Local EMETec",
+        "info": "",
+        "x": 260,
+        "y": 1300,
+        "wires": []
+    },
+    {
+        "id": "2c7adb95b858da30",
+        "type": "exec",
+        "z": "056b4421ed0e4e84",
+        "command": "cd /home/etec/estacion-meteorologica-estatica && git config pull.rebase true && git pull",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Actualizar Repo de GitHub",
+        "x": 300,
+        "y": 1540,
+        "wires": [
+            [
+                "8ed4b93289879da9"
+            ],
+            [
+                "30575dc22ed54919"
+            ],
+            [
+                "586e3fc8c85f7d85"
+            ]
+        ]
+    },
+    {
+        "id": "fc0a87e967a13d08",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Actualizar Repo Local EMETec",
+        "info": "",
+        "x": 170,
+        "y": 1480,
+        "wires": []
+    },
+    {
+        "id": "0af05e7a2464ce80",
+        "type": "inject",
+        "z": "056b4421ed0e4e84",
+        "name": "CLONE",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 90,
+        "y": 1420,
+        "wires": [
+            [
+                "6258a4991dccd497"
+            ]
+        ]
+    },
+    {
+        "id": "cd02a576ae583461",
+        "type": "inject",
+        "z": "056b4421ed0e4e84",
+        "name": "PULL",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 90,
+        "y": 1540,
+        "wires": [
+            [
+                "2c7adb95b858da30"
+            ]
+        ]
+    },
+    {
+        "id": "586e3fc8c85f7d85",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "return code",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 1680,
+        "wires": []
+    },
+    {
+        "id": "30575dc22ed54919",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "Standar err",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 1540,
+        "wires": []
+    },
+    {
+        "id": "8ed4b93289879da9",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "Standar out",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 590,
+        "y": 1420,
+        "wires": []
+    },
+    {
+        "id": "30c2029277eeb1c3",
+        "type": "exec",
+        "z": "056b4421ed0e4e84",
+        "command": "cd /home/etec/estacion-meteorologica-estatica/Web && ls -la",
+        "addpay": "",
+        "append": "",
+        "useSpawn": "false",
+        "timer": "",
+        "winHide": false,
+        "oldrc": false,
+        "name": "Actualizar Repo de GitHub",
+        "x": 300,
+        "y": 1680,
+        "wires": [
+            [
+                "8ed4b93289879da9"
+            ],
+            [
+                "30575dc22ed54919"
+            ],
+            [
+                "586e3fc8c85f7d85"
+            ]
+        ]
+    },
+    {
+        "id": "7bdb001a3a1fa957",
+        "type": "inject",
+        "z": "056b4421ed0e4e84",
+        "name": "SHOW",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 90,
+        "y": 1680,
+        "wires": [
+            [
+                "30c2029277eeb1c3"
+            ]
+        ]
+    },
+    {
+        "id": "300834c1838a0da4",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Ver Repo Local EMETec",
+        "info": "",
+        "x": 130,
+        "y": 1620,
+        "wires": []
+    },
+    {
+        "id": "ef8e4d1f88fb0141",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "SQL create dataWeb table",
+        "func": "var consultaSQL = `  \nCREATE TABLE IF NOT EXISTS \\`datos web\\` (\n  \\`Dato N°\\` int NOT NULL PRIMARY KEY auto_increment,\n  \\`Fecha\\` longtext,\n  \n  \\`Temperatura Promedio\\` decimal(4,2) DEFAULT NULL, -- temperatura promedio entre dht y bmp\n  \\`Humedad\\` decimal(5,2) DEFAULT NULL,\n  \\`Sensacion T\\` decimal(4,2) DEFAULT NULL,\n  \n\\`Presion\\` decimal(8,2) DEFAULT NULL,\n\\`Altitud\\` decimal(6,2) DEFAULT NULL,\n\\`Presion Nivel Mar\\` decimal(8,2) DEFAULT NULL,\n  \n\\`Nivel de luz\\` decimal(8,2) DEFAULT NULL,\n  \n  \\`ppm CO2\\` decimal(7,2) DEFAULT NULL,\n  \n\\`Velocidad del viento\\` varchar(15) DEFAULT NULL,\n\\`Direccion del viento\\` varchar(15) DEFAULT NULL,\n  \n  \\`Sensor de lluvia\\` varchar(15) DEFAULT NULL,\n  \n  -- Datos Calculados por fuera de los sensores, usando su data\n  \\`Temperatura punto de rocio\\` decimal(4,2) DEFAULT NULL,\n\\`Calidad del aire\\` varchar(15) DEFAULT NULL,\n\\`Nivel de bateria\\` decimal(5,3) DEFAULT NULL  \n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n`;\n\nmsg.topic = consultaSQL;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 1980,
+        "wires": [
+            [
+                "6249c66e8e4e164a"
+            ]
+        ]
+    },
+    {
+        "id": "6249c66e8e4e164a",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Web",
+        "x": 70,
+        "y": 2080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "ab9bc372743d973d",
+        "type": "inject",
+        "z": "056b4421ed0e4e84",
+        "name": "CREATE",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 100,
+        "y": 1880,
+        "wires": [
+            [
+                "931975e386e4cc97"
+            ]
+        ]
+    },
+    {
+        "id": "c2a5decf9d486fd5",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "SQL create dataSens table",
+        "func": "var consultaSQL = `  \nCREATE TABLE IF NOT EXISTS \\`EME\\`.\\`datos sensores\\` (\n  \\`Dato N°\\` int NOT NULL PRIMARY KEY auto_increment,\n  \\`Fecha\\` longtext,\n  \n  \\`Temperatura DHT\\` decimal(4,2) DEFAULT NULL,\n\\`Humedad DHT\\` decimal(5,2) DEFAULT NULL,\n\\`Sensacion T DHT\\` decimal(4,2) DEFAULT NULL,\n  \n\\`Temperatura BMP\\` decimal(4,2) DEFAULT NULL,\n\\`Presion BMP\\` decimal(8,2) DEFAULT NULL,\n\\`Altitud BMP\\` decimal(6,2) DEFAULT NULL,\n\\`Presion Nivel Mar BMP\\` decimal(8,2) DEFAULT NULL,\n  \n\\`Nivel de luz\\` decimal(8,2) DEFAULT NULL,\n  \n  \\`ppm CO2\\` decimal(7,2) DEFAULT NULL,\n  \n\\`Velocidad del viento\\` varchar(15) DEFAULT NULL,\n\\`Direccion del viento\\` varchar(15) DEFAULT NULL,\n  \n  \\`Sensor de lluvia\\` varchar(15) DEFAULT NULL\n   \n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n`;\n\nmsg.topic = consultaSQL;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 2020,
+        "wires": [
+            [
+                "dc621181f94d3d48"
+            ]
+        ]
+    },
+    {
+        "id": "dc621181f94d3d48",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Sensores",
+        "x": 260,
+        "y": 2080,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "723e1d1fb5a31c44",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Crear Tablas de Datos Web y Sensores",
+        "info": "",
+        "x": 170,
+        "y": 1820,
+        "wires": []
+    },
+    {
+        "id": "c8adaef2ea97bb55",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "debug SQL",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 570,
+        "y": 2080,
+        "wires": []
+    },
+    {
+        "id": "b9a350dc6f6674c4",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Drop Datos",
+        "x": 570,
+        "y": 2020,
+        "wires": [
+            [
+                "c8adaef2ea97bb55"
+            ]
+        ]
+    },
+    {
+        "id": "34a107306968889f",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "Drop both tables",
+        "func": "var consultaSQL = `  \ndrop table \\`EME\\`.\\`datos web\\`;\ndrop table \\`EME\\`.\\`datos sensores\\`;\n`;\n\nmsg.topic = consultaSQL;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 560,
+        "y": 1980,
+        "wires": [
+            [
+                "b9a350dc6f6674c4"
+            ]
+        ]
+    },
+    {
+        "id": "c3a1777897cbe23d",
+        "type": "inject",
+        "z": "056b4421ed0e4e84",
+        "name": "DROP",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 540,
+        "y": 1940,
+        "wires": [
+            [
+                "34a107306968889f"
+            ]
+        ]
+    },
+    {
+        "id": "7f9ff7f1f024bb32",
+        "type": "inject",
+        "z": "056b4421ed0e4e84",
+        "name": "SHOW DB",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1090,
+        "y": 1960,
+        "wires": [
+            [
+                "8867e70448b82e1d"
+            ]
+        ]
+    },
+    {
+        "id": "8867e70448b82e1d",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "Select * from data",
+        "func": "msg.topic = \"select * from`EME`.`datos sensores`;\"\n\nmsg.topic = `\nselect * from \\`EME\\`.\\`datos web\\`\nORDER BY Fecha desc\nLIMIT 40;\n`;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1260,
+        "y": 1960,
+        "wires": [
+            [
+                "a1432e370e37c089"
+            ]
+        ]
+    },
+    {
+        "id": "a1432e370e37c089",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "show data",
+        "x": 1090,
+        "y": 2020,
+        "wires": [
+            [
+                "4b3870b42b377c08"
+            ]
+        ]
+    },
+    {
+        "id": "4b3870b42b377c08",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "Show db",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1280,
+        "y": 2020,
+        "wires": []
+    },
+    {
+        "id": "a91632d04be25dc4",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "CUIDADO DROPEA TABLA!!!",
+        "info": "El suicidio no es una opción\nllama al 2616167475 para obtener\nayuda!",
+        "x": 560,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "267f75da97ee0cf6",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Ver tablas de la db EME",
+        "info": "",
+        "x": 1080,
+        "y": 1880,
+        "wires": []
+    },
+    {
+        "id": "931975e386e4cc97",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "SQL create dataNodo table",
+        "func": "var consultaSQL = `  \nCREATE TABLE IF NOT EXISTS \\`Nodos EM\\` (\n  \\`Nodo ID\\` int NOT NULL PRIMARY KEY auto_increment,\n  \\`Tipo EM\\` varchar(6) DEFAULT NULL,\n  \\`Responsable\\` longtext,\n  \n  \\`Ubicacion\\` longtext,\n  \\`Estado\\` varchar(15), \n  \\`Ultima conexion\\` longtext\n   \n) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;\n`;\n\n// - ID\n// - tipo de EM\n// - Responsable\n// - Ubicación\n// - Estado\n// - Ultima conexión\n\nmsg.topic = consultaSQL;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 200,
+        "y": 1940,
+        "wires": [
+            [
+                "ced0e2271e7ffff1"
+            ]
+        ]
+    },
+    {
+        "id": "ced0e2271e7ffff1",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Datos Sensores",
+        "x": 320,
+        "y": 1880,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "243fcb3480682113",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "Select * from data",
+        "func": "msg.topic = \"select * from`EME`.`Nodos EM`;\"\n\nmsg.topic = \"show tables from `EME`;\"\n\n// msg.topic = `\n// select * from \\`EME\\`.\\`datos web\\`\n// ORDER BY Fecha desc\n// LIMIT 40;\n// `;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1260,
+        "y": 1920,
+        "wires": [
+            [
+                "a1432e370e37c089"
+            ]
+        ]
+    },
+    {
+        "id": "74914fe418b52b8e",
+        "type": "inject",
+        "z": "056b4421ed0e4e84",
+        "name": "SHOW DB",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 1090,
+        "y": 1920,
+        "wires": [
+            [
+                "243fcb3480682113"
+            ]
+        ]
+    },
+    {
+        "id": "07b6c213b9bb66c5",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "debug SQL",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 830,
+        "y": 2040,
+        "wires": []
+    },
+    {
+        "id": "ca124ac22a26df6a",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "Truncate accion",
+        "x": 840,
+        "y": 1980,
+        "wires": [
+            [
+                "07b6c213b9bb66c5"
+            ]
+        ]
+    },
+    {
+        "id": "584421746cd6a804",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "TRUNCATE datos web",
+        "func": "var consultaSQL = \"TRUNCATE `datos web`\"\n\nmsg.topic = consultaSQL;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 860,
+        "y": 1940,
+        "wires": [
+            [
+                "ca124ac22a26df6a"
+            ]
+        ]
+    },
+    {
+        "id": "8cf43b33f57a392a",
+        "type": "inject",
+        "z": "056b4421ed0e4e84",
+        "name": "TRUNCATE",
+        "props": [],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "x": 830,
+        "y": 1880,
+        "wires": [
+            [
+                "584421746cd6a804"
+            ]
+        ]
+    },
+    {
+        "id": "3787ed8538950bf2",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "CUIDADO! TRUNCATE datos web",
+        "info": "",
+        "x": 840,
+        "y": 1840,
+        "wires": []
+    },
+    {
+        "id": "3a187f94b7281545",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Manejo de solicitudes http",
+        "info": "",
+        "x": 610,
+        "y": 40,
+        "wires": []
+    },
+    {
+        "id": "d006ee35a65af113",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Administración rápida DB",
+        "info": "",
+        "x": 1130,
+        "y": 1760,
+        "wires": []
+    },
+    {
+        "id": "f43c61d001590ece",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "WEB SERVER",
+        "url": "/EM",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 440,
+        "wires": [
+            [
+                "6b8561c2aa6bc53f"
+            ]
+        ]
+    },
+    {
+        "id": "6b8561c2aa6bc53f",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "RESPONSE",
+        "statusCode": "301",
+        "headers": {
+            "Location": "https://emetec.wetec.um.edu.ar"
+        },
+        "x": 410,
+        "y": 440,
+        "wires": []
+    },
+    {
+        "id": "4644a5d5ddd91262",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se añade una redireccion 301 para /em",
+        "info": "",
+        "x": 430,
+        "y": 400,
+        "wires": []
+    },
+    {
+        "id": "a9d52ca085a3cb3d",
+        "type": "inject",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "\"10 °C\"",
+        "payloadType": "json",
+        "x": 350,
+        "y": 2380,
+        "wires": [
+            [
+                "42e3ef08053e5672",
+                "a3a9b60fcce12d04",
+                "fe632a0f181e11c2",
+                "c777de8ec4ce00e1",
+                "81a35f0e493da289",
+                "2b9771fe9390b0d9",
+                "be3761d8b29cf968",
+                "b0474f137cfe6b10",
+                "9c0197267c84577b",
+                "f13ef3e458a51425",
+                "ef3b24a4806aa106",
+                "e673cda49d23119e"
+            ]
+        ]
+    },
+    {
+        "id": "42e3ef08053e5672",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/dht/temp",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 550,
+        "y": 2200,
+        "wires": []
+    },
+    {
+        "id": "a3a9b60fcce12d04",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/dht/hum",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 550,
+        "y": 2260,
+        "wires": []
+    },
+    {
+        "id": "fe632a0f181e11c2",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/dht/senst",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 550,
+        "y": 2320,
+        "wires": []
+    },
+    {
+        "id": "c777de8ec4ce00e1",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/bmp/temp",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 550,
+        "y": 2380,
+        "wires": []
+    },
+    {
+        "id": "81a35f0e493da289",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/bmp/pres",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 550,
+        "y": 2440,
+        "wires": []
+    },
+    {
+        "id": "2b9771fe9390b0d9",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/bmp/alt",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 540,
+        "y": 2500,
+        "wires": []
+    },
+    {
+        "id": "be3761d8b29cf968",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/bmp/presnm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 560,
+        "y": 2560,
+        "wires": []
+    },
+    {
+        "id": "b0474f137cfe6b10",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/bh/presnm",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 560,
+        "y": 2620,
+        "wires": []
+    },
+    {
+        "id": "9c0197267c84577b",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/mq/ppmco2",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 800,
+        "y": 2300,
+        "wires": []
+    },
+    {
+        "id": "f13ef3e458a51425",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/yl/lluv",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 780,
+        "y": 2360,
+        "wires": []
+    },
+    {
+        "id": "ef3b24a4806aa106",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/viento/vel",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 790,
+        "y": 2420,
+        "wires": []
+    },
+    {
+        "id": "e673cda49d23119e",
+        "type": "mqtt out",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "topic": "EME_n0/viento/dir",
+        "qos": "",
+        "retain": "",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "103af03ab387ac01",
+        "x": 790,
+        "y": 2480,
+        "wires": []
+    },
+    {
+        "id": "269212dd72bcda32",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "url": "/novedades",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 550,
+        "y": 980,
+        "wires": [
+            [
+                "394e84f7a62aaa92"
+            ]
+        ]
+    },
+    {
+        "id": "394e84f7a62aaa92",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "Select from mysql",
+        "func": "msg.topic = \"SELECT * FROM `EM`.`Novedades`\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 980,
+        "wires": [
+            [
+                "744d1cc8c080fd4d"
+            ]
+        ]
+    },
+    {
+        "id": "a3be271d8fb62510",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "JSON",
+        "func": "msg.headers = msg.headers || {};\nmsg.headers['Access-Control-Allow-Origin'] = '*'; // Cambia '*' por 'https://example.com' si necesitas restringir el origen\nmsg.headers['Access-Control-Allow-Methods'] = 'GET';\nmsg.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1020,
+        "y": 980,
+        "wires": [
+            [
+                "f7614662a8a2c1e4",
+                "6f43f7c9120a3d0e"
+            ]
+        ]
+    },
+    {
+        "id": "f7614662a8a2c1e4",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1180,
+        "y": 980,
+        "wires": []
+    },
+    {
+        "id": "6f43f7c9120a3d0e",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "debug 17",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1170,
+        "y": 1020,
+        "wires": []
+    },
+    {
+        "id": "f76ae1ac6544525a",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Se obtienen los datos de la db para los graficos",
+        "info": "",
+        "x": 1090,
+        "y": 800,
+        "wires": []
+    },
+    {
+        "id": "744d1cc8c080fd4d",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "",
+        "x": 900,
+        "y": 980,
+        "wires": [
+            [
+                "a3be271d8fb62510"
+            ]
+        ]
+    },
+    {
+        "id": "34428d7b55c5bea5",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "",
+        "url": "/datosemm",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 530,
+        "y": 1080,
+        "wires": [
+            [
+                "b7064961c2045e18"
+            ]
+        ]
+    },
+    {
+        "id": "b7064961c2045e18",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "Select from mysql",
+        "func": "msg.topic = \"SELECT * FROM `EMM`.`datos_web` ORDER BY `Dato N°` DESC LIMIT 10 ;\"\nreturn msg;",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 730,
+        "y": 1080,
+        "wires": [
+            [
+                "d0373db1bb1dc9fc"
+            ]
+        ]
+    },
+    {
+        "id": "767b19f27287d113",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "JSON",
+        "func": "msg.headers = msg.headers || {};\nmsg.headers['Access-Control-Allow-Origin'] = '*'; // Cambia '*' por 'https://example.com' si necesitas restringir el origen\nmsg.headers['Access-Control-Allow-Methods'] = 'GET, POST, PUT, DELETE, OPTIONS';\nmsg.headers['Access-Control-Allow-Headers'] = 'Content-Type, Authorization';\nreturn msg;\n",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 1010,
+        "y": 1080,
+        "wires": [
+            [
+                "ad4fddce5351867c",
+                "cd09013f27934eac"
+            ]
+        ]
+    },
+    {
+        "id": "ad4fddce5351867c",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "Response",
+        "statusCode": "",
+        "headers": {},
+        "x": 1170,
+        "y": 1080,
+        "wires": []
+    },
+    {
+        "id": "cd09013f27934eac",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "debug 23",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1160,
+        "y": 1120,
+        "wires": []
+    },
+    {
+        "id": "d0373db1bb1dc9fc",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "",
+        "x": 890,
+        "y": 1080,
+        "wires": [
+            [
+                "767b19f27287d113"
+            ]
+        ]
+    },
+    {
+        "id": "catch1",
+        "type": "catch",
+        "z": "056b4421ed0e4e84",
+        "name": "Captura de errores",
+        "scope": null,
+        "uncaught": false,
+        "x": 170,
+        "y": 2900,
+        "wires": [
+            [
+                "6cab4144c65e26a1"
+            ]
+        ]
+    },
+    {
+        "id": "6cab4144c65e26a1",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "Mensaje",
+        "func": "// Asegúrate de que el objeto error.source existe y contiene los datos\nlet errorSource = msg.error && msg.error.source ? msg.error.source : {id: 'desconocido', name: 'desconocido', type: 'desconocido'};\nlet errorMessage = msg.error && msg.error.message ? msg.error.message : 'No hay mensaje de error';\n\nmsg.payload = {\n    chatId: 1293964250,\n    type: 'message',\n    content: `⚠️ Ha ocurrido un error en el nodo ${errorSource.id} - ${errorSource.name} de tipo ${errorSource.type}. El mensaje de error es: ${errorMessage}. Se le solicita revisar urgente! ⚠️`\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 360,
+        "y": 2900,
+        "wires": [
+            [
+                "907c2a682879cd84"
+            ]
+        ]
+    },
+    {
+        "id": "907c2a682879cd84",
+        "type": "telegram sender",
+        "z": "056b4421ed0e4e84",
+        "name": "Envío",
+        "bot": "1e95e7e0c7e712c7",
+        "haserroroutput": false,
+        "outputs": 1,
+        "x": 510,
+        "y": 2900,
+        "wires": [
+            [
+                "a812d29c3cd73eac"
+            ]
+        ]
+    },
+    {
+        "id": "a812d29c3cd73eac",
+        "type": "debug",
+        "z": "056b4421ed0e4e84",
+        "name": "Debug",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 650,
+        "y": 2900,
+        "wires": []
+    },
+    {
+        "id": "cb026be365d5c649",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "Selección",
+        "func": "// En el nodo de función\nmsg.topic = \"SELECT * FROM `EMM`.`datos_web`;\"\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": "",
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 740,
+        "y": 620,
+        "wires": [
+            [
+                "7cdceec603ee1fc2"
+            ]
+        ]
+    },
+    {
+        "id": "26281878fe4d96ec",
+        "type": "http in",
+        "z": "056b4421ed0e4e84",
+        "name": "Excel http in",
+        "url": "/excelemm",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 590,
+        "y": 620,
+        "wires": [
+            [
+                "cb026be365d5c649"
+            ]
+        ]
+    },
+    {
+        "id": "c83324e9d3814544",
+        "type": "function",
+        "z": "056b4421ed0e4e84",
+        "name": "JSON",
+        "func": "msg.payload = JSON.stringify(msg.payload)\nreturn msg;",
+        "outputs": 1,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 990,
+        "y": 620,
+        "wires": [
+            [
+                "303d956800975f7e"
+            ]
+        ]
+    },
+    {
+        "id": "303d956800975f7e",
+        "type": "http response",
+        "z": "056b4421ed0e4e84",
+        "name": "Excel http out",
+        "statusCode": "",
+        "headers": {
+            "Content-Type": "application/json"
+        },
+        "x": 1140,
+        "y": 620,
+        "wires": []
+    },
+    {
+        "id": "586b59a4209cc1f4",
+        "type": "comment",
+        "z": "056b4421ed0e4e84",
+        "name": "Administrar solicitudes de excel",
+        "info": "",
+        "x": 1090,
+        "y": 580,
+        "wires": []
+    },
+    {
+        "id": "7cdceec603ee1fc2",
+        "type": "mysql",
+        "z": "056b4421ed0e4e84",
+        "mydb": "e87cd6f13dc19268",
+        "name": "",
+        "x": 870,
+        "y": 620,
+        "wires": [
+            [
+                "c83324e9d3814544"
+            ]
+        ]
+    },
+    {
+        "id": "92bee7fb8573935d",
+        "type": "http in",
+        "z": "8e72afe2d972ab89",
+        "name": "",
+        "url": "/weather",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 240,
+        "y": 60,
+        "wires": [
+            [
+                "c3cc37f0a325cb1c",
+                "0d4ec178d90fcd4a"
+            ]
+        ]
+    },
+    {
+        "id": "c3cc37f0a325cb1c",
+        "type": "function",
+        "z": "8e72afe2d972ab89",
+        "name": "function 1",
+        "func": "msg.payload = [\n  {\n    \"Dato N°\": 12345,\n    \"Fecha\": \"27-09-2024 14:22:15\",\n    \"Temperatura Promedio\": 22.35,\n    \"Humedad\": 50.7,\n    \"Sensacion T\": 21.89,\n    \"Presion\": 1023.65,\n    \"Altitud\": 450,\n    \"Presion Nivel Mar\": 1013.45,\n    \"Nivel de luz\": 75.32,\n    \"ppm CO2\": 0.03,\n    \"Velocidad del viento\": \"12 km/h\",\n    \"Direccion del viento\": \"Noroeste\",\n    \"Sensor de lluvia\": \"No\",\n    \"Temperatura punto de rocio\": 10.12,\n    \"Calidad del aire\": \"Bueno\",\n    \"Nivel de bateria\": 9.1\n  },\n  {\n    \"Dato N°\": 12344,\n    \"Fecha\": \"27-09-2024 14:15:10\",\n    \"Temperatura Promedio\": 22.40,\n    \"Humedad\": 49.9,\n    \"Sensacion T\": 21.95,\n    \"Presion\": 1023.55,\n    \"Altitud\": 450,\n    \"Presion Nivel Mar\": 1013.35,\n    \"Nivel de luz\": 76.0,\n    \"ppm CO2\": 0.03,\n    \"Velocidad del viento\": \"14 km/h\",\n    \"Direccion del viento\": \"Noreste\",\n    \"Sensor de lluvia\": \"No\",\n    \"Temperatura punto de rocio\": 10.22,\n    \"Calidad del aire\": \"Bueno\",\n    \"Nivel de bateria\": 8.9\n  },\n  {\n    \"Dato N°\": 12343,\n    \"Fecha\": \"27-09-2024 14:10:05\",\n    \"Temperatura Promedio\": 22.50,\n    \"Humedad\": 48.5,\n    \"Sensacion T\": 22.05,\n    \"Presion\": 1023.45,\n    \"Altitud\": 450,\n    \"Presion Nivel Mar\": 1013.25,\n    \"Nivel de luz\": 77.5,\n    \"ppm CO2\": 0.03,\n    \"Velocidad del viento\": \"15 km/h\",\n    \"Direccion del viento\": \"Este\",\n    \"Sensor de lluvia\": \"No\",\n    \"Temperatura punto de rocio\": 10.33,\n    \"Calidad del aire\": \"Regular\",\n    \"Nivel de bateria\": 8.8\n  },\n  {\n    \"Dato N°\": 12342,\n    \"Fecha\": \"27-09-2024 14:05:00\",\n    \"Temperatura Promedio\": 22.60,\n    \"Humedad\": 47.8,\n    \"Sensacion T\": 22.15,\n    \"Presion\": 1023.35,\n    \"Altitud\": 450,\n    \"Presion Nivel Mar\": 1013.15,\n    \"Nivel de luz\": 78.1,\n    \"ppm CO2\": 0.03,\n    \"Velocidad del viento\": \"10 km/h\",\n    \"Direccion del viento\": \"Sur\",\n    \"Sensor de lluvia\": \"Sí\",\n    \"Temperatura punto de rocio\": 10.43,\n    \"Calidad del aire\": \"Excelente\",\n    \"Nivel de bateria\": 9.2\n  },\n  {\n    \"Dato N°\": 12341,\n    \"Fecha\": \"27-09-2024 14:00:55\",\n    \"Temperatura Promedio\": 22.70,\n    \"Humedad\": 46.3,\n    \"Sensacion T\": 22.25,\n    \"Presion\": 1023.25,\n    \"Altitud\": 450,\n    \"Presion Nivel Mar\": 1013.05,\n    \"Nivel de luz\": 79.0,\n    \"ppm CO2\": 0.03,\n    \"Velocidad del viento\": \"8 km/h\",\n    \"Direccion del viento\": \"Suroeste\",\n    \"Sensor de lluvia\": \"No\",\n    \"Temperatura punto de rocio\": 10.55,\n    \"Calidad del aire\": \"Muy Bueno\",\n    \"Nivel de bateria\": 9.5\n  },\n  {\n    \"Dato N°\": 12340,\n    \"Fecha\": \"27-09-2024 13:55:50\",\n    \"Temperatura Promedio\": 22.80,\n    \"Humedad\": 45.0,\n    \"Sensacion T\": 22.35,\n    \"Presion\": 1023.15,\n    \"Altitud\": 450,\n    \"Presion Nivel Mar\": 1012.95,\n    \"Nivel de luz\": 80.2,\n    \"ppm CO2\": 0.03,\n    \"Velocidad del viento\": \"11 km/h\",\n    \"Direccion del viento\": \"Norte\",\n    \"Sensor de lluvia\": \"No\",\n    \"Temperatura punto de rocio\": 10.65,\n    \"Calidad del aire\": \"Regular\",\n    \"Nivel de bateria\": 8.7\n  },\n  {\n    \"Dato N°\": 12339,\n    \"Fecha\": \"27-09-2024 13:50:45\",\n    \"Temperatura Promedio\": 22.90,\n    \"Humedad\": 44.5,\n    \"Sensacion T\": 22.45,\n    \"Presion\": 1023.05,\n    \"Altitud\": 450,\n    \"Presion Nivel Mar\": 1012.85,\n    \"Nivel de luz\": 81.0,\n    \"ppm CO2\": 0.03,\n    \"Velocidad del viento\": \"9 km/h\",\n    \"Direccion del viento\": \"Oeste\",\n    \"Sensor de lluvia\": \"Sí\",\n    \"Temperatura punto de rocio\": 10.75,\n    \"Calidad del aire\": \"Bueno\",\n    \"Nivel de bateria\": 8.3\n  },\n  {\n    \"Dato N°\": 12338,\n    \"Fecha\": \"27-09-2024 13:45:40\",\n    \"Temperatura Promedio\": 23.00,\n    \"Humedad\": 43.8,\n    \"Sensacion T\": 22.55,\n    \"Presion\": 1022.95,\n    \"Altitud\": 450,\n    \"Presion Nivel Mar\": 1012.75,\n    \"Nivel de luz\": 82.5,\n    \"ppm CO2\": 0.03,\n    \"Velocidad del viento\": \"13 km/h\",\n    \"Direccion del viento\": \"Sureste\",\n    \"Sensor de lluvia\": \"No\",\n    \"Temperatura punto de rocio\": 10.88,\n    \"Calidad del aire\": \"Excelente\",\n    \"Nivel de bateria\": 9.0\n  },\n  {\n    \"Dato N°\": 12337,\n    \"Fecha\": \"27-09-2024 13:40:35\",\n    \"Temperatura Promedio\": 23.10,\n    \"Humedad\": 42.7,\n    \"Sensacion T\": 22.65,\n    \"Presion\": 1022.85,\n    \"Altitud\": 450,\n    \"Presion Nivel Mar\": 1012.65,\n    \"Nivel de luz\": 83.0,\n    \"ppm CO2\": 0.03,\n    \"Velocidad del viento\": \"7 km/h\",\n    \"Direccion del viento\": \"Este\",\n    \"Sensor de lluvia\": \"No\",\n    \"Temperatura punto de rocio\": 11.00,\n    \"Calidad del aire\": \"Muy Bueno\",\n    \"Nivel de bateria\": 9.3\n  },\n  {\n    \"Dato N°\": 12336,\n    \"Fecha\": \"27-09-2024 13:35:30\",\n    \"Temperatura Promedio\": 23.20,\n    \"Humedad\": 41.5,\n    \"Sensacion T\": 22.75,\n    \"Presion\": 1022.75,\n    \"Altitud\": 450,\n    \"Presion Nivel Mar\": 1012.55,\n    \"Nivel de luz\": 84.0,\n    \"ppm CO2\": 0.03,\n    \"Velocidad del viento\": \"10 km/h\",\n    \"Direccion del viento\": \"Noroeste\",\n    \"Sensor de lluvia\": \"No\",\n    \"Temperatura punto de rocio\": 11.10,\n    \"Calidad del aire\": \"Regular\",\n    \"Nivel de bateria\": 8.6\n  }\n]\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 440,
+        "y": 60,
+        "wires": [
+            [
+                "448bc5c4eec28397",
+                "2e51adde75a3f752"
+            ]
+        ]
+    },
+    {
+        "id": "448bc5c4eec28397",
+        "type": "http response",
+        "z": "8e72afe2d972ab89",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 610,
+        "y": 60,
+        "wires": []
+    },
+    {
+        "id": "0300dd4a40063293",
+        "type": "http in",
+        "z": "8e72afe2d972ab89",
+        "name": "",
+        "url": "/weather",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 120,
+        "y": 140,
+        "wires": [
+            [
+                "50edd4a77312eae0",
+                "2f7c8e55cdd1162e"
+            ]
+        ]
+    },
+    {
+        "id": "50edd4a77312eae0",
+        "type": "http response",
+        "z": "8e72afe2d972ab89",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 310,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2f7c8e55cdd1162e",
+        "type": "debug",
+        "z": "8e72afe2d972ab89",
+        "name": "debug 16",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 360,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "0d4ec178d90fcd4a",
+        "type": "debug",
+        "z": "8e72afe2d972ab89",
+        "name": "debug 19",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 500,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "2e51adde75a3f752",
+        "type": "debug",
+        "z": "8e72afe2d972ab89",
+        "name": "debug 20",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 720,
+        "y": 180,
+        "wires": []
+    },
+    {
+        "id": "fff7d0cf49a81864",
+        "type": "http in",
+        "z": "8e72afe2d972ab89",
+        "name": "",
+        "url": "/weather",
+        "method": "post",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 280,
+        "y": 380,
+        "wires": [
+            [
+                "d22435c8592e2f64"
+            ]
+        ]
+    },
+    {
+        "id": "d22435c8592e2f64",
+        "type": "function",
+        "z": "8e72afe2d972ab89",
+        "name": "function 2",
+        "func": "var payload = msg.payload;\nnode.warn(\"Datos recibidos: \" + JSON.stringify(payload));\n\n// Respuesta de éxito\nmsg.payload = {\n    \"status\": \"success\",\n    \"message\": \"Datos recibidos correctamente\",\n    \"receivedData\": payload\n};\n\nreturn msg;\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 480,
+        "y": 380,
+        "wires": [
+            [
+                "e349c4845b2f839c",
+                "fc751fcc82e0a920"
+            ]
+        ]
+    },
+    {
+        "id": "e349c4845b2f839c",
+        "type": "http response",
+        "z": "8e72afe2d972ab89",
+        "name": "",
+        "statusCode": "",
+        "headers": {},
+        "x": 710,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "fc751fcc82e0a920",
+        "type": "debug",
+        "z": "8e72afe2d972ab89",
+        "name": "debug 21",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "false",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 740,
+        "y": 460,
+        "wires": []
+    },
+    {
+        "id": "5a1ded26a2d11144",
+        "type": "http in",
+        "z": "fb3a6e0e59d07e75",
+        "name": "",
+        "url": "/globe",
+        "method": "get",
+        "upload": false,
+        "swaggerDoc": "",
+        "x": 220,
+        "y": 160,
+        "wires": [
+            [
+                "1381ce925788123f"
+            ]
+        ]
+    },
+    {
+        "id": "1381ce925788123f",
+        "type": "http response",
+        "z": "fb3a6e0e59d07e75",
+        "name": "",
+        "statusCode": "301",
+        "headers": {
+            "Location": "https://sites.google.com/alumno.etec.um.edu.ar/globetec/"
+        },
+        "x": 560,
+        "y": 160,
+        "wires": []
+    },
+    {
+        "id": "31af699016c9ebf0",
+        "type": "comment",
+        "z": "fb3a6e0e59d07e75",
+        "name": "Web Globe ¡NO TOCAR!",
+        "info": "",
+        "x": 390,
+        "y": 120,
+        "wires": []
+    }
+]
