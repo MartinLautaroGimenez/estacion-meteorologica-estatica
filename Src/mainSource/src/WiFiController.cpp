@@ -18,56 +18,56 @@
 
 ControladorWiFi::ControladorWiFi()
 {
-  // Credenciales WiFi predeterminadas (se usarán si no hay nada guardado en las preferencias)
-  const char* defaultSSID = "ETEC";
-  const char* defaultPassword = "ETec2024*";
 
-  // Creamos un objeto Preferences para manejar la configuración en la memoria flash
-  Preferences preferences;
+  // // Creamos un objeto Preferences para manejar la configuración en la memoria flash
+  // Preferences preferences;
 
-  // Creamos una instancia del servidor web en el puerto 80
-  WebServer server(80);
+  // // Creamos una instancia del servidor web en el puerto 80
+  // WebServer server(80);
 
-  // Iniciamos la comunicación serial para depuración
-  Serial.begin(115200);
+  // // Iniciamos la comunicación serial para depuración
+  // Serial.begin(115200);
 
-  // Iniciamos las preferencias en modo lectura/escritura
-  preferences.begin("wifi", false);
+  // // Iniciamos las preferencias en modo lectura/escritura
+  // preferences.begin("wifi", false);
 
-  // Ofrecemos la opción de borrar las preferencias al inicio
-  Serial.println("Presiona 'C' en los próximos 5 segundos para borrar las preferencias...");
-  unsigned long startTime = millis();
-  while (millis() - startTime < 5000) {
-    if (Serial.available() && Serial.read() == 'C') {
-      clearPreferences();
-      Serial.println("Preferencias borradas. Reiniciando...");
-      delay(1000);
-      ESP.restart();
-    }
-  }
+  // // Ofrecemos la opción de borrar las preferencias al inicio
+  // Serial.println("Presiona 'C' en los próximos 5 segundos para borrar las preferencias...");
+  // unsigned long startTime = millis();
+  // while (millis() - startTime < 5000) {
+  //   if (Serial.available() && Serial.read() == 'C') {
+  //     clearPreferences();
+  //     Serial.println("Preferencias borradas. Reiniciando...");
+  //     delay(1000);
+  //     ESP.restart();
+  //   }
+  // }
 
-  // Intentamos conectarnos al WiFi
-  if (!connectToWiFi()) {
-    // Si la conexión falla, configuramos el modo punto de acceso
-    setupAP();
-  }
+  // // Intentamos conectarnos al WiFi
+  // if (!connectToWiFi()) {
+  //   // Si la conexión falla, configuramos el modo punto de acceso
+  //   setupAP();
+  // }
+
+  connectToWiFi();
 }
 
 bool ControladorWiFi::connectToWiFi() {
-  // Leemos las credenciales WiFi de las preferencias
-  String ssid = preferences.getString("ssid", defaultSSID);
-  String password = preferences.getString("password", defaultPassword);
+  // // Leemos las credenciales WiFi de las preferencias
+  // String ssid = preferences.getString("ssid", defaultSSID);
+  // String password = preferences.getString("password", defaultPassword);
 
-  Serial.println("Intentando conectar a: " + ssid);
+  // Serial.println("Intentando conectar a: " + ssid);
 
-  // Intentamos conectarnos al WiFi
-  this->WiFi.begin(ssid.c_str(), password.c_str());
+  // // Intentamos conectarnos al WiFi
+  // this->WiFi.begin(ssid.c_str(), password.c_str());
+  WiFi.begin(defaultSSID, defaultPassword);
 
   // Esperamos hasta 10 segundos por la conexión
   for (int i = 0; i < 20; i++) {
-    if (this->WiFi.status() == WL_CONNECTED) {
+    if (WiFi.status() == WL_CONNECTED) {
       Serial.println("Conectado a WiFi");
-      Serial.println("Dirección IP: " + this->WiFi.localIP().toString());
+      Serial.println("Dirección IP: " + WiFi.localIP().toString());
       return true;
     }
     delay(500);
@@ -79,29 +79,29 @@ bool ControladorWiFi::connectToWiFi() {
 }
 
 void ControladorWiFi::handleRoot() {
-  // la variable html la saca del RootHTML.h
-  this->server.send(200, "text/html", html);
+  // // la variable html la saca del RootHTML.h
+  // this->server.send(200, "text/html", html);
 }
 
 void ControladorWiFi::handleSave() {
-  // Obtenemos el nuevo SSID y contraseña del formulario
-  String newSSID = this->server.arg("ssid");
-  String newPassword = this->server.arg("password");
+  // // Obtenemos el nuevo SSID y contraseña del formulario
+  // String newSSID = this->server.arg("ssid");
+  // String newPassword = this->server.arg("password");
 
-  // Guardamos las nuevas credenciales en las preferencias
-  this->preferences.putString("ssid", newSSID);
-  this->preferences.putString("password", newPassword);
+  // // Guardamos las nuevas credenciales en las preferencias
+  // this->preferences.putString("ssid", newSSID);
+  // this->preferences.putString("password", newPassword);
 
-  // Enviamos una respuesta al cliente
-  this->server.send(200, "text/plain", "Configuración guardada. Reiniciando...");
-  delay(1000);
-  ESP.restart();  // Reiniciamos el ESP32 para aplicar la nueva configuración
+  // // Enviamos una respuesta al cliente
+  // this->server.send(200, "text/plain", "Configuración guardada. Reiniciando...");
+  // delay(1000);
+  // ESP.restart();  // Reiniciamos el ESP32 para aplicar la nueva configuración
 }
 
 void ControladorWiFi::clearPreferences() {
-  // Borramos todas las preferencias almacenadas en el espacio de nombres "wifi"
-  this->preferences.clear();
-  this->preferences.end();
+  // // Borramos todas las preferencias almacenadas en el espacio de nombres "wifi"
+  // this->preferences.clear();
+  // this->preferences.end();
 }
 
 
@@ -110,30 +110,25 @@ ControladorWiFi::~ControladorWiFi()
 }
 
 void ControladorWiFi::setupAP() {
-    // Configuramos el ESP32 como punto de acceso
-  this->WiFi.mode(WIFI_AP);
-  this->WiFi.softAP("ESP32_Config", "password");
+  //   // Configuramos el ESP32 como punto de acceso
+  // this->WiFi.mode(WIFI_AP);
+  // this->WiFi.softAP("ESP32_Config", "password");
 
-  // Configuramos las rutas del servidor web
-  const Uri root = "/";
-  this->server.on("/", std::bind(&ControladorWiFi::handleRoot, this));
-  this->server.on("/save", std::bind(&ControladorWiFi::handleSave, this));
-  this->server.begin();
+  // // Configuramos las rutas del servidor web
+  // const Uri root = "/";
+  // this->server.on("/", std::bind(&ControladorWiFi::handleRoot, this));
+  // this->server.on("/save", std::bind(&ControladorWiFi::handleSave, this));
+  // this->server.begin();
 
-  Serial.println("Modo punto de acceso iniciado");
-  Serial.println("SSID: ESP32_Config");
-  Serial.println("Password: password");
-  Serial.println("Dirección IP: " + WiFi.softAPIP().toString());
+  // Serial.println("Modo punto de acceso iniciado");
+  // Serial.println("SSID: ESP32_Config");
+  // Serial.println("Password: password");
+  // Serial.println("Dirección IP: " + WiFi.softAPIP().toString());
 }
 
 
 ManejoDatosWifi::ManejoDatosWifi() 
 {
-  // Crear cliente seguro para HTTPS
-  WiFiClientSecure client;
-
-  // Si estás en un entorno de pruebas y no te importa la verificación del certificado:
-  client.setInsecure();
 }
 
 String ManejoDatosWifi::jsonMaker(
@@ -189,6 +184,12 @@ ManejoDatosWifi::~ManejoDatosWifi()
 //  Método para el envío de datos pro medio de HTTP
 int ManejoDatosWifi::enviarData(String postData)
 {
+  
+  // Crear cliente seguro para HTTPS
+  WiFiClientSecure client;
+
+  // Si estás en un entorno de pruebas y no te importa la verificación del certificado:
+  client.setInsecure();
   // Conectar al servidor
   if (client.connect("emetec.wetec.um.edu.ar", 443)) {
     Serial.println("Conectado al servidor HTTPS");
