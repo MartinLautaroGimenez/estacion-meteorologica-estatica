@@ -626,8 +626,25 @@ footer {
     border-radius: 5px;
     margin-left: auto !important;
     margin-right: 300px;
-    
 }
+
+select {
+    background-color: #333; /* Fondo del select */
+    color: #fff;           /* Color del texto del select */
+    border: 1px solid #666;
+    padding: 5px;
+    border-radius: 5px;
+  }
+  
+  select option {
+    background-color: #444; /* Fondo de las opciones */
+    color: #fff;            /* Color del texto de las opciones */
+  }
+  
+  /* Compatibilidad para hover en las opciones */
+  select option:hover {
+    background-color: #555;
+  }  
 
 .zarazap {
     display: flex;
