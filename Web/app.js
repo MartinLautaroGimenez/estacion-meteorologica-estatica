@@ -115,13 +115,11 @@ async function obtenerDatos(url) {
             fila.innerHTML = `
                 <td>${dato["Dato N°"]}</td>
                 <td>${dato["Fecha"]}</td>
-                <td>${dato["Nivel de bateria"]} V</td>
-                <td>${dato["Temperatura Promedio"]} °C</td>
+                <td>${dato["Temperatura Promedio"]} V</td>
+                <td>${dato["Sensacion T"]} °C</td>
                 <td>${dato["Presion"]} hPa</td>
                 <td>${dato["Humedad"]} %</td>
                 <td>${dato["Nivel de luz"]} lm</td>
-                <td>${dato["Calidad del aire"]}</td>
-                <td>${dato["ppm CO2"]} ppm</td>
             `;
             tablaDetallesCuerpo.appendChild(fila);
         });
