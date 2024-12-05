@@ -101,6 +101,7 @@ async function obtenerDatos(url) {
         document.getElementById('velocidadViento').textContent = ultimoDato["Velocidad del viento"];
         document.getElementById('direccionViento').textContent = ultimoDato["Direccion del viento"];
         document.getElementById('sensorLluvia').textContent = ultimoDato["Sensor de lluvia"];
+        document.getElementById('Altitud').textContent = ultimoDato["Altitud"];
         document.getElementById('fecha2').textContent = ultimoDato["Fecha"];
         document.getElementById('fecha3').textContent = ultimoDato["Fecha"];
         document.getElementById('fecha4').textContent = ultimoDato["Fecha"];
