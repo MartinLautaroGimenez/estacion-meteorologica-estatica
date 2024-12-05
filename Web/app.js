@@ -115,7 +115,7 @@ async function obtenerDatos(url) {
             fila.innerHTML = `
                 <td>${dato["Dato N°"]}</td>
                 <td>${dato["Fecha"]}</td>
-                <td>${dato["Temperatura Promedio"]} V</td>
+                <td>${dato["Temperatura Promedio"]} °C</td>
                 <td>${dato["Sensacion T"]} °C</td>
                 <td>${dato["Presion"]} hPa</td>
                 <td>${dato["Humedad"]} %</td>
