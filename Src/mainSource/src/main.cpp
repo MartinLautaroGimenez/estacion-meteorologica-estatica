@@ -6,6 +6,7 @@
 // #include "../lib/WiFiController.h"
 #include "esp_sleep.h"
 #include <WiFiClientSecure.h>
+#include <ArduinoOTA.h>  // Añadido para la funcionalidad OTA
 
 // Instanciar objetos de tipos.
 WiFiClient esp_EME;
@@ -79,6 +80,11 @@ void setup()
   // setupWifi();
 
   leerSensores();
+
+  // **Configuración de OTA**
+  ArduinoOTA.setHostname("ESP32_OTA"); // Nombre del dispositivo
+  ArduinoOTA.setPassword("emetec2024*"); // Contraseña de OTA
+  ArduinoOTA.begin(); // Inicia el proceso de OTA
   
   Serial.println("Esperando 1 minuto para entrar en modo deepsleep...");
   delay(60000);
@@ -89,6 +95,8 @@ void setup()
 
 void loop()
 {
+  ArduinoOTA.handle(); // Para manejar las solicitudes OTA mientras se ejecuta el loop
+  
   // Si estamos en modo punto de acceso, atendemos las peticiones web
   // if (controlerWiFi.WiFi.getMode() == WIFI_AP) {
   //   controlerWiFi.server.handleClient();
