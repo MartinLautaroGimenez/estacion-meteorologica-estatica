@@ -76,6 +76,7 @@ categoriaDropdown.addEventListener('change', function() {
 });
 
 // Función para obtener datos
+// Función para obtener datos
 async function obtenerDatos(url) {
     try {
         const response = await fetch(url, {
@@ -90,52 +91,61 @@ async function obtenerDatos(url) {
         const ultimos10Datos = data.slice(-10);
 
         const ultimoDato = ultimos10Datos[0];
-        document.getElementById('datoNumero').textContent = ultimoDato["Dato N°"];
-        document.getElementById('fecha').textContent = ultimoDato["Fecha"];
-        document.getElementById('battery').textContent = ultimoDato["Nivel de bateria"] + ' V';
-        document.getElementById('temperatura').textContent = ultimoDato["Temperatura Promedio"] + ' °C';
-        document.getElementById('stermica').textContent = ultimoDato["Sensacion T"] + ' °C';
-        document.getElementById('presion').textContent = ultimoDato["Presion"] + ' hPa';
-        document.getElementById('humedad').textContent = ultimoDato["Humedad"] + ' %';
-        document.getElementById('nivelLuz').textContent = ultimoDato["Nivel de luz"] + ' lm';
-        document.getElementById('procio').textContent = ultimoDato["Temperatura punto de rocio"] + ' °C';
-        document.getElementById('ppmco2').textContent = ultimoDato["ppm CO2"] + ' ppm';
-        document.getElementById('calidadAire').textContent = ultimoDato["Calidad del aire"];
-        document.getElementById('velocidadViento').textContent = ultimoDato["Velocidad del viento"];
-        document.getElementById('direccionViento').textContent = ultimoDato["Direccion del viento"];
-        document.getElementById('sensorLluvia').textContent = ultimoDato["Sensor de lluvia"];
-        document.getElementById('Altitud').textContent = ultimoDato["Altitud"];
-        document.getElementById('fecha2').textContent = ultimoDato["Fecha"];
-        document.getElementById('fecha3').textContent = ultimoDato["Fecha"];
-        document.getElementById('fecha4').textContent = ultimoDato["Fecha"];
-        document.getElementById('fecha5').textContent = ultimoDato["Fecha"];
+        
+        // Función para manejar valores nulos
+        const obtenerValor = (valor) => (valor === null || valor === "null" || valor === "Proximamente") ? "No disponible" : valor;
 
-        // Verificar si algún dato es null y mostrar "No disponible" en su lugar
-        const elementos = [
-            { id: 'datoNumero', valor: ultimoDato["Dato N°"] },
-            { id: 'fecha', valor: ultimoDato["Fecha"] },
-            { id: 'battery', valor: ultimoDato["Nivel de bateria"] + ' V' },
-            { id: 'temperatura', valor: ultimoDato["Temperatura Promedio"] + ' °C' },
-            { id: 'stermica', valor: ultimoDato["Sensacion T"] + ' °C' },
-            { id: 'presion', valor: ultimoDato["Presion"] + ' hPa' },
-            { id: 'humedad', valor: ultimoDato["Humedad"] + ' %' },
-            { id: 'nivelLuz', valor: ultimoDato["Nivel de luz"] + ' lm' },
-            { id: 'procio', valor: ultimoDato["Temperatura punto de rocio"] + ' °C' },
-            { id: 'ppmco2', valor: ultimoDato["ppm CO2"] + ' ppm' },
-            { id: 'calidadAire', valor: ultimoDato["Calidad del aire"] },
-            { id: 'velocidadViento', valor: ultimoDato["Velocidad del viento"] },
-            { id: 'direccionViento', valor: ultimoDato["Direccion del viento"] },
-            { id: 'sensorLluvia', valor: ultimoDato["Sensor de lluvia"] },
-            { id: 'Altitud', valor: ultimoDato["Altitud"] },
-            { id: 'fecha2', valor: ultimoDato["Fecha"] },
-            { id: 'fecha3', valor: ultimoDato["Fecha"] },
-            { id: 'fecha4', valor: ultimoDato["Fecha"] },
-            { id: 'fecha5', valor: ultimoDato["Fecha"] }
-        ];
+        document.getElementById('datoNumero').textContent = obtenerValor(ultimoDato["Dato N°"]);
+        document.getElementById('fecha').textContent = obtenerValor(ultimoDato["Fecha"]);
+        document.getElementById('battery').textContent = 
+            obtenerValor(ultimoDato["Nivel de bateria"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Nivel de bateria"]) + " V";
 
-        elementos.forEach(elemento => {
-            document.getElementById(elemento.id).textContent = elemento.valor !== null ? elemento.valor : 'No disponible';
-        });
+        document.getElementById('temperatura').textContent = 
+            obtenerValor(ultimoDato["Temperatura Promedio"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Temperatura Promedio"]) + " °C";
+
+        document.getElementById('stermica').textContent = 
+            obtenerValor(ultimoDato["Sensacion T"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Sensacion T"]) + " °C";
+
+        document.getElementById('presion').textContent = 
+            obtenerValor(ultimoDato["Presion"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Presion"]) + " hPa";
+
+        document.getElementById('humedad').textContent = 
+            obtenerValor(ultimoDato["Humedad"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Humedad"]) + " %";
+
+        document.getElementById('nivelLuz').textContent = 
+            obtenerValor(ultimoDato["Nivel de luz"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Nivel de luz"]) + " lm";
+
+        document.getElementById('procio').textContent = 
+            obtenerValor(ultimoDato["Temperatura punto de rocio"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Temperatura punto de rocio"]) + " °C";
+
+        document.getElementById('ppmco2').textContent = 
+            obtenerValor(ultimoDato["ppm CO2"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["ppm CO2"]) + " ppm";
+
+        document.getElementById('calidadAire').textContent = obtenerValor(ultimoDato["Calidad del aire"]);
+        document.getElementById('velocidadViento').textContent = obtenerValor(ultimoDato["Velocidad del viento"]);
+        document.getElementById('direccionViento').textContent = obtenerValor(ultimoDato["Direccion del viento"]);
+        document.getElementById('sensorLluvia').textContent = obtenerValor(ultimoDato["Sensor de lluvia"]);
+        document.getElementById('Altitud').textContent = obtenerValor(ultimoDato["Altitud"]);
+        document.getElementById('fecha2').textContent = obtenerValor(ultimoDato["Fecha"]);
+        document.getElementById('fecha3').textContent = obtenerValor(ultimoDato["Fecha"]);
+        document.getElementById('fecha4').textContent = obtenerValor(ultimoDato["Fecha"]);
+        document.getElementById('fecha5').textContent = obtenerValor(ultimoDato["Fecha"]);
 
         const tablaDetallesCuerpo = document.getElementById('tablaDetallesCuerpo');
         tablaDetallesCuerpo.innerHTML = '';
@@ -143,13 +153,13 @@ async function obtenerDatos(url) {
         ultimos10Datos.forEach(dato => {
             const fila = document.createElement('tr');
             fila.innerHTML = `
-                <td>${dato["Dato N°"]}</td>
-                <td>${dato["Fecha"]}</td>
-                <td>${dato["Temperatura Promedio"]} °C</td>
-                <td>${dato["Sensacion T"]} °C</td>
-                <td>${dato["Presion"]} hPa</td>
-                <td>${dato["Humedad"]} %</td>
-                <td>${dato["Nivel de luz"]} lm</td>
+                <td>${obtenerValor(dato["Dato N°"])}</td>
+                <td>${obtenerValor(dato["Fecha"])}</td>
+                <td>${obtenerValor(dato["Temperatura Promedio"])} °C</td>
+                <td>${obtenerValor(dato["Sensacion T"])} °C</td>
+                <td>${obtenerValor(dato["Presion"])} hPa</td>
+                <td>${obtenerValor(dato["Humedad"])} %</td>
+                <td>${obtenerValor(dato["Nivel de luz"])} lm</td>
             `;
             tablaDetallesCuerpo.appendChild(fila);
         });
