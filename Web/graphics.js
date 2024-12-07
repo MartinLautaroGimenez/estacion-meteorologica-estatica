@@ -1,11 +1,11 @@
-const apiUrl = 'https://emetec.wetec.um.edu.ar/graph';
+const apiUrl2 = 'https://emetec.wetec.um.edu.ar/graph';
 
 let myChart1, myChart2, myChart3;
 
 // Función asincrónica para obtener y procesar datos
 async function fetchData() {
     try {
-        const response = await fetch(apiUrl, {
+        const response = await fetch(apiUrl2, {
             headers: {
                 'Access-Control-Allow-Origin': '*'  // Permitir CORS, si es necesario
             }
@@ -25,12 +25,12 @@ async function fetchData() {
           if (myChart3) {
             myChart3.destroy();
           }
-        
+
         const data = await response.json();
         const ultimos10Datos = data.slice(-10);
-        
-        const numMuestras = document.getElementById('numMuestras').value;
-        const ultimosNdatos = data.slice(-numMuestras); // Filtrar por muestras seleccionadas
+
+        // const numMuestras = document.getElementById('numMuestras').value;
+        const ultimosNdatos = data.slice(-10); // Filtrar por muestras seleccionadas
         console.log(data); // Registro para verificar que los datos se obtienen correctamente
         displayData(data); // Función para mostrar los datos (puedes definirla más adelante)
         createTemperatureHumidityChart(ultimosNdatos); // Función para crear gráfico de temperatura y humedad
@@ -50,7 +50,7 @@ function createTemperatureHumidityChart(data) {
     // Configuración del primer gráfico (Temperatura y Humedad Relativa)
     const labels = data.map(d => formatTime(d.Fecha));
     const temperatures = data.map(d => parseFloat(d["Temperatura Promedio"]));
-    const humidities = data.map(d => parseFloat(d["Humedad"]));
+    const humidity = data.map(d => parseFloat(d["Humedad"]));
 
     const ctx = document.getElementById('myChart1').getContext('2d');
     myChart1 = new Chart(ctx, {
@@ -68,7 +68,7 @@ function createTemperatureHumidityChart(data) {
                 },
                 {
                     label: 'Humedad Relativa',
-                    data: humidities,
+                    data: humidity,
                     backgroundColor: 'rgba(74, 170, 246, 0.2)',
                     borderColor: 'rgb(74, 170, 246)',
                     fill: false,

@@ -66,26 +66,22 @@
     <!-- Contenido Principal -->
     <main>
         <h2 class="grafich2">Graficos importantes</h2>
+        <select id="categoriaDropdown" class="dropdown" style="margin-right: 0px;">
+            <option value="" disabled selected>Seleccione nodo meteorológico</option>
+            <option value="emetec" selected>EME: ETec</option>
+            <option value="test" selected>EMM: Malargüe</option>
+            <option value="emm3" selected>EMM: Particular - Tincho</option>
+            <!-- <option value="emmetec">EMM: ETec</option>
+            <option value="emmsj">EMM: Colegio San Jorge</option> -->
+        </select>
         <div class="timetable">
             <div class="grafico">
                 <canvas id="myChart1" class="chart" style="height: 300px; width: 450px !important; responsive: true;"></canvas>
                     <div class="selector-muestras">
-                      <label for="numMuestras">Cantidad de muestras:</label>
-                      <select id="numMuestras">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                      </select>
                     </div>  
                 <div class="grafico3">
                 <canvas id="myChart3" class="chart" style="height: 300px; width: 450px !important; responsive: true;"></canvas>
                     <div class="selector-muestras">
-                      <label for="numMuestras">Cantidad de muestras:</label>
-                      <select id="numMuestras">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                      </select>
                     </div>   
             </div>
             </div>
@@ -93,12 +89,6 @@
             <div class="grafico2">
                 <canvas id="myChart2" class="chart" style="height: 300px; width: 450px; responsive: true;"></canvas>
                     <div class="selector-muestras">
-                      <label for="numMuestras">Cantidad de muestras:</label>
-                      <select id="numMuestras">
-                        <option value="10">10</option>
-                        <option value="20">20</option>
-                        <option value="30">30</option>
-                      </select>
                     </div>   
             </div>
         </div>
@@ -110,6 +100,7 @@
 
     <!-- JavaScript -->
     <script src="https://emetec.wetec.um.edu.ar/js"></script>
-    <script src="https://emetec.wetec.um.edu.ar/graphicsjs"></script>
+    <!-- <script src="https://emetec.wetec.um.edu.ar/graphicsjs"></script> -->
+     <script src="graphics.js"></script>
 </body>
 </html>
