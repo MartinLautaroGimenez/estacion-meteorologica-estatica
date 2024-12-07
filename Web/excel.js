@@ -1,5 +1,6 @@
 let apiEMEtec = 'https://emetec.wetec.um.edu.ar/exceleme';
 let apiTest = 'https://emetec.wetec.um.edu.ar/excelemm';
+let apiEMM3 = 'https://emetec.wetec.um.edu.ar/exceleme3';
 
 // Función para establecer cookies
 function setCookie(name, value, days) {
@@ -37,6 +38,11 @@ async function descargarDatosEnXLSX() {
           apiUrl = apiEMEtec;
       } else if (selectedCategory === 'test') {
           apiUrl = apiTest;
+      } else if (selectedCategory === 'emm3') {
+          apiUrl = apiEMM3;
+      } else {
+          console.error('Categoría inválida:', selectedCategory);
+          return;
       }
 
       const response = await fetch(apiUrl, {
