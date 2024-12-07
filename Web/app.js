@@ -110,6 +110,33 @@ async function obtenerDatos(url) {
         document.getElementById('fecha4').textContent = ultimoDato["Fecha"];
         document.getElementById('fecha5').textContent = ultimoDato["Fecha"];
 
+        // Verificar si algún dato es null y mostrar "No disponible" en su lugar
+        const elementos = [
+            { id: 'datoNumero', valor: ultimoDato["Dato N°"] },
+            { id: 'fecha', valor: ultimoDato["Fecha"] },
+            { id: 'battery', valor: ultimoDato["Nivel de bateria"] + ' V' },
+            { id: 'temperatura', valor: ultimoDato["Temperatura Promedio"] + ' °C' },
+            { id: 'stermica', valor: ultimoDato["Sensacion T"] + ' °C' },
+            { id: 'presion', valor: ultimoDato["Presion"] + ' hPa' },
+            { id: 'humedad', valor: ultimoDato["Humedad"] + ' %' },
+            { id: 'nivelLuz', valor: ultimoDato["Nivel de luz"] + ' lm' },
+            { id: 'procio', valor: ultimoDato["Temperatura punto de rocio"] + ' °C' },
+            { id: 'ppmco2', valor: ultimoDato["ppm CO2"] + ' ppm' },
+            { id: 'calidadAire', valor: ultimoDato["Calidad del aire"] },
+            { id: 'velocidadViento', valor: ultimoDato["Velocidad del viento"] },
+            { id: 'direccionViento', valor: ultimoDato["Direccion del viento"] },
+            { id: 'sensorLluvia', valor: ultimoDato["Sensor de lluvia"] },
+            { id: 'Altitud', valor: ultimoDato["Altitud"] },
+            { id: 'fecha2', valor: ultimoDato["Fecha"] },
+            { id: 'fecha3', valor: ultimoDato["Fecha"] },
+            { id: 'fecha4', valor: ultimoDato["Fecha"] },
+            { id: 'fecha5', valor: ultimoDato["Fecha"] }
+        ];
+
+        elementos.forEach(elemento => {
+            document.getElementById(elemento.id).textContent = elemento.valor !== null ? elemento.valor : 'No disponible';
+        });
+
         const tablaDetallesCuerpo = document.getElementById('tablaDetallesCuerpo');
         tablaDetallesCuerpo.innerHTML = '';
 
