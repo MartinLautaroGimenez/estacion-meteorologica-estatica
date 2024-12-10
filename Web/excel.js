@@ -1,6 +1,6 @@
 let apiEMEtec = 'https://emetec.wetec.um.edu.ar/exceleme';
-let apiEMM = 'https://emetec.wetec.um.edu.ar/excelemm';
-let apiEMM3_excel = 'https://emetec.wetec.um.edu.ar/exceleme3'; // Renombrado para evitar conflictos
+let apiTest = 'https://emetec.wetec.um.edu.ar/excelemm';
+let apiEMM3_Alt = 'https://emetec.wetec.um.edu.ar/exceleme3'; // Renombrado para evitar conflictos
 
 // Función para establecer cookies
 function setCookie(name, value, days) {
