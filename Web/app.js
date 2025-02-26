@@ -62,6 +62,7 @@ const apiUrl = 'https://emetec.wetec.um.edu.ar/datos';
 const apiTempUrl = 'https://emetec.wetec.um.edu.ar/datosemm';
 const apiEMM3 = 'https://emetec.wetec.um.edu.ar/datosemm3';
 const apiEMM4 = 'https://emetec.wetec.um.edu.ar/datosemm4';
+const apiSJ = 'https://emetec.wetec.um.edu.ar/datosemesj';
 
 // Event listener para el dropdown
 categoriaDropdown.addEventListener('change', function() {
@@ -75,6 +76,8 @@ categoriaDropdown.addEventListener('change', function() {
         obtenerDatos(apiEMM3);
     } else if (selectedValue === 'emm4'){
         obtenerDatos(apiEMM4);
+    } else if (selectedValue === 'sj'){
+        obtenerDatos(apiSJ);
     }
 });
 
