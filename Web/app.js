@@ -60,6 +60,9 @@ window.addEventListener('load', function() {
 //APIs
 const apiUrl = 'https://emetec.wetec.um.edu.ar/datos';
 const apiTempUrl = 'https://emetec.wetec.um.edu.ar/datosemm';
+const apiEMM3 = 'https://emetec.wetec.um.edu.ar/datosemm3';
+const apiEMM4 = 'https://emetec.wetec.um.edu.ar/datosemm4';
+const apiSJ = 'https://emetec.wetec.um.edu.ar/datosemesj';
 
 // Event listener para el dropdown
 categoriaDropdown.addEventListener('change', function() {
@@ -69,9 +72,16 @@ categoriaDropdown.addEventListener('change', function() {
         obtenerDatos(apiUrl);
     } else if (selectedValue === 'test') {
         obtenerDatos(apiTempUrl);
+    } else if (selectedValue === 'emm3') {
+        obtenerDatos(apiEMM3);
+    } else if (selectedValue === 'emm4'){
+        obtenerDatos(apiEMM4);
+    } else if (selectedValue === 'sj'){
+        obtenerDatos(apiSJ);
     }
 });
 
+// Función para obtener datos
 // Función para obtener datos
 async function obtenerDatos(url) {
     try {
@@ -87,24 +97,61 @@ async function obtenerDatos(url) {
         const ultimos10Datos = data.slice(-10);
 
         const ultimoDato = ultimos10Datos[0];
-        document.getElementById('datoNumero').textContent = ultimoDato["Dato N°"];
-        document.getElementById('fecha').textContent = ultimoDato["Fecha"];
-        document.getElementById('battery').textContent = ultimoDato["Nivel de bateria"] + ' V';
-        document.getElementById('temperatura').textContent = ultimoDato["Temperatura Promedio"] + ' °C';
-        document.getElementById('stermica').textContent = ultimoDato["Sensacion T"] + ' °C';
-        document.getElementById('presion').textContent = ultimoDato["Presion"] + ' hPa';
-        document.getElementById('humedad').textContent = ultimoDato["Humedad"] + ' %';
-        document.getElementById('nivelLuz').textContent = ultimoDato["Nivel de luz"] + ' lm';
-        document.getElementById('procio').textContent = ultimoDato["Temperatura punto de rocio"] + ' °C';
-        document.getElementById('ppmco2').textContent = ultimoDato["ppm CO2"] + ' ppm';
-        document.getElementById('calidadAire').textContent = ultimoDato["Calidad del aire"];
-        document.getElementById('velocidadViento').textContent = ultimoDato["Velocidad del viento"];
-        document.getElementById('direccionViento').textContent = ultimoDato["Direccion del viento"];
-        document.getElementById('sensorLluvia').textContent = ultimoDato["Sensor de lluvia"];
-        document.getElementById('fecha2').textContent = ultimoDato["Fecha"];
-        document.getElementById('fecha3').textContent = ultimoDato["Fecha"];
-        document.getElementById('fecha4').textContent = ultimoDato["Fecha"];
-        document.getElementById('fecha5').textContent = ultimoDato["Fecha"];
+        
+        // Función para manejar valores nulos
+        const obtenerValor = (valor) => (valor === null || valor === "null" || valor === "Proximamente") ? "No disponible" : valor;
+
+        document.getElementById('datoNumero').textContent = obtenerValor(ultimoDato["Dato N°"]);
+        document.getElementById('fecha').textContent = obtenerValor(ultimoDato["Fecha"]);
+        document.getElementById('battery').textContent = 
+            obtenerValor(ultimoDato["Nivel de bateria"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Nivel de bateria"]) + " V";
+
+        document.getElementById('temperatura').textContent = 
+            obtenerValor(ultimoDato["Temperatura Promedio"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Temperatura Promedio"]) + " °C";
+
+        document.getElementById('stermica').textContent = 
+            obtenerValor(ultimoDato["Sensacion T"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Sensacion T"]) + " °C";
+
+        document.getElementById('presion').textContent = 
+            obtenerValor(ultimoDato["Presion"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Presion"]) + " hPa";
+
+        document.getElementById('humedad').textContent = 
+            obtenerValor(ultimoDato["Humedad"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Humedad"]) + " %";
+
+        document.getElementById('nivelLuz').textContent = 
+            obtenerValor(ultimoDato["Nivel de luz"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Nivel de luz"]) + " lm";
+
+        document.getElementById('procio').textContent = 
+            obtenerValor(ultimoDato["Temperatura punto de rocio"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["Temperatura punto de rocio"]) + " °C";
+
+        document.getElementById('ppmco2').textContent = 
+            obtenerValor(ultimoDato["ppm CO2"]) === "No disponible" 
+                ? "No disponible" 
+                : obtenerValor(ultimoDato["ppm CO2"]) + " ppm";
+
+        document.getElementById('calidadAire').textContent = obtenerValor(ultimoDato["Calidad del aire"]);
+        document.getElementById('velocidadViento').textContent = obtenerValor(ultimoDato["Velocidad del viento"]);
+        document.getElementById('direccionViento').textContent = obtenerValor(ultimoDato["Direccion del viento"]);
+        document.getElementById('sensorLluvia').textContent = obtenerValor(ultimoDato["Sensor de lluvia"]);
+        document.getElementById('Altitud').textContent = obtenerValor(ultimoDato["Altitud"]) + "mts";
+        document.getElementById('fecha2').textContent = obtenerValor(ultimoDato["Fecha"]);
+        document.getElementById('fecha3').textContent = obtenerValor(ultimoDato["Fecha"]);
+        document.getElementById('fecha4').textContent = obtenerValor(ultimoDato["Fecha"]);
+        document.getElementById('fecha5').textContent = obtenerValor(ultimoDato["Fecha"]);
 
         const tablaDetallesCuerpo = document.getElementById('tablaDetallesCuerpo');
         tablaDetallesCuerpo.innerHTML = '';
@@ -112,15 +159,13 @@ async function obtenerDatos(url) {
         ultimos10Datos.forEach(dato => {
             const fila = document.createElement('tr');
             fila.innerHTML = `
-                <td>${dato["Dato N°"]}</td>
-                <td>${dato["Fecha"]}</td>
-                <td>${dato["Nivel de bateria"]} V</td>
-                <td>${dato["Temperatura Promedio"]} °C</td>
-                <td>${dato["Presion"]} hPa</td>
-                <td>${dato["Humedad"]} %</td>
-                <td>${dato["Nivel de luz"]} lm</td>
-                <td>${dato["Calidad del aire"]}</td>
-                <td>${dato["ppm CO2"]} ppm</td>
+                <td>${obtenerValor(dato["Dato N°"])}</td>
+                <td>${obtenerValor(dato["Fecha"])}</td>
+                <td>${obtenerValor(dato["Temperatura Promedio"])} °C</td>
+                <td>${obtenerValor(dato["Sensacion T"])} °C</td>
+                <td>${obtenerValor(dato["Presion"])} hPa</td>
+                <td>${obtenerValor(dato["Humedad"])} %</td>
+                <td>${obtenerValor(dato["Nivel de luz"])} lm</td>
             `;
             tablaDetallesCuerpo.appendChild(fila);
         });

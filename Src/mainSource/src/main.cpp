@@ -6,6 +6,7 @@
 // #include "../lib/WiFiController.h"
 #include "esp_sleep.h"
 #include <WiFiClientSecure.h>
+#include <ArduinoOTA.h>  // Añadido para la funcionalidad OTA
 
 // Instanciar objetos de tipos.
 WiFiClient esp_EME;
@@ -51,10 +52,14 @@ void setup()
 
     // print_wakeup_reason();
 
+  esp_sleep_enable_timer_wakeup(15*60*1000000);
+
   Serial.begin(115200);
   String thisBoard = ARDUINO_BOARD;
   Serial.println(thisBoard);
 
+  digitalWrite(PIN_GROUND_1, true);
+  digitalWrite(PIN_GROUND_2, true);
 
   // Conectar a la red WiFi
   WiFi.begin(ssid, pass);
@@ -64,28 +69,43 @@ void setup()
     Serial.print(".");
   }
   Serial.println("\nConectado a la red WiFi");
+  Serial.print("Dirección IP: ");
+  Serial.println(WiFi.localIP()); // Muestra la IP asignada
+  
   
   //  Inicializar controlador de sensores
   controladorSensores.initControlador(BMP_TYPE_280, DHT_TYPE_22);
 
   //  Inicializar conexión a la red
   // setupWifi();
+
+  leerSensores();
+
+  // **Configuración de OTA**
+  ArduinoOTA.setHostname("ESP32_OTA"); // Nombre del dispositivo
+  ArduinoOTA.setPassword("emetec2024*"); // Contraseña de OTA
+  ArduinoOTA.begin(); // Inicia el proceso de OTA
   
-  // Serial.print("Entrando a modo Deep Sleep\n");
-  // esp_deep_sleep_start();
+  Serial.println("Esperando 1 minuto para entrar en modo deepsleep...");
+  delay(60000);
+
+  Serial.print("Entrando a modo Deep Sleep\n");
+  esp_deep_sleep_start();
 }
 
 void loop()
 {
+  ArduinoOTA.handle(); // Para manejar las solicitudes OTA mientras se ejecuta el loop
+  
   // Si estamos en modo punto de acceso, atendemos las peticiones web
   // if (controlerWiFi.WiFi.getMode() == WIFI_AP) {
   //   controlerWiFi.server.handleClient();
   // }
 
-  leerSensores();
+  //leerSensores();
   
   // ESP.deepSleep(15*60*1000000);
-  delay(2 * 60 * 1000);
+  //delay(2 * 60 * 1000);
   //delay(TIME_TO_SLEEP_5_SEG * 1000);
 }
 
@@ -184,11 +204,20 @@ String jsonMaker(
     LeerSensoresControlador::datosYL lluvia
 )
 {
+  String lluviaPosibilidad;
+  
+  // Evaluar la humedad relativa para determinar el mensaje
+  if (dhtData.humedadRelativa > 85) {
+    lluviaPosibilidad = "\"Hay posibilidades de que llueva\"";
+  } else {
+    lluviaPosibilidad = "\"No hay posibilidades de que llueva\"";
+  }
+
   String postData;
-  if (lluvia.digital < 0 || velViento < 0 
+  if (velViento < 0 
   || strcmp(dirViento.c_str(), "default") == 0 || strcmp(dirViento.c_str(), "Pendiente") == 0)
   {
-    // Crear los datos JSON para enviar (temperatura y humedad)
+    // Crear los datos JSON para enviar (sin valores de viento y hoja mojada)
     postData =  "{\"EME_n0/dht/temp\":" + String(dhtData.temperatura) + 
                 ",\"EME_n0/dht/hum\":" + String(dhtData.humedadRelativa) + 
                 ",\"EME_n0/dht/senst\":" + String(dhtData.sensacionTermica) + 
@@ -198,12 +227,12 @@ String jsonMaker(
                 ",\"EME_n0/bmp/presnm\":" + String(bmpData.presionAlNivelDelMar) + 
                 ",\"EME_n0/bh/presnm\":" + String(bhData) + 
                 ",\"EME_n0/mq/ppmco2\":" + String(mqData.ppmCO2) + 
-                ",\"EME_n0/yl/lluv\":\"Proximamente\"" + 
+                ",\"EME_n0/yl/lluv\":" + lluviaPosibilidad + 
                 ",\"EME_n0/viento/vel\":\"Proximamente\"" + 
                 ",\"EME_n0/viento/dir\":\"Proximamente\"" + 
                 "}";
   } else {
-    // Crear los datos JSON para enviar (temperatura y humedad)
+    // Crear los datos JSON para enviar (con valores completos)
     postData =  "{\"EME_n0/dht/temp\":" + String(dhtData.temperatura) + 
                 ",\"EME_n0/dht/hum\":" + String(dhtData.humedadRelativa) + 
                 ",\"EME_n0/dht/senst\":" + String(dhtData.sensacionTermica) + 
@@ -213,14 +242,14 @@ String jsonMaker(
                 ",\"EME_n0/bmp/presnm\":" + String(bmpData.presionAlNivelDelMar) + 
                 ",\"EME_n0/bh/presnm\":" + String(bhData) + 
                 ",\"EME_n0/mq/ppmco2\":" + String(mqData.ppmCO2) + 
-                ",\"EME_n0/yl/lluv\":" + String(lluvia.digital) + 
+                ",\"EME_n0/yl/lluv\":" + lluviaPosibilidad + 
                 ",\"EME_n0/viento/vel\":" +  String(velViento) + 
                 ",\"EME_n0/viento/dir\":" + dirViento + 
                 "}";
-    
   }
   return postData;
 }
+
 
 /*
 ⣿⣿⡟⡹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿

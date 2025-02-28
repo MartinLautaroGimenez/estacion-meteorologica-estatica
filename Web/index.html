@@ -32,7 +32,8 @@
 	#ppmco2
 	#battery
 	#stermica
-        #sensorLluvia {
+        #sensorLluvia
+	#Altitud    {
             display: none;
         }
     </style>
@@ -72,7 +73,10 @@
                 <select id="categoriaDropdown" class="dropdown" style="margin-right: 0px;">
                     <option value="" disabled selected>Seleccione nodo meteorológico</option>
                     <option value="emetec" selected>EME: ETec</option>
-                    <option value="test" selected>EMM: Malargüe</option>
+                    <option value="test" selected>EMM: ETec</option>
+                    <option value="sj" selected>EME: Colegio San Jorge</option>
+                    <option value="emm3" selected>EMM: Particular - Tincho</option>
+                    <option value="emm4" selected>EMM: Particular - Luis</option>
                     <!-- <option value="emmetec">EMM: ETec</option>
                     <option value="emmsj">EMM: Colegio San Jorge</option> -->
                 </select>
@@ -120,13 +124,11 @@
                             <tr>
                                 <th>Dato</th>
                                 <th>Fecha</th>
-                                <th>Voltaje de la bateria</th>
                                 <th>Temperatura</th>
+                                <th>Sensación Térmica</th>
                                 <th>Presión atmosferica</th>
                                 <th>Humedad relativa</th>
                                 <th>Nivel de luz</th>
-                                <th>Calidad del aire</th>
-                                <th>PPM CO2</th>
                             </tr>
                         </thead>
                         <tbody id="tablaDetallesCuerpo"></tbody>
@@ -249,4 +251,5 @@
 <div id="stermica" style="display: none;"></div>
 <div id="ppmco2" style="display: none;" ></div>
 <div id="procio" style="display: none;"></div>
+<div id="Altitud" style="display: none;"></div>
 </html>

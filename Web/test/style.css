@@ -613,7 +613,7 @@ footer {
 
 .etech2 {
     margin-top: 7px;
-  }
+}
 
 
 .dropdown-container {
@@ -621,6 +621,7 @@ footer {
     justify-content: space-between; /* Coloca el menú desplegable al inicio y 'subjects' al final */
     align-items: center; /* Alinea verticalmente los elementos */
     width: 100%; /* Asegura que ocupe todo el ancho disponible */
+    background-color: -var(--color-white);
 }
 
 .dropdown {
@@ -682,4 +683,6 @@ main .excelc > div span{
     border: light-dark;
     margin-left: 34px;
   }
+  
+
   
