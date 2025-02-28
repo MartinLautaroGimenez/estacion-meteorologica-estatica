@@ -379,6 +379,7 @@ LeerSensoresControlador::datosBMP LeerSensoresControlador::leerBMP()
         return {0, 0, 0, 0};
     }
 }
+
 //  Método para leer sensor BH1750
 float LeerSensoresControlador::leerBH()
 {
@@ -423,8 +424,7 @@ void LeerSensoresControlador::contadorPulsos() {
             LeerSensoresControlador::calcularVelocidad(pulseCount);
             pulseCount = 0; // Reiniciar el contador
         }
-        pulseCount++;
-        
+        pulseCount++;  
 }
 
 
