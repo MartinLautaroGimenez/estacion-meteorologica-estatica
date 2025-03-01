@@ -1,0 +1,4 @@
+dht22: 2.5mA
+bmp180: .65 mA (peak, general 5 a 15 uA)
+bh1750: 7mA
+LM1117: entrega hasta 1A
