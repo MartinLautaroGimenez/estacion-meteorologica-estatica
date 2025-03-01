@@ -1,84 +1,36 @@
-#ifndef WiFiController_h
-#define WiFiController_h
+#ifndef WIFI_CONTROLLER_H
+#define WIFI_CONTROLLER_H
 
 #include <WiFi.h>
-#include <Preferences.h>
-#include <WebServer.h>
-#include "LeerSensores.h"
-#include <WiFiClientSecure.h>
-#include "../lib/config.h"
+#include <ESPAsyncWebServer.h>
+#include <DNSServer.h>
 
-class ControladorWiFi 
-{
-    public:
-        // Credenciales WiFi predeterminadas (se usarán si no hay nada guardado en las preferencias)
-        const char* defaultSSID = RED_SSID_WIFI;
-        const char* defaultPassword = PASSWORD_WIFI;
+class WiFiController {
+public:
+  // Constructor que recibe las credenciales por defecto.
+  WiFiController(const char* defaultSSID, const char* defaultPassword);
 
-        // Creamos una instancia del servidor web en el puerto 80
-        // WebServer server(80);
-        // Métodos
-        ControladorWiFi();
+  // Inicializa la conexión. Si falla, inicia el portal cautivo.
+  void begin();
 
-        /*!
-        *  Destructor de la clase LeerSensoresControlador.
-        *  @brief   
-        *           Destructor 
-        *  @warning 
-        *           Necesaria para Destruir el objeto controlador.
-        */
-        ~ControladorWiFi();
+  // Procesa las peticiones del DNS (para redirigir a nuestro portal).
+  void handleClient();
 
-        // Declaración de funciones
-        void setupAP();
-        void handleRoot();
-        void handleSave();
-        bool connectToWiFi();
+private:
+  const char* _defaultSSID;
+  const char* _defaultPassword;
+  bool _connected;
+  AsyncWebServer _server;
+  DNSServer _dnsServer;
 
-        void clearPreferences();
+  // Intenta conectarse a la red por defecto.
+  bool connectToDefaultWiFi();
 
-    // private:
-        // Creamos un objeto Preferences para manejar la configuración en la memoria flash
-        // Preferences preferences;
-        // WebServer server;
-        // WiFiClass WiFi;
+  // Inicia el modo AP y configura el portal cautivo.
+  void startCaptivePortal();
 
+  // Configura las rutas del servidor (formulario de configuración, etc.).
+  void setupWebServer();
 };
-
-class ManejoDatosWifi
-{
-  public:
-
-    ManejoDatosWifi();
-
-    /*!
-    *  Destructor de la clase LeerSensoresControlador.
-    *  @brief   
-    *           Destructor 
-    *  @warning 
-    *           Necesaria para Destruir el objeto controlador.
-    */
-    ~ManejoDatosWifi();
-
-    // URL del servidor con HTTPS (asegúrate que el endpoint de Node-RED no incluya /admin)
-    const char* serverName = "https://emetec.wetec.um.edu.ar/weather";
-
-    WiFiClientSecure client;
-  // métodos
-    int enviarData(String postData);
-     
-    String jsonMaker(
-        LeerSensoresControlador::datosDHT dhtData,
-        LeerSensoresControlador::datosMQ mqData,
-        LeerSensoresControlador::datosBMP bmpData,  
-        float bhData,
-        float velViento,
-        String dirViento,
-        float lluvia
-        );
-};
-
 
 #endif
-
-

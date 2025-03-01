@@ -508,20 +508,20 @@ String LeerSensoresControlador::alimentaciones(String state){
     Serial.print("\nSe han cambiado los estados de los MOSFET de alimentación\n");
     String respuesta;
     if (strcmp(state.c_str(), "on")){
-        // digitalWrite(PIN_GROUND_1, true);
-        // digitalWrite(PIN_GROUND_2, true);
+        digitalWrite(PIN_GROUND_1, true);
+        digitalWrite(PIN_GROUND_2, true);
         respuesta = "Ambos MOSFET's activados";
     } else if (strcmp(state.c_str(), "off")){
-        // digitalWrite(PIN_GROUND_1, false);
-        // digitalWrite(PIN_GROUND_2, false);
+         digitalWrite(PIN_GROUND_1, false);
+        digitalWrite(PIN_GROUND_2, false);
         respuesta = "Ambos MOSFET's desactivados";
     }else if (strcmp(state.c_str(), "g1")){
-        // digitalWrite(PIN_GROUND_1, true);
-        // digitalWrite(PIN_GROUND_2, false);
+        digitalWrite(PIN_GROUND_1, true);
+        digitalWrite(PIN_GROUND_2, false);
         respuesta = "MOSFET de Sensores: Activado \t\tMOSFET de Comunicaciones: Desactivado \n";
     }else if (strcmp(state.c_str(), "g2")){
-        // digitalWrite(PIN_GROUND_1, false);
-        // digitalWrite(PIN_GROUND_2, true);
+        digitalWrite(PIN_GROUND_1, false);
+        digitalWrite(PIN_GROUND_2, true);
         respuesta = "MOSFET de Sensores: Desactivado \t\tMOSFET de Comunicaciones: Activado \n";
     } else {
         respuesta = "Estado incorrecto para los MOSFET's.";

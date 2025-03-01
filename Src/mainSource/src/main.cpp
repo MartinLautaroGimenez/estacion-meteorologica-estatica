@@ -3,116 +3,134 @@
 #include <PubSubClient.h>
 #include "../lib/LeerSensores.h"
 #include "../lib/config.h"
-// #include "../lib/WiFiController.h"
+#include "../lib/WiFiController.h" // Nueva librería para gestionar WiFi y portal cautivo
 #include "esp_sleep.h"
 #include <WiFiClientSecure.h>
-#include <ArduinoOTA.h>  // Añadido para la funcionalidad OTA
+#include <ArduinoOTA.h>
+#include <AsyncTCP.h>
+#include <ESPAsyncWebServer.h>
 
-// Instanciar objetos de tipos.
+// Instanciar objetos de sensores
 WiFiClient esp_EME;
-// ControladorWiFi controlerWiFi;
-// ManejoDatosWifi dataHandler;
 LeerSensoresControlador controladorSensores;
 
-// Definición de las credenciales de WiFi
-#define ssid RED_SSID_WIFI
-#define pass PASSWORD_WIFI
+// Servidor HTTP para recibir solicitudes POST que activan deep sleep
+WiFiServer server(80);
 
-// Definición de factores de tiempo a usar
-#define uS_TO_S_FACTOR 1000000  // Conversión de segundos a microsegundos
-#define TIME_TO_SLEEP_15_MIN  15 * 60  // Tiempo en segundos (15 minutos)
-#define TIME_TO_SLEEP_5_SEG  5   // Tiempo en segundos (5seg
-#define TIME_TO_SLEEP_2_MIN  2 * 60   // Tiempo en segundos (2min)
+// Definir las credenciales por defecto (estas se usan para conectar en modo STA)
+#define DEFAULT_SSID RED_SSID_WIFI
+#define DEFAULT_PASS PASSWORD_WIFI
 
-// Función para leer sensores
+// Factores de tiempo y configuración para deep sleep
+#define uS_TO_S_FACTOR 1000000       // Conversión de segundos a microsegundos
+#define TIME_TO_SLEEP_15_MIN (15 * 60) // 15 minutos (en segundos)
+#define TIME_TO_SLEEP_5_SEG 5        // 5 segundos (en segundos)
+#define TIME_TO_SLEEP_2_MIN (2 * 60)   // 2 minutos (en segundos)
+
+// Declaración de funciones
 void leerSensores();
-bool connectToWiFi();
 String jsonMaker(
     LeerSensoresControlador::datosDHT dhtData,
     LeerSensoresControlador::datosMQ mqData,
-    LeerSensoresControlador::datosBMP bmpData,    
+    LeerSensoresControlador::datosBMP bmpData,
     float bhData,
     float velViento,
     String dirViento,
-    LeerSensoresControlador::datosYL lluvia
-);
+    LeerSensoresControlador::datosYL lluvia);
 
-void setup()
-{
-  ////****Para ESP8266****////
-  // ESP.deepSleep(15*60*1000000);    // DEEP sleep 15 minutos
-  // ESP.deepSleep(5 * 1000000); // DEEP sleep de 5 segundos
-  ////****Para ESP32*****////
-  // Configurar el temporizador RTC para que despierte el ESP32 después de TIME_TO_SLEEP segundos
-  // esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP_15_MIN * uS_TO_S_FACTOR);
-  // esp_sleep_enable_timer_wakeup(TIME_TO_SLEEP_5_SEG * uS_TO_S_FACTOR);
+// Crear una instancia de WiFiController con las credenciales por defecto
+WiFiController wifiController(DEFAULT_SSID, DEFAULT_PASS);
 
-    // ++bootCount;
-    // Serial.printf("Boot number: %d\n", bootCount);
-
-    // print_wakeup_reason();
-
-  esp_sleep_enable_timer_wakeup(15*60*1000000);
-
+void setup() {
   Serial.begin(115200);
   String thisBoard = ARDUINO_BOARD;
   Serial.println(thisBoard);
 
+  // Configurar pines (por ejemplo, activar salidas para sensores)
   digitalWrite(PIN_GROUND_1, true);
   digitalWrite(PIN_GROUND_2, true);
 
-  // Conectar a la red WiFi
-  WiFi.begin(ssid, pass);
-  Serial.print("Conectando a WiFi...");
-  while (WiFi.status() != WL_CONNECTED) {
-    delay(1000);
-    Serial.print(".");
+  // Inicializar la conexión WiFi utilizando WiFiController
+  wifiController.begin();
+
+  // Si se logró conectar a la red (modo STA), iniciamos el servidor HTTP para recibir comandos
+  if (WiFi.status() == WL_CONNECTED) {
+    server.begin();
+    Serial.println("Servidor HTTP iniciado en el puerto 80 🚀");
   }
-  Serial.println("\nConectado a la red WiFi");
-  Serial.print("Dirección IP: ");
-  Serial.println(WiFi.localIP()); // Muestra la IP asignada
-  
-  
-  //  Inicializar controlador de sensores
+
+  // Inicializar el controlador de sensores
   controladorSensores.initControlador(BMP_TYPE_280, DHT_TYPE_22);
 
-  //  Inicializar conexión a la red
-  // setupWifi();
-
+  // Leer sensores y enviar los datos al servidor remoto
   leerSensores();
 
-  // **Configuración de OTA**
-  ArduinoOTA.setHostname("ESP32_OTA"); // Nombre del dispositivo
-  ArduinoOTA.setPassword("emetec2024*"); // Contraseña de OTA
-  ArduinoOTA.begin(); // Inicia el proceso de OTA
-  
-  Serial.println("Esperando 1 minuto para entrar en modo deepsleep...");
-  delay(60000);
+  // Configurar OTA (Actualización Over The Air)
+  ArduinoOTA.setHostname("ESP32_OTA");
+  ArduinoOTA.setPassword("emetec2024*");
+  ArduinoOTA.begin();
 
-  Serial.print("Entrando a modo Deep Sleep\n");
-  esp_deep_sleep_start();
+  // Activar las alimentaciones necesarias para sensores u otros módulos
+  controladorSensores.alimentaciones("on");
 }
 
-void loop()
-{
-  ArduinoOTA.handle(); // Para manejar las solicitudes OTA mientras se ejecuta el loop
-  
-  // Si estamos en modo punto de acceso, atendemos las peticiones web
-  // if (controlerWiFi.WiFi.getMode() == WIFI_AP) {
-  //   controlerWiFi.server.handleClient();
-  // }
+void loop() {
+  // Manejar actualizaciones OTA
+  ArduinoOTA.handle();
 
-  //leerSensores();
-  
-  // ESP.deepSleep(15*60*1000000);
-  //delay(2 * 60 * 1000);
-  //delay(TIME_TO_SLEEP_5_SEG * 1000);
+  // Procesar solicitudes del portal cautivo (si está activo)
+  wifiController.handleClient();
+
+  // Procesar solicitudes HTTP para deep sleep
+  WiFiClient client = server.available();
+  if (client) {
+    Serial.println("¡Nuevo cliente HTTP conectado!");
+    String request = "";
+    // Esperar a que haya datos disponibles
+    while (client.connected() && client.available() == 0)
+      delay(1);
+    request = client.readStringUntil('\r');
+    Serial.print("Solicitud recibida: ");
+    Serial.println(request);
+
+    if (request.indexOf("POST") >= 0) {
+      // Leer el cuerpo de la solicitud que contendrá la duración de deep sleep
+      String body = client.readString();
+      Serial.print("Cuerpo de la solicitud: ");
+      Serial.println(body);
+
+      int sleepDuration = body.toInt();
+      if (sleepDuration > 0) {
+        // Responder al cliente y activar deep sleep
+        client.println("HTTP/1.1 200 OK");
+        client.println("Content-Type: text/plain");
+        client.println("Connection: close");
+        client.println();
+        client.println("Deep Sleep activado por solicitud POST 😴");
+        delay(10);
+        client.stop();
+
+        Serial.printf("Deep Sleep activado por solicitud POST. Duración: %d segundos. ¡A descansar se ha dicho! 😎\n", sleepDuration);
+        delay(100);
+        esp_sleep_enable_timer_wakeup(sleepDuration * uS_TO_S_FACTOR);
+        esp_deep_sleep_start();
+      } else {
+        // Responder con error en caso de datos inválidos
+        client.println("HTTP/1.1 400 Bad Request");
+        client.println("Content-Type: text/plain");
+        client.println("Connection: close");
+        client.println();
+        client.println("Duración de Deep Sleep no válida.");
+        delay(10);
+        client.stop();
+        Serial.println("Duración de Deep Sleep no válida.");
+      }
+    }
+  }
 }
 
-
-void leerSensores(){
-  
-  //  Declaración de variables de lectura para sensores tomando cómo estructura de datos la de la clase LeerSensoresControlador
+void leerSensores() {
+  // Declaración de variables para almacenar los datos de los sensores
   LeerSensoresControlador::datosBMP bmpData;
   LeerSensoresControlador::datosDHT dhtData;
   LeerSensoresControlador::datosMQ mqData;
@@ -121,7 +139,7 @@ void leerSensores(){
   String dirViento;
   LeerSensoresControlador::datosYL lluvia;
 
-  //  Lectura y asignación de párametros de los sensores
+  // Realizar la lectura de cada sensor
   dhtData = controladorSensores.leerDHT();
   bmpData = controladorSensores.leerBMP();
   bh1750Data = controladorSensores.leerBH();
@@ -130,30 +148,28 @@ void leerSensores(){
   lluvia = controladorSensores.leerHojaMojada();
   velViento = controladorSensores.leerAnemometro();
 
-
-  // Crear cliente seguro para HTTPS
+  // Crear un cliente seguro para la conexión HTTPS
   WiFiClientSecure client;
-  // Si estás en un entorno de pruebas y no te importa la verificación del certificado:
-  client.setInsecure();
+  client.setInsecure(); // Para pruebas, deshabilitamos la verificación del certificado
 
-  // Conectar al servidor
+  // Conectar al servidor remoto mediante HTTPS
   if (client.connect(SERVIDOR_ETEC, 443)) {
     Serial.printf("\nConectado al servidor HTTPS: %s\n", SERVIDOR_ETEC);
 
-    //  Función para formatear a un dato tipo JSON valido
-    String datazo = jsonMaker(dhtData,mqData,bmpData,bh1750Data,velViento,dirViento,lluvia);
+    // Crear el string JSON con los datos obtenidos
+    String datazo = jsonMaker(dhtData, mqData, bmpData, bh1750Data, velViento, dirViento, lluvia);
 
-    // Enviar solicitud HTTP POST
+    // Enviar la solicitud HTTP POST
     client.println("POST /emeapi HTTP/1.1");
     client.println("Host: emetec.wetec.um.edu.ar");
     client.println("User-Agent: ESP32");
     client.println("Content-Type: application/json");
     client.print("Content-Length: ");
     client.println(datazo.length());
-    client.println();  // Línea vacía para indicar fin de encabezados
-    client.println(datazo);  // Cuerpo de la solicitud (datos)
+    client.println();       // Fin de las cabeceras HTTP
+    client.println(datazo); // Enviar el cuerpo de la solicitud
 
-    // Leer la respuesta del servidor
+    // Leer y mostrar la respuesta del servidor
     while (client.connected()) {
       String line = client.readStringUntil('\n');
       if (line == "\r") {
@@ -161,12 +177,8 @@ void leerSensores(){
         break;
       }
     }
-
-    // Imprimir el cuerpo de la respuesta
     String response = client.readString();
     Serial.println(response);
-
-  // Caso contrario indicar falla al servidor
   } else {
     Serial.println("Fallo al conectar al servidor HTTPS");
   }
@@ -175,38 +187,15 @@ void leerSensores(){
   client.stop();
 }
 
-bool connectToWiFi()
-{
-  WiFi.begin(ssid, pass);
-
-  // Esperamos hasta 10 segundos por la conexión
-  for (int i = 0; i < 20; i++) {
-    if (WiFi.status() == WL_CONNECTED) {
-      Serial.println("Conectado a WiFi");
-      Serial.println("Dirección IP: " + WiFi.localIP().toString());
-      return true;
-    }
-    delay(500);
-    Serial.print(".");
-  }
-
-  Serial.println("Fallo en la conexión WiFi");
-  return false;
-}
-
 String jsonMaker(
     LeerSensoresControlador::datosDHT dhtData,
     LeerSensoresControlador::datosMQ mqData,
-    LeerSensoresControlador::datosBMP bmpData,    
+    LeerSensoresControlador::datosBMP bmpData,
     float bhData,
     float velViento,
     String dirViento,
-    LeerSensoresControlador::datosYL lluvia
-)
-{
+    LeerSensoresControlador::datosYL lluvia) {
   String lluviaPosibilidad;
-  
-  // Evaluar la humedad relativa para determinar el mensaje
   if (dhtData.humedadRelativa > 85) {
     lluviaPosibilidad = "\"Hay posibilidades de que llueva\"";
   } else {
@@ -214,38 +203,35 @@ String jsonMaker(
   }
 
   String postData;
-  if (velViento < 0 
-  || strcmp(dirViento.c_str(), "default") == 0 || strcmp(dirViento.c_str(), "Pendiente") == 0)
-  {
-    // Crear los datos JSON para enviar (sin valores de viento y hoja mojada)
-    postData =  "{\"EME_n0/dht/temp\":" + String(dhtData.temperatura) + 
-                ",\"EME_n0/dht/hum\":" + String(dhtData.humedadRelativa) + 
-                ",\"EME_n0/dht/senst\":" + String(dhtData.sensacionTermica) + 
-                ",\"EME_n0/bmp/temp\":" + String(bmpData.temperatura) + 
-                ",\"EME_n0/bmp/pres\":" + String(bmpData.presionAbsoluta) + 
-                ",\"EME_n0/bmp/alt\":" + String(bmpData.altitud) + 
-                ",\"EME_n0/bmp/presnm\":" + String(bmpData.presionAlNivelDelMar) + 
-                ",\"EME_n0/bh/presnm\":" + String(bhData) + 
-                ",\"EME_n0/mq/ppmco2\":" + String(mqData.ppmCO2) + 
-                ",\"EME_n0/yl/lluv\":" + lluviaPosibilidad + 
-                ",\"EME_n0/viento/vel\":\"Proximamente\"" + 
-                ",\"EME_n0/viento/dir\":\"Proximamente\"" + 
-                "}";
+  // Si no se obtuvieron datos válidos de viento, se envían valores por defecto
+  if (velViento < 0 || strcmp(dirViento.c_str(), "default") == 0 || strcmp(dirViento.c_str(), "Pendiente") == 0) {
+    postData = "{\"EME_n0/dht/temp\":" + String(dhtData.temperatura) +
+               ",\"EME_n0/dht/hum\":" + String(dhtData.humedadRelativa) +
+               ",\"EME_n0/dht/senst\":" + String(dhtData.sensacionTermica) +
+               ",\"EME_n0/bmp/temp\":" + String(bmpData.temperatura) +
+               ",\"EME_n0/bmp/pres\":" + String(bmpData.presionAbsoluta) +
+               ",\"EME_n0/bmp/alt\":" + String(bmpData.altitud) +
+               ",\"EME_n0/bmp/presnm\":" + String(bmpData.presionAlNivelDelMar) +
+               ",\"EME_n0/bh/presnm\":" + String(bhData) +
+               ",\"EME_n0/mq/ppmco2\":" + String(mqData.ppmCO2) +
+               ",\"EME_n0/yl/lluv\":" + lluviaPosibilidad +
+               ",\"EME_n0/viento/vel\":\"Proximamente\"" +
+               ",\"EME_n0/viento/dir\":\"Proximamente\"" +
+               "}";
   } else {
-    // Crear los datos JSON para enviar (con valores completos)
-    postData =  "{\"EME_n0/dht/temp\":" + String(dhtData.temperatura) + 
-                ",\"EME_n0/dht/hum\":" + String(dhtData.humedadRelativa) + 
-                ",\"EME_n0/dht/senst\":" + String(dhtData.sensacionTermica) + 
-                ",\"EME_n0/bmp/temp\":" + String(bmpData.temperatura) + 
-                ",\"EME_n0/bmp/pres\":" + String(bmpData.presionAbsoluta) + 
-                ",\"EME_n0/bmp/alt\":" + String(bmpData.altitud) + 
-                ",\"EME_n0/bmp/presnm\":" + String(bmpData.presionAlNivelDelMar) + 
-                ",\"EME_n0/bh/presnm\":" + String(bhData) + 
-                ",\"EME_n0/mq/ppmco2\":" + String(mqData.ppmCO2) + 
-                ",\"EME_n0/yl/lluv\":" + lluviaPosibilidad + 
-                ",\"EME_n0/viento/vel\":" +  String(velViento) + 
-                ",\"EME_n0/viento/dir\":" + dirViento + 
-                "}";
+    postData = "{\"EME_n0/dht/temp\":" + String(dhtData.temperatura) +
+               ",\"EME_n0/dht/hum\":" + String(dhtData.humedadRelativa) +
+               ",\"EME_n0/dht/senst\":" + String(dhtData.sensacionTermica) +
+               ",\"EME_n0/bmp/temp\":" + String(bmpData.temperatura) +
+               ",\"EME_n0/bmp/pres\":" + String(bmpData.presionAbsoluta) +
+               ",\"EME_n0/bmp/alt\":" + String(bmpData.altitud) +
+               ",\"EME_n0/bmp/presnm\":" + String(bmpData.presionAlNivelDelMar) +
+               ",\"EME_n0/bh/presnm\":" + String(bhData) +
+               ",\"EME_n0/mq/ppmco2\":" + String(mqData.ppmCO2) +
+               ",\"EME_n0/yl/lluv\":" + lluviaPosibilidad +
+               ",\"EME_n0/viento/vel\":" + String(velViento) +
+               ",\"EME_n0/viento/dir\":" + dirViento +
+               "}";
   }
   return postData;
 }
@@ -255,12 +241,12 @@ String jsonMaker(
 ⣿⣿⡟⡹⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿
 ⣿⣿⢱⣶⣭⡻⢿⠿⣛⣛⣛⠸⣮⡻⣿⣿⡿⢛⣭⣶⣆⢿⣿
 ⣿⡿⣸⣿⣿⣿⣷⣮⣭⣛⣿⣿⣿⣿⣶⣥⣾⣿⣿⣿⡷⣽⣿
-⣿⡏⣾⣿⣿⡿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿
+⣿⡏⣾⣿⣿⡿⠿⢿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡇⣿⣿
 ⣿⣧⢻⣿⡟⣰⡿⠁⢹⣿⣿⣿⣋⣴⠖⢶⣝⢻⣿⣿⡇⣿⣿
 ⠩⣥⣿⣿⣴⣿⣇⠀⣸⣿⣿⣿⣿⣷⠀⢰⣿⠇⣿⣭⣼⠍⣿
 ⣿⡖⣽⣿⣿⣿⣿⣿⣿⣯⣭⣭⣿⣿⣷⣿⣿⣿⣿⣿⡔⣾⣿
 ⣿⡡⢟⡛⠻⠿⣿⣿⣿⣝⣨⣝⣡⣿⣿⡿⠿⠿⢟⣛⣫⣼⣿
 ⣿⣿⣿⡷⠝⢿⣾⣿⣿⣿⣿⣿⣿⣿⣿⣾⡩⣼⣿⣿⣿⣿⣿
 ⣿⣿⣯⡔⢛⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣭⣍⣨⠿⢿⣿⣿⣿
-⣿⡿⢫⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣝⣿
+⣿⡿⢫⣼⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣷⣶⣝⣿
 */
