@@ -15,6 +15,7 @@
 /*****************DEFINICIONES*************/
 //  Definiciones del sensor DHT22
 #define DHT_PIN 15
+// #define DHT_PIN 12 //PCB vers
 #define DHT_TYPE_22 "DHT22"
 #define DHT_TYPE_11 "DHT11"
 #define DHT_TYPE_AM2302 "AM2302"
