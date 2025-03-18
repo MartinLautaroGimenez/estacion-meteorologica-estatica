@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estación Meteorológica ETec</title>
+    <!-- Favicon -->
+    <link rel="shortcut icon" href="https://i.ibb.co/hctNTsB/logo.jpg">
+    <!-- Google Icons -->
+    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <!-- CSS personalizado local -->
+    <link rel="stylesheet" href="https://emetec.wetec.um.edu.ar/css">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <style>
+        .container {
+            display: flex;
+            flex-wrap: wrap;
+        }
+        .container > main, .container > .right {
+            flex: 1;
+        }  
+        #velocidadViento,
+        #direccionViento,
+        #datoNumero,
+	#procio
+	#ppmco2
+	#battery
+	#stermica
+        #sensorLluvia
+	#Altitud    {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo">
+            <img src="https://i.ibb.co/hctNTsB/logo.jpg" alt="">
+            <h2 class="etech2">Escuela Técnica de la Universidad de Mendoza<span class="danger"></span></h2>
+        </div>
+        <div class="navbar">
+            <a href="/em/index.html" class="active">
+                <span class="material-symbols-sharp">home</span>
+                <h3>Inicio</h3>
+            </a>
+            <a href="/em/datos.html">
+                <span class="material-symbols-sharp">format_list_bulleted</span>
+                <h3>Datos</h3>
+            </a> 
+            <a href="/em/graphs.html">
+                <span class="material-symbols-sharp">grid_view</span>
+                <h3>Gráficos Importantes</h3>
+            </a>
+        </div>
+        <div class="theme-toggler">
+            <span class="material-symbols-sharp active">light_mode</span>
+            <span class="material-symbols-sharp">dark_mode</span>
+        </div>
+    </header>
+
+    <div class="container">
+        <!-- Contenido Principal -->
+         <main>
+            aca main
+         </main>
+
+        <!-- Barra Lateral -->
+        <div class="right">
+            <!-- Anuncios -->
+            <div class="announcements">
+                <h2>Novedades</h2>
+                <div class="updates">
+                    <div class="message">
+                        <p><b>Nuevos firmware</b> Se están implementando nuevas versiones de firmware para la EME, optimizando su rendimiento frente a lecturas erroneas.</p>
+                        <small class="text-muted">Hace 2 días</small>
+                    </div>
+                    <div class="message">
+                        <p><b>Actualización dashboard</b> Se está trabajando para integrar los primeros 2 nodos meteorológicos que posee la ETec y poder migrar a más cantidades de nodos, separando la visualización de sus datos según corresponda.</p>
+                        <small class="text-muted">Hace 1 día</small>
+                    </div>
+                    <div class="message">
+                        <p><b>Ajuste de lógica </b> Se realizo exitosamente el merge desde la EMM a la actual EME, unificando data de web en el servidor del colegio.</p>
+                        <small class="text-muted">Ayer</small>
+                    </div>
+                </div>
+            </div>
+            <!-- Nuestro Equipo -->
+            <div class="leaves-tc">
+                <h2>Nuestro Equipo</h2>
+                <div class="g1">
+                    <div class="teacher">
+                        <div class="profile-photo"><img src="https://i.ibb.co/mt1CQTF/mario.jpg" data-mfp-src="https://i.ibb.co/mt1CQTF/mario.jpg" alt="" class="image-link" style="cursor: pointer;"></div>
+                        <div class="info">
+                            <h3>Mario Papetti</h3>
+                            <small class="text-muted">Tutor técnico en el área de electrónica e informática.</small>
+                        </div>
+                    </div>
+                    <div class="teacher">
+                        <div class="profile-photo"><img src="https://i.ibb.co/PtzgQcN/Luis.jpg" data-mfp-src="https://i.ibb.co/PtzgQcN/Luis.jpg" alt="" class="image-link" style="cursor: pointer;"></div>
+                        <div class="info">
+                            <h3>Luis Cuesta</h3>
+                            <small class="text-muted">Tutor técnico en el área de informática.</small>
+                        </div>
+                    </div>
+                </div>
+                <div class="teacher">
+                    <div class="profile-photo"><img src="https://i.ibb.co/NT6RjyM/Whats-App-Image-2024-08-02-at-14-50-40.jpg" data-mfp-src="https://i.ibb.co/NT6RjyM/Whats-App-Image-2024-08-02-at-14-50-40.jpg" alt="" class="image-link" style="cursor: pointer;"></div>
+                    <div class="info">
+                        <h3>Santiago Juarez</h3>
+                        <small class="text-muted">Integrante del equipo, estudiante de segundo año de la ETec.</small>
+                    </div>
+                </div>
+                <div class="teacher">
+                    <div class="profile-photo"><img src="https://i.ibb.co/3CRxcZ5/martin.jpg" data-mfp-src="https://i.ibb.co/3CRxcZ5/martin.jpg" alt="" class="image-link" style="cursor: pointer;"></div>
+                    <div class="info">
+                        <h3>Martín Gimenez</h3>
+                        <small class="text-muted">Integrante del equipo, estudiante de segundo año de la ETec.</small>
+                    </div>
+                </div>
+                <div class="teacher">
+                    <div class="profile-photo"><img src="https://i.ibb.co/dLJyKZN/augusto.jpg" alt="" class="image-link" data-mfp-src="https://i.ibb.co/dLJyKZN/augusto.jpg" style="cursor: pointer;"></div>
+                    <div class="info">
+                        <h3>Augusto Massut</h3>
+                        <small class="text-muted">Integrante del equipo, estudiante de sexto año electrónica de la ETec.</small>
+                    </div>
+                </div>
+                <div class="teacher">
+                    <div class="profile-photo"><img src="https://i.ibb.co/yVBnQLp/sofi.jpg" data-mfp-src="https://i.ibb.co/yVBnQLp/sofi.jpg" class="image-link" alt="" style="cursor: pointer;"></div>
+                    <div class="info">
+                        <h3>Sofia Rojas</h3>
+                        <small class="text-muted">Integrante del equipo, estudiante de cuarto año electrónica de la ETec.</small>
+                    </div>
+                </div>
+                <div class="teacher">
+                    <div class="profile-photo"><img src="https://i.ibb.co/QNt1vkk/Whats-App-Image-2024-11-14-at-15-30-01.jpg" data-mfp-src="https://i.ibb.co/QNt1vkk/Whats-App-Image-2024-11-14-at-15-30-01.jpg" class="image-link" alt="" style="cursor: pointer;"></div>
+                    <div class="info">
+                        <h3>Ivo Bartolomeo</h3>
+                        <small class="text-muted">Integrante del equipo, estudiante de sexto año electrónica de la ETec.</small>
+                    </div>
+                </div>
+                <div id="overlay" class="overlay">
+                    <img id="overlay-img" class="overlay-img">
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Footer -->
+    <footer>
+        <p>Cabe aclarar que la estación sigue una etapa de prueba y los datos pueden no estar muy precisos.</p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="https://emetec.wetec.um.edu.ar/js"></script>
+    <!-- <script src="app.js"></script> -->
+   
+</body>
+<!-- Elementos adicionales ocultos -->
+<div id="datoNumero" style="display: none;"></div>
+<div id="velocidadViento" style="display: none;"></div>
+<div id="direccionViento" style="display: none;"></div>
+<div id="sensorLluvia" style="display: none;"></div>
+<div id="battery" style="display: none;"></div>
+<div id="stermica" style="display: none;"></div>
+<div id="ppmco2" style="display: none;" ></div>
+<div id="procio" style="display: none;"></div>
+<div id="Altitud" style="display: none;"></div>
+</html>
