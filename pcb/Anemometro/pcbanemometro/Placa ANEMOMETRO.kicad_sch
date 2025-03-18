@@ -1436,7 +1436,7 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 66.04) (xy 231.14 66.04)
+			(xy 147.32 44.45) (xy 143.51 44.45)
 		)
 		(stroke
 			(width 0)
@@ -1526,7 +1526,7 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 69.85) (xy 232.41 69.85)
+			(xy 147.32 46.99) (xy 143.51 46.99)
 		)
 		(stroke
 			(width 0)
@@ -1816,16 +1816,6 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 68.58) (xy 234.95 69.85)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "db450562-ba05-4708-8c5d-e1df386d4c9b")
-	)
-	(wire
-		(pts
 			(xy 179.07 90.17) (xy 208.28 90.17)
 		)
 		(stroke
@@ -1856,7 +1846,7 @@
 	)
 	(wire
 		(pts
-			(xy 234.95 63.5) (xy 234.95 43.18)
+			(xy 147.32 41.91) (xy 147.32 36.83)
 		)
 		(stroke
 			(width 0)
@@ -1948,7 +1938,7 @@
 	)
 	(global_label "GND_G1"
 		(shape input)
-		(at 232.41 69.85 180)
+		(at 143.51 44.45 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -1958,7 +1948,7 @@
 		)
 		(uuid "416bbb1f-1ab3-44ee-821b-0c8d4f7adffc")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 222.1072 69.85 0)
+			(at 133.2072 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -1992,7 +1982,7 @@
 	)
 	(global_label "D_hall"
 		(shape input)
-		(at 231.14 66.04 180)
+		(at 143.51 46.99 180)
 		(fields_autoplaced yes)
 		(effects
 			(font
@@ -2002,7 +1992,7 @@
 		)
 		(uuid "58195ee2-e380-4c52-8f71-d3eb04a9f1bf")
 		(property "Intersheetrefs" "${INTERSHEET_REFS}"
-			(at 222.2888 66.04 0)
+			(at 134.6588 46.99 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2058,7 +2048,7 @@
 	)
 	(symbol
 		(lib_id "power:VD")
-		(at 234.95 43.18 0)
+		(at 147.32 36.83 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2067,7 +2057,7 @@
 		(fields_autoplaced yes)
 		(uuid "0c7d6c0d-b2fd-40c4-ba2e-633d5e7fbd58")
 		(property "Reference" "#PWR07"
-			(at 234.95 46.99 0)
+			(at 147.32 40.64 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2076,7 +2066,7 @@
 			)
 		)
 		(property "Value" "3.3V"
-			(at 234.95 38.1 0)
+			(at 147.32 31.75 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2084,7 +2074,7 @@
 			)
 		)
 		(property "Footprint" ""
-			(at 234.95 43.18 0)
+			(at 147.32 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2093,7 +2083,7 @@
 			)
 		)
 		(property "Datasheet" ""
-			(at 234.95 43.18 0)
+			(at 147.32 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2102,7 +2092,7 @@
 			)
 		)
 		(property "Description" "Power symbol creates a global label with name \"VD\""
-			(at 234.95 43.18 0)
+			(at 147.32 36.83 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2150,7 +2140,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 			(at 60.706 76.454 90)
 			(effects
 				(font
@@ -2287,7 +2277,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 			(at 73.406 53.594 90)
 			(effects
 				(font
@@ -2347,7 +2337,7 @@
 				)
 			)
 		)
-		(property "Value" "Conn_01x03"
+		(property "Value" "SS41"
 			(at 43.18 69.85 0)
 			(effects
 				(font
@@ -2898,7 +2888,7 @@
 	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
-		(at 240.03 66.04 0)
+		(at 152.4 44.45 0)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -2907,7 +2897,7 @@
 		(fields_autoplaced yes)
 		(uuid "66634e79-5a33-4fb2-bd16-a993dccb7432")
 		(property "Reference" "J2"
-			(at 242.57 64.7699 0)
+			(at 154.94 43.1799 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2915,8 +2905,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "Conn_01x03"
-			(at 242.57 67.3099 0)
+		(property "Value" "ToMother"
+			(at 154.94 45.7199 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2925,7 +2915,7 @@
 			)
 		)
 		(property "Footprint" "Connector_PinHeader_2.54mm:PinHeader_1x03_P2.54mm_Vertical"
-			(at 240.03 66.04 0)
+			(at 152.4 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2934,7 +2924,7 @@
 			)
 		)
 		(property "Datasheet" "~"
-			(at 240.03 66.04 0)
+			(at 152.4 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -2943,7 +2933,7 @@
 			)
 		)
 		(property "Description" "Generic connector, single row, 01x03, script generated (kicad-library-utils/schlib/autogen/connector/)"
-			(at 240.03 66.04 0)
+			(at 152.4 44.45 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3285,7 +3275,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Capacitor_THT:C_Radial_D5.0mm_H7.0mm_P2.00mm"
+		(property "Footprint" "Capacitor_THT:C_Radial_D8.0mm_H7.0mm_P3.50mm"
 			(at 208.28 66.04 0)
 			(effects
 				(font
@@ -3509,7 +3499,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P7.62mm_Horizontal"
+		(property "Footprint" "Resistor_THT:R_Axial_DIN0207_L6.3mm_D2.5mm_P10.16mm_Horizontal"
 			(at 119.126 53.594 90)
 			(effects
 				(font
