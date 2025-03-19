@@ -99,8 +99,12 @@ async function obtenerDatos(url) {
         const ultimoDato = ultimos10Datos[0];
         
         // Función para manejar valores nulos
-        const obtenerValor = (valor) => (valor === null || valor === "null" || valor === "Proximamente") ? "No disponible" : valor;
-
+        const obtenerValor = (valor) => (
+            valor === null || valor === "null" || valor === "Proximamente" || valor === 0 || valor === "0"
+                ? "No disponible"
+                : valor
+        );
+        
         document.getElementById('datoNumero').textContent = obtenerValor(ultimoDato["Dato N°"]);
         document.getElementById('fecha').textContent = obtenerValor(ultimoDato["Fecha"]);
         document.getElementById('battery').textContent = 

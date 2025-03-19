@@ -35,6 +35,7 @@ void setup() {
 }
 
 void loop() {
+  delay(2000);
   sensores.leerTodos();
 
   // Usamos jsonValue para cada valor numérico y String() para los enteros ya que se espera que sean 0 o 1.
