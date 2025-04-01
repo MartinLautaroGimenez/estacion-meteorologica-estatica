@@ -37,23 +37,21 @@ void setup() {
 void loop() {
   delay(2000);
   sensores.leerTodos();
-
+  String postData;
   // Usamos jsonValue para cada valor numérico y String() para los enteros ya que se espera que sean 0 o 1.
-  String postData = "{" 
-    "\"EME_n0/dht/temp\":" + jsonValue(sensores.tempDHT) +
-    ",\"EME_n0/dht/hum\":" + jsonValue(sensores.humDHT) +
-    ",\"EME_n0/dht/senst\":" + jsonValue(sensores.sensDHT) +
-    ",\"EME_n0/bmp/temp\":" + jsonValue(sensores.tempBMP) +
-    ",\"EME_n0/bmp/pres\":" + jsonValue(sensores.presBMP) +
-    ",\"EME_n0/bmp/alt\":" + jsonValue(sensores.altBMP) +
-    ",\"EME_n0/bmp/presnm\":" + jsonValue(sensores.presNMBMP) +
-    ",\"EME_n0/bh/presnm\":" + jsonValue(sensores.bh1750) +
-    ",\"EME_n0/mq/ppmco2\":" + jsonValue(sensores.ppmCO2) +
-    ",\"EME_n0/yl/lluv\":" + String(sensores.lluviaPosibilidad) +
-    ",\"EME_n0/viento/vel\":" + jsonValue(sensores.vientoVel) +
-    ",\"EME_n0/viento/dir\":" + String(sensores.vientoDir) +
-    "}";
-
+  postData =  "{\"EME_n0/dht/temp\":" + String(sensores.tempDHT) + 
+  ",\"EME_n0/dht/hum\":" + String(sensores.humDHT) + 
+  ",\"EME_n0/dht/senst\":" + String(sensores.sensDHT) + 
+  ",\"EME_n0/bmp/temp\":" + String(sensores.tempBMP) + 
+  ",\"EME_n0/bmp/pres\":" + String(sensores.presBMP) + 
+  ",\"EME_n0/bmp/alt\":" + String(sensores.altBMP) + 
+  ",\"EME_n0/bmp/presnm\":" + String(sensores.presNMBMP) + 
+  ",\"EME_n0/bh/luz\":" + String(sensores.bh1750) + 
+  ",\"EME_n0/mq/ppmco2\":" + String(sensores.ppmCO2) + 
+  ",\"EME_n0/yl/lluv\":" + String(-1) + 
+  ",\"EME_n0/viento/vel\":" + String(sensores.vientoVel) +  
+  ",\"EME_n0/viento/dir\":" + String(sensores.vientoDir) + 
+  "}";
   Serial.println("Datos a enviar:");
   Serial.println(postData);
 

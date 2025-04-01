@@ -107,11 +107,11 @@ header .logo img{
 
 header,
 header .navbar{
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    padding: 0 3rem;
-    color: var(--color-info);
+    display: flex !important;
+    align-items: center !important;
+    justify-content: flex-end !important;
+    padding: 0 3rem !important;
+    color: var(--color-info) !important;
 }
 header .navbar a{
     display: flex;
@@ -157,12 +157,12 @@ header .theme-toggler{
     margin-right: 2rem;
 }
 header .theme-toggler span{
-    font-size: 1.2rem;
-    width: 50%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    font-size: 1.2rem !important;
+    width: 50% !important;
+    height: 100% !important;
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
 }
 header .theme-toggler span.active{
     background-color: var(--color-primary);
@@ -239,11 +239,11 @@ main .subjects > div:hover{
     box-shadow: none;
 }
 main .subjects > div span{
-    background-color: var(--color-primary);
-    padding: .5rem;
-    border-radius: 50%;
-    color: var(--color-white);
-    font-size: 1.5rem;
+    background-color: var(--color-primary) !important;
+    padding: .5rem !important;
+    border-radius: 50% !important;
+    color: var(--color-white) !important;
+    font-size: 1.5rem !important;
 }
 main .subjects > div.mth span,main .subjects > div.cg span{background: var(--color-danger);}
 main .subjects > div.cs span{background: var(--color-success);}

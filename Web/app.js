@@ -100,7 +100,7 @@ async function obtenerDatos(url) {
         
         // Función para manejar valores nulos
         const obtenerValor = (valor) => (
-            valor === null || valor === "null" || valor === "Proximamente" || valor === 0 || valor === "0" || valor === "-1" || valor === -1 
+            valor === null || valor === "null" || valor === "Proximamente" || valor === 0 || valor === "0" || valor === "-1" || valor === -1  || valor < 0
                 ? "No disponible"
                 : valor
         );

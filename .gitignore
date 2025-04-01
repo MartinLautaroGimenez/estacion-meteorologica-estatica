@@ -4,7 +4,7 @@ mainSource/.vscode/c_cpp_properties.json
 mainSource/.vscode/launch.json
 mainSource/.vscode/ipch
 mainSource/*.code-workspace
-
+.pio
 # Excluir archivo de datos sobre redes internas
 mainSource/lib/config.h
 

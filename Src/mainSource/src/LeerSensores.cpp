@@ -1,15 +1,21 @@
 #include "Arduino.h"
 #include "../lib/LeerSensores.h"
-#include "config.h"
-#include <DHT.h>
-#define DHTTYPE DHT22  // Usamos DHT22 para DHT22
-#include <Adafruit_BMP280.h>
+
+#ifdef USE_DHT
+  #include <DHT.h>
+  #define DHTTYPE DHT22  // Usamos DHT22
+#endif
+
+#ifdef USE_BMP
+  #include <Adafruit_BMP280.h>
+#endif
+
 #ifdef USE_BH_SENSOR
   #include <BH1750.h>
 #endif
 
 #ifdef USE_ANEMOMETER
-volatile unsigned long anemometerPulseCount = 0;
+  volatile unsigned long anemometerPulseCount = 0;
 #endif
 
 #ifdef USE_ANEMOMETER
@@ -18,15 +24,26 @@ void IRAM_ATTR anemometerISR() {
 }
 #endif
 
-// Constructor: usamos el constructor por defecto para DHT
-LeerSensores::LeerSensores() : dht(DHT_PIN, DHTTYPE) {
+// Constructor: Inicializa dht solo si USE_DHT está definido
+LeerSensores::LeerSensores()
+#ifdef USE_DHT
+  : dht(DHT_PIN, DHTTYPE)
+#endif
+{
   tempDHT = 0;
   humDHT = 0;
   sensDHT = 0;
+#ifdef USE_BMP
   tempBMP = 0;
   presBMP = 0;
   altBMP = 0;
   presNMBMP = 0;
+#else
+  tempBMP = -1;
+  presBMP = -1;
+  altBMP = -1;
+  presNMBMP = -1;
+#endif
   bh1750 = 0;
   ppmCO2 = 0;
   lluviaPosibilidad = 0;
@@ -35,32 +52,65 @@ LeerSensores::LeerSensores() : dht(DHT_PIN, DHTTYPE) {
 }
 
 void LeerSensores::begin() {
-  // Configuramos el DHT con su pin y tipo usando setup()
-  DHT dht(DHT_PIN, DHTTYPE);
+  Serial.println("---- Estado de Sensores ----");
 
-  // Iniciar BMP280 (prueba con 0x76 o 0x77)
+#ifdef USE_DHT
+  Serial.println("DHT: ACTIVADO");
+  dht.begin(); // Inicializamos el DHT
+#else
+  Serial.println("DHT: DESACTIVADO");
+#endif
+
+#ifdef USE_BMP
+  Serial.println("BMP280: ACTIVADO");
   if (!bmp.begin(0x76)) {
     Serial.println("Error al iniciar BMP280!");
   }
+#else
+  Serial.println("BMP280: DESACTIVADO");
+#endif
 
 #ifdef USE_BH_SENSOR
-  // Iniciar BH1750 sin parámetros
+  Serial.println("BH1750: ACTIVADO");
   if (!lightMeter.begin()) {
     Serial.println("Error al iniciar BH1750!");
   }
+#else
+  Serial.println("BH1750: DESACTIVADO");
 #endif
 
 #ifdef USE_ANEMOMETER
+  Serial.println("Anemómetro: ACTIVADO");
   pinMode(PIN_ANEMOMETER, INPUT_PULLUP);
   attachInterrupt(digitalPinToInterrupt(PIN_ANEMOMETER), anemometerISR, FALLING);
+#else
+  Serial.println("Anemómetro: DESACTIVADO");
 #endif
 
 #ifdef USE_HOJA_MOJADA
+  Serial.println("Hoja Mojada: ACTIVADO");
   pinMode(HOJA_MOJADA_PIN, INPUT);
+#else
+  Serial.println("Hoja Mojada: DESACTIVADO");
 #endif
+
+#ifdef USE_MQ_SENSOR
+  Serial.println("MQ Sensor (MQ135): ACTIVADO");
+#else
+  Serial.println("MQ Sensor (MQ135): DESACTIVADO");
+#endif
+
+#ifdef USE_VELETA
+  Serial.println("Velocímetro (VELETA): ACTIVADO");
+#else
+  Serial.println("Velocímetro (VELETA): DESACTIVADO");
+#endif
+
+  Serial.println("---- Fin Estado de Sensores ----");
 }
 
 void LeerSensores::leerTodos() {
+#ifdef USE_DHT
   // --- DHT: Temperatura y Humedad ---
   float t = dht.readTemperature();
   float h = dht.readHumidity();
@@ -74,12 +124,25 @@ void LeerSensores::leerTodos() {
     humDHT = h;
     sensDHT = 1;
   }
+#else
+  tempDHT = -1;
+  humDHT = -1;
+  sensDHT = 0;
+#endif
 
+#ifdef USE_BMP
   // --- BMP280: Temperatura, Presión y Altitud ---
   tempBMP = bmp.readTemperature();
   presBMP = bmp.readPressure() / 100.0;
   altBMP = bmp.readAltitude(1013.25);
-  presNMBMP = presBMP - 1;
+  float presNMBMP = presBMP / pow(1.0 - (750.0 / 44330.0), 5.255);
+
+#else
+  tempBMP = -1;
+  presBMP = -1;
+  altBMP = -1;
+  presNMBMP = -1;
+#endif
 
 #ifdef USE_BH_SENSOR
   // --- BH1750: Nivel de luz (lux) ---
