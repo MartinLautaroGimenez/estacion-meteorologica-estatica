@@ -2458,6 +2458,16 @@
 	)
 	(wire
 		(pts
+			(xy 69.85 45.72) (xy 68.58 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "5ea9a6e7-9268-44b5-811c-d600fee2dd05")
+	)
+	(wire
+		(pts
 			(xy 120.65 27.94) (xy 120.65 29.21)
 		)
 		(stroke
@@ -2465,16 +2475,6 @@
 			(type default)
 		)
 		(uuid "6051db63-8a5a-40dd-a1b6-10a0af6b4658")
-	)
-	(wire
-		(pts
-			(xy 66.04 48.26) (xy 69.85 48.26)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "61bbe412-e726-4e05-86a6-8bc1b87de954")
 	)
 	(wire
 		(pts
@@ -2668,6 +2668,16 @@
 	)
 	(wire
 		(pts
+			(xy 72.39 45.72) (xy 69.85 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "86a00ff0-2b75-410f-a1ce-37020627487e")
+	)
+	(wire
+		(pts
 			(xy 34.29 22.86) (xy 34.29 40.64)
 		)
 		(stroke
@@ -2778,6 +2788,16 @@
 	)
 	(wire
 		(pts
+			(xy 68.58 45.72) (xy 69.85 46.99)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "a1886c01-124e-4268-8553-d39eec6f299c")
+	)
+	(wire
+		(pts
 			(xy 38.1 25.4) (xy 24.13 25.4)
 		)
 		(stroke
@@ -2808,7 +2828,7 @@
 	)
 	(wire
 		(pts
-			(xy 69.85 48.26) (xy 69.85 54.61)
+			(xy 69.85 46.99) (xy 69.85 54.61)
 		)
 		(stroke
 			(width 0)
@@ -2925,6 +2945,16 @@
 			(type default)
 		)
 		(uuid "c00c60b0-8db4-407b-b871-c87968f5f08a")
+	)
+	(wire
+		(pts
+			(xy 68.58 46.99) (xy 68.58 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c49683e3-d63f-4703-b201-d9b7ee1bfc39")
 	)
 	(wire
 		(pts
@@ -3098,16 +3128,6 @@
 	)
 	(wire
 		(pts
-			(xy 66.04 45.72) (xy 72.39 45.72)
-		)
-		(stroke
-			(width 0)
-			(type default)
-		)
-		(uuid "f3294de9-496c-4764-a7e7-003eed189433")
-	)
-	(wire
-		(pts
 			(xy 92.71 50.8) (xy 92.71 58.42)
 		)
 		(stroke
@@ -3126,10 +3146,29 @@
 		)
 		(uuid "f98fce99-4655-4448-a4af-732b544e00fb")
 	)
+	(wire
+		(pts
+			(xy 66.04 45.72) (xy 68.58 45.72)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "fe2e6c95-1e70-4ae1-9b15-c37f662b51a3")
+	)
+	(wire
+		(pts
+			(xy 66.04 48.26) (xy 68.58 48.26)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "ff67690b-de7e-4987-b780-3489993fe630")
+	)
 	(symbol
 		(lib_id "Connector_Generic:Conn_01x03")
-		(at 60.96 45.72 0)
-		(mirror y)
+		(at 60.96 45.72 180)
 		(unit 1)
 		(exclude_from_sim no)
 		(in_bom yes)
@@ -3137,7 +3176,7 @@
 		(dnp no)
 		(uuid "06b350b7-cea7-47c2-aff7-e5fc18b00431")
 		(property "Reference" "J1"
-			(at 60.96 39.37 0)
+			(at 60.96 52.07 0)
 			(effects
 				(font
 					(size 1.27 1.27)
@@ -3145,7 +3184,7 @@
 			)
 		)
 		(property "Value" "Conn_01x03"
-			(at 60.96 36.83 0)
+			(at 60.96 54.61 0)
 			(effects
 				(font
 					(size 1.27 1.27)
