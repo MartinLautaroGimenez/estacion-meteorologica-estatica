@@ -11,4 +11,3 @@ mainSource/lib/config.h
 # Excluir carpeta de backups de pcb
 mainSource/pcb/EME-backups/*.zip
 Web/old
-em
