@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Nuestra Historia - ETec</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- TimelineJS -->
+  <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+
+  <!-- Estilos simples -->
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #f4f4f4;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #f49892;
+      color: white;
+      text-align: center;
+      padding: 1.5rem 0;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 2rem;
+    }
+
+    #timeline-embed {
+      width: 100%;
+      height: 600px;
+      margin: 0 auto;
+    }
+
+    footer {
+      background-color: #333;
+      color: white;
+      padding: 1rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Nuestra Historia - Estación Meteorológica ETec</h1>
+  </header>
+
+  <!-- Aquí aparece la línea de tiempo -->
+  <div id="timeline-embed"></div>
+
+  <footer>
+    <p>&copy; 2025 ETec - Escuela Técnica de la Universidad de Mendoza</p>
+  </footer>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      var timeline_json = {
+        "title": {
+          "text": {
+            "headline": "Nuestra Historia",
+            "text": "El recorrido de nuestro equipo en el proyecto de la Estación Meteorológica"
+          },
+          "media": {
+            "url": "https://i.ibb.co/Q3TJVGP4/20240809-105548.jpg"
+          }
+        },
+        "events": [
+          {
+            "start_date": {
+              "year": "2023"
+            },
+            "text": {
+              "headline": "Nace la idea",
+              "text": "Una conversación entre mates y cables desencadenó este hermoso caos."
+            },
+            "media": {
+              "url": "https://i.ibb.co/ktrpqVG/IMG-20241105-WA0018.jpg"
+            }
+          },
+          {
+            "start_date": {
+              "year": "2024"
+            },
+            "text": {
+              "headline": "Prototipo inicial",
+              "text": "Entre soldaduras y cortocircuitos, vimos funcionar la primera versión real de la estación."
+            },
+            "media": {
+              "url": "https://i.ibb.co/hctNTsB/logo.jpg"
+            }
+          },
+          {
+            "start_date": {
+              "year": "2025"
+            },
+            "text": {
+              "headline": "¡Lanzamos la web!",
+              "text": "La estación ya tiene presencia digital. ¡Mirá qué facha! 😎"
+            },
+            "media": {
+              "url": "https://i.ibb.co/Q3TJVGP4/20240809-105548.jpg"
+            }
+          }
+        ]
+      };
+
+      window.timeline = new TL.Timeline('timeline-embed', timeline_json);
+    });
+  </script>
+
+</body>
+</html>

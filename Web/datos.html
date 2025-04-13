@@ -5,11 +5,26 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Estación Meteorológica ETec</title>
+    <!-- Favicon -->
     <link rel="shortcut icon" href="https://i.ibb.co/hctNTsB/logo.jpg">
+    <!-- Google Icons -->
     <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/xlsx/0.17.4/xlsx.full.min.js"></script>
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <link rel="stylesheet" href="https://emetec.wetec.um.edu.ar/css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- Magnific Popup -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <!-- CSS personalizado local -->
+    <!-- <link rel="stylesheet" href="https://emetec.wetec.um.edu.ar/css"> -->
+    <body data-active="datos">
+        <div id="header-placeholder"></div>
+    <link rel="stylesheet" href="frontend/style.css">
     <style>
         body {
             display: flex;
@@ -53,42 +68,17 @@
 </head>
 <body>
     <!-- Header -->
-    <header>
-        <div class="logo">
-            <img src="https://i.ibb.co/hctNTsB/logo.jpg" alt="">
-            <h2 class="etech2">Escuela Técnica de la Universidad de Mendoza<span class="danger"></span></h2>
-        </div>
-        <div class="navbar">
-            <a href="/EM/index.html">
-                <span class="material-symbols-sharp">home</span>
-                <h3>Inicio</h3>
-            </a>
-            <a href="/EM/datos.html" class="active">
-                <span class="material-symbols-sharp">format_list_bulleted</span>
-                <h3>Datos</h3>
-            </a> 
-            <a href="/EM/graphs.html">
-                <span class="material-symbols-sharp">grid_view</span>
-                <h3>Gráficos Importantes</h3>
-            </a>
-        </div>
-        <div class="theme-toggler">
-            <span class="material-symbols-sharp active">light_mode</span>
-            <span class="material-symbols-sharp">dark_mode</span>
-        </div>
-    </header>
-
+    <!-- <div id="header-placeholder"></div> -->
     <div class="container">
         <main>
             <div class="zarazap">
-                <h1>Datos Más Importantes</h1>
-                <select id="categoriaDropdown" class="dropdown">
+                <h1>Datos</h1>
+                <h3>Seleccione el nodo meteorológico: </h3>
+                <select id="categoriaDropdown" class="dropdown" style="margin-right: 0px;">
                     <option value="" disabled selected>Seleccione nodo meteorológico</option>
                     <option value="emetec" selected>EME: ETec</option>
                     <option value="test" selected>EMM: ETec</option>
                     <option value="sj" selected>EME: Colegio San Jorge</option>
-                    <option value="emm3" selected>EMM: Particular - Tincho</option>
-                    <option value="emm4" selected>EMM: Particular - Luis</option>
                     <!-- <option value="emmetec">EMM: ETec</option>
                     <option value="emmsj">EMM: Colegio San Jorge</option> -->
                 </select>
@@ -97,8 +87,8 @@
                     <h3>Descargar Excel</h3>
                 </div>
             </div>
-            <div class="subjects">
-                <div class="cs">
+            <div class="subjects" style="grid-template-columns: repeat(5, 1fr) !important">
+                <div class="cs" id="popup-fecha">
                     <span class="material-symbols-sharp">schedule</span>
                     <h3>Última Actualización</h3>
                     <h2 id="fecha"></h2>
@@ -108,80 +98,84 @@
                     <h3>Ubicación</h3>
                     <h3><a href="https://maps.app.goo.gl/2LxSamvsiX2J4FRX7" target="_blank" style="text-decoration: underline;">Escuela Técnica de la Universidad de Mendoza</a></h3>
                 </div>
-                <div class="mth">
+                <div class="mth" id="popup-voltaje">
                     <span class="material-symbols-sharp">battery_5_bar</span>
                     <h3>Voltaje de la batería</h3>
                     <h2 id="battery"></h2>
                 </div>
-                <div class="qw">
+                <div class="qw" id="popup-temperatura">
                     <span class="material-symbols-sharp">device_thermostat</span>
                     <h3>Temperatura</h3>
-                    <h2 id="temperatura">12/14</h2>
+                    <h2 id="temperatura"></h2>
                 </div>
-                <div class="mth">
+                <div class="mth" id="popup-stermica">
                     <span class="material-symbols-sharp">nest_thermostat_zirconium_eu</span>
                     <h3>Sensación Térmica</h3>
-                    <h2 id="stermica">12/14</h2>
+                    <h2 id="stermica"></h2>
                 </div>
-                <div class="cs">
+                <div class="cs" id="popup-bp">
                     <span class="material-symbols-sharp">cloud</span>
                     <h3>Presión Atmosférica</h3>
-                    <h2 id="presion">27/29</h2>
+                    <h2 id="presion"></h2>
                 </div>
-                <div class="eg">
+                <div class="eg" id="popup-hum">
                     <span class="material-symbols-sharp">water_drop</span>
                     <h3>Humedad Relativa</h3>
-                    <h2 id="humedad">27/30</h2>
+                    <h2 id="humedad"></h2>
                 </div>
-                <div class="cs">
+                <div class="cs" id="popup-altitud">
                     <span class="material-symbols-sharp">Altitude</span>
                     <h3>Altitud</h3>
-                    <h2 id="Altitud">Zaraza</h2>
+                    <h2 id="Altitud"></h2>
                 </div>
-                <div class="qw">
+                <div class="qw" id="popup-luz">
                     <span class="material-symbols-sharp">light_mode</span>
                     <h3>Nivel de luz</h3>
-                    <h2 id="nivelLuz">24/25</h2>
+                    <h2 id="nivelLuz"></h2>
                 </div>
-                <div class="cs">
+                <div class="cs" id="popup-rocio">
                     <span class="material-symbols-sharp">dew_point</span>
                     <h3>Punto de rocío</h3>
-                    <h2 id="procio">24/25</h2>
+                    <h2 id="procio"></h2>
                 </div>
-                <div class="mth">
+                <div class="mth" id="popup-co2">
                     <span class="material-symbols-sharp">eco</span>
                     <h3>Partes por millón CO2</h3>
-                    <h2 id="ppmco2">25/27</h2>
+                    <h2 id="ppmco2"></h2>
                 </div>
-                <div class="eg">
+                <div class="eg" id="popup-aire">
                     <span class="material-symbols-sharp">air</span>
                     <h3>Calidad del aire</h3>
-                    <h2 id="calidadAire">25/27</h2>
+                    <h2 id="calidadAire"></h2>
                 </div>
-                <div class="qw">
+                <div class="qw" id="popup-vientoVel">
                     <span class="material-symbols-sharp">wind_power</span>
                     <h3>Velocidad del viento</h3>
-                    <h2 id="velocidadViento">12/14</h2>
+                    <h2 id="velocidadViento"></h2>
                 </div>
-                <div class="eg">
+                <div class="eg" id="popup-vientoDir">
                     <span class="material-symbols-sharp">read_more</span>
                     <h3>Dirección del viento</h3>
-                    <h2 id="direccionViento">27/29</h2>
+                    <h2 id="direccionViento"></h2>
                 </div>
-                <div class="qw">
+                <div class="qw" id="popup-lluvia">
                     <span class="material-symbols-sharp">rainy</span>
                     <h3>Sensor de lluvia</h3>
-                    <h2 id="sensorLluvia">Proximamente</h2>
+                    <h2 id="sensorLluvia"></h2>
                 </div>
             </div>
+            
         </main>
         <footer>
             <p>Cabe aclarar que la estación sigue una etapa de prueba y los datos no pueden estar muy apegados a la realidad</p>
         </footer>
     </div>
-    <!-- <script src="app.js"></script> -->
-    <script src="https://emetec.wetec.um.edu.ar/js"></script>
-    <script src="https://emetec.wetec.um.edu.ar/exceljs"></script>
+    <script src="frontend/front.js"></script>
+    <script src="backend/back.js"></script>
+    <script src="https://cdn.sheetjs.com/xlsx-latest/package/dist/xlsx.full.min.js"></script>
+    <script src="backend/excel.js"></script>
+    <!-- <script src="https://emetec.wetec.um.edu.ar/js"></script> -->
+    <!-- <script src="https://emetec.wetec.um.edu.ar/exceljs"></script> -->
      <!-- <script src="excel.js"></script> -->
 </body>
 <div id="datoNumero"></div>
