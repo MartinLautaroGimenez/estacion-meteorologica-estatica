@@ -25,6 +25,30 @@
         <div id="header-placeholder"></div>
     <link rel="stylesheet" href="/frontend/style.css">
     <style>
+        /* Colores dinámicos para el estado */
+.card-estado-nodo.online {
+  border-left-color: #28a745;
+  background-color: #e6f9ec;
+  color: #155724;
+}
+
+.card-estado-nodo.offline {
+  border-left-color: #dc3545;
+  background-color: #fcebea;
+  color: #721c24;
+}
+
+.card-estado-nodo.unknown {
+  border-left-color: #6c757d;
+  background-color: #f1f1f1;
+  color: #495057;
+}
+.estado-texto {
+  all: unset !important; /* Elimina herencia salvaje de estilos */
+  font-weight: 600;
+  font-size: 1rem;
+  color: inherit;
+}
         body {
             display: flex;
             flex-direction: column;
