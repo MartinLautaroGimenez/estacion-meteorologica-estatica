@@ -16,6 +16,7 @@ categoriaDropdown.addEventListener('change', function () {
     } else if (selectedValue === 'sj') {
         obtenerDatos(apiSJ);
     }
+    verificarEstadoNodo();
 });
 
 // Función para obtener datos
@@ -295,7 +296,7 @@ function invokemap() {
                                 } else if (selectedValue === 'sj') {
                                     obtenerDatos(apiSJ);
                                 }
-            
+                                
                                 Swal.close(); // Cerrar el mapa popup
                             });
                         }
@@ -307,3 +308,48 @@ function invokemap() {
         }
     });
 }
+
+async function verificarEstadoNodo() {
+    const estadoElemento = document.getElementById('estadoNodo');
+    estadoElemento.innerHTML = ''; // Limpiar contenido
+    estadoElemento.className = 'card-estado-nodo compact'; // Resetear clases
+
+    if (categoriaDropdown.value !== 'emetec') {
+        estadoElemento.style.display = 'none';
+        return;
+    }
+
+    estadoElemento.style.display = 'flex';
+
+    try {
+        const response = await fetch('https://emetec.wetec.um.edu.ar/emsdb');
+        if (!response.ok) throw new Error('Error al obtener estado del nodo');
+
+        const data = await response.json();
+        const emetec = data.find(estacion => estacion.Nombre.includes('ETec'));
+
+        if (!emetec) {
+            estadoElemento.classList.add('unknown');
+            estadoElemento.innerHTML = `
+                <i class="fa-solid fa-circle-question"></i>
+                <span>Estado del nodo desconocido</span>
+            `;
+        } else {
+            const enLinea = emetec.Estado === 'En Linea';
+            estadoElemento.classList.add(enLinea ? 'online' : 'offline');
+            estadoElemento.innerHTML = enLinea
+            ? `<i class="fa-solid fa-circle-check"></i><span class="estado-texto">Nodo en línea</span>`
+            : `<i class="fa-solid fa-circle-xmark"></i><span class="estado-texto">Nodo fuera de línea</span>`;
+          
+        }
+    } catch (error) {
+        console.error('Error al verificar el estado del nodo:', error);
+        estadoElemento.classList.add('unknown');
+        estadoElemento.innerHTML = `
+            <i class="fa-solid fa-triangle-exclamation"></i>
+            <span>No se pudo obtener el estado del nodo</span>
+        `;
+    }
+}
+
+
