@@ -18,35 +18,491 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
   <!-- CSS personalizado local -->
-  <link rel="stylesheet" href="/frontend/styles_au.css">
+  <link rel="stylesheet" href="/frontend/style.css">
   <!-- AOS (Animate On Scroll) -->
   <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
   <!-- Swiper Slider -->
   <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+  <!-- Variables CSS con colores en tonos pastel -->
   <style>
+    :root {
+      --color-primary: #a29bfe; /* Lila pastel */
+      --color-danger: #ff7675;  /* Rosa rojizo pastel */
+      --color-success: #55efc4; /* Verde agua pastel */
+      --color-warning: #ffeaa7; /* Amarillo pastel */
+      --color-white: #ffffff;
+      --color-info: #b2bec3;    /* Gris pastel */
+      --color-dark: #2d3436;    /* Gris oscuro */
+      --color-light: rgba(178, 190, 195, 0.18);
+      --color-background: #f5f6fa;
+
+      --card-border-radius: 2rem;
+      --border-radius-1: 0.4rem;
+      --border-radius-2: 1.2rem;
+
+      --card-padding: 1.8rem;
+      --box-shadow: 0 2rem 3rem var(--color-light);
+    }
+
+    .dark-theme {
+      --color-background: #181a1e;
+      --color-white: #202528;
+      --color-dark: #edeffd;
+      --color-info: #a3bdcc;
+      --color-light: rgba(0, 0, 0, 0.4);
+      --box-shadow: 0 2rem 3rem var(--color-light);
+    }
+  </style>
+
+  <!-- Estilos básicos + retoques pastel -->
+  <style>
+    * {
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--color-background);
+      color: var(--color-dark);
+    }
+
+    a,
+    button {
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .container > main,
+    .container > .right {
+      flex: 1;
+    }
+
+    /* Ocultos */
+    #velocidadViento,
+    #direccionViento,
+    #datoNumero,
+    #procio,
+    #ppmco2,
+    #battery,
+    #stermica,
+    #sensorLluvia,
+    #Altitud {
+      display: none;
+    }
+
+    /* Ajustes responsivos generales */
+    .responsive-container-block {
+      width: 100%;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      justify-content: flex-start;
+    }
+
+    .responsive-container-block.bigContainer {
+      padding: 10px 30px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text-blk {
+      margin: 0;
+      padding: 10px;
+      line-height: 25px;
+    }
+
+    .text-blk.headingText {
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 34px;
+      color: var(--color-dark);
+      padding: 0 10px;
+      margin: 0;
+    }
+
+    .allText {
+      padding: 0;
+      margin: 0 0 0 40px;
+      width: 40%;
+    }
+
+    .mainImg {
+      color: var(--color-dark);
+      width: 55%;
+      height: auto;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius-2);
+    }
+
+    @media (max-width: 1024px) {
+      .allText {
+        margin: 0 0 0 20px;
+      }
+      .mainImg {
+        width: 55%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .allText {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .mainImg {
+        width: 90%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .mainImg {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <!-- NUEVO CSS: "Acerca de Nosotros" minimalista con fondo degradado y dos columnas -->
+  <style>
+    /* =====================
+       HERO Section
+    ===================== */
     #hero {
-  position: relative;
-  background: url('frontend/images/eme.jpg') center center/cover no-repeat;
-  height: 70vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: white;
-  text-align: center;
-  border-bottom-left-radius: var(--border-radius-2);
-  border-bottom-right-radius: var(--border-radius-2);
-  overflow: hidden;
-}
-#github-cta {
-  padding: 4rem 1rem;
-  background: url('frontend/images/emm.jpeg') no-repeat center center/cover;
-  color: #fff;
-  position: relative;
-  margin-top: 2rem;
-  border-radius: var(--border-radius-2);
-  overflow: hidden;
-}
-#contacto {
+      position: relative;
+      background: url('frontend/images/eme.jpg') center center/cover no-repeat;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      border-bottom-left-radius: var(--border-radius-2);
+      border-bottom-right-radius: var(--border-radius-2);
+      overflow: hidden;
+    }
+    #hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    #hero .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    #hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+      color: white;
+    }
+    #hero p {
+      font-size: 1.5rem;
+      color: white;
+    }
+  
+    /* =====================
+       ACERCA DE NOSOTROS
+    ===================== */
+    #acerca {
+      margin-top: 2rem;
+      padding: 4rem 1rem;
+      border-radius: var(--border-radius-2);
+      color: var(--color-white);
+      /* Degradado simple en diagonal para modo claro */
+      background: linear-gradient(
+        135deg,
+        var(--color-primary) 0%,
+        var(--color-warning) 100%
+      );
+    }
+    .dark-theme #acerca {
+      /* Degradado alternativo para modo oscuro */
+      background: linear-gradient(
+        135deg,
+        #2c3e50 0%,
+        #4ca1af 100%
+      );
+    }
+    #acerca .acerca-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    #acerca .acerca-text {
+      flex: 1;
+      min-width: 280px;
+    }
+    #acerca h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+    #acerca p {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    #acerca .acerca-image {
+      flex: 1;
+      min-width: 280px;
+      text-align: center;
+    }
+    #acerca .acerca-image img {
+      max-width: 90%;
+      border-radius: var(--border-radius-2);
+      box-shadow: var(--box-shadow);
+    }
+    @media (max-width: 768px) {
+      #acerca .acerca-container {
+        flex-direction: column-reverse;
+      }
+      #acerca .acerca-image img {
+        max-width: 100%;
+      }
+    }
+  
+    /* =====================
+       NUESTRA HISTORIA
+    ===================== */
+    #historia {
+      padding: 4rem 1rem;
+      background: var(--color-white);
+      border-radius: var(--border-radius-2);
+      margin-top: 2rem;
+    }
+    /* Timeline original */
+    #timeline-embed {
+      width: 100%;
+      height: 600px;
+      margin: 0 auto;
+    }
+  
+    /* =====================
+       MISIÓN & VISIÓN
+    ===================== */
+    #mision-vision {
+      padding: 4rem 1rem;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-warning) 100%);
+      border-radius: var(--border-radius-2);
+      margin-top: 2rem;
+    }
+    .dark-theme #mision-vision {
+      background: linear-gradient(135deg, #6a0572 0%, #d72638 100%);
+    }
+    #mision-vision h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: var(--color-dark);
+      text-align: center;
+    }
+    #mision-vision .content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    #mision-vision .content .box {
+      flex: 1;
+      min-width: 280px;
+      background: var(--color-white);
+      padding: 1.5rem;
+      border-radius: var(--border-radius-1);
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+    #mision-vision .content .box img {
+      max-width: 100%;
+      border-radius: var(--border-radius-2);
+      margin-bottom: 1rem;
+    }
+    #mision-vision .content .box p {
+      font-size: 1.1rem;
+      color: var(--color-dark);
+    }
+  
+    /* =====================
+       PROYECTOS (Slider)
+    ===================== */
+    #proyectos {
+      padding: 4rem 1rem;
+      background: var(--color-white);
+      border-radius: var(--border-radius-2);
+      margin-top: 2rem;
+      text-align: center;
+    }
+    #proyectos h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: var(--color-dark);
+    }
+    #proyectos p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      color: var(--color-info);
+    }
+    .swiper-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 2rem auto;
+      border-radius: var(--border-radius-2);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+    .swiper-slide img {
+      width: 100%;
+      border-radius: var(--border-radius-2);
+    }
+  
+    /* =====================
+       NUESTRO EQUIPO
+    ===================== */
+    #equipo {
+      padding: 4rem 1rem;
+      background: var(--color-white);
+      border-radius: var(--border-radius-2);
+      margin-top: 2rem;
+    }
+    .dark-theme #equipo {
+      background: linear-gradient(135deg, #434343 0%, #2a2a2a 100%);
+      color: var(--color-white);
+    }
+    #equipo h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: var(--color-dark);
+      text-align: center;
+    }
+    #equipo p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      color: var(--color-info);
+      text-align: center;
+    }
+    #equipo .team-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  
+    /* -- Versión mejorada con 170x170, fondos y hover suaves -- */
+    .team-member {
+      width: 170px; /* Ajuste a 170x170 */
+      height: 170px;
+      border: 2px solid var(--color-light);
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+      text-align: center;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+      box-shadow: var(--box-shadow);
+      background: var(--color-white); /* Para contorno claro */
+    }
+    .dark-theme .team-member {
+      background: var(--color-dark-varient);
+      border-color: #444;
+    }
+    .team-member img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.3s;
+    }
+    .team-member:hover img {
+      transform: scale(1.05);
+    }
+    .team-member p {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      padding: 0 0.5rem;
+      line-height: 1.3rem;
+      color: var(--color-dark);
+    }
+    .dark-theme .team-member p {
+      color: var(--color-white);
+    }
+  
+    /* =====================
+       GitHub Call-to-Action
+    ===================== */
+    #github-cta {
+      padding: 4rem 1rem;
+      background: url('frontend/images/emm.jpeg') no-repeat center center/cover;
+      color: #fff;
+      position: relative;
+      margin-top: 2rem;
+      border-radius: var(--border-radius-2);
+      overflow: hidden;
+    }
+    #github-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+      border-radius: var(--border-radius-2);
+    }
+    #github-cta .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    #github-cta h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    #github-cta p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      color: white;
+    }
+    #github-cta a {
+      display: inline-block;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      padding: 0.8rem 2rem;
+      border-radius: var(--border-radius-1);
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+    #github-cta a:hover {
+      background-color: var(--color-success);
+    }
+  
+    /* =====================
+       CONTACTO
+    ===================== */
+    #contacto {
       background: url('frontend/images/tucuman.jpg') no-repeat center center/cover;
       color: #fff;
       position: relative;
@@ -56,8 +512,202 @@
       overflow: hidden;
       text-align: center;
     }
+    #contacto::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 0;
+      border-radius: var(--border-radius-2);
+    }
+    #contacto .contacto-content {
+      position: relative;
+      z-index: 1;
+      max-width: 850px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: var(--border-radius-2);
+    }
+    #contacto h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    #contacto p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: white;
+    }
+    /* Tarjetas de contacto */
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .contact-card {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: var(--border-radius-2);
+      padding: 1rem 1.2rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: background 0.3s;
+    }
+    .contact-card:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .contact-icon {
+      font-size: 2rem;
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .contact-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+      color: white;
+    }
+    .contact-info p,
+    .contact-info a {
+      font-size: 0.95rem;
+      color: white;
+      text-decoration: underline;
+    }
+    .contact-info a:hover {
+      color: var(--color-success);
+    }
+  
+    /* Mapa */
+    #mapaGoogle {
+      width: 100%;
+      height: 300px;
+      border-radius: var(--border-radius-2);
+      box-shadow: var(--box-shadow);
+      margin: 0 auto;
+    }
+  
+   /* =====================
+   POPUP OVERLAY
+===================== */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+
+  display: none;           /* Oculto por defecto */
+  opacity: 0;              /* Para animación fade */
+  pointer-events: none;    /* Evitar clicks cuando está oculto */
+  transition: opacity 0.3s ease;
+}
+.popup-overlay.active {
+  display: flex;           /* Al activarlo, mostramos y animamos */
+  opacity: 1;
+  pointer-events: auto;
+  align-items: center;
+  justify-content: center;
+}
+
+/* =====================
+   POPUP CONTENT
+===================== */
+.popup-content {
+  background: var(--color-white);
+  color: var(--color-dark);
+  padding: 2rem;
+  max-width: 900px; /* Aumentamos el ancho */
+  width: 90%;
+  display: flex;
+  gap: 2rem; /* Más separación */
+  border-radius: var(--border-radius-2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+
+  /* Animación de zoom */
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+.popup-content.active {
+  transform: scale(1);
+}
+
+.dark-theme .popup-content {
+  background: var(--color-dark-varient);
+  color: var(--color-white);
+}
+
+/* Foto más grande */
+.popup-content img {
+  width: 300px;  /* Mayor tamaño */
+  height: 300px; /* Mantener foto cuadrada */
+  border-radius: var(--border-radius-1);
+  object-fit: cover;
+  box-shadow: 0 0 6px var(--color-light);
+}
+
+/* =====================
+   TEXTO DENTRO DEL POPUP
+===================== */
+.popup-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  max-width: 500px; /* Un poco más de espacio para texto */
+}
+
+/* Estilamos el título un poco más grande y con más “onda” */
+.popup-text h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem; /* Más grande */
+  color: var(--color-dark);
+  font-weight: 600; /* Negrita */
+}
+.dark-theme .popup-text h3 {
+  color: var(--color-white);
+}
+
+/* Texto descriptivo más ameno */
+.popup-text p {
+  line-height: 1.6rem; 
+  color: var(--color-dark);
+  font-size: 1.1rem; /* Levemente más grande */
+  margin-top: 0.5rem;
+}
+.dark-theme .popup-text p {
+  color: var(--color-white);
+  opacity: 0.9;
+}
+
+/* =====================
+   BOTÓN DE CERRAR
+===================== */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: var(--color-black);
+  cursor: pointer;
+  z-index: 10000;
+  transition: transform 0.3s;
+}
+.close-btn:hover {
+  transform: rotate(90deg); /* Efecto gracioso al hover */
+}
 
   </style>
+  
+
 </head>
 
 <body data-active="about_us">
