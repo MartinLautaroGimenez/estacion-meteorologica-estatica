@@ -9,5 +9,6 @@ mainSource/*.code-workspace
 mainSource/lib/config.h
 
 # Excluir carpeta de backups de pcb
-mainSource/pcb/EME-backups/*.zip
+pcb/MotherBoard/EME-backups
+pcb/MotherBoard/EME-backups/[_#~]*
 Web/old
