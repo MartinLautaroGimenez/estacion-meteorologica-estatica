@@ -49,7 +49,8 @@ void handleCaptivePortal();
 void setup() {
   Serial.begin(115200);
   Serial.println("Arrancando estación meteorológica... 🌦️");
-
+  Serial.print("Dirección MAC del ESP32: ");
+  Serial.println(WiFi.macAddress());
   // Leer credenciales almacenadas
   preferences.begin("wifi", true);
   String ssid = preferences.getString("ssid", "");
