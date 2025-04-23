@@ -1,7 +1,6 @@
 let apiEMEtec = 'https://emetec.wetec.um.edu.ar/exceleme';
 let apiTest = 'https://emetec.wetec.um.edu.ar/excelemm';
-let apiEMM3_Alt = 'https://emetec.wetec.um.edu.ar/exceleme3'; // Renombrado para evitar conflictos
-let apiSJ = 'https://emetec.wetec.um.edu.ar/excelemesj';
+let apiSJexcel = 'https://emetec.wetec.um.edu.ar/excelemesj';
 
 // Función para establecer cookies
 function setCookie(name, value, days) {
@@ -39,10 +38,8 @@ async function descargarDatosEnXLSX() {
             apiUrl = apiEMEtec;
         } else if (selectedCategory === 'test') {
             apiUrl = apiTest;
-        } else if (selectedCategory === 'emm3') {
-            apiUrl = apiEMM3_Alt; // Usar la constante renombrada
         } else if (selectedCategory === 'sj') {
-            apiUrl = apiSJ;
+            apiUrl = apiSJexcel;
         }
         else {
             console.error('Categoría inválida:', selectedCategory);

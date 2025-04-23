@@ -1,472 +1,1028 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estación Meteorológica ETec</title>
-    <!-- Favicon -->
-    <link rel="shortcut icon" href="https://i.ibb.co/hctNTsB/logo.jpg">
-    <!-- Google Icons -->
-    <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <!-- Magnific Popup -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
-    <!-- CSS personalizado local -->
-    <link rel="stylesheet" href="https://emetec.wetec.um.edu.ar/css">
-    <!-- <link rel="stylesheet" href="style.css"> -->
-    <style>
-        .container {
-            display: flex;
-            flex-wrap: wrap;
-        }
-        .container > main, .container > .right {
-            flex: 1;
-        }  
-        #velocidadViento,
-        #direccionViento,
-        #datoNumero,
-	#procio
-	#ppmco2
-	#battery
-	#stermica
-        #sensorLluvia
-	#Altitud    {
-            display: none;
-        }
-        * {
-  font-family: Nunito, sans-serif;
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Estación Meteorológica ETec</title>
+  <!-- Favicon -->
+  <link rel="shortcut icon" href="https://i.ibb.co/hctNTsB/logo.jpg" />
+  <!-- Google Icons -->
+  <link href="https://fonts.googleapis.com/icon?family=Material+Symbols+Sharp" rel="stylesheet">
+  <!-- jQuery (para otras partes del sitio) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+  <!-- TimelineJS -->
+  <link title="timeline-styles" rel="stylesheet" href="https://cdn.knightlab.com/libs/timeline3/latest/css/timeline.css">
+  <script src="https://cdn.knightlab.com/libs/timeline3/latest/js/timeline.js"></script>
+  <!-- Magnific Popup (solo si lo usás en otra parte) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/magnific-popup.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/magnific-popup.js/1.1.0/jquery.magnific-popup.min.js"></script>
+  <!-- CSS personalizado local -->
+  <link rel="stylesheet" href="/frontend/style.css">
+  <!-- AOS (Animate On Scroll) -->
+  <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+  <!-- Swiper Slider -->
+  <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css">
+
+  <!-- Variables CSS con colores en tonos pastel -->
+  <style>
+    :root {
+      --color-primary: #a29bfe; /* Lila pastel */
+      --color-danger: #ff7675;  /* Rosa rojizo pastel */
+      --color-success: #55efc4; /* Verde agua pastel */
+      --color-warning: #ffeaa7; /* Amarillo pastel */
+      --color-white: #ffffff;
+      --color-info: #b2bec3;    /* Gris pastel */
+      --color-dark: #2d3436;    /* Gris oscuro */
+      --color-light: rgba(178, 190, 195, 0.18);
+      --color-background: #f5f6fa;
+
+      --card-border-radius: 2rem;
+      --border-radius-1: 0.4rem;
+      --border-radius-2: 1.2rem;
+
+      --card-padding: 1.8rem;
+      --box-shadow: 0 2rem 3rem var(--color-light);
+    }
+
+    .dark-theme {
+      --color-background: #181a1e;
+      --color-white: #202528;
+      --color-dark: #edeffd;
+      --color-info: #a3bdcc;
+      --color-light: rgba(0, 0, 0, 0.4);
+      --box-shadow: 0 2rem 3rem var(--color-light);
+    }
+  </style>
+
+  <!-- Estilos básicos + retoques pastel -->
+  <style>
+    * {
+      font-family: 'Nunito', sans-serif;
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      background: var(--color-background);
+      color: var(--color-dark);
+    }
+
+    a,
+    button {
+      transition: all 0.3s ease;
+    }
+
+    .container {
+      display: flex;
+      flex-wrap: wrap;
+    }
+    .container > main,
+    .container > .right {
+      flex: 1;
+    }
+
+    /* Ocultos */
+    #velocidadViento,
+    #direccionViento,
+    #datoNumero,
+    #procio,
+    #ppmco2,
+    #battery,
+    #stermica,
+    #sensorLluvia,
+    #Altitud {
+      display: none;
+    }
+
+    /* Ajustes responsivos generales */
+    .responsive-container-block {
+      width: 100%;
+      padding: 10px;
+      display: flex;
+      flex-wrap: wrap;
+      margin: 0 auto;
+      justify-content: flex-start;
+    }
+
+    .responsive-container-block.bigContainer {
+      padding: 10px 30px;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .text-blk {
+      margin: 0;
+      padding: 10px;
+      line-height: 25px;
+    }
+
+    .text-blk.headingText {
+      font-size: 25px;
+      font-weight: 700;
+      line-height: 34px;
+      color: var(--color-dark);
+      padding: 0 10px;
+      margin: 0;
+    }
+
+    .allText {
+      padding: 0;
+      margin: 0 0 0 40px;
+      width: 40%;
+    }
+
+    .mainImg {
+      color: var(--color-dark);
+      width: 55%;
+      height: auto;
+      box-shadow: var(--box-shadow);
+      border-radius: var(--border-radius-2);
+    }
+
+    @media (max-width: 1024px) {
+      .allText {
+        margin: 0 0 0 20px;
+      }
+      .mainImg {
+        width: 55%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .container {
+        flex-direction: column;
+      }
+      .allText {
+        width: 100%;
+        margin: 0;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+      .mainImg {
+        width: 90%;
+      }
+    }
+
+    @media (max-width: 500px) {
+      .mainImg {
+        width: 100%;
+      }
+    }
+  </style>
+
+  <!-- NUEVO CSS: "Acerca de Nosotros" minimalista con fondo degradado y dos columnas -->
+  <style>
+    /* =====================
+       HERO Section
+    ===================== */
+    #hero {
+      position: relative;
+      background: url('frontend/images/eme.jpg') center center/cover no-repeat;
+      height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      text-align: center;
+      border-bottom-left-radius: var(--border-radius-2);
+      border-bottom-right-radius: var(--border-radius-2);
+      overflow: hidden;
+    }
+    #hero::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.5);
+    }
+    #hero .hero-content {
+      position: relative;
+      z-index: 1;
+    }
+    #hero h1 {
+      font-size: 3rem;
+      margin-bottom: 1rem;
+      letter-spacing: 1px;
+      color: white;
+    }
+    #hero p {
+      font-size: 1.5rem;
+      color: white;
+    }
+  
+    /* =====================
+       ACERCA DE NOSOTROS
+    ===================== */
+    #acerca {
+      margin-top: 2rem;
+      padding: 4rem 1rem;
+      border-radius: var(--border-radius-2);
+      color: var(--color-white);
+      /* Degradado simple en diagonal para modo claro */
+      background: linear-gradient(
+        135deg,
+        var(--color-primary) 0%,
+        var(--color-warning) 100%
+      );
+    }
+    .dark-theme #acerca {
+      /* Degradado alternativo para modo oscuro */
+      background: linear-gradient(
+        135deg,
+        #2c3e50 0%,
+        #4ca1af 100%
+      );
+    }
+    #acerca .acerca-container {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    #acerca .acerca-text {
+      flex: 1;
+      min-width: 280px;
+    }
+    #acerca h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+    #acerca p {
+      font-size: 1.2rem;
+      line-height: 1.6rem;
+      margin-bottom: 1rem;
+    }
+    #acerca .acerca-image {
+      flex: 1;
+      min-width: 280px;
+      text-align: center;
+    }
+    #acerca .acerca-image img {
+      max-width: 90%;
+      border-radius: var(--border-radius-2);
+      box-shadow: var(--box-shadow);
+    }
+    @media (max-width: 768px) {
+      #acerca .acerca-container {
+        flex-direction: column-reverse;
+      }
+      #acerca .acerca-image img {
+        max-width: 100%;
+      }
+    }
+  
+    /* =====================
+       NUESTRA HISTORIA
+    ===================== */
+    #historia {
+      padding: 4rem 1rem;
+      background: var(--color-white);
+      border-radius: var(--border-radius-2);
+      margin-top: 2rem;
+    }
+    /* Timeline original */
+    #timeline-embed {
+      width: 100%;
+      height: 600px;
+      margin: 0 auto;
+    }
+  
+    /* =====================
+       MISIÓN & VISIÓN
+    ===================== */
+    #mision-vision {
+      padding: 4rem 1rem;
+      background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-warning) 100%);
+      border-radius: var(--border-radius-2);
+      margin-top: 2rem;
+    }
+    .dark-theme #mision-vision {
+      background: linear-gradient(135deg, #6a0572 0%, #d72638 100%);
+    }
+    #mision-vision h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: var(--color-dark);
+      text-align: center;
+    }
+    #mision-vision .content {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+    }
+    #mision-vision .content .box {
+      flex: 1;
+      min-width: 280px;
+      background: var(--color-white);
+      padding: 1.5rem;
+      border-radius: var(--border-radius-1);
+      box-shadow: var(--box-shadow);
+      text-align: center;
+    }
+    #mision-vision .content .box img {
+      max-width: 100%;
+      border-radius: var(--border-radius-2);
+      margin-bottom: 1rem;
+    }
+    #mision-vision .content .box p {
+      font-size: 1.1rem;
+      color: var(--color-dark);
+    }
+  
+    /* =====================
+       PROYECTOS (Slider)
+    ===================== */
+    #proyectos {
+      padding: 4rem 1rem;
+      background: var(--color-white);
+      border-radius: var(--border-radius-2);
+      margin-top: 2rem;
+      text-align: center;
+    }
+    #proyectos h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: var(--color-dark);
+    }
+    #proyectos p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      color: var(--color-info);
+    }
+    .swiper-container {
+      width: 100%;
+      max-width: 900px;
+      margin: 2rem auto;
+      border-radius: var(--border-radius-2);
+      overflow: hidden;
+      box-shadow: var(--box-shadow);
+    }
+    .swiper-slide img {
+      width: 100%;
+      border-radius: var(--border-radius-2);
+    }
+  
+    /* =====================
+       NUESTRO EQUIPO
+    ===================== */
+    #equipo {
+      padding: 4rem 1rem;
+      background: var(--color-white);
+      border-radius: var(--border-radius-2);
+      margin-top: 2rem;
+    }
+    .dark-theme #equipo {
+      background: linear-gradient(135deg, #434343 0%, #2a2a2a 100%);
+      color: var(--color-white);
+    }
+    #equipo h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: var(--color-dark);
+      text-align: center;
+    }
+    #equipo p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      color: var(--color-info);
+      text-align: center;
+    }
+    #equipo .team-container {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 2rem;
+      max-width: 900px;
+      margin: 0 auto;
+    }
+  
+    /* -- Versión mejorada con 170x170, fondos y hover suaves -- */
+    .team-member {
+      width: 170px; /* Ajuste a 170x170 */
+      height: 170px;
+      border: 2px solid var(--color-light);
+      border-radius: 50%;
+      overflow: hidden;
+      margin: 0 auto;
+      text-align: center;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+      box-shadow: var(--box-shadow);
+      background: var(--color-white); /* Para contorno claro */
+    }
+    .dark-theme .team-member {
+      background: var(--color-dark-varient);
+      border-color: #444;
+    }
+    .team-member img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      transition: transform 0.3s;
+    }
+    .team-member:hover img {
+      transform: scale(1.05);
+    }
+    .team-member p {
+      margin-top: 0.5rem;
+      font-size: 0.9rem;
+      padding: 0 0.5rem;
+      line-height: 1.3rem;
+      color: var(--color-dark);
+    }
+    .dark-theme .team-member p {
+      color: var(--color-white);
+    }
+  
+    /* =====================
+       GitHub Call-to-Action
+    ===================== */
+    #github-cta {
+      padding: 4rem 1rem;
+      background: url('frontend/images/emm.jpeg') no-repeat center center/cover;
+      color: #fff;
+      position: relative;
+      margin-top: 2rem;
+      border-radius: var(--border-radius-2);
+      overflow: hidden;
+    }
+    #github-cta::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.6);
+      z-index: 0;
+      border-radius: var(--border-radius-2);
+    }
+    #github-cta .content {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+    }
+    #github-cta h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    #github-cta p {
+      font-size: 1.2rem;
+      max-width: 800px;
+      margin: 0 auto 2rem;
+      color: white;
+    }
+    #github-cta a {
+      display: inline-block;
+      background-color: var(--color-primary);
+      color: var(--color-white);
+      padding: 0.8rem 2rem;
+      border-radius: var(--border-radius-1);
+      text-decoration: none;
+      font-size: 1.2rem;
+    }
+    #github-cta a:hover {
+      background-color: var(--color-success);
+    }
+  
+    /* =====================
+       CONTACTO
+    ===================== */
+    #contacto {
+      background: url('frontend/images/tucuman.jpg') no-repeat center center/cover;
+      color: #fff;
+      position: relative;
+      padding: 4rem 1rem;
+      margin-top: 2rem;
+      border-radius: var(--border-radius-2);
+      overflow: hidden;
+      text-align: center;
+    }
+    #contacto::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.7);
+      z-index: 0;
+      border-radius: var(--border-radius-2);
+    }
+    #contacto .contacto-content {
+      position: relative;
+      z-index: 1;
+      max-width: 850px;
+      margin: 0 auto;
+      background: rgba(255, 255, 255, 0.1);
+      padding: 2rem;
+      border-radius: var(--border-radius-2);
+    }
+    #contacto h2 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+      color: white;
+    }
+    #contacto p {
+      font-size: 1.2rem;
+      margin-bottom: 2rem;
+      color: white;
+    }
+    /* Tarjetas de contacto */
+    .contact-cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-bottom: 2rem;
+    }
+    .contact-card {
+      background: rgba(255, 255, 255, 0.2);
+      border-radius: var(--border-radius-2);
+      padding: 1rem 1.2rem;
+      text-align: left;
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      transition: background 0.3s;
+    }
+    .contact-card:hover {
+      background: rgba(255, 255, 255, 0.3);
+    }
+    .contact-icon {
+      font-size: 2rem;
+    }
+    .contact-info {
+      display: flex;
+      flex-direction: column;
+    }
+    .contact-info h3 {
+      font-size: 1.1rem;
+      margin-bottom: 0.3rem;
+      color: white;
+    }
+    .contact-info p,
+    .contact-info a {
+      font-size: 0.95rem;
+      color: white;
+      text-decoration: underline;
+    }
+    .contact-info a:hover {
+      color: var(--color-success);
+    }
+  
+    /* Mapa */
+    #mapaGoogle {
+      width: 100%;
+      height: 300px;
+      border-radius: var(--border-radius-2);
+      box-shadow: var(--box-shadow);
+      margin: 0 auto;
+    }
+  
+   /* =====================
+   POPUP OVERLAY
+===================== */
+.popup-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.8);
+  z-index: 9999;
+
+  display: none;           /* Oculto por defecto */
+  opacity: 0;              /* Para animación fade */
+  pointer-events: none;    /* Evitar clicks cuando está oculto */
+  transition: opacity 0.3s ease;
+}
+.popup-overlay.active {
+  display: flex;           /* Al activarlo, mostramos y animamos */
+  opacity: 1;
+  pointer-events: auto;
+  align-items: center;
+  justify-content: center;
 }
 
-.responsive-container-block {
-  min-height: 75px;
-  height: fit-content;
-  width: 100%;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
+/* =====================
+   POPUP CONTENT
+===================== */
+.popup-content {
+  background: var(--color-white);
+  color: var(--color-dark);
+  padding: 2rem;
+  max-width: 900px; /* Aumentamos el ancho */
+  width: 90%;
   display: flex;
-  flex-wrap: wrap;
-  margin-top: 0px;
-  margin-right: auto;
-  margin-bottom: 0px;
-  margin-left: auto;
-  justify-content: flex-start;
+  gap: 2rem; /* Más separación */
+  border-radius: var(--border-radius-2);
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.7);
+
+  /* Animación de zoom */
+  transform: scale(0.8);
+  transition: transform 0.3s ease;
+}
+.popup-content.active {
+  transform: scale(1);
 }
 
-.text-blk {
-  margin-top: 0px;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-  line-height: 25px;
+.dark-theme .popup-content {
+  background: var(--color-dark-varient);
+  color: var(--color-white);
 }
 
-.responsive-container-block.bigContainer {
-  padding-top: 10px;
-  padding-right: 30px;
-  padding-bottom: 10px;
-  padding-left: 30px;
+/* Foto más grande */
+.popup-content img {
+  width: 300px;  /* Mayor tamaño */
+  height: 300px; /* Mantener foto cuadrada */
+  border-radius: var(--border-radius-1);
+  object-fit: cover;
+  box-shadow: 0 0 6px var(--color-light);
+}
+
+/* =====================
+   TEXTO DENTRO DEL POPUP
+===================== */
+.popup-text {
+  display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
+  max-width: 500px; /* Un poco más de espacio para texto */
 }
 
-.mainImg {
-  color: black;
-  width: 55%;
-  height: auto;
-  box-shadow: rgba(0, 0, 0, 0.05) 0px 5px 10px 7px;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-  border-bottom-left-radius: 10px;
+/* Estilamos el título un poco más grande y con más “onda” */
+.popup-text h3 {
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  font-size: 1.8rem; /* Más grande */
+  color: var(--color-dark);
+  font-weight: 600; /* Negrita */
+}
+.dark-theme .popup-text h3 {
+  color: var(--color-white);
 }
 
-.text-blk.headingText {
-  font-size: 25px;
-  font-weight: 700;
-  line-height: 34px;
-  color: rgb(51, 51, 51);
-  padding-top: 0px;
-  padding-right: 10px;
-  padding-bottom: 0px;
-  padding-left: 10px;
-  margin-top: 0px;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
+/* Texto descriptivo más ameno */
+.popup-text p {
+  line-height: 1.6rem; 
+  color: var(--color-dark);
+  font-size: 1.1rem; /* Levemente más grande */
+  margin-top: 0.5rem;
+}
+.dark-theme .popup-text p {
+  color: var(--color-white);
+  opacity: 0.9;
 }
 
-.allText {
-  padding-top: 0px;
-  padding-right: 0px;
-  padding-bottom: 0px;
-  padding-left: 0px;
-  margin-top: 0px;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 40px;
-  width: 40%;
-  margin: 0 0 0 0;
-}
-
-.text-blk.subHeadingText {
-  color: rgb(102, 102, 102);
-  font-size: 25px;
-  line-height: 34px;
-  font-weight: 700;
-  padding-top: 0px;
-  padding-right: 10px;
-  padding-bottom: 0px;
-  padding-left: 10px;
-  margin-top: 0px;
-  margin-right: 0px;
-  margin-bottom: 15px;
-  margin-left: 0px;
-}
-
-.text-blk.description {
-  font-size: 25px;
-  line-height: 34px;
-  color: rgb(102, 102, 102);
-  margin-top: 0px;
-  margin-right: 0px;
-  margin-bottom: 0px;
-  margin-left: 0px;
-  padding-top: 0px;
-  padding-right: 10px;
-  padding-bottom: 0px;
-  padding-left: 10px;
-}
-
-.explore {
-  font-size: 20px;
-  line-height: 28px;
-  color: rgb(255, 255, 255);
-  background-color: rgb(244, 152, 146);
-  padding-top: 10px;
-  padding-right: 50px;
-  padding-bottom: 10px;
-  padding-left: 50px;
-  border-top-width: 0px;
-  border-right-width: 0px;
-  border-bottom-width: 0px;
-  border-left-width: 0px;
-  border-top-style: outset;
-  border-right-style: outset;
-  border-bottom-style: outset;
-  border-left-style: outset;
-  border-top-color: rgb(244, 152, 146);
-  border-right-color: rgb(244, 152, 146);
-  border-bottom-color: rgb(244, 152, 146);
-  border-left-color: rgb(244, 152, 146);
-  border-image-source: initial;
-  border-image-slice: initial;
-  border-image-width: initial;
-  border-image-outset: initial;
-  border-image-repeat: initial;
+/* =====================
+   BOTÓN DE CERRAR
+===================== */
+.close-btn {
+  position: absolute;
+  top: 20px;
+  right: 30px;
+  font-size: 2rem;
+  color: var(--color-black);
   cursor: pointer;
+  z-index: 10000;
+  transition: transform 0.3s;
+}
+.close-btn:hover {
+  transform: rotate(90deg); /* Efecto gracioso al hover */
 }
 
-.explore:hover {
-  background-image: initial;
-  background-position-x: initial;
-  background-position-y: initial;
-  background-size: initial;
-  background-repeat: initial;
-  background-attachment: initial;
-  background-origin: initial;
-  background-clip: initial;
-  background-color: rgb(255, 235, 234);
-  color: rgb(244, 152, 146);
-}
+  </style>
+  
 
-.responsive-container-block.Container {
-  margin-top: 0px;
-  margin-right: auto;
-  margin-bottom: 0px;
-  margin-left: auto;
-  justify-content: center;
-  align-items: center;
-  max-width: 1320px;
-  padding-top: 10px;
-  padding-right: 10px;
-  padding-bottom: 10px;
-  padding-left: 10px;
-}
-
-.responsive-container-block.Container.bottomContainer {
-  margin-top: 100px;
-  margin-right: 0px;
-  margin-bottom: 50px;
-  margin-left: 0px;
-  flex-direction: row-reverse;
-  margin: 100px auto 50px auto;
-}
-
-.allText.aboveText {
-  margin: 0 0 0 40px;
-}
-
-.allText.bottomText {
-  margin: 0 40px 0 0;
-}
-
-@media (max-width: 1024px) {
-  .responsive-container-block.Container {
-    max-width: 850px;
-  }
-
-  .mainImg {
-    width: 55%;
-    height: auto;
-  }
-
-  .text-blk.description {
-    font-size: 20px;
-  }
-
-  .allText {
-    width: 40%;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 20px;
-  }
-
-  .responsive-container-block.bigContainer {
-    padding-top: 10px;
-    padding-right: 10px;
-    padding-bottom: 10px;
-    padding-left: 10px;
-  }
-
-  .text-blk.subHeadingText {
-    font-size: 22px;
-  }
-
-  .responsive-container-block.Container.bottomContainer {
-    margin: 80px auto 50px auto;
-  }
-
-  .responsive-container-block.Container {
-    max-width: 830px;
-  }
-
-  .allText.aboveText {
-    margin: 30px 0 0 40px;
-  }
-
-  .allText.bottomText {
-    margin: 30px 40px 0 0;
-  }
-}
-
-@media (max-width: 768px) {
-  .mainImg {
-    width: 90%;
-  }
-
-  .allText {
-    width: 100%;
-    margin-top: 0px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-  }
-
-  .responsive-container-block.Container {
-    flex-direction: column;
-    height: auto;
-  }
-
-  .text-blk.headingText {
-    text-align: center;
-  }
-
-  .text-blk.subHeadingText {
-    text-align: center;
-    font-size: 25px;
-  }
-
-  .text-blk.description {
-    text-align: center;
-    font-size: 25px;
-  }
-
-  .allText {
-    margin-top: 40px;
-    margin-right: 0px;
-    margin-bottom: 0px;
-    margin-left: 0px;
-  }
-
-  .allText.aboveText {
-    margin: 40px 0 0 0;
-  }
-
-  .responsive-container-block.Container {
-    margin: 80px auto 50px auto;
-  }
-
-  .responsive-container-block.Container.bottomContainer {
-    margin: 50px auto 50px auto;
-  }
-
-  .allText.bottomText {
-    margin: 40px 0 0 0;
-  }
-}
-
-@media (max-width: 500px) {
-  .responsive-container-block.Container {
-    padding-top: 10px;
-    padding-right: 0px;
-    padding-bottom: 10px;
-    padding-left: 0px;
-    width: 100%;
-    max-width: 100%;
-  }
-
-  .mainImg {
-    width: 100%;
-  }
-
-  .responsive-container-block.bigContainer {
-    padding-top: 10px;
-    padding-right: 25px;
-    padding-bottom: 10px;
-    padding-left: 25px;
-  }
-
-  .text-blk.subHeadingText {
-    font-size: 25px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-  }
-
-  .text-blk.description {
-    font-size: 25px;
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-  }
-
-  .allText {
-    padding-top: 0px;
-    padding-right: 0px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    width: 100%;
-  }
-}
-    </style>
 </head>
-<body>
-    <!-- Header -->
-    <header>
-        <div class="logo">
-            <img src="https://i.ibb.co/hctNTsB/logo.jpg" alt="">
-            <h2 class="etech2">Escuela Técnica de la Universidad de Mendoza<span class="danger"></span></h2>
-        </div>
-        <div class="navbar">
-            <a href="/em/index.html" class="active">
-                <span class="material-symbols-sharp">home</span>
-                <h3>Inicio</h3>
-            </a>
-            <a href="/em/datos.html">
-                <span class="material-symbols-sharp">format_list_bulleted</span>
-                <h3>Datos</h3>
-            </a> 
-            <a href="/em/graphs.html">
-                <span class="material-symbols-sharp">grid_view</span>
-                <h3>Gráficos Importantes</h3>
-            </a>
-        </div>
-        <div class="theme-toggler">
-            <span class="material-symbols-sharp active">light_mode</span>
-            <span class="material-symbols-sharp">dark_mode</span>
-        </div>
-    </header>
 
-    <div class="container">
-        <!-- Contenido Principal -->
-         <main>
-            <div class="responsive-container-block bigContainer">
-                <div class="responsive-container-block Container">
-                  <img class="mainImg" src="https://i.ibb.co/Q3TJVGP4/20240809-105548.jpg">
-                  <div class="allText aboveText">
-                    <p class="text-blk headingText">
-                      Our Mission
-                    </p>
-                    <p class="text-blk subHeadingText">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                    <p class="text-blk description">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum pulvinar ullamcorper suspendisse ac eget. Pellentesque tempus leo in ullamcorper quis vestibulum ligula elementum ut.
-                    </p>
-                    <button class="explore">
-                      Explore
-                    </button>
-                  </div>
-                </div>
-                <div class="responsive-container-block Container bottomContainer">
-                  <img class="mainImg" src="https://i.ibb.co/ktrpqVG/IMG-20241105-WA0018.jpg">
-                  <div class="allText bottomText">
-                    <p class="text-blk headingText">
-                      Our Vision
-                    </p>
-                    <p class="text-blk subHeadingText">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    </p>
-                    <p class="text-blk description">
-                      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fermentum pulvinar ullamcorper suspendisse ac eget. Pellentesque tempus leo in ullamcorper quis vestibulum ligula elementum ut.
-                    </p>
-                    <button class="explore">
-                      Explore
-                    </button>
-                  </div>
-                </div>
-              </div>
-         </main>
+<body data-active="about_us">
+  <div id="header-placeholder"></div>
+
+  <!-- HERO Section -->
+  <section id="hero" data-aos="fade-in">
+    <div class="hero-content">
+      <h1>Bienvenidos a la Estación Meteorológica ETec</h1>
+      <p>Descubrí la fusión perfecta entre tecnología y clima</p>
     </div>
-    <!-- Footer -->
-    <footer>
-        <p>Cabe aclarar que la estación sigue una etapa de prueba y los datos pueden no estar muy precisos.</p>
-    </footer>
+  </section>
 
-    <!-- JavaScript -->
-    <script src="https://emetec.wetec.um.edu.ar/js"></script>
-    <!-- <script src="app.js"></script> -->
-   
+  <div class="container">
+    <!-- Contenido Principal -->
+    <main>
+      <!-- Acerca de Nosotros -->
+      <section id="acerca" data-aos="fade-up">
+        <div class="acerca-container">
+          <div class="acerca-text">
+            <h2>Acerca de Nosotros</h2>
+            <p>
+              En EMETec somos un equipo interdisciplinario conformado por estudiantes y docentes de diversas especialidades técnicas, comprometidos con la innovación tecnológica y la aplicación práctica del conocimiento. Nuestra metodología de trabajo está basada en el desarrollo colaborativo y la experimentación activa en un entorno de taller.
+            </p>
+            <p>
+              Integramos conocimientos de electrónica, informática y diseño para ofrecer soluciones técnicas eficientes y creativas. Apostamos por una formación práctica orientada a proyectos reales, lo que nos impulsa a seguir aprendiendo, investigando y creciendo día a día.
+            </p>
+          </div>
+          <div class="acerca-image">
+            <img
+              src="frontend/images/tucuman.jpg"
+              alt="Foto Acerca de Nosotros"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Nuestra Historia (Timeline intacto) -->
+      <section id="historia" data-aos="fade-up">
+        <div id="timeline-embed"></div>
+      </section>
+
+      <!-- Misión & Visión -->
+      <section id="mision-vision" data-aos="fade-up">
+        <h2>Misión &amp; Visión</h2>
+        <div class="content">
+          <div class="box">
+            <img
+              src="frontend/images/tucumanbalcon.jpeg"
+              alt="Innovación"
+            />
+            <p>
+                <strong>Misión:</strong> Integrar activamente a estudiantes de distintos niveles académicos y especialidades técnicas, promoviendo el Aprendizaje Basado en Proyectos (ABP). Generamos un espacio colaborativo de formación práctica donde todos cumplen un rol específico, independiente de sus conocimientos previos. 
+            </p>
+          </div>
+          <div class="box">
+            <img
+              src="frontend/images/eme.jpeg"
+              alt="Sostenibilidad"
+            />
+            <p>
+              <strong>Visión:</strong> Ser un equipo referente dentro de la Escuela Técnica de la Universidad de Mendoza en la implementación del Aprendizaje Basado en Proyectos, destacando por la calidad técnica, la innovación y la inclusión de estudiantes en procesos reales de investigación, desarrollo tecnológico y resolución creativa de problemas.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Proyectos -->
+      <!-- (Aquí podrías integrar tu sección de Proyectos/Swipper si lo deseas) -->
+
+      <!-- Nuestro Equipo -->
+      <section id="equipo" data-aos="fade-up">
+        <h2>Nuestro Equipo</h2>
+        <p>
+          Conocé a las mentes brillantes detrás de este proyecto. Cada integrante aporta experiencia,
+          creatividad y entusiasmo, construyendo juntos una red de estaciones meteorológicas.
+        </p>
+        <div class="team-container">
+          <div class="team-member">
+            <img src="frontend/images/team/mario.jpg" alt="Mario Papetti">
+            <p>
+              <strong>Mario Papetti:</strong> Tutor técnico en electrónica e informática, con años de experiencia orientando proyectos estudiantiles
+              en la implementación de nuevas tecnologías. Su capacidad para unir teoría y práctica garantiza soluciones innovadoras y viables. 
+              Gracias a su enfoque cercano y didáctico, impulsa a cada integrante a dar lo mejor de sí, transformando ideas en resultados palpables.
+            </p>
+          </div>
+        
+          <div class="team-member">
+            <img src="frontend/images/team/Luis.jpg" alt="Luis Cuesta">
+            <p>
+              <strong>Luis Cuesta:</strong> Backend Developer con un don especial para la lógica y la arquitectura de software. Su dominio de servidores mantiene las estaciones siempre conectadas y optimizadas. Aporta estabilidad y escalabilidad al proyecto 
+              con su rigurosidad técnica y entusiasmo por las buenas prácticas.
+            </p>
+          </div>
+        
+          <div class="team-member">
+            <img src="frontend/images/team/santiago.jpg" alt="Santiago Juarez">
+            <p>
+              <strong>Santiago Juarez:</strong> Responsable del diseño y la estética de nuestas estaciones meteórologicas. Su enfoque en la usabilidad y la experiencia del usuario asegura que cada estación no solo sea funcional, sino también atractiva y fácil de usar.
+            </p>
+          </div>
+        
+          <div class="team-member">
+            <img src="frontend/images/team/martin.jpg" alt="Martín Gimenez">
+            <p>
+              <strong>Martín Gimenez:</strong> Full Stack que integra a la perfección hardware y software. Sus habilidades abarcan 
+              desde la configuración de microcontroladores hasta la creación de aplicaciones web (como la presente). Su pasión por la innovación 
+              empuja constantemente los límites del rendimiento y la experiencia de usuario.
+            </p>
+          </div>
+        
+          <div class="team-member">
+            <img src="frontend/images/team/augusto.jpg" alt="Augusto Massut">
+            <p>
+              <strong>Augusto Massut:</strong> Estudiante de sexto año de electrónica, enfocado en sensado ambiental y soluciones eco-tecnológicas.
+              Su curiosidad innata y espíritu inquieto lo llevan a investigar y probar componentes para lograr mediciones cada vez más precisas.
+            </p>
+          </div>
+        
+          <div class="team-member">
+            <img src="frontend/images/team/sofia.jpg" alt="Sofia Rojas">
+            <p>
+              <strong>Sofia Rojas:</strong> Estudiante de quinto año de electrónica con gran talento para el montaje y la detección de fallas.
+            </p>
+          </div>
+        
+          <div class="team-member">
+            <img src="frontend/images/team/ivo.jpg" alt="Ivo Bartolomeo">
+            <p>
+              <strong>Ivo Bartolomeo:</strong> Estudiante de sexto año de electrónica, experto en soldadura, calibración y mantenimiento de circuitos.
+              Su paciencia y precisión técnica aseguran un funcionamiento impecable en cada etapa. 
+            </p>
+          </div>
+        </div>
+        
+      </section>
+      
+      <!-- GitHub Call-to-Action -->
+      <section id="github-cta" data-aos="fade-up">
+        <div class="content">
+          <h2>¿Querés una estación meteorológica?</h2>
+          <p>
+            Nuestro proyecto es completamente Open Source, lo que significa que cualquiera puede replicarlo desde la comodidad de su hogar, laboratorio o institución.  Sin embargo, si deseás que nosotros recreemos una para vos, nos podes contactar en la siguiente sección.
+          </p>
+          <a href="https://github.com/MartinLautaroGimenez/estacion-meteorologica-estatica" target="_blank">Sumate al GitHub</a>
+        </div>
+      </section>
+
+      <!-- Contacto (Con tarjetas e íconos + Google Maps) -->
+      <section id="contacto" data-aos="fade-up">
+        <div class="contacto-content">
+          <h2>Contacto</h2>
+          <p>
+            ¿Tenés dudas o querés que nosotros armemos tu estación? A continuación te dejamos
+            nuestros correos, teléfono y un mapa de la ubicación de la Escuela Técnica de la UM.
+          </p>
+          <!-- Tarjetas de contacto -->
+          <div class="contact-cards">
+            <!-- Tarjeta 1 -->
+            <div class="contact-card">
+              <span class="material-symbols-sharp">mail</span>
+              <div class="contact-info">
+                <h3>Correo Luis Cuesta</h3>
+                <a href="mailto:luis.cuesta@etec.um.edu.ar">luis.cuesta@etec.um.edu.ar</a>
+              </div>
+            </div>
+            <!-- Tarjeta 2 -->
+            <div class="contact-card">
+              <span class="material-symbols-sharp">mail</span>
+              <div class="contact-info">
+                <h3>Correo Mario Papetti</h3>
+                <a href="mailto:mario.papetti@etec.um.edu.ar">mario.papetti@etec.um.edu.ar</a>
+              </div>
+            </div>
+            <!-- Tarjeta 3 -->
+            <div class="contact-card">
+              <span class="material-symbols-sharp">mail</span>
+              <div class="contact-info">
+                <h3>Correo Martín Gimenez</h3>
+                <a href="mailto:mal.gimenez@alumno.etec.um.edu.ar">mal.gimenez@alumno.etec
+                  .um.edu.ar</a>
+              </div>
+            </div>
+            <!-- Teléfono -->
+            <div class="contact-card">
+              <span class="material-symbols-sharp">call</span>
+              <div class="contact-info">
+                <h3>Teléfono</h3>
+                <p>+54 9 261 4392939</p>
+              </div>
+            </div>
+          </div>
+          <!-- Contenedor del mapa (Google Maps API) -->
+          <iframe 
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3347.9572308101096!2d-68.85449502525934!3d-32.9521385721644!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e0b067323d179%3A0x2f6e98ec0645ef99!2sEscuela%20T%C3%A9cnica%20de%20la%20Universidad%20de%20Mendoza!5e0!3m2!1ses-419!2sar!4v1744426154494!5m2!1ses-419!2sar"
+            width="600"
+            height="450"
+            style="border:0; border-radius: 20px;"
+            allowfullscreen=""
+            loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade">
+          </iframe>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <p>
+      Cabe aclarar que la estación sigue en etapa de prueba y los datos pueden no estar muy precisos.
+    </p>
+  </footer>
+
+  <!-- Scripts existentes -->
+  <script src="/frontend/timeline.js"></script>
+  <script src="/frontend/front.js"></script>
+  <!-- Swiper Slider -->
+  <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+  <!-- AOS -->
+  <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+  <!-- Script para inicializar AOS y Swiper -->
+  <script>
+    AOS.init({
+      duration: 1000,
+      easing: 'ease-in-out',
+      once: true
+    });
+
+    var swiperProyectos = new Swiper('.swiper-container', {
+      slidesPerView: 1,
+      spaceBetween: 20,
+      loop: true,
+      autoplay: {
+        delay: 3000,
+        disableOnInteraction: false
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true
+      }
+    });
+  </script>
+
+  <!-- Popup personalizado para miembros del equipo -->
+  <div class="popup-overlay" id="popup">
+    <div class="popup-content" id="popup-content">
+      <img id="popup-img" src="" alt="Foto ampliada" />
+      <div class="popup-text">
+        <h3 id="popup-name"></h3>
+        <p id="popup-role"></p>
+      </div>
+    </div>
+    <span class="close-btn" id="close-popup">&times;</span>
+  </div>
+
+  <script>
+    // Lógica del popup con fade/zoom y click en fondo
+    const teamImgs = document.querySelectorAll('#equipo .team-member img');
+    const popupOverlay = document.getElementById('popup');
+    const popupContent = document.getElementById('popup-content');
+    const popupImg = document.getElementById('popup-img');
+    const popupName = document.getElementById('popup-name');
+    const popupRole = document.getElementById('popup-role');
+    const closeBtn = document.getElementById('close-popup');
+
+    // Al hacer clic en cualquier imagen del equipo
+ // Al hacer clic
+teamImgs.forEach(img => {
+  img.addEventListener('click', () => {
+    popupImg.src = img.src;
+    popupName.textContent = img.alt;
+    const paragraph = img.parentElement.querySelector('p');
+    popupRole.textContent = paragraph ? paragraph.innerText : '';
+
+    // Activamos clases para animar
+    popupOverlay.classList.add('active');
+    popupContent.classList.add('active');
+  });
+});
+
+// Función cerrar
+function cerrarPopup() {
+  popupOverlay.classList.remove('active');
+  popupContent.classList.remove('active');
+  // Esperamos un poco para quitar la imagen
+  setTimeout(() => {
+    popupImg.src = '';
+  }, 300);
+}
+
+// Cerrar con la X
+closeBtn.addEventListener('click', cerrarPopup);
+
+// Cerrar con ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') cerrarPopup();
+});
+
+// Cerrar con clic en el fondo
+popupOverlay.addEventListener('click', e => {
+  if (e.target === popupOverlay) cerrarPopup();
+});
+
+  </script>
+
+  <!-- Elementos adicionales ocultos -->
+  <div id="datoNumero" style="display: none;"></div>
+  <div id="velocidadViento" style="display: none;"></div>
+  <div id="direccionViento" style="display: none;"></div>
+  <div id="sensorLluvia" style="display: none;"></div>
+  <div id="battery" style="display: none;"></div>
+  <div id="stermica" style="display: none;"></div>
+  <div id="ppmco2" style="display: none;"></div>
+  <div id="procio" style="display: none;"></div>
+  <div id="Altitud" style="display: none;"></div>
 </body>
-<!-- Elementos adicionales ocultos -->
-<div id="datoNumero" style="display: none;"></div>
-<div id="velocidadViento" style="display: none;"></div>
-<div id="direccionViento" style="display: none;"></div>
-<div id="sensorLluvia" style="display: none;"></div>
-<div id="battery" style="display: none;"></div>
-<div id="stermica" style="display: none;"></div>
-<div id="ppmco2" style="display: none;" ></div>
-<div id="procio" style="display: none;"></div>
-<div id="Altitud" style="display: none;"></div>
 </html>
