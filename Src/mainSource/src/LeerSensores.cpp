@@ -10,6 +10,10 @@
   #include <Adafruit_BMP280.h>
 #endif
 
+#ifdef USE_BATERRY_SENSOR
+  #include <Adafruit_BMP280.h>
+#endif
+
 #ifdef USE_BH_SENSOR
   #include <BH1750.h>
 #endif

@@ -38,6 +38,7 @@ class LeerSensores {
     float vientoVel = 0;
     int vientoDir = 0;
 
+    int nivelBateria = 0;
   private:
 #ifdef USE_DHT
     DHT dht;
