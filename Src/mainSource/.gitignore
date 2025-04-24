@@ -10,3 +10,4 @@ lib/config.h
 
 # Excluir carpeta de backups de pcb
 pcb/EME-backups/*.zip
+.qodo
