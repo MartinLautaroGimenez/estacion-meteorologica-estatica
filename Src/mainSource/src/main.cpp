@@ -119,7 +119,9 @@ void setup() {
 
   if (client.connect(SERVIDOR_ETEC, 443)) {
     Serial.println("Conectado al servidor!");
-    client.println("POST /emeapi HTTP/1.1");
+    client.print("POST ");
+    client.print(endpoint);
+    client.println(" HTTP/1.1");
     client.print("Host: "); client.println(SERVIDOR_ETEC);
     client.println("Content-Type: application/json");
     client.print("Content-Length: "); client.println(postData.length());

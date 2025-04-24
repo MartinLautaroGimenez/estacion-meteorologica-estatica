@@ -114,6 +114,7 @@ void LeerSensores::leerTodos() {
   // --- DHT: Temperatura y Humedad ---
   float t = dht.readTemperature();
   float h = dht.readHumidity();
+  float st = dht.computeHeatIndex(t, h, false);
   if (isnan(t) || isnan(h)) {
     Serial.println("Error leyendo DHT!");
     tempDHT = -100;
@@ -122,7 +123,7 @@ void LeerSensores::leerTodos() {
   } else {
     tempDHT = t;
     humDHT = h;
-    sensDHT = 1;
+    sensDHT = st;
   }
 #else
   tempDHT = -1;
