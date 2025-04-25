@@ -49,6 +49,7 @@ void handleCaptivePortal();
 void setup() {
   Serial.begin(115200);
   Serial.println("Arrancando estación meteorológica... 🌦️");
+  
   Serial.print("Dirección MAC del ESP32: ");
   Serial.println(WiFi.macAddress());
   // Leer credenciales almacenadas
@@ -56,7 +57,17 @@ void setup() {
   String ssid = preferences.getString("ssid", "");
   String pass = preferences.getString("pass", "");
   preferences.end();
+  
+    // IMPLEMENTACIÓN DE LOS MOSFET Y SI.. FUNCIONAN 
+  pinMode(PIN_GROUND_1, OUTPUT);
+  pinMode(PIN_GROUND_2, OUTPUT);
+  digitalWrite(PIN_GROUND_1, HIGH);
+  digitalWrite(PIN_GROUND_2, HIGH);
 
+  sensores.begin();
+  delay(2000);
+  sensores.leerTodos();
+  
   // Si no hay credenciales en las preferencias, utilizamos las predeterminadas (definidas en config.h)
   if (ssid == "") {
     #ifdef RED_SSID_WIFI
@@ -97,9 +108,6 @@ void setup() {
   if (WiFi.getMode() == WIFI_AP) return;
 
   client.setInsecure();
-  sensores.begin();
-  delay(2000);
-  sensores.leerTodos();
 
   String postData = "{\"EME_n0/dht/temp\":" + String(sensores.tempDHT) + 
     ",\"EME_n0/dht/hum\":" + String(sensores.humDHT) + 
@@ -118,10 +126,8 @@ void setup() {
   Serial.println(postData);
 
   if (client.connect(SERVIDOR_ETEC, 443)) {
-    Serial.println("Conectado al servidor!");
-    client.print("POST ");
-    client.print(endpoint);
-    client.println(" HTTP/1.1");
+    Serial.println("Conectado al servidor!");    
+    client.println("POST /emeapi HTTP/1.1");
     client.print("Host: "); client.println(SERVIDOR_ETEC);
     client.println("Content-Type: application/json");
     client.print("Content-Length: "); client.println(postData.length());
