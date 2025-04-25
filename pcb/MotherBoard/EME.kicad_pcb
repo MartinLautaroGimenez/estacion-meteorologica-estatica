@@ -2043,7 +2043,7 @@
 		(descr "Through hole straight pin header, 1x02, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x02 2.54mm single row")
 		(property "Reference" "J2"
-			(at 0 -2.33 360)
+			(at 0 -2.33 0)
 			(layer "F.SilkS")
 			(uuid "ddb69a4a-8605-4034-8cbd-9c6c79f96f65")
 			(effects
@@ -2054,7 +2054,7 @@
 			)
 		)
 		(property "Value" "volti"
-			(at 0 4.87 360)
+			(at 0 4.87 0)
 			(layer "F.Fab")
 			(uuid "71f062a4-60cc-4d36-a14d-075ee565a0ba")
 			(effects
@@ -2798,7 +2798,7 @@
 			(uuid "a811be53-eb80-46a4-8539-a3a989ee5d2b")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 3.81 270)
+			(at 0 3.81 -90)
 			(layer "F.Fab")
 			(uuid "31035b8e-6229-4a8b-a119-742f61aa5730")
 			(effects
@@ -3967,7 +3967,7 @@
 		(descr "C, Disc series, Radial, pin pitch=5.00mm, , diameter*width=7.5*4.4mm^2, Capacitor")
 		(tags "C Disc series Radial pin pitch 5.00mm  diameter 7.5mm width 4.4mm Capacitor")
 		(property "Reference" "C8"
-			(at 2.5 -3.45 270)
+			(at 2.5 -3.45 -90)
 			(layer "F.SilkS")
 			(uuid "19fd0809-a612-4e4a-9963-77dc77ba67aa")
 			(effects
@@ -3978,7 +3978,7 @@
 			)
 		)
 		(property "Value" "104"
-			(at 2.5 3.45 270)
+			(at 2.5 3.45 -90)
 			(layer "F.Fab")
 			(uuid "56c2191d-3fed-47a2-bf8b-90953c6b456c")
 			(effects
@@ -4153,7 +4153,7 @@
 			(uuid "ac6a16bf-1216-49ed-981b-e121ae4a13ca")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 2.5 0 270)
+			(at 2.5 0 -90)
 			(layer "F.Fab")
 			(uuid "e87dca53-37af-49e8-ae8d-6739379c8a3a")
 			(effects
@@ -5363,7 +5363,7 @@
 		(descr "Through hole straight pin header, 1x03, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x03 2.54mm single row")
 		(property "Reference" "J7"
-			(at 0 -2.33 270)
+			(at 0 -2.33 -90)
 			(layer "F.SilkS")
 			(uuid "0dba78e3-5ace-4b6b-98a5-4e628c7dd5c5")
 			(effects
@@ -5374,7 +5374,7 @@
 			)
 		)
 		(property "Value" "MQ135"
-			(at 0 7.41 270)
+			(at 0 7.41 -90)
 			(layer "F.Fab")
 			(uuid "d0cb451f-fd90-4b62-a027-960e3f2f8912")
 			(effects
@@ -5576,7 +5576,7 @@
 			(uuid "97e2649c-2c80-41bd-8b4b-3b9031f454e8")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 2.54 360)
+			(at 0 2.54 0)
 			(layer "F.Fab")
 			(uuid "31118985-99b0-4440-ac78-0f0e52f12493")
 			(effects
@@ -6126,7 +6126,7 @@
 			(uuid "33d31f68-a8aa-417b-a4ed-01f9425858eb")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 5.08 270)
+			(at 0 5.08 -90)
 			(layer "F.Fab")
 			(uuid "e559e089-f137-4f7d-8cbe-f3552d11fe3b")
 			(effects
@@ -6902,7 +6902,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R9"
-			(at 5.08 -2.37 360)
+			(at 5.08 -2.37 0)
 			(layer "F.SilkS")
 			(uuid "40dced55-3487-4cb6-8e10-f383c4ef3249")
 			(effects
@@ -6913,7 +6913,7 @@
 			)
 		)
 		(property "Value" "12k"
-			(at 5.08 2.37 360)
+			(at 5.08 2.37 0)
 			(layer "F.Fab")
 			(uuid "538a43b9-adba-49a3-861b-a649f26b409d")
 			(effects
@@ -7125,7 +7125,7 @@
 			(uuid "4f226f9f-22d5-47f6-a49a-2b125bdd5e41")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 5.08 0 360)
+			(at 5.08 0 0)
 			(layer "F.Fab")
 			(uuid "124dfa13-1e23-4d81-9713-848023d41bcc")
 			(effects
@@ -7322,7 +7322,7 @@
 		(descr "Resistor, Axial_DIN0207 series, Axial, Horizontal, pin pitch=10.16mm, 0.25W = 1/4W, length*diameter=6.3*2.5mm^2, http://cdn-reichelt.de/documents/datenblatt/B400/1_4W%23YAG.pdf")
 		(tags "Resistor Axial_DIN0207 series Axial Horizontal pin pitch 10.16mm 0.25W = 1/4W length 6.3mm diameter 2.5mm")
 		(property "Reference" "R10"
-			(at 5.08 -2.37 360)
+			(at 5.08 -2.37 0)
 			(layer "F.SilkS")
 			(uuid "67443cfb-90d0-4ae8-a2aa-35c673db19d3")
 			(effects
@@ -7333,7 +7333,7 @@
 			)
 		)
 		(property "Value" "22k"
-			(at 5.08 2.37 360)
+			(at 5.08 2.37 0)
 			(layer "F.Fab")
 			(uuid "be9d5eed-872d-4c9d-8cd5-80cc6253484a")
 			(effects
@@ -7545,7 +7545,7 @@
 			(uuid "a5bf78e7-6634-4089-a9be-1bb69b5b8435")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 5.08 0 360)
+			(at 5.08 0 0)
 			(layer "F.Fab")
 			(uuid "c417e0f7-6ed7-4a42-80f1-db0e799639fa")
 			(effects
@@ -9043,7 +9043,7 @@
 		(descr "Through hole straight pin header, 1x03, 2.54mm pitch, single row")
 		(tags "Through hole pin header THT 1x03 2.54mm single row")
 		(property "Reference" "J3"
-			(at 0 -2.33 270)
+			(at 0 -2.33 -90)
 			(layer "F.SilkS")
 			(uuid "2e52c8a6-2db0-4153-927c-e3276d586a2a")
 			(effects
@@ -9054,7 +9054,7 @@
 			)
 		)
 		(property "Value" "DHT22"
-			(at 0 7.41 270)
+			(at 0 7.41 -90)
 			(layer "F.Fab")
 			(uuid "226c3a59-fcd4-4228-b80a-6e0be289d1c1")
 			(effects
@@ -9256,7 +9256,7 @@
 			(uuid "74f33789-fa30-42be-81c6-44306a53ef22")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 0 2.54 360)
+			(at 0 2.54 0)
 			(layer "F.Fab")
 			(uuid "ef67d32a-ecf5-4647-8e3b-da79c3a7bdc7")
 			(effects
@@ -9701,7 +9701,7 @@
 		(descr "C, Radial series, Radial, pin pitch=3.50mm, diameter=8mm, height=7mm, Non-Polar Electrolytic Capacitor")
 		(tags "C Radial series Radial pin pitch 3.50mm diameter 8mm height 7mm Non-Polar Electrolytic Capacitor")
 		(property "Reference" "C11"
-			(at 1.75 -5.25 360)
+			(at 1.75 -5.25 0)
 			(layer "F.SilkS")
 			(uuid "f78bec23-f7eb-4d59-b54f-da44ba8948d8")
 			(effects
@@ -9712,7 +9712,7 @@
 			)
 		)
 		(property "Value" "22uF"
-			(at 1.75 5.25 360)
+			(at 1.75 5.25 0)
 			(layer "F.Fab")
 			(uuid "32c6f7ad-abcf-4d7d-8db5-b86ba13ea1ba")
 			(effects
@@ -9797,7 +9797,7 @@
 			(uuid "46bbbcfb-f30d-4aaa-bf48-bac51f2e05c5")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 1.75 0 360)
+			(at 1.75 0 0)
 			(layer "F.Fab")
 			(uuid "59da61ab-d2b0-4e69-a127-2c9a83fcaf4b")
 			(effects
@@ -12162,7 +12162,7 @@
 		(descr "C, Radial series, Radial, pin pitch=3.50mm, diameter=8mm, height=7mm, Non-Polar Electrolytic Capacitor")
 		(tags "C Radial series Radial pin pitch 3.50mm diameter 8mm height 7mm Non-Polar Electrolytic Capacitor")
 		(property "Reference" "C5"
-			(at 1.75 -5.25 270)
+			(at 1.75 -5.25 -90)
 			(layer "F.SilkS")
 			(uuid "4aa21280-6889-44c6-9148-bd56dbb55254")
 			(effects
@@ -12173,7 +12173,7 @@
 			)
 		)
 		(property "Value" "22uF"
-			(at 1.75 5.25 270)
+			(at 1.75 5.25 -90)
 			(layer "F.Fab")
 			(uuid "8fa5922f-06d9-4184-a2a0-d674e47265d1")
 			(effects
@@ -12261,7 +12261,7 @@
 			(uuid "d8c5c7b9-4199-4664-867e-094466957a5f")
 		)
 		(fp_text user "${REFERENCE}"
-			(at 1.75 0 270)
+			(at 1.75 0 -90)
 			(layer "F.Fab")
 			(uuid "6f19d20a-6e0d-4d00-9f87-ad5c5e653015")
 			(effects

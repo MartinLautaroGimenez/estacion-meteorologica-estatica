@@ -7212,9 +7212,9 @@
 		)
 		(uuid "6a622177-82cc-4ea6-9e07-020d20150098")
 	)
-	(text "El microcontrolador ESP32 en su placa de desarrollo de 30\nterminales de conexión, modelo <DOIT DevKit V1> es el que\nse implementa en este proyecto, contemplando que sus GPIO\nmayormente funcionan con 3v3 se decidió por colocar un \nmódulo level shiffter de 8 canales para las comunicaciones\nexternas, cómo GPS, GRMS, LCD(5v), lector uSD, etc.\n"
+	(text "El microcontrolador ESP32 en su placa de desarrollo de 30\nterminales de conexión, modelo <DOIT DevKit V1> es el que\nse implementa en este proyecto, contemplando que sus GPIO\nmayormente funcionan con 3v3 se decidió por colocar un \nmódulo level shiffter de 8 canales para las comunicaciones\nexternas, cómo GPS, GRMS, LCD(5v), lector uSD, etc.\n\nPines: D34, D35, VN y Vp (INPUT-ONLY)"
 		(exclude_from_sim no)
-		(at 142.24 154.94 0)
+		(at 142.24 156.21 0)
 		(effects
 			(font
 				(size 2 2)
