@@ -4,6 +4,7 @@
 #ifdef USE_DHT
   #include <DHT.h>
   #define DHTTYPE DHT22  // Usamos DHT22
+  // #define DHTTYPE DHT11  // Usamos DHT11
 #endif
 
 #ifdef USE_BMP
