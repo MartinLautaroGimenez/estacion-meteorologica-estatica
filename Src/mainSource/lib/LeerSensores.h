@@ -4,12 +4,21 @@
 #include "Arduino.h"
 #include "config.h"
 
+// Validación para que no estén definidos ambos sensores BMP
+#if defined(USE_BMP280) && defined(USE_BMP680)
+  #error "❌ No podés definir USE_BMP280 y USE_BMP680 al mismo tiempo."
+#endif
+
 #ifdef USE_DHT
   #include <DHT.h>
 #endif
 
-#ifdef USE_BMP
+#ifdef USE_BMP280
   #include <Adafruit_BMP280.h>
+#endif
+
+#ifdef USE_BMP680
+  #include <Adafruit_BMP3XX.h>
 #endif
 
 #ifdef USE_BH_SENSOR
@@ -39,13 +48,18 @@ class LeerSensores {
     int vientoDir = 0;
 
     int nivelBateria = 0;
+
   private:
 #ifdef USE_DHT
     DHT dht;
 #endif
 
-#ifdef USE_BMP
-    Adafruit_BMP280 bmp;
+#ifdef USE_BMP280
+    Adafruit_BMP280 bmp280;
+#endif
+
+#ifdef USE_BMP680
+    Adafruit_BMP3XX bmp680;
 #endif
 
 #ifdef USE_BH_SENSOR
@@ -53,4 +67,4 @@ class LeerSensores {
 #endif
 };
 
-#endif
+#endif // LEERSENSORES_H

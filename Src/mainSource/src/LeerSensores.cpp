@@ -3,16 +3,7 @@
 
 #ifdef USE_DHT
   #include <DHT.h>
-  #define DHTTYPE DHT22  // Usamos DHT22
-  // #define DHTTYPE DHT11  // Usamos DHT11
-#endif
-
-#ifdef USE_BMP
-  #include <Adafruit_BMP280.h>
-#endif
-
-#ifdef USE_BATERRY_SENSOR
-  #include <Adafruit_BMP280.h>
+  #define DHTTYPE DHT22
 #endif
 
 #ifdef USE_BH_SENSOR
@@ -21,34 +12,20 @@
 
 #ifdef USE_ANEMOMETER
   volatile unsigned long anemometerPulseCount = 0;
+
+  void IRAM_ATTR anemometerISR() {
+    anemometerPulseCount++;
+  }
 #endif
 
-#ifdef USE_ANEMOMETER
-void IRAM_ATTR anemometerISR() {
-  anemometerPulseCount++;
-}
-#endif
-
-// Constructor: Inicializa dht solo si USE_DHT está definido
+// Constructor
 LeerSensores::LeerSensores()
 #ifdef USE_DHT
   : dht(DHT_PIN, DHTTYPE)
 #endif
 {
-  tempDHT = 0;
-  humDHT = 0;
-  sensDHT = 0;
-#ifdef USE_BMP
-  tempBMP = 0;
-  presBMP = 0;
-  altBMP = 0;
-  presNMBMP = 0;
-#else
-  tempBMP = -1;
-  presBMP = -1;
-  altBMP = -1;
-  presNMBMP = -1;
-#endif
+  tempDHT = humDHT = sensDHT = 0;
+  tempBMP = presBMP = altBMP = presNMBMP = -1;
   bh1750 = 0;
   ppmCO2 = 0;
   lluviaPosibilidad = 0;
@@ -59,20 +36,30 @@ LeerSensores::LeerSensores()
 void LeerSensores::begin() {
   Serial.println("---- Estado de Sensores ----");
 
-#ifdef USE_DHT
-  Serial.println("DHT: ACTIVADO");
-  dht.begin(); // Inicializamos el DHT
-#else
-  Serial.println("DHT: DESACTIVADO");
-#endif
+#if defined(USE_BMP680)
+  Serial.println("BMP680: ACTIVADO");
+  if (!bmp680.begin_I2C()) {
+    Serial.println("❌ Error al iniciar BMP680!");
+  } else {
+    Serial.println("✅ BMP680 listo");
+  }
 
-#ifdef USE_BMP
+#elif defined(USE_BMP280)
   Serial.println("BMP280: ACTIVADO");
-  if (!bmp.begin(0x76)) {
-    Serial.println("Error al iniciar BMP280!");
+  if (!bmp280.begin(0x76)) {
+    Serial.println("❌ Error al iniciar BMP280!");
+  } else {
+    Serial.println("✅ BMP280 listo");
   }
 #else
-  Serial.println("BMP280: DESACTIVADO");
+  Serial.println("BMPs: DESACTIVADO");
+#endif
+
+#ifdef USE_DHT
+  Serial.println("DHT: ACTIVADO");
+  dht.begin();
+#else
+  Serial.println("DHT: DESACTIVADO");
 #endif
 
 #ifdef USE_BH_SENSOR
@@ -115,77 +102,102 @@ void LeerSensores::begin() {
 }
 
 void LeerSensores::leerTodos() {
-#ifdef USE_DHT
-  // --- DHT: Temperatura y Humedad ---
-  float t = dht.readTemperature();
-  float h = dht.readHumidity();
-  float st = dht.computeHeatIndex(t, h, false);
-  if (isnan(t) || isnan(h)) {
-    Serial.println("Error leyendo DHT!");
-    tempDHT = -100;
-    humDHT = -100;
-    sensDHT = 0;
+
+#if defined(USE_BMP680)
+
+  if (bmp680.performReading()) {
+    // BMP680 mide todo: temperatura, humedad, presión
+    tempDHT = bmp680.temperature;
+    humDHT = bmp680.humidity;
+    sensDHT = 0;  // no tiene índice de calor
+
+    tempBMP = bmp680.temperature;
+    presBMP = bmp680.pressure / 100.0;
+    altBMP = bmp680.readAltitude(1013.25);
+    presNMBMP = presBMP / pow(1.0 - (750.0 / 44330.0), 5.255);
+
+    // Estimamos VOC con humedad como aproximación
+    ppmCO2 = humDHT * 10;  // arbitrario, para no dejarlo en -1
+
   } else {
-    tempDHT = t;
-    humDHT = h;
-    sensDHT = st;
+    Serial.println("❌ Fallo la lectura del BMP680");
+    tempDHT = humDHT = sensDHT = -1;
+    tempBMP = presBMP = altBMP = presNMBMP = -1;
+    ppmCO2 = -1;
   }
-#else
-  tempDHT = -1;
-  humDHT = -1;
-  sensDHT = 0;
-#endif
-
-#ifdef USE_BMP
-  // --- BMP280: Temperatura, Presión y Altitud ---
-  tempBMP = bmp.readTemperature();
-  presBMP = bmp.readPressure() / 100.0;
-  altBMP = bmp.readAltitude(1013.25);
-  float presNMBMP = presBMP / pow(1.0 - (750.0 / 44330.0), 5.255);
 
 #else
-  tempBMP = -1;
-  presBMP = -1;
-  altBMP = -1;
-  presNMBMP = -1;
-#endif
 
-#ifdef USE_BH_SENSOR
-  // --- BH1750: Nivel de luz (lux) ---
-  bh1750 = lightMeter.readLightLevel();
-#else
-  bh1750 = -1;
-#endif
+  // --- DHT ---
+  #ifdef USE_DHT
+    float t = dht.readTemperature();
+    float h = dht.readHumidity();
+    float st = dht.computeHeatIndex(t, h, false);
+    if (isnan(t) || isnan(h)) {
+      Serial.println("Error leyendo DHT!");
+      tempDHT = humDHT = -100;
+      sensDHT = 0;
+    } else {
+      tempDHT = t;
+      humDHT = h;
+      sensDHT = st;
+    }
+  #else
+    tempDHT = humDHT = -1;
+    sensDHT = 0;
+  #endif
 
-#ifdef USE_MQ_SENSOR
-  // --- MQ135: CO2 (valor analógico a ppm) ---
-  int mqValue = analogRead(PIN_MQ135);
-  ppmCO2 = (mqValue / 4095.0) * 5000.0;
-#else
-  ppmCO2 = -1;
-#endif
+  // --- BMP280 ---
+  #ifdef USE_BMP280
+    tempBMP = bmp280.readTemperature();
+    presBMP = bmp280.readPressure() / 100.0;
+    altBMP = bmp280.readAltitude(1013.25);
+    presNMBMP = presBMP / pow(1.0 - (750.0 / 44330.0), 5.255);
+  #else
+    tempBMP = presBMP = altBMP = presNMBMP = -1;
+  #endif
 
-#ifdef USE_ANEMOMETER
-  noInterrupts();
-  unsigned long pulseCount = anemometerPulseCount;
-  anemometerPulseCount = 0;
-  interrupts();
-  float windSpeedKmh = (pulseCount * 2.4);
-  vientoVel = windSpeedKmh / 3.6;
-#else
-  vientoVel = -1;
-#endif
+  // --- MQ135 ---
+  #ifdef USE_MQ_SENSOR
+    int mqValue = analogRead(PIN_MQ135);
+    ppmCO2 = (mqValue / 4095.0) * 5000.0;
+  #else
+    ppmCO2 = -1;
+  #endif
 
-#ifdef USE_VELETA
-  int analogVal = analogRead(VELETA_Y);
-  vientoDir = map(analogVal, 0, 4095, 0, 360);
-#else
-  vientoDir = -1;
-#endif
+#endif // USE_BMP680
 
-#ifdef USE_HOJA_MOJADA
-  lluviaPosibilidad = digitalRead(HOJA_MOJADA_PIN);
-#else
-  lluviaPosibilidad = 0;
-#endif
+  // --- BH1750 ---
+  #ifdef USE_BH_SENSOR
+    bh1750 = lightMeter.readLightLevel();
+  #else
+    bh1750 = -1;
+  #endif
+
+  // --- Anemómetro ---
+  #ifdef USE_ANEMOMETER
+    noInterrupts();
+    unsigned long pulseCount = anemometerPulseCount;
+    anemometerPulseCount = 0;
+    interrupts();
+    float windSpeedKmh = (pulseCount * 2.4);
+    vientoVel = windSpeedKmh / 3.6;
+  #else
+    vientoVel = -1;
+  #endif
+
+  // --- Veleta ---
+  #ifdef USE_VELETA
+    int analogVal = analogRead(VELETA_Y);
+    vientoDir = map(analogVal, 0, 4095, 0, 360);
+  #else
+    vientoDir = -1;
+  #endif
+
+  // --- Hoja Mojada ---
+  #ifdef USE_HOJA_MOJADA
+    lluviaPosibilidad = digitalRead(HOJA_MOJADA_PIN);
+  #else
+    lluviaPosibilidad = 0;
+  #endif
 }
