@@ -38,7 +38,7 @@ void LeerSensores::begin() {
 
 #if defined(USE_BMP680)
   Serial.println("BMP680: ACTIVADO");
-  if (!bmp680.begin_I2C()) {
+  if (!bmp680.begin()) {
     Serial.println("❌ Error al iniciar BMP680!");
   } else {
     Serial.println("✅ BMP680 listo");
@@ -65,7 +65,7 @@ void LeerSensores::begin() {
 #ifdef USE_BH_SENSOR
   Serial.println("BH1750: ACTIVADO");
   if (!lightMeter.begin()) {
-    Serial.println("Error al iniciar BH1750!");
+    Serial.println("❌ Error al iniciar BH1750!");
   }
 #else
   Serial.println("BH1750: DESACTIVADO");
@@ -106,21 +106,18 @@ void LeerSensores::leerTodos() {
 #if defined(USE_BMP680)
 
   if (bmp680.performReading()) {
-    // BMP680 mide todo: temperatura, humedad, presión
     tempDHT = bmp680.temperature;
     humDHT = bmp680.humidity;
-    sensDHT = 0;  // no tiene índice de calor
+    sensDHT = 0;
 
     tempBMP = bmp680.temperature;
     presBMP = bmp680.pressure / 100.0;
     altBMP = bmp680.readAltitude(1013.25);
     presNMBMP = presBMP / pow(1.0 - (750.0 / 44330.0), 5.255);
 
-    // Estimamos VOC con humedad como aproximación
-    ppmCO2 = humDHT * 10;  // arbitrario, para no dejarlo en -1
-
+    ppmCO2 = bmp680.gas_resistance / 1000.0;  // Valor estimado
   } else {
-    Serial.println("❌ Fallo la lectura del BMP680");
+    Serial.println("❌ Falló la lectura del BMP680");
     tempDHT = humDHT = sensDHT = -1;
     tempBMP = presBMP = altBMP = presNMBMP = -1;
     ppmCO2 = -1;
@@ -128,7 +125,6 @@ void LeerSensores::leerTodos() {
 
 #else
 
-  // --- DHT ---
   #ifdef USE_DHT
     float t = dht.readTemperature();
     float h = dht.readHumidity();
@@ -147,7 +143,6 @@ void LeerSensores::leerTodos() {
     sensDHT = 0;
   #endif
 
-  // --- BMP280 ---
   #ifdef USE_BMP280
     tempBMP = bmp280.readTemperature();
     presBMP = bmp280.readPressure() / 100.0;
@@ -157,7 +152,6 @@ void LeerSensores::leerTodos() {
     tempBMP = presBMP = altBMP = presNMBMP = -1;
   #endif
 
-  // --- MQ135 ---
   #ifdef USE_MQ_SENSOR
     int mqValue = analogRead(PIN_MQ135);
     ppmCO2 = (mqValue / 4095.0) * 5000.0;
@@ -167,14 +161,12 @@ void LeerSensores::leerTodos() {
 
 #endif // USE_BMP680
 
-  // --- BH1750 ---
   #ifdef USE_BH_SENSOR
     bh1750 = lightMeter.readLightLevel();
   #else
     bh1750 = -1;
   #endif
 
-  // --- Anemómetro ---
   #ifdef USE_ANEMOMETER
     noInterrupts();
     unsigned long pulseCount = anemometerPulseCount;
@@ -186,7 +178,6 @@ void LeerSensores::leerTodos() {
     vientoVel = -1;
   #endif
 
-  // --- Veleta ---
   #ifdef USE_VELETA
     int analogVal = analogRead(VELETA_Y);
     vientoDir = map(analogVal, 0, 4095, 0, 360);
@@ -194,10 +185,13 @@ void LeerSensores::leerTodos() {
     vientoDir = -1;
   #endif
 
-  // --- Hoja Mojada ---
   #ifdef USE_HOJA_MOJADA
     lluviaPosibilidad = digitalRead(HOJA_MOJADA_PIN);
   #else
     lluviaPosibilidad = 0;
+  #endif
+
+  #ifdef pantallita
+    serial.print("Temperatura DHT: ");
   #endif
 }
