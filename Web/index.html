@@ -64,7 +64,7 @@
                 <select id="categoriaDropdown" class="dropdown" style="margin-right: 0px;">
                     <option value="" disabled selected>Seleccione nodo meteorológico</option>
                     <option value="emetec" selected>EME: ETec</option>
-                    <option value="test" selected>EMM: ETec</option>
+                    <!-- <option value="test" selected>EMM: ETec</option> -->
                     <option value="sj" selected>EME: Colegio San Jorge</option>
                     <!-- <option value="emmetec">EMM: ETec</option>
                     <option value="emmsj">EMM: Colegio San Jorge</option> -->
@@ -74,37 +74,37 @@
                 </button>
             </div>
             <div class="subjects">
-                <div class="eg" id="popup-temperatura">
+                <div class="cs" id="popup-temperatura">
                     <span class="material-symbols-sharp">device_thermostat</span>
                     <h3>Temperatura</h3>
                     <h2 id="temperatura"></h2>
                     <small class="text-muted" id="fecha"></small>
                 </div>
-                <div class="mth" id="popup-stermica">
-                    <span class="material-symbols-sharp">nest_thermostat_zirconium_eu</span>
-                    <h3>Sensación Termica</h3>
-                    <h2 id="stermica"></h2>
-                    <small class="text-muted" id="fecha2"></small>
-                </div>
-                <div class="cs" id="popup-hum">
+                <div class="eg" id="popup-hum">
                     <span class="material-symbols-sharp">water_drop</span>
                     <h3>Humedad Relativa</h3>
                     <h2 id="humedad">27/30</h2>
                     <small class="text-muted" id="fecha3">Últimas 24 Horas</small>
                 </div>
-                <div class="cg" id="popup-bp">
+                <div class="qw" id="popup-bp">
                     <span class="material-symbols-sharp">cloud</span>
                     <h3>Presión Atmosférica</h3>
                     <h2 id="presion">24/25</h2>
                     <small class="text-muted" id="fecha4">Últimas 24 Horas</small>
                 </div>
+                <div class="mth" id="popup-bp">
+                    <span class="material-symbols-sharp">dew_point</span>
+                    <h3>Punto de Rocío</h3>
+                    <h2 id="procio">24/25</h2>
+                    <small class="text-muted" id="fecha4">Últimas 24 Horas</small>
+                </div>
                 <div class="net" id="popup-luz">
                     <span class="material-symbols-sharp">light_mode</span>
-                    <h3>Nivel de luz</h3>
-                    <h2 id="nivelLuz">25/27</h2>
+                    <h3>Altitud</h3>
+                    <h2 id="Altitud">25/27</h2>
                     <small class="text-muted" id="fecha5">Últimas 24 Horas</small>
                 </div>
-                <div class="net" id="popup-aire">
+                <div class="cs" id="popup-aire">
                     <span class="material-symbols-sharp">air</span>
                     <h3>Calidad de Aire</h3>
                     <h2 id="calidadAire">25/27</h2>
@@ -123,10 +123,10 @@
                                 <th>Dato</th>
                                 <th>Fecha</th>
                                 <th>Temperatura</th>
-                                <th>Sensación Térmica</th>
-                                <th>Presión atmosferica</th>
                                 <th>Humedad relativa</th>
-                                <th>Nivel de luz</th>
+                                <th>Presión atmosferica</th>
+                                <th>Punto de rocio</th>
+                                <th>Calidad del aire</th>
                             </tr>
                         </thead>
                         <tbody id="tablaDetallesCuerpo"></tbody>
