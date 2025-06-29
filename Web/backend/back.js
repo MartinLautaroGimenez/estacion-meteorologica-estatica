@@ -64,8 +64,8 @@ document.addEventListener('DOMContentLoaded', () => {
         : v;
 
       // Actualizo tarjetas principales
-      setText('datoNumero', obtenerValor(ultimoDatoGlobal['Dato N°']));
-      setText('fecha',      obtenerValor(ultimoDatoGlobal['Fecha']));
+      setText('datoNumero', ultimoDatoGlobal['Dato N°']);
+      setText('fecha',      ultimoDatoGlobal['Fecha']);
       setText('battery',
         obtenerValor(ultimoDatoGlobal['Nivel de bateria']) === 'No disponible'
         ? 'No disponible'
@@ -110,11 +110,15 @@ document.addEventListener('DOMContentLoaded', () => {
       setText('velocidadViento',  obtenerValor(ultimoDatoGlobal['Velocidad del viento']));
       setText('direccionViento',  obtenerValor(ultimoDatoGlobal['Direccion del viento']));
       setText('sensorLluvia',     obtenerValor(ultimoDatoGlobal['Sensor de lluvia']));
-      setText('Altitud',          obtenerValor(ultimoDatoGlobal['Altitud']));
+      setText('Altitud',
+        obtenerValor(ultimoDatoGlobal['Altitud']) === 'No disponible'
+        ? 'No disponible'
+        : `${obtenerValor(ultimoDatoGlobal['Altitud'])} m`
+      );
 
       // Fechas secundarias
-      ['fecha2','fecha3','fecha4','fecha5']
-        .forEach(id => setText(id, obtenerValor(ultimoDatoGlobal['Fecha'])));
+      ['fecha2','fecha3','fecha4','fecha5','fecha6']
+        .forEach(id => setText(id, ultimoDatoGlobal['Fecha']));
 
       // Tabla de detalles
       const tbody = document.getElementById('tablaDetallesCuerpo');
@@ -124,12 +128,12 @@ document.addEventListener('DOMContentLoaded', () => {
           const fila = document.createElement('tr');
           fila.innerHTML = `
             <td>${obtenerValor(dato['Dato N°'])}</td>
-            <td>${obtenerValor(dato['Fecha'])}</td>
+            <td>${dato['Fecha']}</td>
             <td>${obtenerValor(dato['Temperatura Promedio'])} °C</td>
-            <td>${obtenerValor(dato['Sensacion T'])} °C</td>
-            <td>${obtenerValor(dato['Presion'])} hPa</td>
             <td>${obtenerValor(dato['Humedad'])} %</td>
-            <td>${obtenerValor(dato['Nivel de luz'])} lm</td>
+            <td>${obtenerValor(dato['Presion'])} hPa</td>
+            <td>${obtenerValor(dato['Temperatura punto de rocio'])} °C</td>
+            <td>${obtenerValor(dato['Calidad del aire'])}</td>
           `;
           tbody.appendChild(fila);
         });
