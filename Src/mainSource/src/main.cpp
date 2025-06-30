@@ -151,7 +151,7 @@ void enviarDatos() {
     Serial.println("Conectado al servidor!");
     WebSerial.println("Conectado al servidor!");
 
-    client.println("POST " endpoint " HTTP/1.1");
+    client.println("POST " apiendpoint " HTTP/1.1");
     client.print("Host: "); client.println(SERVIDOR_ETEC);
     client.println("Content-Type: application/json");
     client.print("Content-Length: "); client.println(postData.length());

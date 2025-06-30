@@ -20,6 +20,42 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+    <script>
+document.addEventListener('DOMContentLoaded', () => {
+    const categoriaDropdown = document.getElementById('categoriaDropdown');
+    const ubicacionHTML = document.querySelector('#popup-fecha').nextElementSibling;
+
+    function actualizarUbicacion(valorNodo) {
+        if (!ubicacionHTML) return;
+        if (valorNodo === "sj") {
+            ubicacionHTML.innerHTML = `
+                <span class="material-symbols-sharp">location_on</span>
+                <h3>Ubicación</h3>
+                <h3><a href="https://www.google.com/maps/place/Colegio+San+Jorge,+Chacras+De+Coria/@-32.9678848,-68.8488448,13z/data=!4m6!3m5!1s0x967e0af3dc0e8ee1:0x1a250275ca38cde3!8m2!3d-32.985337!4d-68.8965972!16s%2Fg%2F11f4lmjv7t?entry=ttu&g_ep=EgoyMDI1MDYyMy4yIKXMDSoASAFQAw%3D%3D" target="_blank" style="text-decoration: underline;">
+                    Colegio San Jorge de Chacras
+                </a></h3>
+            `;
+        } else {
+            ubicacionHTML.innerHTML = `
+                <span class="material-symbols-sharp">location_on</span>
+                <h3>Ubicación</h3>
+                <h3><a href="https://maps.app.goo.gl/2LxSamvsiX2J4FRX7" target="_blank" style="text-decoration: underline;">
+                    Escuela Técnica de la Universidad de Mendoza
+                </a></h3>
+            `;
+        }
+    }
+
+    // Actualizar ubicación al cargar la página
+    actualizarUbicacion(categoriaDropdown.value);
+
+    // Escuchar cambios en el dropdown
+    categoriaDropdown.addEventListener('change', (e) => {
+        actualizarUbicacion(e.target.value);
+    });
+});
+</script>
+
     <!-- CSS personalizado local -->
     <body data-active="datos">
         <div id="header-placeholder"></div>
