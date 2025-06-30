@@ -5,6 +5,11 @@
 #include <AsyncTCP.h>
 #include <ESPAsyncWebServer.h>
 #include <WebSerial.h>
+#include <ESPmDNS.h>  // Para mDNS
+
+// —— Añadidos para forzar hostname —— 
+#include <esp_netif.h>
+// ————————————————————————————————
 
 #include "config.h"
 #include "../lib/LeerSensores.h"
@@ -20,10 +25,18 @@
   #include <ArduinoOTA.h>
 #endif
 
+#ifdef WEBAPP
+  #include "../lib/WebController.h"
+#endif
+
 WiFiClientSecure client;
 LeerSensores sensores;
 Preferences preferences;
 AsyncWebServer server(2020); // Web server asincrónico
+
+#ifdef WEBAPP
+WebController webapp(80, &sensores, &preferences);
+#endif
 
 String jsonValue(float value) {
   return (isnan(value) || value < 0) ? "0" : String(value, 2);
@@ -33,6 +46,10 @@ void startCaptivePortal();
 void handleCaptivePortal();
 
 void conectarWiFi() {
+  // Inicializa la interfaz de red y fuerza modo estación
+  esp_netif_init();
+  WiFi.mode(WIFI_STA);
+
   preferences.begin("wifi", true);
   String ssid = preferences.getString("ssid", "");
   String pass = preferences.getString("pass", "");
@@ -53,6 +70,12 @@ void conectarWiFi() {
   if (ssid != "") {
     Serial.print("Conectando a: "); Serial.println(ssid);
     WebSerial.print("Conectando a: "); WebSerial.println(ssid);
+
+    // —— Forzamos el hostname ANTES de conectar —— 
+    esp_netif_t* sta_netif = esp_netif_get_handle_from_ifkey("WIFI_STA_DEF");
+    esp_netif_set_hostname(sta_netif, hostdom);
+    // ————————————————————————————————
+
     WiFi.begin(ssid.c_str(), pass.c_str());
 
     unsigned long startAttemptTime = millis();
@@ -69,6 +92,18 @@ void conectarWiFi() {
       #ifdef USE_PANTALLA
         pantalla.mostrarEstadoWiFi(ssid, ip);
       #endif
+
+      // —— Iniciar mDNS para "eme.local" y HTTP ——
+      if (MDNS.begin(hostdom)) {
+        MDNS.addService("http", "tcp", 80);
+        Serial.println("✅ mDNS iniciado: http://" + String(hostdom) + ".local");
+        WebSerial.println("✅ mDNS iniciado: http://" + String(hostdom) + ".local");
+      } else {
+        Serial.println("❌ Error iniciando mDNS");
+        WebSerial.println("❌ Error iniciando mDNS");
+      }
+      // ——————————————————————————
+
     } else {
       Serial.println("❌ Falló conexión. Activando portal cautivo.");
       WebSerial.println("❌ Falló conexión. Activando portal cautivo.");
@@ -95,17 +130,18 @@ void enviarDatos() {
   client.setInsecure();
 
   String postData = "{\"EME_n0/dht/temp\":" + jsonValue(sensores.tempDHT) + 
-    ",\"EME_n0/dht/hum\":" + jsonValue(sensores.humDHT) + 
-    ",\"EME_n0/dht/senst\":" + jsonValue(sensores.sensDHT) + 
-    ",\"EME_n0/bmp/temp\":" + jsonValue(sensores.tempBMP) + 
-    ",\"EME_n0/bmp/pres\":" + jsonValue(sensores.presBMP) + 
-    ",\"EME_n0/bmp/alt\":" + jsonValue(sensores.altBMP) + 
-    ",\"EME_n0/bmp/presnm\":" + jsonValue(sensores.presNMBMP) + 
-    ",\"EME_n0/bh/luz\":" + jsonValue(sensores.bh1750) + 
-    ",\"EME_n0/mq/ppmco2\":" + jsonValue(sensores.ppmCO2) + 
-    ",\"EME_n0/yl/lluv\":" + jsonValue(-1) + 
-    ",\"EME_n0/viento/vel\":" + jsonValue(sensores.vientoVel) +  
-    ",\"EME_n0/viento/dir\":" + jsonValue(sensores.vientoDir) + "}";
+                    ",\"EME_n0/dht/hum\":"  + jsonValue(sensores.humDHT) + 
+                    ",\"EME_n0/dht/senst\":"+ jsonValue(sensores.sensDHT) + 
+                    ",\"EME_n0/bmp/temp\":"+ jsonValue(sensores.tempBMP) +
+                    ",\"EME_n0/bmp/pres\":"+ jsonValue(sensores.presBMP) +
+                    ",\"EME_n0/bmp/alt\":" + jsonValue(sensores.altBMP) +
+                    ",\"EME_n0/bmp/presnm\":"+ jsonValue(sensores.presNMBMP) +
+                    ",\"EME_n0/bh/luz\":" + jsonValue(sensores.bh1750) +
+                    ",\"EME_n0/mq/ppmco2\":"+ jsonValue(sensores.ppmCO2) +
+                    ",\"EME_n0/yl/lluv\":"+ jsonValue(-1) +
+                    ",\"EME_n0/viento/vel\":"+ jsonValue(sensores.vientoVel) +
+                    ",\"EME_n0/viento/dir\":"+ jsonValue(sensores.vientoDir) +
+                    "}";
 
   Serial.println("📤 Datos a enviar:");
   Serial.println(postData);
@@ -115,15 +151,14 @@ void enviarDatos() {
     Serial.println("Conectado al servidor!");
     WebSerial.println("Conectado al servidor!");
 
-    client.println("POST /emeapi HTTP/1.1");
+    client.println("POST " endpoint " HTTP/1.1");
     client.print("Host: "); client.println(SERVIDOR_ETEC);
     client.println("Content-Type: application/json");
     client.print("Content-Length: "); client.println(postData.length());
     client.println(); client.println(postData);
 
     while (client.connected()) {
-      String line = client.readStringUntil('\n');
-      if (line == "\r") break;
+      if (client.readStringUntil('\n') == "\r") break;
     }
 
     String response = client.readString();
@@ -167,8 +202,11 @@ void setup() {
   server.begin();
 
   #ifdef ota
-    ArduinoOTA.setHostname("EME_esp32");
+    ArduinoOTA.setHostname(hostdom);
     ArduinoOTA.begin();
+  #endif
+  #ifdef WEBAPP
+    webapp.begin();
   #endif
 }
 
