@@ -104,7 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setText('ppmco2',
         obtenerValor(ultimoDatoGlobal['ppm CO2']) === 'No disponible'
         ? 'No disponible'
-        : `${obtenerValor(ultimoDatoGlobal['ppm CO2'])} Ω`
+        : `${obtenerValor(ultimoDatoGlobal['ppm CO2'])} KΩ`
       );
       setText('calidadAire',      obtenerValor(ultimoDatoGlobal['Calidad del aire']));
       setText('velocidadViento',  obtenerValor(ultimoDatoGlobal['Velocidad del viento']));
