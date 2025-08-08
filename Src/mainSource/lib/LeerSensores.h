@@ -18,7 +18,8 @@
 #endif
 
 #ifdef USE_BMP680
-  #include <Adafruit_BMP3XX.h>
+  #include <Adafruit_Sensor.h>
+  #include "Adafruit_BME680.h"
 #endif
 
 #ifdef USE_BH_SENSOR
@@ -59,7 +60,7 @@ class LeerSensores {
 #endif
 
 #ifdef USE_BMP680
-    Adafruit_BMP3XX bmp680;
+    Adafruit_BME680 bmp680;
 #endif
 
 #ifdef USE_BH_SENSOR
