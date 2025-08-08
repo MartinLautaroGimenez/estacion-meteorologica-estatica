@@ -22,33 +22,33 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
     <!-- CSS personalizado local -->
     <body data-active="datos">
-        <div id="header-placeholder"></div>
+    <div id="header-placeholder"></div>
     <link rel="stylesheet" href="/frontend/style.css">
     <style>
         /* Colores dinámicos para el estado */
-.card-estado-nodo.online {
-  border-left-color: #28a745;
-  background-color: #e6f9ec;
-  color: #155724;
-}
+        .card-estado-nodo.online {
+            border-left-color: #28a745;
+            background-color: #e6f9ec;
+            color: #155724;
+        }
 
-.card-estado-nodo.offline {
-  border-left-color: #dc3545;
-  background-color: #fcebea;
-  color: #721c24;
-}
+        .card-estado-nodo.offline {
+            border-left-color: #dc3545;
+            background-color: #fcebea;
+            color: #721c24;
+        }
 
-.card-estado-nodo.unknown {
-  border-left-color: #6c757d;
-  background-color: #f1f1f1;
-  color: #495057;
-}
-.estado-texto {
-  all: unset !important; /* Elimina herencia salvaje de estilos */
-  font-weight: 600;
-  font-size: 1rem;
-  color: inherit;
-}
+        .card-estado-nodo.unknown {
+            border-left-color: #6c757d;
+            background-color: #f1f1f1;
+            color: #495057;
+        }
+        .estado-texto {
+            all: unset !important; /* Elimina herencia salvaje de estilos */
+            font-weight: 600;
+            font-size: 1rem;
+            color: inherit;
+        }
         body {
             display: flex;
             flex-direction: column;
@@ -70,15 +70,6 @@
             justify-content: space-between;
         }
 
-        .zarazap {
-            display: flex;
-            align-items: center;
-        }
-
-        .dropdown {
-            margin-left: 20px;
-        }
-
         footer {
             margin-top: auto; /* Push footer to the end */
             text-align: center; /* Center the footer text */
@@ -98,10 +89,10 @@
                 <h1>Datos</h1>
                 <h3>Seleccione el nodo meteorológico: </h3>
                 <select id="categoriaDropdown" class="dropdown" style="margin-right: 0px;">
-                    <option value="" disabled selected>Seleccione nodo meteorológico</option>
+                    <option value="" disabled >Seleccione nodo meteorológico</option>
                     <option value="emetec" selected>EME: ETec</option>
-                    <option value="test" selected>EMM: ETec</option>
-                    <option value="sj" selected>EME: Colegio San Jorge</option>
+                    <option value="test">EMM: ETec</option>
+                    <option value="sj">EME: Colegio San Jorge</option>
                     <!-- <option value="emmetec">EMM: ETec</option>
                     <option value="emmsj">EMM: Colegio San Jorge</option> -->
                 </select>
