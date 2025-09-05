@@ -3,6 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const apiUrl     = 'https://emetec.wetec.um.edu.ar/datos';
   const apiTempUrl = 'https://emetec.wetec.um.edu.ar/datosemm';
   const apiSJ      = 'https://emetec.wetec.um.edu.ar/datosemesj';
+  const apiEMMLV   = 'https://emetec.wetec.um.edu.ar/datoslv';
 
   let ultimos10DatosGlobal = [];
   let ultimoDatoGlobal    = {};
@@ -32,6 +33,8 @@ document.addEventListener('DOMContentLoaded', () => {
       obtenerDatos(apiTempUrl);
     } else if (selectedValue === 'sj') {
       obtenerDatos(apiSJ);
+    } else if (selectedValue === 'emelv') {
+      obtenerDatos(apiEMMLV);
     }
 
     verificarEstadoNodo(); // 🔄 ver estado para EMEtec o EMESJ
