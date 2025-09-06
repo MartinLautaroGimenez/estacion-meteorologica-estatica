@@ -77,7 +77,8 @@ small { font-size: 0.75rem; }
 
 .text-muted { color: var(--color-info); }
 p { color: var(--color-dark-varient); }
-b { color: var(--color-dark); }
+b { color: var(--color-black); }
+
 
 .primary { color: var(--color-primary); }
 .danger { color: var(--color-danger); }
