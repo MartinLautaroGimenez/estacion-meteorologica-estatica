@@ -1,0 +1,14 @@
+footer {
+    color: var(--color-dark-varient);
+    text-align: center;
+    font-size: 0.8rem;
+    padding: 10px 5px;
+    display: flex;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+}
+
+@media screen and (max-width: 480px) {
+    footer { font-size: 0.8rem; }
+}

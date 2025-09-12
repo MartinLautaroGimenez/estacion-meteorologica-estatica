@@ -1,0 +1,138 @@
+header {
+    top: 0;
+    left: 0;
+    position: sticky;
+    width: 100vw;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+    background-color: color-mix(in srgb, var(--color-background) 70%, transparent);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all 0.3s ease;
+}
+
+header h3 {
+    font-weight: 500;
+}
+
+header.scrolled {
+    background-color: color-mix(in srgb, var(--color-background) 90%, transparent);
+    padding: 0.5rem 2rem;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.2);
+}
+
+header.active {
+    box-shadow: var(--box-shadow);
+}
+
+header .logo {
+    display: flex;
+    gap: 0.8rem;
+    margin-right: auto;
+}
+
+header .logo img {
+    width: 11rem;
+    height: 5rem;
+}
+
+header,
+header .navbar {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 0 3rem;
+    color: var(--color-info);
+}
+
+header .navbar a {
+    display: flex;
+    margin-left: 2rem;
+    gap: 1rem;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    height: 3.7rem;
+    transition: all 300ms ease;
+    padding: 0 2rem;
+}
+
+header .navbar a:hover {
+    padding-top: 1.5rem;
+}
+
+header .navbar a.active {
+    background: var(--color-light);
+    color: var(--color-primary);
+}
+
+header .navbar a.active::before {
+    content: "";
+    background-color: var(--color-primary);
+    position: absolute;
+    height: 5px;
+    width: 100%;
+    left: 0;
+    top: 0;
+}
+
+header #profile-btn {
+    display: none;
+    font-size: 2rem;
+    margin: 0.5rem 2rem 0 0;
+    cursor: pointer;
+}
+
+header .theme-toggler {
+    background: var(--color-light);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 1.6rem;
+    width: 4.2rem;
+    cursor: pointer;
+    border-radius: var(--border-radius-1);
+    margin-right: 2rem;
+}
+
+header .theme-toggler span {
+    font-size: 1.2rem;
+    width: 50%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+header .theme-toggler span.active {
+    background-color: var(--color-primary);
+    color: white;
+    border-radius: var(--border-radius-1);
+}
+
+@media screen and (max-width: 1200px) {
+    header .logo h2, header .navbar h3 { display: none; }
+    header .navbar a {
+        width: 4.5rem;
+        padding: 0 1rem;
+    }
+}
+
+@media screen and (max-width: 768px) {
+    header { padding: 0 0.8rem; }
+    header #profile-btn { display: inline; }
+    header .navbar { padding: 0; }
+    header .navbar a { margin: 0 0.5rem 0 0; }
+    header .theme-toggler { margin: 0; }
+}
+
+@media screen and (max-width: 480px) {
+    header .navbar a {
+        margin: 0 5px;
+        font-size: 0.75rem;
+    }
+}
