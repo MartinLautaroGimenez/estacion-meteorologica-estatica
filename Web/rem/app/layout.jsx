@@ -3,8 +3,10 @@
 import "./globals.css";
 import { Header, Footer } from "@/components";
 import Script from "next/script";
+import { usePathname } from "next/navigation";
 
 export default function RootLayout({ children }) {
+  const pathname = usePathname()
   return (
     <html lang="en">
       <head>
@@ -29,6 +31,14 @@ export default function RootLayout({ children }) {
       </head>
       <body>
         <Header />
+        {pathname === "/about_us" && (
+          <section id="hero" data-aos="fade-in">
+            <div className="hero-content">
+              <h1>Bienvenidos a la Estación Meteorológica ETec</h1>
+              <p>Descubrí la fusión perfecta entre tecnología y clima</p>
+            </div>
+          </section>
+        )}
         <div className="content">
           <main>
             {children}

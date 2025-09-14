@@ -10,10 +10,12 @@
   "dependencies": {
     "@knight-lab/timelinejs": "^3.9.8",
     "aos": "^2.3.4",
+    "bcrypt": "^6.0.0",
     "chart.js": "^4.5.0",
     "jquery": "^3.7.1",
     "magnific-popup": "^1.2.0",
     "next": "15.5.0",
+    "next-auth": "^4.24.11",
     "react": "19.1.0",
     "react-chrono": "^2.9.1",
     "react-dom": "19.1.0",

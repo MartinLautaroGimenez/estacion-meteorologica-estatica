@@ -526,21 +526,6 @@ body.loaded #content {
   .content {
     margin: 0;
   }
-  aside {
-    position: absolute;
-    top: 4rem;
-    left: 0;
-    right: 0;
-    background-color: var(--color-white);
-    padding-left: 2rem;
-    transform: translateX(-100%);
-    z-index: 10;
-    width: 18rem;
-    height: 100%;
-    box-shadow: 1rem 3rem 4rem var(--color-light);
-    transition: all 2s ease;
-  }
-  aside.active { transform: translateX(0); }
   main { padding: 0 2rem; }
   main .timetable { position: relative; margin: 3rem 0 0 0; width: 100%; }
   main .timetable table { width: 100%; margin: 0; min-width: 600px; }

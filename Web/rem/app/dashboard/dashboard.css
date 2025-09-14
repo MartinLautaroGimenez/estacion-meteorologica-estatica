@@ -1,0 +1,159 @@
+.dashboard-card {
+    background-color: var(--color-white);
+    padding: var(--card-padding);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    margin-bottom: 1.5rem;
+    transition: all 0.3s ease;
+}
+
+.dashboard-card:hover {
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-form input,
+.dashboard-form select,
+.dashboard-form textarea {
+    width: 100%;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-1);
+    border: 1px solid #ccc;
+    margin-bottom: 1rem;
+    box-shadow: var(--box-shadow);
+    color: #666;
+    background-color: whitesmoke;
+}
+
+.dashboard-form button {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+    padding: 0.5rem 1.2rem;
+    border-radius: var(--border-radius-1);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    margin-top: 1rem;
+}
+
+.dashboard-form button:hover {
+    opacity: 0.9;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-list li {
+    background-color: var(--color-white);
+    padding: 1rem;
+    margin: 1rem;
+    border-radius: var(--card-border-radius);
+    margin-bottom: 0.8rem;
+    box-shadow: 0 0 1.5rem var(--color-light);
+    ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.dashboard-list li:hover {
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.dashboard-container {
+    display: flex;
+    gap: 2rem;
+    min-height: 70vh;
+}
+
+.dashboard-navbar {
+    width: 220px;
+    background-color: var(--color-white);
+    border-radius: var(--card-border-radius);
+    box-shadow: var(--box-shadow);
+    flex-shrink: 0;
+    align-self: flex-start;
+}
+
+.dashboard-navbar h2 {
+    font-size: 1.4rem;
+    margin: 1.5rem;
+    border-radius: var(--card-border-radius);
+    text-align: center;
+}
+
+.dashboard-navbar ul {
+    list-style: none;
+    padding: 0;
+}
+
+.dashboard-navbar li {
+    margin-bottom: 1rem;
+}
+
+.dashboard-navbar li a {
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+    /* espacio entre icono y texto */
+    text-decoration: none;
+    color: var(--color-dark);
+    font-weight: 500;
+    padding: 0.5rem 1rem;
+    border-radius: var(--border-radius-1);
+    transition: all 0.2s ease;
+}
+
+.dashboard-navbar li a .material-symbols-sharp {
+    font-size: 20px;
+    vertical-align: middle;
+    color: inherit;
+}
+
+.dashboard-navbar li a:hover {
+    background-color: var(--color-primary);
+    color: var(--color-white);
+}
+
+.dashboard-main {
+    flex: 1;
+}
+
+.btn-delete {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    background-color: var(--color-danger);
+    color: var(--color-white);
+    border: none;
+    border-radius: var(--border-radius-1);
+    padding: 0.5rem 1rem;
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.btn-delete .material-symbols-sharp {
+    font-size: 18px;
+    vertical-align: middle;
+}
+
+.btn-delete:hover {
+    background-color: #e06671;
+}
+
+@media screen and (max-width: 768px) {
+    .dashboard-container {
+        flex-direction: column;
+        /* aside arriba */
+    }
+
+    .dashboard-navbar {
+        width: 100%;
+        /* ocupa todo el ancho */
+        margin-bottom: 1rem;
+        /* separa del contenido */
+    }
+
+    .dashboard-main {
+        width: 100%;
+    }
+}

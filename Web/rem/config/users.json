@@ -1,0 +1,14 @@
+[
+  {
+    "id": "1757800771741",
+    "email": "ivogiovarruscio@gmail.com",
+    "role": "admin",
+    "password": "$2b$10$kyQuR.KRfR6SdIATvRFJBe7zfjyjeEJ/dT.OqoY3KJbLIAI6ntY.."
+  },
+  {
+    "id": "1757813464551",
+    "email": "i.giovarruscio@alumno.etec.um.edu.ar",
+    "role": "editor",
+    "password": "$2b$10$8Bf6qGgLyOMt7NsxOR3OpeCpSooj38p7IjPTG6XNYPYp7stgY/RYG"
+  }
+]
