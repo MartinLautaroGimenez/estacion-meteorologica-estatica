@@ -2,7 +2,8 @@ import { NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 
 // GET /api/events/:id
-export async function GET(req, { params }) {
+export async function GET(req, props) {
+    const params = await props.params;
     try {
         const id = Number(params.id);
         const event = await prisma.events.findUnique({
@@ -21,7 +22,8 @@ export async function GET(req, { params }) {
 }
 
 // PUT /api/events/:id
-export async function PUT(req, { params }) {
+export async function PUT(req, props) {
+    const params = await props.params;
     try {
         const id = Number(params.id);
         const body = await req.json();
@@ -42,7 +44,8 @@ export async function PUT(req, { params }) {
 }
 
 // DELETE /api/events/:id
-export async function DELETE(req, { params }) {
+export async function DELETE(req, props) {
+    const params = await props.params;
     try {
         const id = Number(params.id);
 

@@ -19,7 +19,7 @@ export async function GET() {
 // POST /api/users
 export async function POST(req) {
     try {
-        //const session = await requireAdmin(req);  // Para verificar si el usuario es admin
+        const session = await requireAdmin(req);
 
         const body = await req.json();
         if (!body.email || !body.clave) {

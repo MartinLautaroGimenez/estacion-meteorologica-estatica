@@ -11,14 +11,22 @@ export const authOptions = {
                 password: { label: "Contraseña", type: "password" }
             },
             async authorize(credentials) {
-                const res = await fetch(`${process.env.NEXTAUTH_URL}/api/users`);
-                const users = await res.json();
+                const user = await prisma.webadmins.findUnique({
+                    where: { email: credentials.email }
+                });
 
-                const user = users.find(u => u.email === credentials.email);
-                if (user && await bcrypt.compare(credentials.password, user.password)) {
-                    return { id: user.id, email: user.email, role: user.role };
-                }
-                return null;
+                if (!user) return null;
+
+                const isValid = await bcrypt.compare(credentials.password, user.clave);
+                if (!isValid) return null;
+
+                const role = user.esAdmin === 1 ? "admin" : "editor";
+
+                return {
+                    id: user.idwebadmins,
+                    email: user.email,
+                    role
+                };
             }
         })
     ],
@@ -28,7 +36,6 @@ export const authOptions = {
     secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt({ token, user }) {
-            // se llama en el login: agregamos el rol al token
             if (user) {
                 token.id = user.id;
                 token.role = user.role;
@@ -36,7 +43,6 @@ export const authOptions = {
             return token;
         },
         async session({ session, token }) {
-            // cada vez que se pide la sesión: propagamos el rol desde el token
             if (token) {
                 session.user.id = token.id;
                 session.user.role = token.role;

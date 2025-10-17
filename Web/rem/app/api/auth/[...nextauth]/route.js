@@ -1,9 +1,7 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { readData } from "@/lib/db"; // tu helper para leer JSON
 import bcrypt from "bcryptjs";
-
-const FILE = "users.json";
+import { prisma } from "@/lib/prisma"; // conexión Prisma
 
 export const authOptions = {
     providers: [
@@ -14,22 +12,38 @@ export const authOptions = {
                 password: { label: "Contraseña", type: "password" },
             },
             async authorize(credentials) {
-                const users = await readData(FILE);
-                const user = users.find(u => u.email === credentials.email);
-                if (user) {
-                    const isValid = await bcrypt.compare(credentials.password, user.password);
-                    if (isValid) {
-                        return { id: user.id, email: user.email, role: user.role };
-                    }
-                }
-                return null;
-            }
+                if (!credentials?.email || !credentials?.password) return null;
+
+                // Buscar el usuario en la base de datos
+                const user = await prisma.webadmins.findUnique({
+                    where: { email: credentials.email },
+                });
+
+                if (!user) return null;
+
+                // Validar la contraseña
+                const isValid = await bcrypt.compare(credentials.password, user.clave);
+                if (!isValid) return null;
+
+                // Mapear esAdmin (0 o 1) a "admin" o "user"
+                const role = user.esAdmin === 1 ? "admin" : "user";
+
+                // Devolver datos que irán al token
+                return {
+                    id: user.idwebadmins,
+                    email: user.email,
+                    role,
+                };
+            },
         }),
     ],
+
     pages: {
-        signIn: "/login", // página personalizada
+        signIn: "/login",
     },
+
     callbacks: {
+        // Guardar información personalizada en el JWT
         async jwt({ token, user }) {
             if (user) {
                 token.id = user.id;
@@ -37,6 +51,8 @@ export const authOptions = {
             }
             return token;
         },
+
+        // Pasar la información del token a la sesión
         async session({ session, token }) {
             if (token) {
                 session.user.id = token.id;
@@ -45,9 +61,14 @@ export const authOptions = {
             return session;
         },
     },
+
+    session: {
+        strategy: "jwt",
+    },
+
     secret: process.env.NEXTAUTH_SECRET,
 };
 
+// Exportar para que Next.js lo use como API
 const handler = NextAuth(authOptions);
-
 export { handler as GET, handler as POST };

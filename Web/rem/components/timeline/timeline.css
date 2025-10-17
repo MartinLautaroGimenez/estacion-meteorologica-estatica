@@ -1,258 +1,437 @@
-.timeline {
+/* Added Google Fonts import */
+@import url("https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900&family=Poppins:wght@300;400;500;600;700;800&display=swap");
+
+/* =======================
+  VARIABLES Y TEMAS
+======================= */
+:root {
+    --color-primary: #7380ec;
+    --color-danger: #ff7782;
+    --color-success: #41f1b6;
+    --color-warning: #ffbb55;
+    --color-white: #fff;
+    --color-info: #7d8da1;
+    --color-dark: #363949;
+    --color-light: rgba(132, 139, 200, 0.18);
+    --color-dark-varient: #677483;
+    --color-background: #f6f6f9;
+    --card-border-radius: 2rem;
+    --border-radius-1: 0.4rem;
+    --border-radius-2: 1.2rem;
+    --card-padding: 1.8rem;
+    --box-shadow: 0 2rem 3rem var(--color-light);
+    /* Added font families */
+    --font-heading: "Cairo", sans-serif;
+    --font-body: "Poppins", sans-serif;
+}
+
+.dark-theme {
+    --color-background: #181a1e;
+    --color-white: #202528;
+    --color-dark: #edeffd;
+    --color-dark-varient: #a3bdcc;
+    --color-light: rgba(0, 0, 0, 0.4);
+    --box-shadow: 0 2rem 3rem var(--color-light);
+}
+
+.altura{
+    --altura: 10%;
+}
+
+/* =======================
+  CONTENEDOR PRINCIPAL
+======================= */
+.timeline-container {
+    width: 100%;
+    background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-warning) 100%);
+    padding: 2rem;
+    border-radius: var(--card-border-radius);
+    /* Applied body font */
+    font-family: var(--font-body);
+}
+
+.timeline-empty {
+    padding: 3rem;
+    text-align: center;
+    color: var(--color-info);
+    background: var(--color-white);
+    border-radius: var(--border-radius-2);
+}
+
+/* =======================
+  SCROLL Y LÍNEA
+======================= */
+.timeline-scroll {
     position: relative;
-    padding: 2rem 1rem;
-    max-width: 100%;
     overflow-x: auto;
-    white-space: nowrap;
+    overflow-y: visible;
+    height: 280px;
+    margin-bottom: 3rem;
+    padding: 2rem 0;
+    background: var(--color-white);
+    border-radius: var(--border-radius-2);
+    box-shadow: var(--box-shadow);
+}
+
+.timeline-scroll::-webkit-scrollbar {
+    height: 8px;
+}
+
+.timeline-scroll::-webkit-scrollbar-track {
+    background: var(--color-light);
+    border-radius: 10px;
+}
+
+.timeline-scroll::-webkit-scrollbar-thumb {
+    background: var(--color-primary);
+    border-radius: 10px;
+}
+
+.timeline-scroll::-webkit-scrollbar-thumb:hover {
+    background: var(--color-success);
 }
 
 .timeline-line {
     position: absolute;
+    top: var(--altura);
     left: 0;
-    width: 100%;
-    height: 3px;
-    background: var(--color-primary, #3498db);
-    z-index: 0;
+    height: 4px;
+    background: linear-gradient(90deg, var(--color-primary) 0%, var(--color-success) 50%, var(--color-warning) 100%);
+    border-radius: 2px;
+    box-shadow: 0 2px 8px rgba(115, 128, 236, 0.3);
 }
 
-.timeline-events {
-    display: flex;
-    position: relative;
-}
-
-.timeline-event {
-    transform: translate(-50%);
+/* Added navigation buttons at extremes with semi-transparent background */
+.timeline-nav-btn {
     position: absolute;
-    flex: 0 0 auto;
-    width: 150px;
-    text-align: center;
-}
-
-.timeline-marker {
-    width: 18px;
-    height: 18px;
+    top: 40%;
+    transform: translateY(-50%);
+    background: rgba(115, 128, 236, 0.7);
+    backdrop-filter: blur(8px);
+    color: var(--color-white);
     border: none;
-    background: var(--color-primary, #3498db);
+    width: 48px;
+    height: 48px;
     border-radius: 50%;
-    cursor: pointer;
-    margin: 0 auto;
-    position: relative;
-    top: 10px;
-    z-index: 1;
-    transition: transform 0.2s ease, background 0.2s ease;
-}
-
-.timeline-marker:hover {
-    transform: scale(1.2);
-    background: var(--color-secondary, #1abc9c);
-}
-
-.timeline-marker.active {
-    background: var(--color-secondary, #1abc9c);
-    transform: scale(1.3);
-}
-
-.timeline-date {
-    margin-top: 1.2rem;
-    font-weight: bold;
-    color: #555;
-}
-
-/* Panel de detalle */
-.timeline-detail {
-    padding: 1.5rem;
-    background: #fff;
-    border: 2px solid var(--color-primary, #3498db);
-    border-radius: 12px;
-    max-width: 600px;
-    margin-top: 1rem;
-    margin-left: auto;
-    margin-right: auto;
-    text-align: center;
-    animation: fadeIn 0.3s ease-in-out;
-}
-
-.timeline-detail h3 {
-    margin: 0 0 0.5rem 0;
-    color: var(--color-primary, #3498db);
-    font-size: 1.5rem;
-}
-
-.timeline-detail-date {
-    display: block;
-    font-size: 0.9rem;
-    color: #777;
-    margin-bottom: 1rem;
-}
-
-.timeline-detail p {
-    font-size: 1rem;
-    color: #333;
-    margin-bottom: 1.2rem;
-}
-
-.timeline-close {
-    background: var(--color-primary, #3498db);
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.timeline-close:hover {
-    background: var(--color-secondary, #1abc9c);
-}
-
-.timeline-scroll {
-    height: 150px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    white-space: nowrap;
-    position: relative;
-    padding-bottom: 2rem;
-    scroll-behavior: smooth;
-}
-
-/* Ocultar scrollbar */
-.timeline-scroll::-webkit-scrollbar {
-    display: none;
-}
-
-.timeline-scroll {
-    -ms-overflow-style: none;
-    /* IE/Edge */
-    scrollbar-width: none;
-    /* Firefox */
-}
-
-.timeline-nav {
-    margin-top: 1rem;
     display: flex;
+    align-items: center;
     justify-content: center;
-    gap: 1rem;
-}
-
-.timeline-arrow {
-    background: var(--color-primary, #3498db);
-    color: #fff;
-    border: none;
-    padding: 0.6rem 1.2rem;
-    border-radius: 50%;
-    font-size: 1.2rem;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: all 0.3s ease;
+    z-index: 10;
+    box-shadow: 0 4px 12px rgba(115, 128, 236, 0.3);
 }
 
-.timeline-arrow:hover {
-    background: var(--color-secondary, #1abc9c);
+.timeline-nav-btn.left {
+    left: 1rem;
 }
 
-.timeline-arrow:disabled {
-    background: #ccc;
+.timeline-nav-btn.right {
+    right: 1rem;
+}
+
+.timeline-nav-btn:hover:not(:disabled) {
+    background: rgba(65, 241, 182, 0.8);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: 0 6px 16px rgba(65, 241, 182, 0.4);
+}
+
+.timeline-nav-btn:disabled {
+    background: rgba(132, 139, 200, 0.3);
     cursor: not-allowed;
+    opacity: 0.5;
 }
 
+/* =======================
+  ESCALA Y MARCAS
+======================= */
 .timeline-scale {
-    position: relative;
-    top: 3px; /* debajo de la línea */
-    font-size: 0.8rem;
-    color: #666;
+    position: absolute;
+    top: var(--altura);
+    left: 0;
+    height: 1px;
 }
 
 .timeline-mark {
     position: absolute;
+    top: 0;
     transform: translateX(-50%);
-    text-align: center;
-    white-space: nowrap;
 }
 
-.timeline-mark::before {
-    content: "";
-    display: block;
+.timeline-mark-line {
     width: 2px;
-    background: #999;
+    height: 12px;
+    background: var(--color-dark-varient);
     margin: 0 auto;
 }
 
-.timeline-mark.month::before {
-    height: 8px;
+.timeline-mark.year .timeline-mark-line {
+    height: 20px;
+    width: 3px;
+    background: var(--color-primary);
 }
 
-.timeline-mark.year::before {
-    height: 14px;
-    background: var(--color-primary, #3498db);
-    font-weight: bold;
-}
-
-.timeline-mark span {
+.timeline-mark-label {
     display: block;
-    margin-top: 4px;
+    margin-top: 8px;
+    font-size: 0.75rem;
+    color: var(--color-info);
+    white-space: nowrap;
+    text-align: center;
 }
 
-.timeline-mark.year span {
-    font-size: 0.9rem;
-    font-weight: bold;
-    color: var(--color-primary, #3498db);
+.timeline-mark.year .timeline-mark-label {
+    font-weight: 700;
+    font-size: 0.85rem;
+    color: var(--color-dark);
+}
+
+/* =======================
+  EVENTOS Y ETIQUETAS
+======================= */
+.timeline-events {
+    position: absolute;
+    top: var(--altura);
+    left: 0;
+    height: 1px;
 }
 
 .timeline-event {
     position: absolute;
-    transform: translateX(-50%); /* centra respecto al eje */
-    text-align: center;
+    top: 0;
+    transform: translateX(-50%);
 }
 
-/* Línea vertical que conecta evento con timeline */
 .timeline-connector {
-    width: 2px;
-    height: 40px;
-    background: var(--color-primary, #3498db);
+    width: 3px;
+    height: 30px;
+    background: var(--color-primary);
     margin: 0 auto;
+    position: relative;
+    z-index: 2;
 }
 
-/* Tarjeta pequeña */
-.timeline-card {
-    background: #fff;
-    border: 2px solid var(--color-primary, #3498db);
-    border-radius: 8px;
-    padding: 0.5rem 1rem;
-    margin-top: 0.5rem;
+.timeline-connector::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 12px;
+    background: var(--color-primary);
+    border: 3px solid var(--color-white);
+    border-radius: 50%;
+    box-shadow: 0 2px 8px rgba(115, 128, 236, 0.4);
+}
+
+.timeline-label {
+    position: absolute;
+    top: 35px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-white);
+    border-radius: var(--border-radius-2);
+    padding: 0.8rem;
+    min-width: 200px;
+    max-width: 250px;
+    box-shadow: var(--box-shadow);
     cursor: pointer;
-    transition: transform 0.2s ease, background 0.2s ease;
-    white-space: normal;
-    max-width: 150px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
 }
 
-.timeline-card h4 {
+.timeline-label:hover {
+    transform: translateX(-50%) translateY(-4px);
+    box-shadow: 0 4rem 6rem var(--color-light);
+    border-color: var(--color-primary);
+}
+
+.timeline-label.active {
+    border-color: var(--color-success);
+    background: linear-gradient(135deg, var(--color-white) 0%, var(--color-light) 100%);
+    transform: translateX(-50%) translateY(-4px) scale(1.05);
+}
+
+.timeline-label-image {
+    width: 100%;
+    height: 120px;
+    border-radius: var(--border-radius-1);
+    overflow: hidden;
+    margin-bottom: 0.8rem;
+    background: var(--color-light);
+}
+
+.timeline-label-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.timeline-label-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.timeline-label-date {
+    font-size: 0.75rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.timeline-label-title {
+    font-size: 0.95rem;
+    color: var(--color-dark);
+    font-weight: 700;
     margin: 0;
-    font-size: 0.9rem;
-    color: #333;
+    line-height: 1.3;
+    /* Applied heading font */
+    font-family: var(--font-heading);
 }
 
-/* Hover/activo */
-.timeline-card:hover {
-    background: var(--color-primary, #3498db);
-    color: #fff;
+/* =======================
+  SECCIÓN DE DETALLES
+======================= */
+.timeline-details {
+    /* Removed margin-top, now at the top */
+    margin-bottom: 3rem;
+}
+
+.timeline-details h3 {
+    color: var(--color-dark);
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: 1.5rem;
+    padding: 0 1rem;
+    /* Applied heading font */
+    font-family: var(--font-heading);
+}
+
+/* Replaced grid layout with single card container */
+.timeline-detail-single {
+    display: flex;
+    justify-content: center;
+    padding: 0 1rem;
+}
+
+.timeline-detail-card {
+    /* Changed to horizontal layout: image left, content right */
+    display: flex;
+    flex-direction: row;
+    background: var(--color-white);
+    border-radius: var(--border-radius-2);
+    overflow: hidden;
+    box-shadow: var(--box-shadow);
+    transition: all 0.3s ease;
+    max-width: 900px;
+    width: 100%;
+}
+
+.timeline-detail-image {
+    /* Image takes left side, fixed width */
+    flex-shrink: 0;
+    width: 350px;
+    height: auto;
+    overflow: hidden;
+    background: var(--color-light);
+}
+
+.timeline-detail-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.timeline-detail-card:hover .timeline-detail-image img {
     transform: scale(1.05);
 }
 
-.timeline-card.active {
-    background: var(--color-secondary, #1abc9c);
-    color: #fff;
-    transform: scale(1.1);
+.timeline-detail-content {
+    /* Content takes right side */
+    flex: 1;
+    padding: var(--card-padding);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
+.timeline-detail-date {
+    display: inline-block;
+    font-size: 0.8rem;
+    color: var(--color-primary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 0.8rem;
+    padding: 0.3rem 0.8rem;
+    background: var(--color-light);
+    border-radius: var(--border-radius-1);
+    width: fit-content;
+}
 
+.timeline-detail-content h4 {
+    color: var(--color-dark);
+    /* Increased title size significantly */
+    font-size: 2rem;
+    font-weight: 700;
+    margin: 0 0 1rem 0;
+    line-height: 1.3;
+    /* Applied heading font */
+    font-family: var(--font-heading);
+}
 
-/* Animación */
-@keyframes fadeIn {
-    from {
-        opacity: 0;
-        transform: translateY(10px);
+.timeline-detail-content p {
+    color: var(--color-info);
+    font-size: 0.95rem;
+    line-height: 1.6;
+    margin: 0;
+}
+
+/* =======================
+  RESPONSIVE
+======================= */
+@media (max-width: 768px) {
+    .timeline-container {
+        padding: 1rem;
     }
 
-    to {
-        opacity: 1;
-        transform: translateY(0);
+    /* Adjusted for mobile: stack image on top */
+    .timeline-detail-card {
+        flex-direction: column;
+    }
+
+    .timeline-detail-image {
+        width: 100%;
+        height: 200px;
+    }
+
+    .timeline-detail-content h4 {
+        font-size: 1.5rem;
+    }
+
+    .timeline-scroll {
+        height: 320px;
+    }
+
+    .timeline-label {
+        min-width: 180px;
+        max-width: 200px;
+    }
+
+    .timeline-nav-btn {
+        width: 40px;
+        height: 40px;
+    }
+
+    .timeline-nav-btn.left {
+        left: 0.5rem;
+    }
+
+    .timeline-nav-btn.right {
+        right: 0.5rem;
     }
 }

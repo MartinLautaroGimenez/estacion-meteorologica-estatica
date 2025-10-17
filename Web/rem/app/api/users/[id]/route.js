@@ -6,7 +6,8 @@ import bcrypt from "bcryptjs";
 const SALT_ROUNDS = 10;
 
 // GET /api/users/:id
-export async function GET(req, { params }) {
+export async function GET(req, props) {
+    const params = await props.params;
     try {
         await requireAdmin(req);
 
@@ -36,7 +37,8 @@ export async function GET(req, { params }) {
 }
 
 // PUT /api/users/:id
-export async function PUT(req, { params }) {
+export async function PUT(req, props) {
+    const params = await props.params;
     try {
         await requireAdmin(req);
 
@@ -78,7 +80,7 @@ export async function PUT(req, { params }) {
 // DELETE /api/users/:id
 export async function DELETE(req, { params }) {
     try {
-        //await requireAdmin(req);
+        await requireAdmin(req);
         let { id } = await params
         id = parseInt(id, 10);
         if (isNaN(id)) {

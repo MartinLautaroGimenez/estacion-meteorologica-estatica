@@ -44,6 +44,9 @@ export default function AboutUs() {
         new Swiper(".swiper-container", {});
     }, []);
 
+    console.log("Participants:", participants);
+    console.log("Events:", events);
+
     return (
         <>
             {/* Acerca de Nosotros */}

@@ -1,4 +1,3 @@
-// lib/fetcher.js
 export async function catchedFetch(url, options = {}) {
     try {
         const res = await fetch(url, {
@@ -7,6 +6,7 @@ export async function catchedFetch(url, options = {}) {
                 "Content-Type": "application/json",
                 ...(options.headers || {}),
             },
+            credentials: "include",
         });
 
         if (!res.ok) {

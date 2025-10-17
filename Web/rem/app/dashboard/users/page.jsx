@@ -5,6 +5,7 @@ import { useSession } from "next-auth/react";
 
 export default function UsersDashboard() {
     const { data: session, status } = useSession();
+    console.log("Session in UsersDashboard:", session);
     const isAdmin = session?.user?.role === "admin";
     const [users, setUsers] = useState([]);
     const [form, setForm] = useState({
@@ -21,6 +22,7 @@ export default function UsersDashboard() {
         const res = await fetch("/api/users");
         const data = await res.json();
         setUsers(data);
+        console.log("fetched users", data);
     }
 
     async function handleSubmit(e) {
@@ -38,6 +40,7 @@ export default function UsersDashboard() {
 
     async function deleteUser(id) {
         if (!confirm("¿Seguro que querés borrar este usuario?")) return;
+        console.log("deleting user", id);
         const res = await fetch(`/api/users/${id}`, { method: "DELETE" });
         if (res.ok) fetchUsers();
     }
@@ -46,14 +49,14 @@ export default function UsersDashboard() {
         return <p>Cargando...</p>;
     }
 
-    /*if (!isAdmin) {
+    if (!isAdmin) {
         return (
             <div className="dashboard-card">
                 <h1>No autorizado</h1>
                 <p>No tenés permisos para acceder a esta sección.</p>
             </div>
         );
-    }*/
+    }
 
     return (
         <div className="dashboard-card">
@@ -89,7 +92,7 @@ export default function UsersDashboard() {
                         <span>
                             <strong>{u.email}</strong> ({u.role})
                         </span>
-                        <button className="btn-delete" onClick={() => deleteUser(u.id)}>
+                        <button className="btn-delete" onClick={() => deleteUser(u.idwebadmins)}>
                             <span className="material-symbols-sharp">delete</span>
                             Eliminar
                         </button>
