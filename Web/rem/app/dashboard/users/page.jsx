@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { useSession } from 'next-auth/react'
+import { useSession } from "next-auth/react";
 
 export default function UsersDashboard() {
     const { data: session, status } = useSession();
@@ -10,12 +10,12 @@ export default function UsersDashboard() {
     const [form, setForm] = useState({
         email: "",
         role: "editor",
-        password: "",
+        clave: "",
     });
 
     useEffect(() => {
-        fetchUsers();
-    }, []);
+        if (isAdmin) fetchUsers();
+    }, [isAdmin]);
 
     async function fetchUsers() {
         const res = await fetch("/api/users");
@@ -31,7 +31,7 @@ export default function UsersDashboard() {
             body: JSON.stringify(form),
         });
         if (res.ok) {
-            setForm({ email: "", role: "editor", password: "" });
+            setForm({ email: "", role: "editor", clave: "" });
             fetchUsers();
         }
     }
@@ -42,51 +42,60 @@ export default function UsersDashboard() {
         if (res.ok) fetchUsers();
     }
 
+    if (status === "loading") {
+        return <p>Cargando...</p>;
+    }
+
+    /*if (!isAdmin) {
+        return (
+            <div className="dashboard-card">
+                <h1>No autorizado</h1>
+                <p>No tenés permisos para acceder a esta sección.</p>
+            </div>
+        );
+    }*/
+
     return (
         <div className="dashboard-card">
-            <h1>Dashboard de Usuarios</h1>
-            {isAdmin && (
-                <>
-                    <form onSubmit={handleSubmit} className="dashboard-form">
-                        <input
-                            type="email"
-                            placeholder="Email"
-                            value={form.email}
-                            onChange={(e) => setForm({ ...form, email: e.target.value })}
-                            required
-                        />
-                        <select
-                            value={form.role}
-                            onChange={(e) => setForm({ ...form, role: e.target.value })}
-                        >
-                            <option value="admin">Admin</option>
-                            <option value="editor">Editor</option>
-                        </select>
-                        <input
-                            type="password"
-                            placeholder="Contraseña"
-                            value={form.password}
-                            onChange={(e) => setForm({ ...form, password: e.target.value })}
-                            required
-                        />
-                        <button type="submit">Agregar usuario</button>
-                    </form>
+            <h1>Usuarios</h1>
+            <form onSubmit={handleSubmit} className="dashboard-form">
+                <input
+                    type="email"
+                    placeholder="Email"
+                    value={form.email}
+                    onChange={(e) => setForm({ ...form, email: e.target.value })}
+                    required
+                />
+                <select
+                    value={form.role}
+                    onChange={(e) => setForm({ ...form, role: e.target.value })}
+                >
+                    <option value="admin">Admin</option>
+                    <option value="editor">Editor</option>
+                </select>
+                <input
+                    type="password"
+                    placeholder="Contraseña"
+                    value={form.clave}
+                    onChange={(e) => setForm({ ...form, clave: e.target.value })}
+                    required
+                />
+                <button type="submit">Agregar usuario</button>
+            </form>
 
-                    <ul className="dashboard-list">
-                        {users.map((u) => (
-                            <li key={u.id}>
-                                <span>
-                                    <strong>{u.email}</strong> ({u.role})
-                                </span>
-                                <button className="btn-delete" onClick={() => deleteUser(u.id)}>
-                                    <span className="material-symbols-sharp">delete</span>
-                                    Eliminar
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </>
-            )}
+            <ul className="dashboard-list">
+                {users.map((u) => (
+                    <li key={u.idwebadmins}>
+                        <span>
+                            <strong>{u.email}</strong> ({u.role})
+                        </span>
+                        <button className="btn-delete" onClick={() => deleteUser(u.id)}>
+                            <span className="material-symbols-sharp">delete</span>
+                            Eliminar
+                        </button>
+                    </li>
+                ))}
+            </ul>
         </div>
     );
 }

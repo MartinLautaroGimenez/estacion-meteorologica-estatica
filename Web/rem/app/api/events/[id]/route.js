@@ -1,54 +1,61 @@
 import { NextResponse } from "next/server";
-import { readFile, writeFile } from "fs/promises";
-import path from "path";
-
-const filePath = path.join(process.cwd(), "config", "events.json");
-
-async function readEvents() {
-    const data = await readFile(filePath, "utf8");
-    return JSON.parse(data);
-}
-
-async function saveEvents(events) {
-    await writeFile(filePath, JSON.stringify(events, null, 2));
-}
+import { prisma } from "@/lib/prisma";
 
 // GET /api/events/:id
 export async function GET(req, { params }) {
-    const id = await params.id;
-    const events = await readEvents();
-    const event = events.find((e) => e.id === id);
+    try {
+        const id = Number(params.id);
+        const event = await prisma.events.findUnique({
+            where: { id },
+        });
 
-    if (!event) return NextResponse.json({ error: "Not found" }, { status: 404 });
+        if (!event) {
+            return NextResponse.json({ error: "Not found" }, { status: 404 });
+        }
 
-    return NextResponse.json(event);
+        return NextResponse.json(event);
+    } catch (error) {
+        console.error("GET /api/events/:id error:", error);
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
+    }
 }
 
 // PUT /api/events/:id
 export async function PUT(req, { params }) {
-    const id = await params.id;
-    const body = await req.json();
-    const events = await readEvents();
+    try {
+        const id = Number(params.id);
+        const body = await req.json();
 
-    const index = events.findIndex((e) => e.id === id);
-    if (index === -1)
-        return NextResponse.json({ error: "Not found" }, { status: 404 });
+        const updated = await prisma.events.update({
+            where: { id },
+            data: body,
+        });
 
-    events[index] = { ...events[index], ...body };
-    await saveEvents(events);
-
-    return NextResponse.json(events[index]);
+        return NextResponse.json(updated);
+    } catch (error) {
+        console.error("PUT /api/events/:id error:", error);
+        if (error.code === "P2025") {
+            return NextResponse.json({ error: "Not found" }, { status: 404 });
+        }
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
+    }
 }
 
 // DELETE /api/events/:id
 export async function DELETE(req, { params }) {
-    const id = await params.id;
-    const events = await readEvents();
+    try {
+        const id = Number(params.id);
 
-    const filtered = events.filter((e) => e.id !== id);
-    if (filtered.length === events.length)
-        return NextResponse.json({ error: "Not found" }, { status: 404 });
+        await prisma.events.delete({
+            where: { ideventos: id },
+        });
 
-    await saveEvents(filtered);
-    return NextResponse.json({ success: true });
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error("DELETE /api/events/:id error:", error);
+        if (error.code === "P2025") {
+            return NextResponse.json({ error: "Not found" }, { status: 404 });
+        }
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
+    }
 }

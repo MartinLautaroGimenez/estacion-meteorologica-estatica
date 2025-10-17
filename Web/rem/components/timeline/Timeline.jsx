@@ -1,26 +1,34 @@
 "use client";
 
-import { useState, useRef } from "react";
+import { useState, useRef, useMemo } from "react";
 import "./timeline.css";
-import { TIMELINE_EVENTS } from "@/config/timeLineEvents";
 
-export function Timeline() {
-    const [activeEvent, setActiveEvent] = useState(0); // inicial en el primero
+export function Timeline({ events = [] }) {
+    const [activeEvent, setActiveEvent] = useState(0);
     const scrollRef = useRef(null);
     const markersRef = useRef([]);
 
-    const PX_PER_DAY = 1;
+    const PX_PER_DAY = 5;
     const extra = 200;
 
     function parseLocalDate(dateStr) {
         const [year, month, day] = dateStr.split("-").map(Number);
-        return new Date(year, month - 1, day); // 👈 evita UTC, crea fecha local
+        return new Date(year, month - 1, day);
     }
-    const eventsWithDates = TIMELINE_EVENTS.map((e) => ({
-        ...e,
-        dateObj: parseLocalDate(e.date),
-    }));
 
+    // Normalizamos los eventos con fechas en Date
+    const eventsWithDates = useMemo(
+        () =>
+            events.map((e) => ({
+                ...e,
+                dateObj: parseLocalDate(e.date),
+            })),
+        [events]
+    );
+
+    if (eventsWithDates.length === 0) {
+        return <p>No hay eventos para mostrar</p>;
+    }
 
     const minDate = new Date(
         Math.min(...eventsWithDates.map((e) => e.dateObj.getTime()))
@@ -29,44 +37,39 @@ export function Timeline() {
         Math.max(...eventsWithDates.map((e) => e.dateObj.getTime()))
     );
 
-    const daysRange = Math.ceil(
-        (maxDate - minDate) / (1000 * 60 * 60 * 24)
-    );
+    const daysRange = Math.ceil((maxDate - minDate) / (1000 * 60 * 60 * 24));
     const totalWidth = daysRange * PX_PER_DAY + extra;
 
     const marks = [];
     const current = new Date(minDate.getFullYear(), minDate.getMonth(), 1);
     while (current <= maxDate) {
-        const daysFromStart = Math.floor((current - minDate) / (1000 * 60 * 60 * 24));
+        const daysFromStart = Math.floor(
+            (current - minDate) / (1000 * 60 * 60 * 24)
+        );
         marks.push({
             date: new Date(current),
             left: daysFromStart * PX_PER_DAY,
-            isYear: current.getMonth() === 0, // si es enero
+            isYear: current.getMonth() === 0,
         });
         current.setMonth(current.getMonth() + 1);
     }
 
-    // Manejar click en evento
     const handleEventClick = (index) => {
         setActiveEvent(index);
         scrollToEvent(index);
     };
 
-    // Auto-scroll a un evento
     const scrollToEvent = (index) => {
         const marker = markersRef.current[index];
         const container = scrollRef.current;
-
         if (marker && container) {
             const markerRect = marker.getBoundingClientRect();
             const containerRect = container.getBoundingClientRect();
-
             const offset =
                 markerRect.left -
                 containerRect.left -
                 containerRect.width / 2 +
                 markerRect.width / 2;
-
             container.scrollBy({
                 left: offset,
                 behavior: "smooth",
@@ -74,7 +77,6 @@ export function Timeline() {
         }
     };
 
-    // Ir al anterior
     const handlePrev = () => {
         if (activeEvent > 0) {
             const newIndex = activeEvent - 1;
@@ -83,7 +85,6 @@ export function Timeline() {
         }
     };
 
-    // Ir al siguiente
     const handleNext = () => {
         if (activeEvent < eventsWithDates.length - 1) {
             const newIndex = activeEvent + 1;
@@ -95,41 +96,40 @@ export function Timeline() {
     return (
         <section className="timeline">
             <div className="timeline-scroll" ref={scrollRef}>
-                {/* Línea */}
+                <div className="timeline-line" style={{ width: totalWidth }} />
                 <div
-                    className="timeline-line"
+                    className="timeline-scale"
                     style={{
                         width: totalWidth,
+                        transform: `translateX(${extra / 2}px)`,
                     }}
-                />
-
-                {/* Marcas de tiempo */}
-                <div className="timeline-scale" style={{
-                    width: totalWidth,
-                    transform: `translateX(${extra / 2}px)`,
-                }}>
+                >
                     {marks.map((mark, i) => (
                         <div
                             key={i}
-                            className={`timeline-mark ${mark.isYear ? "year" : "month"}`}
+                            className={`timeline-mark ${
+                                mark.isYear ? "year" : "month"
+                            }`}
                             style={{ left: `${mark.left}px` }}
                         >
                             <span>
                                 {mark.isYear
                                     ? mark.date.getFullYear()
                                     : mark.date.toLocaleDateString("es-ES", {
-                                        month: "short",
-                                    })}
+                                          month: "short",
+                                      })}
                             </span>
                         </div>
                     ))}
                 </div>
 
-                {/* Eventos */}
-                <div className="timeline-events" style={{
-                    width: totalWidth,
-                    transform: `translateX(${extra / 2}px)`,
-                }}>
+                <div
+                    className="timeline-events"
+                    style={{
+                        width: totalWidth,
+                        transform: `translateX(${extra / 2}px)`,
+                    }}
+                >
                     {eventsWithDates.map((event, index) => {
                         const daysFromStart = Math.floor(
                             (event.dateObj - minDate) / (1000 * 60 * 60 * 24)
@@ -142,12 +142,11 @@ export function Timeline() {
                                 className="timeline-event"
                                 style={{ left: `${left}px` }}
                             >
-                                {/* Línea que conecta */}
                                 <div className="timeline-connector" />
-
-                                {/* Tarjeta con título */}
                                 <div
-                                    className={`timeline-card ${activeEvent === index ? "active" : ""}`}
+                                    className={`timeline-card ${
+                                        activeEvent === index ? "active" : ""
+                                    }`}
                                     onClick={() => handleEventClick(index)}
                                 >
                                     <h4>{event.title}</h4>
@@ -158,20 +157,19 @@ export function Timeline() {
                 </div>
             </div>
 
-            {/* Panel de detalle */}
             {activeEvent !== null && (
                 <div className="timeline-detail">
                     <h3>{eventsWithDates[activeEvent].title}</h3>
                     <span className="timeline-detail-date">
-                        {eventsWithDates[activeEvent].dateObj.toLocaleDateString("es-ES", {
-                            year: 'numeric',
-                            month: 'long',
-                            day: 'numeric',
+                        {eventsWithDates[
+                            activeEvent
+                        ].dateObj.toLocaleDateString("es-ES", {
+                            year: "numeric",
+                            month: "long",
+                            day: "numeric",
                         })}
                     </span>
                     <p>{eventsWithDates[activeEvent].description}</p>
-
-                    {/* Botones de navegación */}
                     <div className="timeline-nav">
                         <button
                             onClick={handlePrev}

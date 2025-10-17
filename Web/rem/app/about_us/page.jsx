@@ -3,15 +3,39 @@
 import "../globals.css";
 import "./aboutUs.css";
 
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import "aos/dist/aos.css";
 import AOS from "aos";
 import "swiper/css";
 import Swiper from "swiper";
 import { PopupImage, Timeline } from "@/components";
-import { MEMBERS_CONFIG } from "@/config"
+import { catchedFetch } from '@/lib'
 
 export default function AboutUs() {
+    const [participants, setParticipants] = useState([])
+    const [events, setEvents] = useState([])
+    useEffect(() => {
+        async function loadData() {
+            try{
+                const data = await catchedFetch('/api/events')
+                setEvents(data)
+            } catch (err) {
+                console.error("Error al cargar los eventos: ", err)
+            }
+        }
+        loadData()
+    }, [])
+    useEffect(() => {
+        async function loadData() {
+            try{
+                const data = await catchedFetch('/api/participants')
+                setParticipants(data)
+            } catch (err) {
+                console.error("Error al cargar los participantes: ", err)
+            }
+        }
+        loadData()
+    }, [])
     useEffect(() => {
         // Inicializar AOS
         AOS.init();
@@ -47,7 +71,9 @@ export default function AboutUs() {
             <section id="historia" data-aos="fade-up">
                 <h2>Nuestra Historia</h2>
                 <div className="timeline-container">
-                    <Timeline/>
+                    <Timeline
+                        events={events}
+                    />
                 </div>
             </section>
 
@@ -83,10 +109,10 @@ export default function AboutUs() {
                     Conocé a las mentes brillantes detrás de este proyecto. Cada integrante aporta experiencia, creatividad y entusiasmo, construyendo juntos una red de estaciones meteorológicas.
                 </p>
                 <div className="team-container">
-                    {MEMBERS_CONFIG.map((member, index) => (
+                    {participants.map((member, index) => (
                         <div className="team-member" key={index}>
                             <PopupImage
-                                image={member.img}
+                                image={member.image}
                                 title={member.name}
                                 alt={member.name}
                                 description={member.description}

@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
+import "./login.css";
 
 export default function LoginPage() {
     const [email, setEmail] = useState("");
@@ -19,6 +20,7 @@ export default function LoginPage() {
             password,
             redirect: false,
         });
+        console.log("SignIn response:", res);
 
         if (res?.error) {
             setError("Credenciales inválidas");
@@ -28,30 +30,45 @@ export default function LoginPage() {
     }
 
     return (
-        <div style={{ padding: "2rem" }}>
-            <h1>🔑 Iniciar sesión</h1>
-            <form onSubmit={handleSubmit}>
-                <div>
-                    <label>Email: </label>
-                    <input
-                        type="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        required
-                    />
-                </div>
-                <div>
-                    <label>Contraseña: </label>
-                    <input
-                        type="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}
-                        required
-                    />
-                </div>
-                <button type="submit">Entrar</button>
-            </form>
-            {error && <p style={{ color: "red" }}>{error}</p>}
+        <div className="login-container">
+            <div className="login-card">
+                <h1 className="login-title">Iniciar sesión</h1>
+
+                <form onSubmit={handleSubmit} className="login-form">
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">
+                            Email
+                        </label>
+                        <input
+                            type="email"
+                            value={email}
+                            className="login-input"
+                            onChange={(e) => setEmail(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <div>
+                        <label className="block text-sm font-medium text-gray-700">
+                            Contraseña
+                        </label>
+                        <input
+                            type="password"
+                            value={password}
+                            className="login-input"
+                            onChange={(e) => setPassword(e.target.value)}
+                            required
+                        />
+                    </div>
+
+                    <button type="submit" className="login-button">
+                        <span className="material-symbols-sharp">login</span>
+                        Entrar
+                    </button>
+                </form>
+
+                {error && <p className="login-error">{error}</p>}
+            </div>
         </div>
     );
 }

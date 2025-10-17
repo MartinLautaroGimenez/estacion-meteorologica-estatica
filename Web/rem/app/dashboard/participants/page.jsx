@@ -8,8 +8,8 @@ export default function ParticipantsDashboard() {
     const [participants, setParticipants] = useState([]);
     const [file, setFile] = useState(null);
     const [form, setForm] = useState({
-        name: "",
-        description: "",
+        nombre: "",
+        descripcion: "",
     });
 
     useEffect(() => {
@@ -25,7 +25,7 @@ export default function ParticipantsDashboard() {
     async function handleSubmit(e) {
         e.preventDefault();
 
-        let imageUrl = null;
+        let imagenUrl = null;
         if (file) {
             const formData = new FormData();
             formData.append("file", file);
@@ -36,7 +36,7 @@ export default function ParticipantsDashboard() {
             });
 
             const uploadData = await uploadRes.json();
-            imageUrl = uploadData.url;
+            imagenUrl = uploadData.url;
         } else {
             alert("Por favor selecciona una imagen antes de enviar")
             return
@@ -46,14 +46,14 @@ export default function ParticipantsDashboard() {
             method: "POST",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify({
-                name: form.name,
-                description: form.description,
-                image: imageUrl,
+                nombre: form.nombre,
+                descripcion: form.descripcion,
+                imagen: imagenUrl,
             }),
         });
 
         if (res.ok) {
-            setForm({ name: "", description: "" });
+            setForm({ nombre: "", descripcion: "" });
             setFile(null);
             fetchParticipants();
         }
@@ -68,20 +68,20 @@ export default function ParticipantsDashboard() {
 
     return (
         <div className="dashboard-card">
-            <h1>Dashboard de Participantes</h1>
+            <h1>Participantes</h1>
 
             <form onSubmit={handleSubmit} className="dashboard-form">
                 <input
                     type="text"
                     placeholder="Nombre"
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
+                    value={form.nombre}
+                    onChange={(e) => setForm({ ...form, nombre: e.target.value })}
                     required
                 />
                 <textarea
                     placeholder="Descripción"
-                    value={form.description}
-                    onChange={(e) => setForm({ ...form, description: e.target.value })}
+                    value={form.descripcion}
+                    onChange={(e) => setForm({ ...form, descripcion: e.target.value })}
                 />
                 <ImageUploader key={form.image || "empty"} onFileSelect={setFile} required/>
                 <button type="submit">Agregar participante</button>
@@ -94,12 +94,12 @@ export default function ParticipantsDashboard() {
                             {p.image && (
                                 <img
                                     src={p.image}
-                                    alt={p.name}
+                                    alt={p.nombre}
                                     className="dashboard-thumb"
                                 />
                             )}
                             <span>
-                                <strong>{p.name}</strong> — {p.description}
+                                <strong>{p.nombre}</strong> — {p.descripcion}
                             </span>
                         </div>
                         <button className="btn-delete" onClick={() => deleteParticipant(p.id)}>

@@ -1,54 +1,65 @@
 import { NextResponse } from "next/server";
-import { readFile, writeFile } from "fs/promises";
-import path from "path";
-
-const filePath = path.join(process.cwd(), "config", "participants.json");
-
-async function readParticipants() {
-    const data = await readFile(filePath, "utf8");
-    return JSON.parse(data);
-}
-
-async function saveParticipants(participants) {
-    await writeFile(filePath, JSON.stringify(participants, null, 2));
-}
+import { prisma } from "@/lib/prisma";
 
 // GET /api/participants/:id
 export async function GET(req, { params }) {
-    const id = await params.id;
-    const participants = await readParticipants();
-    const participant = participants.find((e) => e.id === id);
+    try {
+        const id = Number(params.id);
+        const participant = await prisma.participantes.findUnique({
+            where: { idparticipantes: id },
+        });
 
-    if (!participant) return NextResponse.json({ error: "Not found" }, { status: 404 });
+        if (!participant) {
+            return NextResponse.json({ error: "Not found" }, { status: 404 });
+        }
 
-    return NextResponse.json(participant);
+        return NextResponse.json(participant);
+    } catch (error) {
+        console.error("Error fetching participant:", error);
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
+    }
 }
 
 // PUT /api/participants/:id
 export async function PUT(req, { params }) {
-    const id = await params.id;
-    const body = await req.json();
-    const participants = await readParticipants();
+    try {
+        const id = Number(params.id);
+        const body = await req.json();
 
-    const index = participants.findIndex((e) => e.id === id);
-    if (index === -1)
-        return NextResponse.json({ error: "Not found" }, { status: 404 });
+        const updated = await prisma.participantes.update({
+            where: { idparticipantes: id },
+            data: {
+                nombre: body.nombre,
+                descripcion: body.descripcion,
+                imagen: body.imagen,
+            },
+        });
 
-    participants[index] = { ...participants[index], ...body };
-    await saveParticipants(participants);
-
-    return NextResponse.json(participants[index]);
+        return NextResponse.json(updated);
+    } catch (error) {
+        console.error("Error updating participant:", error);
+        if (error.code === "P2025") {
+            return NextResponse.json({ error: "Not found" }, { status: 404 });
+        }
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
+    }
 }
 
 // DELETE /api/participants/:id
 export async function DELETE(req, { params }) {
-    const id = await params.id;
-    const participants = await readParticipants();
+    try {
+        const id = Number(params.id);
 
-    const filtered = participants.filter((e) => e.id !== id);
-    if (filtered.length === participants.length)
-        return NextResponse.json({ error: "Not found" }, { status: 404 });
+        await prisma.participantes.delete({
+            where: { idparticipantes: id },
+        });
 
-    await saveParticipants(filtered);
-    return NextResponse.json({ success: true });
+        return NextResponse.json({ success: true });
+    } catch (error) {
+        console.error("Error deleting participant:", error);
+        if (error.code === "P2025") {
+            return NextResponse.json({ error: "Not found" }, { status: 404 });
+        }
+        return NextResponse.json({ error: "Server error" }, { status: 500 });
+    }
 }

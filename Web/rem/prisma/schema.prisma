@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model eventos {
+  ideventos   Int      @id @default(autoincrement())
+  titulo      String   @db.VarChar(45)
+  fecha       DateTime @db.DateTime(0)
+  descripcion String   @db.VarChar(500)
+  imagen      String?  @db.TinyText
+}
+
+model participantes {
+  idparticipantes Int    @id @default(autoincrement())
+  nombre          String @db.VarChar(45)
+  descripcion     String @db.VarChar(500)
+  imagen          String @db.TinyText
+}
+
+model webadmins {
+  idwebadmins Int    @id @default(autoincrement())
+  email       String @unique(map: "email_UNIQUE") @db.VarChar(45)
+  esAdmin     Int    @db.TinyInt
+  clave       String @db.VarChar(256)
+}

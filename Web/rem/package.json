@@ -9,13 +9,15 @@
   },
   "dependencies": {
     "@knight-lab/timelinejs": "^3.9.8",
+    "@prisma/client": "^6.17.0",
     "aos": "^2.3.4",
-    "bcrypt": "^6.0.0",
+    "bcryptjs": "^3.0.2",
     "chart.js": "^4.5.0",
     "jquery": "^3.7.1",
     "magnific-popup": "^1.2.0",
     "next": "15.5.0",
     "next-auth": "^4.24.11",
+    "prisma": "^6.17.0",
     "react": "19.1.0",
     "react-chrono": "^2.9.1",
     "react-dom": "19.1.0",
@@ -30,5 +32,10 @@
     "autoprefixer": "^10.4.21",
     "postcss": "^8.5.6",
     "tailwindcss": "^4.1.12"
+  },
+  "browser": {
+    "fs": false,
+    "os": false,
+    "path": false
   }
 }

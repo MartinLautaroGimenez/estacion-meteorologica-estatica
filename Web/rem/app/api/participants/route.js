@@ -1,20 +1,13 @@
 import { NextResponse } from "next/server";
-import { readData, saveData } from "@/lib/db";
-
-const FILE = "participants.json";
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
-  const participants = await readData(FILE);
+  const participants = await prisma.participantes.findMany();
   return NextResponse.json(participants);
 }
 
 export async function POST(req) {
-  const body = await req.json();
-  const participants = await readData(FILE);
-
-  const newParticipant = { id: Date.now().toString(), ...body };
-  participants.push(newParticipant);
-
-  await saveData(FILE, participants);
+  const data = await req.json();
+  const newParticipant = await prisma.participantes.create({ data });
   return NextResponse.json(newParticipant, { status: 201 });
 }

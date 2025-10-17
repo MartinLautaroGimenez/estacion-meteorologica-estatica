@@ -1,36 +1,34 @@
 import NextAuth from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
-import { readData } from "@/lib/db"; // tu helper para leer JSON
 import bcrypt from "bcryptjs";
-
-const FILE = "users.json";
 
 export const authOptions = {
     providers: [
         CredentialsProvider({
-            name: "Credenciales",
+            name: "Credentials",
             credentials: {
-                email: { label: "Email", type: "text" },
-                password: { label: "Contraseña", type: "password" },
+                email: { label: "Email", type: "email" },
+                password: { label: "Contraseña", type: "password" }
             },
             async authorize(credentials) {
-                const users = await readData(FILE);
+                const res = await fetch(`${process.env.NEXTAUTH_URL}/api/users`);
+                const users = await res.json();
+
                 const user = users.find(u => u.email === credentials.email);
-                if (user) {
-                    const isValid = await bcrypt.compare(credentials.password, user.password);
-                    if (isValid) {
-                        return { id: user.id, email: user.email, role: user.role };
-                    }
+                if (user && await bcrypt.compare(credentials.password, user.password)) {
+                    return { id: user.id, email: user.email, role: user.role };
                 }
                 return null;
             }
-        }),
+        })
     ],
-    pages: {
-        signIn: "/login", // página personalizada
+    session: {
+        strategy: "jwt"
     },
+    secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt({ token, user }) {
+            // se llama en el login: agregamos el rol al token
             if (user) {
                 token.id = user.id;
                 token.role = user.role;
@@ -38,16 +36,14 @@ export const authOptions = {
             return token;
         },
         async session({ session, token }) {
+            // cada vez que se pide la sesión: propagamos el rol desde el token
             if (token) {
                 session.user.id = token.id;
                 session.user.role = token.role;
             }
             return session;
-        },
-    },
-    secret: process.env.NEXTAUTH_SECRET,
+        }
+    }
 };
 
-const handler = NextAuth(authOptions);
-
-export { handler as GET, handler as POST };
+export default NextAuth(authOptions);
