@@ -9,7 +9,6 @@ import { usePollingApi } from "@/hooks";
 export default function Home() {
     const [categoria, setCategoria] = useState('emetec');
     const { data, error, loading } = usePollingApi(categoria); // 15 minutos por defecto
-    console.log(data);
 
     const invokemap = () => {
         // TODO: Función para abrir mapa

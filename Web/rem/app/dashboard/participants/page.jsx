@@ -60,8 +60,12 @@ export default function ParticipantsDashboard() {
     }
 
 
-    async function deleteParticipant(id) {
+    async function deleteParticipant(id, imagen) {
         if (!confirm("¿Seguro que querés borrar este participante?")) return;
+        await fetch(`/api/upload?filename=${encodeURIComponent(imagen)}`, {
+            method: "DELETE",
+        });
+
         const res = await fetch(`/api/participants/${id}`, { method: "DELETE" });
         if (res.ok) fetchParticipants();
     }
@@ -89,7 +93,7 @@ export default function ParticipantsDashboard() {
 
             <ul className="dashboard-list">
                 {participants.map((p) => (
-                    <li key={p.id} className="dashboard-item">
+                    <li key={p.idparticipantes} className="dashboard-item">
                         <div className="dashboard-item-info">
                             {p.image && (
                                 <img
@@ -102,7 +106,7 @@ export default function ParticipantsDashboard() {
                                 <strong>{p.nombre}</strong> — {p.descripcion}
                             </span>
                         </div>
-                        <button className="btn-delete" onClick={() => deleteParticipant(p.id)}>
+                        <button className="btn-delete" onClick={() => deleteParticipant(p.idparticipantes, p.imagen)}>
                             <span className="material-symbols-sharp">delete</span>
                             Eliminar
                         </button>

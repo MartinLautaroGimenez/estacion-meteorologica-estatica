@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "build": "next build --turbopack",
-    "start": "next start"
+    "start": "next start",
+    "seed": "node --loader esm prisma/seed.js"
   },
   "dependencies": {
     "@knight-lab/timelinejs": "^3.9.8",

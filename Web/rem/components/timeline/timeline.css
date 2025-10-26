@@ -173,7 +173,6 @@
 
 .timeline-mark-label {
     display: block;
-    margin-top: 8px;
     font-size: 0.75rem;
     color: var(--color-info);
     white-space: nowrap;

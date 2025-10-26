@@ -1,5 +1,5 @@
 import { NextResponse } from "next/server";
-import { writeFile } from "fs/promises";
+import { writeFile, unlink } from "fs/promises";
 import path from "path";
 
 export async function POST(req) {
@@ -30,5 +30,27 @@ export async function POST(req) {
     } catch (error) {
         console.error("Error uploading file:", error);
         return NextResponse.json({ error: "Upload failed" }, { status: 500 });
+    }
+}
+
+export async function DELETE(req) {
+    try {
+        const { searchParams } = new URL(req.url);
+        const filename = searchParams.get("filename")?.replace(/^\/?uploads\//, "");
+
+        if (!filename) {
+            return NextResponse.json({ error: "Missing filename parameter" }, { status: 400 });
+        }
+
+        const filePath = path.join(process.cwd(), "public", "uploads", filename);
+        await unlink(filePath);
+
+        return NextResponse.json({ message: "File deleted successfully" });
+    } catch (error) {
+        if (error.code === "ENOENT") {
+            return NextResponse.json({ error: "File not found" }, { status: 404 });
+        }
+        console.error("Error deleting file:", error);
+        return NextResponse.json({ error: "Delete failed" }, { status: 500 });
     }
 }

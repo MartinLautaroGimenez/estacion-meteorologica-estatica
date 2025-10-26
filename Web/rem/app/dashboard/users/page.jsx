@@ -5,7 +5,6 @@ import { useSession } from "next-auth/react";
 
 export default function UsersDashboard() {
     const { data: session, status } = useSession();
-    console.log("Session in UsersDashboard:", session);
     const isAdmin = session?.user?.role === "admin";
     const [users, setUsers] = useState([]);
     const [form, setForm] = useState({
@@ -40,7 +39,6 @@ export default function UsersDashboard() {
 
     async function deleteUser(id) {
         if (!confirm("¿Seguro que querés borrar este usuario?")) return;
-        console.log("deleting user", id);
         const res = await fetch(`/api/users/${id}`, { method: "DELETE" });
         if (res.ok) fetchUsers();
     }

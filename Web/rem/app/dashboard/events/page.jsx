@@ -57,8 +57,12 @@ export default function EventsDashboard() {
         }
     }
 
-    async function deleteEvent(id) {
+    async function deleteEvent(id, imagen) {
         if (!confirm("¿Seguro que querés borrar este evento?")) return;
+        await fetch(`/api/upload?filename=${encodeURIComponent(imagen)}`, {
+            method: "DELETE",
+        });
+
         const res = await fetch(`/api/events/${id}`, { method: "DELETE" });
         if (res.ok) fetchEvents();
     }
@@ -106,7 +110,7 @@ export default function EventsDashboard() {
                             <p>{ev.fecha}</p>
                             <p>{ev.descripcion}</p>
                         </div>
-                        <button className="btn-delete" onClick={() => deleteEvent(ev.id)}>
+                        <button className="btn-delete" onClick={() => deleteEvent(ev.ideventos, ev.imagen)}>
                             <span className="material-symbols-sharp">delete</span>
                         </button>
                     </li>

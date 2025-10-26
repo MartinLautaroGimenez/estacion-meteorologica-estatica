@@ -49,7 +49,7 @@ export async function DELETE(req, props) {
     try {
         const id = Number(params.id);
 
-        await prisma.events.delete({
+        await prisma.eventos.delete({
             where: { ideventos: id },
         });
 

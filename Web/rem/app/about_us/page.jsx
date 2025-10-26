@@ -115,10 +115,10 @@ export default function AboutUs() {
                     {participants.map((member, index) => (
                         <div className="team-member" key={index}>
                             <PopupImage
-                                image={member.image}
-                                title={member.name}
-                                alt={member.name}
-                                description={member.description}
+                                image={member.imagen}
+                                title={member.nombre}
+                                alt={member.nombre}
+                                description={member.descripcion}
                             />
                         </div>
                     ))}
