@@ -116,7 +116,7 @@ export function Timeline({ events = [] }) {
                 </div>
             </div>
 
-            <div className="timeline-scroll" ref={scrollRef}>
+            <div className="timeline-scroll-container">
                 <button
                     onClick={handlePrev}
                     disabled={activeEvent === 0}
@@ -128,6 +128,80 @@ export function Timeline({ events = [] }) {
                     </svg>
                 </button>
 
+                <div className="timeline-scroll" ref={scrollRef}>
+                    <div className="timeline-line" style={{ width: totalWidth }} />
+                    <div
+                        className="timeline-scale"
+                        style={{
+                            width: totalWidth,
+                            transform: `translateX(${extra / 2}px)`,
+                        }}
+                    >
+                        {marks.map((mark, i) => (
+                            <div
+                                key={i}
+                                className={`timeline-mark ${mark.isYear ? "year" : "month"}`}
+                                style={{ left: `${mark.left}px` }}
+                            >
+                                <div className="timeline-mark-line" />
+                                <span className="timeline-mark-label">
+                                    {mark.isYear
+                                        ? mark.date.getFullYear()
+                                        : mark.date.toLocaleDateString("es-ES", {
+                                            month: "short",
+                                        })}
+                                </span>
+                            </div>
+                        ))}
+                    </div>
+
+                    <div
+                        className="timeline-events"
+                        style={{
+                            width: totalWidth,
+                            transform: `translateX(${extra / 2}px)`,
+                        }}
+                    >
+                        {eventsWithDates.map((event, index) => {
+                            const daysFromStart = Math.floor(
+                                (event.dateObj.getTime() - minDate.getTime()) / (1000 * 60 * 60 * 24)
+                            )
+                            const left = daysFromStart * PX_PER_DAY
+
+                            return (
+                                <div
+                                    key={index}
+                                    ref={(el) => (markersRef.current[index] = el)}
+                                    className="timeline-event"
+                                    style={{ left: `${left}px` }}
+                                >
+                                    <div className="timeline-connector" />
+                                    <div
+                                        className={`timeline-label ${activeEvent === index ? "active" : ""}`}
+                                        onClick={() => handleEventClick(index)}
+                                    >
+                                        {event.imagen && (
+                                            <div className="timeline-label-image">
+                                                <img src={event.imagen || "/placeholder.svg"} alt={event.titulo} />
+                                            </div>
+                                        )}
+                                        <div className="timeline-label-content">
+                                            <span className="timeline-label-date">
+                                                {event.dateObj.toLocaleDateString("es-ES", {
+                                                    day: "numeric",
+                                                    month: "short",
+                                                    year: "numeric",
+                                                })}
+                                            </span>
+                                            <h4 className="timeline-label-titulo">{event.titulo}</h4>
+                                        </div>
+                                    </div>
+                                </div>
+                            )
+                        })}
+                    </div>
+                </div>
+
                 <button
                     onClick={handleNext}
                     disabled={activeEvent === eventsWithDates.length - 1}
@@ -138,77 +212,6 @@ export function Timeline({ events = [] }) {
                         <polyline points="9 18 15 12 9 6"></polyline>
                     </svg>
                 </button>
-
-                <div className="timeline-line" style={{ width: totalWidth }} />
-
-                <div
-                    className="timeline-scale"
-                    style={{
-                        width: totalWidth,
-                        transform: `translateX(${extra / 2}px)`,
-                    }}
-                >
-                    {marks.map((mark, i) => (
-                        <div
-                            key={i}
-                            className={`timeline-mark ${mark.isYear ? "year" : "month"}`}
-                            style={{ left: `${mark.left}px` }}
-                        >
-                            <div className="timeline-mark-line" />
-                            <span className="timeline-mark-label">
-                                {mark.isYear
-                                    ? mark.date.getFullYear()
-                                    : mark.date.toLocaleDateString("es-ES", {
-                                        month: "short",
-                                    })}
-                            </span>
-                        </div>
-                    ))}
-                </div>
-
-                <div
-                    className="timeline-events"
-                    style={{
-                        width: totalWidth,
-                        transform: `translateX(${extra / 2}px)`,
-                    }}
-                >
-                    {eventsWithDates.map((event, index) => {
-                        const daysFromStart = Math.floor((event.dateObj.getTime() - minDate.getTime()) / (1000 * 60 * 60 * 24))
-                        const left = daysFromStart * PX_PER_DAY
-
-                        return (
-                            <div
-                                key={index}
-                                ref={(el) => (markersRef.current[index] = el)}
-                                className="timeline-event"
-                                style={{ left: `${left}px` }}
-                            >
-                                <div className="timeline-connector" />
-                                <div
-                                    className={`timeline-label ${activeEvent === index ? "active" : ""}`}
-                                    onClick={() => handleEventClick(index)}
-                                >
-                                    {event.imagen && (
-                                        <div className="timeline-label-image">
-                                            <img src={event.imagen || "/placeholder.svg"} alt={event.titulo} />
-                                        </div>
-                                    )}
-                                    <div className="timeline-label-content">
-                                        <span className="timeline-label-date">
-                                            {event.dateObj.toLocaleDateString("es-ES", {
-                                                day: "numeric",
-                                                month: "short",
-                                                year: "numeric",
-                                            })}
-                                        </span>
-                                        <h4 className="timeline-label-titulo">{event.titulo}</h4>
-                                    </div>
-                                </div>
-                            </div>
-                        )
-                    })}
-                </div>
             </div>
         </div>
     )

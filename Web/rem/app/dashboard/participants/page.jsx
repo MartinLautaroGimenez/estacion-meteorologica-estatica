@@ -61,6 +61,7 @@ export default function ParticipantsDashboard() {
 
 
     async function deleteParticipant(id, imagen) {
+        console.log("Imagen a borrar:", imagen);
         if (!confirm("¿Seguro que querés borrar este participante?")) return;
         await fetch(`/api/upload?filename=${encodeURIComponent(imagen)}`, {
             method: "DELETE",

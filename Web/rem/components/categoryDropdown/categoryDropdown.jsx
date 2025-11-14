@@ -21,11 +21,11 @@ export const CategoryDropdown = ({ set, estadoNodo }) => {
             <div className="zarazap">
                 <h1>Datos</h1>
                 <h3>Seleccione el nodo meteorológico: </h3>
-                <div style={{ display: "flex", gap: "8px", alignItems: "center" }}>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", paddingRight: "5px 10px 5px" }}>
                     <select
                         id="categoriaDropdown"
                         className="dropdown"
-                        style={{ marginRight: "0px", flex: 1 }}
+                        style={{ marginRight: "0px", flex: 1}}
                         defaultValue=""
                         onChange={handleChange}
                     >

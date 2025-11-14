@@ -172,6 +172,11 @@
     display: block;
 }
 
+.map-button {
+    background: transparent;
+    border: none;
+}
+
 /* Estilos para el mapa único con marcadores */
 .single-map-container {
     width: 100%;

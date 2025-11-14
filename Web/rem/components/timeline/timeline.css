@@ -61,16 +61,25 @@
 /* =======================
   SCROLL Y LÍNEA
 ======================= */
+.timeline-scroll-container {
+    position: relative;
+    width: 100%;
+    margin-bottom: 3rem;
+    display: flex;
+    align-items: center;
+}
+
 .timeline-scroll {
     position: relative;
+    flex: 1;
     overflow-x: auto;
     overflow-y: visible;
     height: 280px;
-    margin-bottom: 3rem;
     padding: 2rem 0;
     background: var(--color-white);
     border-radius: var(--border-radius-2);
     box-shadow: var(--box-shadow);
+    margin: 0 24px;
 }
 
 .timeline-scroll::-webkit-scrollbar {
@@ -102,9 +111,16 @@
 }
 
 /* Added navigation buttons at extremes with semi-transparent background */
+.timeline-scroll-container {
+    position: relative;
+    width: 100%;
+    display: flex;
+    align-items: center;
+}
+
 .timeline-nav-btn {
     position: absolute;
-    top: 40%;
+    top: 50%;
     transform: translateY(-50%);
     background: rgba(115, 128, 236, 0.7);
     backdrop-filter: blur(8px);
@@ -123,11 +139,11 @@
 }
 
 .timeline-nav-btn.left {
-    left: 1rem;
+    left: -30px;
 }
 
 .timeline-nav-btn.right {
-    right: 1rem;
+    right: -30px;
 }
 
 .timeline-nav-btn:hover:not(:disabled) {
@@ -398,6 +414,12 @@
         padding: 1rem;
     }
 
+    .timeline-nav-btn svg {
+        width: 16px;
+        height: 16px;
+        flex: 0 0 16px;
+    }
+
     /* Adjusted for mobile: stack image on top */
     .timeline-detail-card {
         flex-direction: column;
@@ -422,15 +444,15 @@
     }
 
     .timeline-nav-btn {
-        width: 40px;
-        height: 40px;
+        width: 30px;
+        height: 30px;
     }
 
     .timeline-nav-btn.left {
-        left: 0.5rem;
+        left: -12px;
     }
 
     .timeline-nav-btn.right {
-        right: 0.5rem;
+        right: -12px;
     }
 }
